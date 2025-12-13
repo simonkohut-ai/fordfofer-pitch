@@ -359,46 +359,136 @@
             border-color: var(--soft-blue);
             transform: scale(1.1);
         }
+        
+        /* Investment CTA Animations */
+        @keyframes pulse {
+            0%, 100% { 
+                box-shadow: 0 0 30px rgba(58,141,255,0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 50px rgba(58,141,255,0.6);
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% { 
+                box-shadow: 0 6px 20px rgba(58,141,255,0.4);
+            }
+            50% { 
+                box-shadow: 0 8px 30px rgba(58,141,255,0.7);
+            }
+        }
+        
+        @keyframes pulse-cta {
+            0%, 100% { 
+                transform: translateY(0);
+                box-shadow: 0 8px 30px rgba(255,199,0,0.5);
+            }
+            50% { 
+                transform: translateY(-3px);
+                box-shadow: 0 12px 40px rgba(255,199,0,0.7);
+            }
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* Enhanced Featured Link */
+        .link.featured {
+            position: relative;
+        }
+        
+        .link.featured::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, var(--soft-blue), var(--warm-yellow));
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: pulse-border 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-border {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* Trust Badges */
+        .trust-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.9);
+            color: var(--soft-blue);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin: 0.3rem;
+            border: 2px solid var(--soft-blue);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Profile -->
         <div class="profile">
-            <div class="avatar" style="background: linear-gradient(135deg, var(--soft-blue), var(--warm-yellow)); border: 4px solid var(--soft-blue); border-radius: 50%; width: 100px; height: 100px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(58,141,255,0.3);">
+            <div class="avatar" style="background: linear-gradient(135deg, var(--soft-blue), var(--warm-yellow)); border: 4px solid var(--soft-blue); border-radius: 50%; width: 100px; height: 100px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(58,141,255,0.3); animation: pulse 2s infinite;">
                 <img src="logo-icon.svg" alt="Chiara Logo" style="width: 80px; height: 80px; border-radius: 50%;">
             </div>
             <h1 class="name">Goliáš Čapovič</h1>
             <p class="title">Founder & CEO | Chiara's World</p>
             <p class="location">📍 AI Trading | P2BA Platform | FinTech</p>
-            <p class="bio">Founder of Chiara's World - AI Trading Platform & P2BA (Prompt-to-Business Automation) System. Building the future of autonomous business creation.</p>
+            <p class="bio">Early investors are already seeing returns. Join the limited €50 lifetime access offer before it closes.</p>
+        </div>
+        
+        <!-- Investment CTA Banner -->
+        <div style="background: linear-gradient(135deg, var(--soft-blue), var(--warm-yellow)); border: 4px solid var(--soft-blue); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; box-shadow: 0 6px 20px rgba(58,141,255,0.4); animation: glow 2s ease-in-out infinite;">
+            <div style="color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">💰 LIMITED TIME OFFER</div>
+            <div style="color: white; font-size: 0.9rem; opacity: 0.95;">€50 Lifetime Access • Only 72 Hours Left</div>
         </div>
         
         <!-- Stats -->
         <div class="stats">
             <div class="stat">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Transparent</div>
+                <div class="stat-value">€50</div>
+                <div class="stat-label">Lifetime</div>
             </div>
             <div class="stat">
-                <div class="stat-value">24/7</div>
-                <div class="stat-label">Active</div>
+                <div class="stat-value">72H</div>
+                <div class="stat-label">Left</div>
             </div>
             <div class="stat">
                 <div class="stat-value">∞</div>
-                <div class="stat-label">Trustworthy</div>
+                <div class="stat-label">Returns</div>
             </div>
         </div>
         
         <!-- Links -->
         <div class="links">
-            <!-- Featured: Main CTA -->
-            <a href="https://fordfofer.vercel.app" class="link featured">
-                <span class="badge">✨ NEW</span>
-                <span class="link-icon">🚀</span>
+            <!-- MEGA CTA: INVEST NOW -->
+            <a href="https://fordfofer.vercel.app/#invest" class="link featured" style="background: linear-gradient(135deg, var(--warm-yellow), #FFD700); border: 5px solid var(--soft-blue); padding: 1.5rem; font-size: 1.2rem; box-shadow: 0 8px 30px rgba(255,199,0,0.5); animation: pulse-cta 2s ease-in-out infinite; position: relative; overflow: visible;">
+                <span class="badge" style="background: var(--soft-blue); color: white; font-size: 0.7rem; padding: 0.3rem 0.8rem; animation: blink 1.5s infinite;">🔥 HOT</span>
+                <span class="link-icon" style="font-size: 2rem;">💰</span>
                 <div class="link-content">
-                    <div class="link-title">Invest in Chiara's World</div>
-                    <div class="link-desc">Early access available</div>
+                    <div class="link-title" style="font-size: 1.3rem; font-weight: 800;">INVEST NOW - €50 Lifetime</div>
+                    <div class="link-desc" style="font-size: 0.95rem; font-weight: 600;">Early Access • Limited Offer • Click to Invest</div>
+                </div>
+                <span class="link-arrow" style="font-size: 1.5rem; font-weight: 800;">→</span>
+            </a>
+            
+            <!-- Secondary: Main Website -->
+            <a href="https://fordfofer.vercel.app" class="link" style="border-color: var(--warm-yellow);">
+                <span class="link-icon">🌐</span>
+                <div class="link-content">
+                    <div class="link-title">Chiara's World Website</div>
+                    <div class="link-desc">Full platform details & investment info</div>
                 </div>
                 <span class="link-arrow">→</span>
             </a>
@@ -468,15 +558,34 @@
                 <span class="link-icon">📧</span>
                 <div class="link-content">
                     <div class="link-title">Contact Me</div>
-                    <div class="link-desc">Business inquiries</div>
+                    <div class="link-desc">Business inquiries & questions</div>
                 </div>
                 <span class="link-arrow">→</span>
             </a>
         </div>
         
+        <!-- Trust Section -->
+        <div style="margin-top: 2rem; padding: 1.5rem; background: var(--light-gray); border: 3px solid var(--soft-blue); border-radius: 12px; text-align: center;">
+            <div style="font-size: 0.85rem; color: var(--dark-gray); margin-bottom: 1rem; font-weight: 600;">✅ Trusted By Early Investors</div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;">
+                <span class="trust-badge">🔒 Secure Payment</span>
+                <span class="trust-badge">⚡ Instant Access</span>
+                <span class="trust-badge">💰 Lifetime Value</span>
+                <span class="trust-badge">🚀 Early Bird</span>
+            </div>
+        </div>
+        
+        <!-- Urgency Message -->
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,199,0,0.1); border: 3px solid var(--warm-yellow); border-radius: 12px; text-align: center;">
+            <div style="font-size: 0.9rem; color: var(--dark-gray); font-weight: 600;">
+                ⏰ Limited to first 100 investors • Only €50 for lifetime access
+            </div>
+        </div>
+        
         <!-- Footer -->
         <div class="footer">
             <p>© 2024 Chiara's World | <a href="https://fordfofer.vercel.app">chiarasworld.com</a></p>
+            <p style="margin-top: 0.5rem; font-size: 0.65rem; color: #888;">Founded by Goliáš Čapovič</p>
         </div>
     </div>
 </body>
