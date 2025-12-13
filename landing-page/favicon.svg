@@ -1,0 +1,14 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" fill="#FFFFFF" rx="4"/>
+  
+  <!-- Border -->
+  <rect x="2" y="2" width="28" height="28" fill="none" stroke="#3A8DFF" stroke-width="2" rx="3"/>
+  
+  <!-- Friendly circle -->
+  <circle cx="16" cy="12" r="4" fill="#3A8DFF"/>
+  
+  <!-- Text: CW -->
+  <text x="16" y="24" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#3A8DFF" text-anchor="middle">CW</text>
+</svg>
+

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO -->
+    <title>Chiara's World | All Links</title>
+    <meta name="description" content="Chiara's World - All links in one place. Friendly AI Trading Platform.">
+    <meta name="author" content="Chiara's World">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Chiara's World | All Links">
+    <meta property="og:description" content="Chiara's World - Friendly AI Trading Platform">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://fordfofer.vercel.app/links">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Šimon Kohút | Links">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --soft-blue: #3A8DFF;
+            --warm-yellow: #FFC700;
+            --white: #FFFFFF;
+            --light-gray: #F0F0F0;
+            --dark-gray: #1a1a1a;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--dark-gray);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+        
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(58,141,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255,199,0,0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 420px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--soft-blue), var(--warm-yellow));
+            border: 4px solid var(--soft-blue);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 0 30px rgba(58,141,255,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(58,141,255,0.3); }
+            50% { box-shadow: 0 0 50px rgba(58,141,255,0.5); }
+        }
+        
+        .name {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            color: var(--soft-blue);
+        }
+        
+        .title {
+            color: var(--warm-yellow);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        
+        .location {
+            color: var(--dark-gray);
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+        
+        .bio {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            line-height: 1.5;
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--light-gray);
+            border: 3px solid var(--soft-blue);
+            border-radius: 12px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--warm-yellow);
+        }
+        
+        .stat-label {
+            font-size: 0.65rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Links */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--light-gray);
+            border: 3px solid var(--soft-blue);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark-gray);
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link:hover {
+            border-color: var(--warm-yellow);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(58,141,255,0.3);
+        }
+        
+        .link:hover .link-arrow {
+            transform: translateX(5px);
+        }
+        
+        .link-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .link-content {
+            flex: 1;
+        }
+        
+        .link-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        
+        .link-desc {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.15rem;
+        }
+        
+        .link-arrow {
+            color: var(--soft-blue);
+            transition: transform 0.2s;
+        }
+        
+        /* Featured Link */
+        .link.featured {
+            background: linear-gradient(135deg, var(--soft-blue), var(--warm-yellow));
+            border-color: var(--soft-blue);
+        }
+        
+        .link.featured .link-title,
+        .link.featured .link-desc {
+            color: var(--white);
+        }
+        
+        .link.featured:hover {
+            box-shadow: 0 5px 30px rgba(58,141,255,0.5);
+        }
+        
+        /* Badge */
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: 10px;
+            background: var(--white);
+            color: var(--black);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #555;
+        }
+        
+        .footer a {
+            color: var(--pink);
+            text-decoration: none;
+        }
+        
+        /* Social Icons */
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--light-gray);
+            border: 3px solid var(--soft-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+        
+        .social-icon:hover {
+            border-color: var(--soft-blue);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile -->
+        <div class="profile">
+            <div class="avatar">CW</div>
+            <h1 class="name">Chiara's World</h1>
+            <p class="title">Friendly AI Trading Platform</p>
+            <p class="location">📍 Trustworthy & Transparent</p>
+            <p class="bio">Building a friendly, approachable AI trading platform with full transparency and trust. Welcome to Chiara's World.</p>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Transparent</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">Active</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Trustworthy</div>
+            </div>
+        </div>
+        
+        <!-- Links -->
+        <div class="links">
+            <!-- Featured: Main CTA -->
+            <a href="https://fordfofer.vercel.app" class="link featured">
+                <span class="badge">✨ NEW</span>
+                <span class="link-icon">🚀</span>
+                <div class="link-content">
+                    <div class="link-title">Invest in Chiara's World</div>
+                    <div class="link-desc">Early access available</div>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <!-- Website -->
+            <a href="https://fordfofer.vercel.app" class="link">
+                <span class="link-icon">🌐</span>
+                <div class="link-content">
+                    <div class="link-title">Chiara's World Website</div>
+                    <div class="link-desc">Official landing page</div>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <!-- Instagram -->
+            <a href="https://instagram.com/chiarasworld" class="link" target="_blank">
+                <span class="link-icon">📸</span>
+                <div class="link-content">
+                    <div class="link-title">Instagram</div>
+                    <div class="link-desc">@chiarasworld</div>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@chiarasworld" class="link" target="_blank">
+                <span class="link-icon">🎵</span>
+                <div class="link-content">
+                    <div class="link-title">TikTok</div>
+                    <div class="link-desc">@chiarasworld</div>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <!-- Twitter -->
+            <a href="https://twitter.com/chiarasworld" class="link" target="_blank">
+                <span class="link-icon">🐦</span>
+                <div class="link-content">
+                    <div class="link-title">Twitter / X</div>
+                    <div class="link-desc">@chiarasworld</div>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/simon-kohut" class="link" target="_blank">
+                <span class="link-icon">💼</span>
+                <div class="link-content">
+                    <div class="link-title">LinkedIn</div>
+                    <div class="link-desc">Professional profile</div>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <!-- GitHub -->
+            <a href="https://github.com/simonkohut-ai" class="link" target="_blank">
+                <span class="link-icon">💻</span>
+                <div class="link-content">
+                    <div class="link-title">GitHub</div>
+                    <div class="link-desc">Open source projects</div>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <!-- Contact -->
+            <a href="mailto:gcapovic.biz@proton.me" class="link">
+                <span class="link-icon">📧</span>
+                <div class="link-content">
+                    <div class="link-title">Contact Me</div>
+                    <div class="link-desc">Business inquiries</div>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 Chiara's World | <a href="https://fordfofer.vercel.app">chiarasworld.com</a></p>
+        </div>
+    </div>
+</body>
+</html>
+
+

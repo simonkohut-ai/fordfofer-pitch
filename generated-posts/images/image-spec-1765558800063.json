@@ -1,0 +1,12 @@
+{
+  "text": "ČO ZÍSKAŠ ZA €50",
+  "emoji": "🦄💰",
+  "colors": {
+    "background": "#000000",
+    "text": "#FFFFFF",
+    "accent": "#FF004D"
+  },
+  "size": "1080x1080",
+  "font": "Space Mono",
+  "instructions": "Create Instagram post image:\n- Background: Black (#000000)\n- Main text: \"ČO ZÍSKAŠ ZA €50\" in white, large, bold\n- Emoji: 🦄💰 in Cyber Pink (#FF004D)\n- Style: Neobrutalism - thick borders, high contrast\n- Size: 1080x1080px"
+}

@@ -1,0 +1,49 @@
+{
+  "campaign_name": "72H PRÍSTUPOVÉ OKNO",
+  "type": "Instagram Story Sequence",
+  "style": "CYBER PINK na ČIERNOM pozadí - NEOBRUTALIZMUS",
+  "countdown_start": "72:00:00",
+  
+  "stories": [
+    {
+      "sequence": 1,
+      "duration_seconds": 5,
+      "text_primary": "PRÍSTUPOVÉ OKNO SA ZATVÁRA.",
+      "text_secondary": "72H",
+      "visual_notes": "Veľký digitálny odpočítavací timer. Cyber Pink (#FF004D) text na čiernom pozadí. Hrubé biele okraje okolo textového bloku.",
+      "animation": "Timer pulzuje. Text sa pomaly približuje."
+    },
+    {
+      "sequence": 2,
+      "duration_seconds": 5,
+      "text_primary": "AK NEMÁTE PRÍSTUP,",
+      "text_secondary": "NEPATRÍTE SEM.",
+      "visual_notes": "Minimalistický dizajn. Veľké biele písmo na čiernom pozadí. Slovo 'NEPATRÍTE' v Cyber Pink.",
+      "animation": "Glitch efekt na texte. Rýchle bliknutia."
+    },
+    {
+      "sequence": 3,
+      "duration_seconds": 8,
+      "text_primary": "FORD FOFER NEČAKÁ.",
+      "text_secondary": "KLIKNITE PRE VIDEO PITCH →",
+      "cta": "SWIPE UP / LINK IN BIO",
+      "visual_notes": "FordFofer logo v hornej časti. CTA tlačidlo v Cyber Pink s čiernym textom. Šípka animovaná.",
+      "animation": "Šípka pulzuje, nabáda k akcii."
+    }
+  ],
+
+  "posting_schedule": {
+    "story_1": "Ihneď po schválení",
+    "story_2": "+4 hodiny",
+    "story_3": "+8 hodín",
+    "repeat_cycle": "Každých 12 hodín počas 72h"
+  },
+
+  "hashtags_for_mentions": [
+    "#FordFofer",
+    "#72Hours",
+    "#ExclusiveAccess",
+    "#BillionDollarConcept"
+  ]
+}
+

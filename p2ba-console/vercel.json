@@ -1,0 +1,15 @@
+{
+  "buildCommand": "cd ../p2ba-core && npm install && npm run build && cd ../p2ba-console && npm install && npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "app/api/**/*.ts": {
+      "maxDuration": 60
+    }
+  }
+}

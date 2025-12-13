@@ -1,0 +1,52 @@
+╔═══════════════════════════════════════════════════════════════╗
+║  🦄 INFLUENCER DATABASE - 8 INFLUENCEROV
+╚═══════════════════════════════════════════════════════════════╝
+
+1. TechSlovakia
+   📧 Email: tech@slovakia.sk
+   📱 Platform: Instagram
+   👥 Followers: 50K
+   🎯 Niche: Tech
+   
+2. CryptoSlovakia
+   📧 Email: crypto@slovakia.sk
+   📱 Platform: Twitter
+   👥 Followers: 30K
+   🎯 Niche: Crypto
+   
+3. StartupSK
+   📧 Email: startup@sk.sk
+   📱 Platform: LinkedIn
+   👥 Followers: 25K
+   🎯 Niche: Startups
+   
+4. AISlovakia
+   📧 Email: ai@slovakia.sk
+   📱 Platform: Instagram
+   👥 Followers: 40K
+   🎯 Niche: AI
+   
+5. FinTechSK
+   📧 Email: fintech@sk.sk
+   📱 Platform: Twitter
+   👥 Followers: 35K
+   🎯 Niche: FinTech
+   
+6. YoungEntrepreneurs
+   📧 Email: young@entrepreneurs.sk
+   📱 Platform: Instagram
+   👥 Followers: 60K
+   🎯 Niche: Entrepreneurship
+   
+7. SlovakInvestors
+   📧 Email: investors@sk.sk
+   📱 Platform: LinkedIn
+   👥 Followers: 45K
+   🎯 Niche: Investment
+   
+8. TechNewsSK
+   📧 Email: news@tech.sk
+   📱 Platform: Twitter
+   👥 Followers: 55K
+   🎯 Niche: Tech News
+   

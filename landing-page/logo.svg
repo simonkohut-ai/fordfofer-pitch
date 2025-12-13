@@ -1,0 +1,21 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#FFFFFF" rx="16"/>
+  
+  <!-- Border - Soft Brutalism with rounded corners -->
+  <rect x="4" y="4" width="192" height="192" fill="none" stroke="#3A8DFF" stroke-width="6" rx="12"/>
+  
+  <!-- Friendly geometric shape -->
+  <circle cx="100" cy="70" r="25" fill="#3A8DFF" opacity="0.2"/>
+  <circle cx="100" cy="70" r="15" fill="#3A8DFF"/>
+  
+  <!-- Text: CHIARA'S WORLD -->
+  <text x="100" y="120" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#3A8DFF" text-anchor="middle" letter-spacing="1">CHIARA'S</text>
+  <text x="100" y="140" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#FFC700" text-anchor="middle" letter-spacing="1">WORLD</text>
+  
+  <!-- Accent line - warm yellow -->
+  <line x1="30" y1="155" x2="170" y2="155" stroke="#FFC700" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Friendly star accent -->
+  <polygon points="100,165 102,170 107,170 103,173 105,178 100,175 95,178 97,173 93,170 98,170" fill="#FFC700"/>
+</svg>

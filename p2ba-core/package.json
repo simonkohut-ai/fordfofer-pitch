@@ -1,0 +1,36 @@
+{
+  "name": "p2ba-core",
+  "version": "1.0.0",
+  "description": "Chiara's World - Prompt-to-Business Automation Core Platform",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node --esm src/index.ts",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "keywords": [
+    "ai",
+    "automation",
+    "business",
+    "agentic",
+    "p2ba"
+  ],
+  "author": "Chiara's World",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.20.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/nodemailer": "^6.4.14",
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.2"
+  }
+}
+

@@ -1,0 +1,17 @@
+{
+  "name": "automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "auto-marketing.js",
+  "scripts": {
+    "start": "node auto-marketing.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-cron": "^4.2.1",
+    "node-fetch": "^2.7.0"
+  }
+}

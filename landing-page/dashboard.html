@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦄 FordFofer Dashboard - CEO Control Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .login-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+        }
+        
+        .login-box {
+            background: #111;
+            border: 4px solid #FF004D;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 16px 16px 0px 0px #FF004D;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .login-box h1 {
+            color: #FF004D;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+        
+        .login-box input {
+            width: 100%;
+            padding: 1rem;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .login-box input:focus {
+            outline: none;
+            border-color: #FF004D;
+        }
+        
+        .login-box button {
+            width: 100%;
+            padding: 1rem;
+            background: #FF004D;
+            color: #000;
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .login-box button:hover {
+            background: #ff3366;
+        }
+        
+        .dashboard {
+            display: none;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dashboard.active {
+            display: block;
+        }
+        
+        .header {
+            border-bottom: 4px solid #FF004D;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #FF004D;
+            font-size: 2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #333;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            color: #888;
+            font-family: 'Space Mono', monospace;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .tab.active {
+            color: #FF004D;
+            border-bottom-color: #FF004D;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .prompt-box {
+            background: #111;
+            border: 4px solid #FF004D;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .prompt-box textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        
+        .prompt-box textarea:focus {
+            outline: none;
+            border-color: #FF004D;
+        }
+        
+        .prompt-box button {
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            background: #FF004D;
+            color: #000;
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .prompt-box button:hover {
+            background: #ff3366;
+        }
+        
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 70vh;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #0a0a0a;
+            border: 2px solid #333;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .message {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            animation: fadeIn 0.3s;
+        }
+        
+        .message.user {
+            background: #1a1a1a;
+            border-left: 4px solid #888;
+            margin-left: 20%;
+        }
+        
+        .message.assistant {
+            background: #1a1a1a;
+            border-left: 4px solid #FF004D;
+            margin-right: 20%;
+        }
+        
+        .message-header {
+            color: #FF004D;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .message-content {
+            color: #fff;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        
+        .message.user .message-header {
+            color: #888;
+        }
+        
+        .typing-indicator {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            border-radius: 8px;
+            color: #888;
+        }
+        
+        .typing-dots {
+            display: inline-block;
+        }
+        
+        .typing-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #FF004D;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chat-input-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input-container textarea {
+            flex: 1;
+            min-height: 60px;
+            padding: 1rem;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            border-radius: 8px;
+            resize: none;
+        }
+        
+        .chat-input-container textarea:focus {
+            outline: none;
+            border-color: #FF004D;
+        }
+        
+        .chat-input-container button {
+            padding: 1rem 2rem;
+            background: #FF004D;
+            color: #000;
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            height: fit-content;
+            align-self: flex-end;
+        }
+        
+        .chat-input-container button:hover {
+            background: #ff3366;
+        }
+        
+        .output {
+            background: #111;
+            border: 4px solid #333;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            white-space: pre-wrap;
+            font-family: 'Space Mono', monospace;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .settings-form {
+            background: #111;
+            border: 4px solid #FF004D;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        
+        .settings-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #FF004D;
+            font-weight: 700;
+        }
+        
+        .settings-form input {
+            width: 100%;
+            padding: 0.75rem;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .settings-form input:focus {
+            outline: none;
+            border-color: #FF004D;
+        }
+        
+        .settings-form button {
+            padding: 1rem 2rem;
+            background: #FF004D;
+            color: #000;
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .status {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .status-label {
+            color: #888;
+        }
+        
+        .status-value {
+            color: #FF004D;
+            font-weight: 700;
+        }
+        
+        .status-value.active {
+            color: #00ff00;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <h1>🦄 FORDFOFER DASHBOARD</h1>
+            <input type="password" id="password" placeholder="Zadaj heslo" autocomplete="off">
+            <button onclick="login()">PRIHLÁSIŤ SA</button>
+        </div>
+    </div>
+    
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <div class="header">
+            <h1>🦄 FORDFOFER CEO DASHBOARD</h1>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('prompt')">💬 PROMPT</button>
+            <button class="tab" onclick="showTab('settings')">⚙️ NASTAVENIA</button>
+            <button class="tab" onclick="showTab('status')">📊 STATUS</button>
+        </div>
+        
+        <!-- Prompt Tab -->
+        <div class="tab-content active" id="promptTab">
+            <div class="chat-container" style="display: flex; flex-direction: column; height: 70vh;">
+                <div class="chat-messages" id="chatMessages" style="flex: 1; overflow-y: auto; padding: 1rem; background: #0a0a0a; border: 2px solid #333; border-radius: 8px; margin-bottom: 1rem;">
+                    <div class="message assistant" style="padding: 1rem; margin-bottom: 1rem; background: #1a1a1a; border-radius: 8px; border-left: 4px solid #FF004D;">
+                        <div style="color: #FF004D; font-weight: 700; margin-bottom: 0.5rem;">🦄 FordFofer AI</div>
+                        <div style="color: #fff;">Ahoj! Som tvoj AI marketing asistent. Čo chceš dnes vytvoriť?</div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container" style="display: flex; gap: 0.5rem;">
+                    <textarea id="promptInput" placeholder="Napíš správu..." style="flex: 1; min-height: 60px; padding: 1rem; background: #1a1a1a; border: 2px solid #333; color: #fff; font-family: 'Space Mono', monospace; border-radius: 8px; resize: none;"></textarea>
+                    <button onclick="processPrompt()" style="padding: 1rem 2rem; background: #FF004D; color: #000; border: none; font-family: 'Space Mono', monospace; font-weight: 700; cursor: pointer; border-radius: 8px; height: fit-content; align-self: flex-end;">🚀</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Tab -->
+        <div class="tab-content" id="settingsTab">
+            <div class="settings-form">
+                <h2 style="color: #FF004D; margin-bottom: 1.5rem;">NASTAVENIA</h2>
+                
+                <label>Skrill Email:</label>
+                <input type="email" id="skrillEmail" value="gcapovic.biz@proton.me">
+                
+                <label>Instagram Handle:</label>
+                <input type="text" id="instagramHandle" value="@fordfofer">
+                
+                <label>Website URL:</label>
+                <input type="url" id="websiteUrl" value="https://fordfofer.vercel.app">
+                
+                <label>Claude API Key (voliteľné):</label>
+                <input type="password" id="claudeApiKey" placeholder="Vlož ak máš">
+                
+                <button onclick="saveSettings()">💾 ULOŽIŤ NASTAVENIA</button>
+            </div>
+        </div>
+        
+        <!-- Status Tab -->
+        <div class="tab-content" id="statusTab">
+            <div class="status">
+                <div class="status-item">
+                    <span class="status-label">Marketing System:</span>
+                    <span class="status-value active">✅ BEŽÍ</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Auto Posts:</span>
+                    <span class="status-value active">✅ KAŽDÉ 2H</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Git Commit:</span>
+                    <span class="status-value active">✅ AUTO</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Vercel Deploy:</span>
+                    <span class="status-value active">✅ AUTO</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Skrill Email:</span>
+                    <span class="status-value" id="statusSkrill">gcapovic.biz@proton.me</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simple password (change this!)
+        const DASHBOARD_PASSWORD = 'fordfofer2024';
+        
+        function login() {
+            const password = document.getElementById('password').value;
+            if (password === DASHBOARD_PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboard').classList.add('active');
+                loadSettings();
+            } else {
+                alert('❌ Nesprávne heslo!');
+            }
+        }
+        
+        // Enter key to login
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+        
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('fordfoferSettings') || '{}');
+            document.getElementById('skrillEmail').value = settings.skrillEmail || 'gcapovic.biz@proton.me';
+            document.getElementById('instagramHandle').value = settings.instagramHandle || '@fordfofer';
+            document.getElementById('websiteUrl').value = settings.websiteUrl || 'https://fordfofer.vercel.app';
+            document.getElementById('claudeApiKey').value = settings.claudeApiKey || '';
+            document.getElementById('statusSkrill').textContent = settings.skrillEmail || 'gcapovic.biz@proton.me';
+        }
+        
+        function saveSettings() {
+            const settings = {
+                skrillEmail: document.getElementById('skrillEmail').value,
+                instagramHandle: document.getElementById('instagramHandle').value,
+                websiteUrl: document.getElementById('websiteUrl').value,
+                claudeApiKey: document.getElementById('claudeApiKey').value
+            };
+            localStorage.setItem('fordfoferSettings', JSON.stringify(settings));
+            alert('✅ Nastavenia uložené!');
+            loadSettings();
+        }
+        
+        function addMessage(role, content) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            const header = document.createElement('div');
+            header.className = 'message-header';
+            header.textContent = role === 'user' ? '👤 Ty' : '🦄 FordFofer AI';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.textContent = content;
+            
+            messageDiv.appendChild(header);
+            messageDiv.appendChild(messageContent);
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function showTyping() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message assistant';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="message-header">🦄 FordFofer AI</div>
+                <div class="typing-indicator">
+                    <span class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </span>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function hideTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+        
+        function processPrompt() {
+            const promptInput = document.getElementById('promptInput');
+            const prompt = promptInput.value.trim();
+            
+            if (!prompt) {
+                return;
+            }
+            
+            // Add user message
+            addMessage('user', prompt);
+            
+            // Clear input
+            promptInput.value = '';
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Simulate processing
+            setTimeout(() => {
+                hideTyping();
+                
+                const settings = JSON.parse(localStorage.getItem('fordfoferSettings') || '{}');
+                const skrillEmail = settings.skrillEmail || 'gcapovic.biz@proton.me';
+                
+                let response = '';
+                
+                if (prompt.toLowerCase().includes('post') || prompt.toLowerCase().includes('instagram')) {
+                    response = generateInstagramPost(prompt, skrillEmail);
+                } else if (prompt.toLowerCase().includes('email') || prompt.toLowerCase().includes('influencer')) {
+                    response = generateInfluencerEmail(prompt, skrillEmail);
+                } else if (prompt.toLowerCase().includes('story') || prompt.toLowerCase().includes('stories')) {
+                    response = generateStory(prompt, skrillEmail);
+                } else {
+                    response = generateGenericContent(prompt, skrillEmail);
+                }
+                
+                // Add assistant response
+                addMessage('assistant', response);
+                
+                // Auto-copy to clipboard
+                navigator.clipboard.writeText(response).then(() => {
+                    // Show copy notification
+                    const notification = document.createElement('div');
+                    notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #FF004D; color: #000; padding: 1rem; border-radius: 8px; font-weight: 700; z-index: 1000;';
+                    notification.textContent = '✅ Skopírované do schránky!';
+                    document.body.appendChild(notification);
+                    setTimeout(() => notification.remove(), 2000);
+                });
+            }, 1500);
+        }
+        
+        // Enter key to send (Shift+Enter for new line)
+        document.getElementById('promptInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                processPrompt();
+            }
+        });
+        
+        function generateInstagramPost(prompt, skrillEmail) {
+            const posts = [
+                `🦄⏰ POSLEDNÉ HODINY\n\n€50 cena platí len DNES.\n\nZajtra: €200\nPozajtra: Dvere zatvorené\n\n10 miest. 24 hodín.\n\n💰 Platba: ${skrillEmail} (Skrill)\n\nfordfofer.vercel.app/links\n\n#FordFofer #LastChance #Urgency #Investment`,
+                `🦄📊 UPDATE\n\nPrvých 5 investorov už zaplatilo.\n\nPrečo?\n\nLebo vedia že:\n• AI je budúcnosť\n• Skorý vstup = najväčší výnos\n• €50 dnes = €200 zajtra\n\n💰 Platba: ${skrillEmail}\n\nfordfofer.vercel.app/links\n\n#FOMO #FordFofer #EarlyBird #Payment`,
+                `🦄💰 PLATBA JE JEDNODUCHÁ\n\nVšetky spôsoby platby podporované:\n\n💳 Karty (Visa, Mastercard)\n₿ Crypto (BTC, ETH, USDT)\n🏦 Bank Transfer\n💵 Skrill Balance\n\nVšetko ide na:\n${skrillEmail}\n\n€50 = Lifetime prístup.\n\nfordfofer.vercel.app/links\n\n#Payment #FordFofer #Skrill`
+            ];
+            return posts[Math.floor(Math.random() * posts.length)];
+        }
+        
+        function generateInfluencerEmail(prompt, skrillEmail) {
+            return `Subject: 🦄 Collaboration - $1.2B AI Project | Revenue Share Opportunity
+
+Ahoj [INFLUENCER NAME],
+
+Som Šimon Kohút, 18-ročný podnikateľ zo Slovenska.
+
+Práve som spustil FordFofer - $1.2B AI trading systém.
+
+MÁM PRE TEBA EXKLUZÍVNU PONUKU:
+
+💰 Revenue Share Partnership
+• Získaj % z každého investora ktorého privedieš
+• Early access za €50 (normálne €200)
+• Exkluzívny content pre tvojich followerov
+
+PLATBA JE JEDNODUCHÁ:
+Všetky platby idú na Skrill: ${skrillEmail}
+
+Záujem? Odpíš a pošlem ti viac info.
+
+Link: fordfofer.vercel.app/links
+
+S pozdravom,
+Šimon Kohút
+Founder @ FordFofer`;
+        }
+        
+        function generateStory(prompt, skrillEmail) {
+            const stories = [
+                '⏰ POSLEDNÉ HODINY',
+                `€50 → €200\n💰 ${skrillEmail}`,
+                '10 MIEST ZOSTÁVA',
+                `💰 PLATBA: ${skrillEmail}`,
+                '✅ VŠETKY PLATBY PODPOROVANÉ'
+            ];
+            return stories.join('\n\n');
+        }
+        
+        function generateGenericContent(prompt, skrillEmail) {
+            return `🦄 CONTENT VYGENEROVANÝ\n\nPrompt: ${prompt}\n\n💰 Platba: ${skrillEmail}\n\nLink: fordfofer.vercel.app/links\n\n#FordFofer #AI #Investment`;
+        }
+    </script>
+</body>
+</html>
+

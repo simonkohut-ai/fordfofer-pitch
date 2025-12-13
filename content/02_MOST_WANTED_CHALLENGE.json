@@ -1,0 +1,45 @@
+{
+  "campaign_name": "THE MOST WANTED CODE CHALLENGE",
+  "type": "Instagram Post - Viral Engagement",
+  "goal": "Maximalizovať KOMENTÁRE a ZDIEĽANIA pre algoritmický boost",
+
+  "post_content": {
+    "slogan_vizual": "THE MOST WANTED. UHÁDNI KÓD.",
+    
+    "popis_ig": "🔒 VÝZVA PRE SKUTOČNÝCH TECHNICKÝCH MOZGOV\n\nV našom repozitári 'themostwanted' sa skrýva kritický kód. Jeden riadok. Jedna funkcia. Miliardová hodnota.\n\n🏆 ODMENA:\nPrvý, kto presne určí FUNKCIU tohto kódu, získa:\n→ 1-ročnú exkluzívnu analýzu trhu od FordFofer AI\n→ Priamy prístup do uzavretej investorskej komunity\n→ Mention v našom $1.2B pitch videu\n\n⏰ LIMIT: 72 HODÍN\n\n📌 PRAVIDLÁ:\n1. Komentujte svoju odpoveď pod tento príspevok\n2. Označte 2 ľudí, ktorí by to mohli vedieť\n3. Uložte tento príspevok (SAVE) pre budúcu referenciu\n\nHint: Nejde o to, ČO kód robí. Ide o to, PREČO to robí.\n\n#TheMostWanted #CodeChallenge #FordFofer",
+
+    "visual_description": "Tmavé pozadie s maticovým kódom (zelený/ružový). V centre biely brutalistický box s textom 'THE MOST WANTED' a lupou/zámkom ikonou. Timer '72:00:00' v rohu."
+  },
+
+  "engagement_mechanics": {
+    "primary_action": "Komentuj svoju odpoveď",
+    "secondary_action": "Označ 2 priateľov",
+    "tertiary_action": "Ulož príspevok (SAVE)",
+    "algorithm_target": "Vysoký SAVE RATE + SHARE RATE = Algoritmický boost"
+  },
+
+  "reward_structure": {
+    "1st_place": "1-ročná analýza trhu od FordFofer AI",
+    "2nd_place": "Prístup do uzavretej komunity",
+    "3rd_place": "Mention v pitch videu",
+    "all_participants": "Exkluzívny prístup k budúcim výzvam"
+  },
+
+  "hashtagy": [
+    "#TheMostWanted",
+    "#CodeChallenge", 
+    "#FordFofer",
+    "#AICapital",
+    "#TechPuzzle",
+    "#CryptoCode",
+    "#FinTechChallenge",
+    "#BillionDollarCode",
+    "#DevCommunity",
+    "#StartupChallenge"
+  ],
+
+  "posting_time": "Optimálne: 18:00-20:00 CET (špička FinTech komunity)"
+}
+
+
+
