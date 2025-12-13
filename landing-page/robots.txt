@@ -1,12 +1,38 @@
-# FordFofer Robots.txt
+# robots.txt for Chiara's World
+# Founder: Goliáš Čapovič
+# Website: https://fordfofer.vercel.app
+
 User-agent: *
 Allow: /
+Allow: /links
+Allow: /about
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
 
-# Sitemaps
+# Sitemap
 Sitemap: https://fordfofer.vercel.app/sitemap.xml
 
 # Crawl-delay
+User-agent: *
 Crawl-delay: 1
 
+# Specific bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
 
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
 
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
