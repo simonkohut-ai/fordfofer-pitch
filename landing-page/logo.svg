@@ -1,62 +1,147 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
   <defs>
     <linearGradient id="unicornGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#3A8DFF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#5BA0FF;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#FFC700;stop-opacity:1" />
     </linearGradient>
     <linearGradient id="hornGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#FFC700;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FFC700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1" />
     </linearGradient>
-    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-      <feOffset dx="2" dy="2" result="offsetblur"/>
-      <feComponentTransfer>
-        <feFuncA type="linear" slope="0.3"/>
-      </feComponentTransfer>
-      <feMerge>
-        <feMergeNode/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
   
-  <!-- Unicorn Head -->
-  <g filter="url(#shadow)">
-    <!-- Head Circle -->
-    <circle cx="60" cy="60" r="45" fill="url(#unicornGradient)" stroke="#1a1a1a" stroke-width="3"/>
+  <!-- Unicorn Illustration - Side Profile -->
+  <g>
+    <!-- Head and Neck Outline -->
+    <path d="M 50 80 
+             Q 45 60, 55 50
+             Q 60 45, 70 50
+             Q 75 52, 80 60
+             Q 85 70, 90 85
+             Q 95 100, 100 110
+             Q 105 115, 110 120
+             Q 115 125, 120 130
+             Q 125 135, 130 140
+             Q 135 145, 140 150
+             Q 145 155, 150 160
+             Q 155 165, 160 170
+             Q 165 175, 170 180
+             Q 175 185, 180 190
+             Q 185 195, 190 200
+             L 50 200
+             Q 45 190, 50 180
+             Q 55 170, 60 160
+             Q 65 150, 70 140
+             Q 75 130, 80 120
+             Q 85 110, 90 100
+             Q 95 90, 100 85
+             Q 105 80, 110 75
+             Q 115 70, 120 65
+             Q 125 60, 130 55
+             Q 135 50, 140 45
+             Q 145 40, 150 35
+             Q 155 30, 160 25
+             Q 165 20, 170 15
+             Q 175 10, 180 5
+             L 50 5
+             Z" 
+          fill="none" 
+          stroke="url(#unicornGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
     
-    <!-- Unicorn Horn -->
-    <path d="M 60 15 L 50 35 L 55 30 L 60 25 L 65 30 L 70 35 Z" fill="url(#hornGradient)" stroke="#1a1a1a" stroke-width="2"/>
-    <circle cx="60" cy="20" r="3" fill="#FFD700"/>
+    <!-- Simplified Unicorn - Cleaner Version -->
+    <path d="M 60 100 
+             Q 55 70, 70 50
+             Q 80 40, 95 50
+             Q 100 55, 105 65
+             Q 110 80, 115 100
+             Q 120 120, 125 140
+             Q 130 160, 135 180
+             L 60 180
+             Q 55 160, 60 140
+             Q 65 120, 70 100
+             Z" 
+          fill="none" 
+          stroke="url(#unicornGradient)" 
+          stroke-width="4" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
     
-    <!-- Eye -->
-    <circle cx="50" cy="55" r="6" fill="#1a1a1a"/>
-    <circle cx="52" cy="53" r="2" fill="#FFFFFF"/>
+    <!-- Horn -->
+    <path d="M 90 50 
+             L 85 30
+             L 90 35
+             L 95 30
+             Z" 
+          fill="url(#hornGradient)" 
+          stroke="#1a1a1a" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
     
-    <!-- Nostril -->
-    <ellipse cx="70" cy="65" rx="3" ry="2" fill="#1a1a1a"/>
+    <!-- Ear -->
+    <path d="M 75 55 
+             L 70 45
+             L 75 50
+             Z" 
+          fill="none" 
+          stroke="url(#unicornGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
     
-    <!-- Mane (Stylized) -->
-    <path d="M 25 50 Q 15 40, 20 30 Q 25 25, 30 35 Q 35 30, 40 40" 
-          fill="none" stroke="url(#unicornGradient)" stroke-width="4" stroke-linecap="round"/>
-    <path d="M 30 55 Q 20 45, 25 35 Q 30 30, 35 40 Q 40 35, 45 45" 
-          fill="none" stroke="url(#unicornGradient)" stroke-width="4" stroke-linecap="round"/>
-    <path d="M 35 60 Q 25 50, 30 40 Q 35 35, 40 45 Q 45 40, 50 50" 
-          fill="none" stroke="url(#unicornGradient)" stroke-width="4" stroke-linecap="round"/>
+    <!-- Mane - Three Flowing Waves -->
+    <path d="M 100 60 
+             Q 110 40, 120 50
+             Q 130 60, 140 70
+             Q 150 80, 160 90" 
+          fill="none" 
+          stroke="url(#unicornGradient)" 
+          stroke-width="4" 
+          stroke-linecap="round"/>
+    
+    <path d="M 105 80 
+             Q 115 60, 125 70
+             Q 135 80, 145 90
+             Q 155 100, 165 110" 
+          fill="none" 
+          stroke="url(#unicornGradient)" 
+          stroke-width="4" 
+          stroke-linecap="round"/>
+    
+    <path d="M 110 100 
+             Q 120 80, 130 90
+             Q 140 100, 150 110
+             Q 160 120, 170 130" 
+          fill="none" 
+          stroke="url(#unicornGradient)" 
+          stroke-width="4" 
+          stroke-linecap="round"/>
+    
+    <!-- Neck and Chest Curve -->
+    <path d="M 115 100 
+             Q 125 120, 135 140
+             Q 145 160, 155 180
+             L 115 180
+             Q 105 160, 115 140
+             Q 125 120, 115 100" 
+          fill="none" 
+          stroke="url(#unicornGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round"/>
   </g>
   
-  <!-- Text: Chiara's World -->
-  <g>
-    <text x="130" y="45" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
-          font-size="32" font-weight="700" fill="#1a1a1a" letter-spacing="-0.5px">
-      Chiara's World
-    </text>
-    <text x="130" y="75" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
-          font-size="18" font-weight="500" fill="#3A8DFF" letter-spacing="2px">
-      P2BA PLATFORM
-    </text>
-    <line x1="130" y1="50" x2="380" y2="50" stroke="#FFC700" stroke-width="3" stroke-linecap="round"/>
-  </g>
+  <!-- Text: Chiara -->
+  <text x="150" y="180" 
+        font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
+        font-size="32" 
+        font-weight="600" 
+        fill="#4A5568" 
+        text-anchor="middle" 
+        letter-spacing="2px">
+    chiara
+  </text>
 </svg>

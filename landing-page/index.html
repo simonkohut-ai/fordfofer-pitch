@@ -280,6 +280,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
+        /* Scroll Down Animation */
+        @keyframes scrollDown {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(10px);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            animation: scrollDown 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--soft-blue);
+            filter: drop-shadow(0 2px 4px rgba(58,141,255,0.3));
+        }
+        
+        .scroll-indicator:hover {
+            animation-play-state: paused;
+        }
+        
+        /* Fade In on Scroll */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .fade-in-up-delay-1 {
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        
+        .fade-in-up-delay-2 {
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        
+        /* Intersection Observer for Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    
+    <style>
         :root {
             --soft-blue: #3A8DFF;
             --warm-yellow: #FFC700;
@@ -619,12 +696,12 @@
         <h1 class="logo-text">Chiara's World</h1>
         <p class="tagline">Trustworthy AI Trading for Everyone</p>
         
-        <div class="value-box">
+        <div class="value-box scroll-reveal">
             <div class="value-number">$1.2B</div>
             <div class="value-label">CAPITAL CAPACITY</div>
         </div>
         
-        <div class="countdown-section">
+        <div class="countdown-section scroll-reveal">
             <div class="countdown-label">Early Access Window Closing</div>
             <div class="countdown">
                 <div class="countdown-item">
@@ -642,25 +719,32 @@
             </div>
         </div>
         
-        <a href="#invest" class="cta-button">
+        <a href="#invest" class="cta-button scroll-reveal">
             Get Early Access →
         </a>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-indicator" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4L12 20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
     </section>
     
     <!-- Features Section -->
-    <section class="features">
+    <section id="features" class="features">
         <div class="features-grid">
-            <div class="feature-card">
+            <div class="feature-card scroll-reveal">
                 <div class="feature-icon">🤖</div>
                 <h3 class="feature-title">AI-Powered Trading</h3>
                 <p class="feature-text">Our friendly AI agents work around the clock to optimize your trading strategy. Transparent, reliable, and always learning.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card scroll-reveal">
                 <div class="feature-icon">⚡</div>
                 <h3 class="feature-title">24/7 Operation</h3>
                 <p class="feature-text">While you sleep, our systems work. Continuous optimization means continuous opportunities for growth.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card scroll-reveal">
                 <div class="feature-icon">🏗️</div>
                 <h3 class="feature-title">Built on Trust</h3>
                 <p class="feature-text">We believe in transparency and approachability. Every decision is clear, every process is understandable.</p>
@@ -671,15 +755,15 @@
     <!-- Stats Section -->
     <section class="stats">
         <div class="stats-grid">
-            <div class="stat">
+            <div class="stat scroll-reveal">
                 <div class="stat-number">100%</div>
                 <div class="stat-label">Transparent</div>
             </div>
-            <div class="stat">
+            <div class="stat scroll-reveal">
                 <div class="stat-number">24/7</div>
                 <div class="stat-label">Active</div>
             </div>
-            <div class="stat">
+            <div class="stat scroll-reveal">
                 <div class="stat-number">∞</div>
                 <div class="stat-label">Trustworthy</div>
             </div>
@@ -688,7 +772,7 @@
     
     <!-- Challenge Section -->
     <section class="challenge">
-        <div class="challenge-box">
+        <div class="challenge-box scroll-reveal">
             <h2 class="challenge-title">Welcome to Chiara's World</h2>
             <div class="challenge-reward">✨</div>
             <p class="challenge-text">
