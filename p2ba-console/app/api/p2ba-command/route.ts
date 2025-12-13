@@ -1,13 +1,30 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 /**
  * P2BA Command API Route
  * Receives commands and executes them via BusinessAgentManager
  * Returns Server-Sent Events for real-time logging
  * 
+ * 🔒 SECURITY: Password protected
  * NOTE: This requires p2ba-core to be built and accessible
  * Run: cd ../p2ba-core && npm run build
  */
+
+/**
+ * 🔒 Validate authentication
+ */
+function validateAuth(request: NextRequest): boolean {
+  const password = request.cookies.get('p2ba-auth');
+  const correctPassword = process.env.P2BA_PASSWORD || 'chiaras-world-2025';
+  
+  // Also check Authorization header for API access
+  const authHeader = request.headers.get('authorization');
+  if (authHeader === `Bearer ${correctPassword}`) {
+    return true;
+  }
+  
+  return password?.value === correctPassword;
+}
 
 // Dynamic import to handle module resolution
 async function getBusinessAgentManager() {
@@ -39,6 +56,14 @@ async function getManager() {
 }
 
 export async function POST(request: NextRequest) {
+  // 🔒 Authentication check
+  if (!validateAuth(request)) {
+    return NextResponse.json(
+      { error: 'Unauthorized. Please login first.' },
+      { status: 401 }
+    );
+  }
+
   try {
     const { command } = await request.json()
 
