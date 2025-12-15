@@ -1,0 +1,128 @@
+@echo off
+setlocal enabledelayedexpansion
+
+echo.
+echo ==========================================
+echo  GOLO CAPO - ONE CLICK AUTOMATION (Vercel)
+echo ==========================================
+echo.
+
+REM Always run from the script folder
+cd /d "%~dp0"
+
+REM Sanity check folders
+if not exist "dashboard\" (
+  echo [FATAL] Missing dashboard\ folder. Run this from fordfofer-pitch.
+  pause
+  exit /b 1
+)
+if not exist "p2ba-console\" (
+  echo [FATAL] Missing p2ba-console\ folder. Run this from fordfofer-pitch.
+  pause
+  exit /b 1
+)
+
+REM Tool checks
+where node >nul 2>&1 || (echo [FATAL] Node.js not found. Install Node then re-run. & pause & exit /b 1)
+where git  >nul 2>&1 || (echo [FATAL] Git not found. Install Git then re-run. & pause & exit /b 1)
+where vercel >nul 2>&1 || (echo [FATAL] Vercel CLI not found. Run: npm i -g vercel & pause & exit /b 1)
+
+echo [OK] Toolchain:
+node -v
+git -v
+vercel -v
+echo.
+
+REM Ensure Vercel login
+echo [STEP] Checking Vercel login...
+vercel whoami >nul 2>&1
+if errorlevel 1 (
+  echo [ACTION] Not logged in. Starting vercel login (browser will open)...
+  vercel login
+)
+echo [OK] Logged in as:
+vercel whoami
+echo.
+
+REM ------------------------------------------
+REM DASHBOARD: link + root dir + env + deploy
+REM ------------------------------------------
+echo ==========================================
+echo  1/2 DASHBOARD (ai-studio)
+echo ==========================================
+pushd dashboard
+
+echo [STEP] Linking dashboard folder to Vercel project "ai-studio"...
+vercel link --yes --project ai-studio >nul 2>&1
+if errorlevel 1 (
+  echo [INFO] Non-interactive link failed. Running interactive vercel link...
+  vercel link --project ai-studio
+)
+
+echo [STEP] Forcing root directory: ai-studio -> dashboard
+vercel project set ai-studio --root-directory dashboard
+
+echo.
+echo [STEP] Setting OPENAI_API_KEY for ai-studio (Production)
+echo       (Vercel will prompt you. Paste key there. DO NOT paste into chat.)
+vercel env add OPENAI_API_KEY production
+
+echo.
+echo [STEP] Deploying dashboard to production...
+vercel --prod
+
+popd
+echo.
+
+REM ------------------------------------------
+REM CONSOLE: link + env + deploy
+REM ------------------------------------------
+echo ==========================================
+echo  2/2 CONSOLE (p2ba)
+echo ==========================================
+pushd p2ba-console
+
+echo [STEP] Linking console folder to Vercel project "p2ba"...
+vercel link --yes --project p2ba >nul 2>&1
+if errorlevel 1 (
+  echo [INFO] Non-interactive link failed. Running interactive vercel link...
+  vercel link --project p2ba
+)
+
+echo.
+echo [STEP] Setting OPENAI_API_KEY for p2ba (Production)
+vercel env add OPENAI_API_KEY production
+
+echo.
+echo [STEP] Deploying console to production...
+vercel --prod
+
+popd
+echo.
+
+REM ------------------------------------------
+REM Git connect for auto-deploy on push
+REM ------------------------------------------
+echo ==========================================
+echo  FINAL: Connect Git -> Vercel (auto-deploy)
+echo ==========================================
+echo [STEP] Checking for a git remote...
+git remote -v | findstr /i "origin" >nul
+if errorlevel 1 (
+  echo [WARN] No git origin remote found. Auto-deploy needs a GitHub remote set.
+  echo        If you already have a repo, add it then re-run:
+  echo        git remote add origin YOUR_GITHUB_REPO_URL
+  echo.
+) else (
+  echo [STEP] Connecting Git integration (may prompt provider/confirm)...
+  vercel git connect --yes
+)
+
+echo.
+echo ==========================================
+echo  DONE.
+echo  - Dashboard: https://ai-studio-sandy-five.vercel.app  (pass: moneymachine25)
+echo  - Console:   https://p2ba-navy.vercel.app
+echo ==========================================
+echo.
+pause
