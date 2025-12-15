@@ -38,7 +38,7 @@
    - Go to: **Settings** → **Environment Variables**
    - Click **"Add New"**
    - **Name**: `OPENAI_API_KEY`
-   - **Value**: `REMOVED_OPENAI_KEY`
+   - **Value**: `YOUR_OPENAI_API_KEY_HERE`
    - **Environments**: ✅ All (Production, Preview, Development)
    - Click **"Save"**
 
@@ -72,7 +72,7 @@
    - Go to: **Settings** → **Environment Variables**
    - Click **"Add New"**
    - **Name**: `OPENAI_API_KEY`
-   - **Value**: `REMOVED_OPENAI_KEY`
+   - **Value**: `YOUR_OPENAI_API_KEY_HERE`
    - **Environments**: ✅ All (Production, Preview, Development)
    - Click **"Save"**
 

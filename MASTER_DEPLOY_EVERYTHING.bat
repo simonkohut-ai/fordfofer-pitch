@@ -18,7 +18,7 @@ cd /d "%~dp0"
 REM Configuration
 set VERCEL_TOKEN=REMOVED_VERCEL_TOKEN
 set TEAM_ID=golos-projects-e144069f
-set OPENAI_KEY=REMOVED_OPENAI_KEY
+set OPENAI_KEY=YOUR_OPENAI_API_KEY_HERE
 
 echo ✅ Configuration loaded
 echo ✅ Vercel Pro Account: Active

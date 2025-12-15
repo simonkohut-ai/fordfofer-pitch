@@ -13,7 +13,7 @@
 5. **Click:** `Add New`
 6. **Fill in:**
    - **Name:** `OPENAI_API_KEY`
-   - **Value:** `REMOVED_OPENAI_KEY`
+   - **Value:** `YOUR_OPENAI_API_KEY_HERE`
    - **Environments:** ✅ Check all 3 boxes (Production, Preview, Development)
 7. **Click:** `Save`
 8. **Go to:** `Deployments` tab
@@ -32,7 +32,7 @@
 5. **Click:** `Add New`
 6. **Fill in:**
    - **Name:** `OPENAI_API_KEY`
-   - **Value:** `REMOVED_OPENAI_KEY`
+   - **Value:** `YOUR_OPENAI_API_KEY_HERE`
    - **Environments:** ✅ Check all 3 boxes (Production, Preview, Development)
 7. **Click:** `Save`
 8. **Go to:** `Deployments` tab
