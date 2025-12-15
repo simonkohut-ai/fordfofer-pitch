@@ -2,14 +2,14 @@
 /* 🦄 Personal Brand Signature */
 
 :root {
-    --primary: #ff4a00;
-    --primary-hover: #e64200;
+    --primary: #667eea;
+    --primary-hover: #5568d3;
     --secondary: #6b7280;
-    --background: #ffffff;
-    --surface: #f9fafb;
-    --border: #e5e7eb;
-    --text-primary: #111827;
-    --text-secondary: #6b7280;
+    --background: #0f172a;
+    --surface: #1e293b;
+    --border: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
     --success: #10b981;
     --warning: #f59e0b;
     --error: #ef4444;
@@ -17,12 +17,12 @@
     --topbar-height: 72px;
 }
 
-[data-theme="dark"] {
-    --background: #0f172a;
-    --surface: #1e293b;
-    --border: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
+[data-theme="light"] {
+    --background: #ffffff;
+    --surface: #f9fafb;
+    --border: #e5e7eb;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
 }
 
 * {
@@ -1170,6 +1170,166 @@ form {
     margin-top: 24px;
 }
 
+/* Trust Banner */
+.trust-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    margin: 0 32px 20px 32px;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.usage-counter {
+    font-size: 12px;
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+/* Quick Start Panel */
+.quick-start-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.quick-start-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.quick-start-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.execution-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.execution-mode-toggle input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.quick-start-prompts {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.quick-prompt-btn {
+    padding: 8px 16px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.quick-prompt-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.daily-plan-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.daily-plan-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Nav Section Label */
+.nav-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Export Bar */
+.export-bar {
+    position: sticky;
+    top: var(--topbar-height);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    gap: 12px;
+    z-index: 40;
+}
+
+.export-btn {
+    padding: 6px 12px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.export-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Dark Luxury Enhancements */
+body {
+    background: var(--background);
+    color: var(--text-primary);
+}
+
+.sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+}
+
+.chat-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .sidebar {
@@ -1187,6 +1347,20 @@ form {
     
     .content-section {
         padding: 16px;
+    }
+    
+    .trust-banner {
+        margin: 0 16px 16px 16px;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .quick-start-prompts {
+        flex-direction: column;
+    }
+    
+    .quick-prompt-btn {
+        width: 100%;
     }
     
     .stats-grid,

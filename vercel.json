@@ -17,6 +17,10 @@
     { "src": "/linktree", "dest": "/landing-page/links.html" },
     { "src": "/bio", "dest": "/landing-page/links.html" },
     { "src": "/dashboard", "dest": "/automation/MARKETING_DASHBOARD.html" },
+    { "src": "/portfolio/(.*)", "dest": "/portfolio/$1" },
+    { "src": "/golo", "dest": "/portfolio/index.html" },
+    { "src": "/ako-to-funguje", "dest": "/portfolio/slovak.html" },
+    { "src": "/slovak", "dest": "/portfolio/slovak.html" },
     { "src": "/", "dest": "/landing-page/index.html" },
     { "src": "/(.*)", "dest": "/landing-page/$1" }
   ]

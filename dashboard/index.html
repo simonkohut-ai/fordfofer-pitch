@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="🦄">
-    <!-- 🦄 -->
-    <title>AI Studio - Command Center</title>
+    <title>AI Studio - All-in-One AI Marketing Platform</title>
     <link rel="stylesheet" href="styles.css">
     <script src="auth.js"></script>
 </head>
@@ -16,35 +14,36 @@
             <div class="logo">
                 <span class="logo-icon">⚡</span>
                 <span class="logo-text">AI Studio</span>
-                <!-- 🦄 -->
             </div>
         </div>
         
         <nav class="sidebar-nav">
-            <a href="#dashboard" class="nav-item active" data-section="dashboard">
+            <div class="nav-section-label">Modes</div>
+            <a href="#marketing-generator" class="nav-item active" data-section="marketing-generator">
+                <span class="nav-icon">📢</span>
+                <span class="nav-text">Marketing Generator</span>
+            </a>
+            <a href="#ai-influencer" class="nav-item" data-section="ai-influencer">
+                <span class="nav-icon">🎭</span>
+                <span class="nav-text">AI Influencer</span>
+            </a>
+            <a href="#product-builder" class="nav-item" data-section="product-builder">
+                <span class="nav-icon">📦</span>
+                <span class="nav-text">Digital Product Builder</span>
+            </a>
+            <a href="#automation-hub" class="nav-item" data-section="automation-hub">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Automation Hub</span>
+            </a>
+            
+            <div class="nav-section-label" style="margin-top: 24px;">Tools</div>
+            <a href="#dashboard" class="nav-item" data-section="dashboard">
                 <span class="nav-icon">📊</span>
                 <span class="nav-text">Dashboard</span>
-            </a>
-            <a href="#workflows" class="nav-item" data-section="workflows">
-                <span class="nav-icon">🔄</span>
-                <span class="nav-text">Workflows</span>
-            </a>
-            <a href="#chat" class="nav-item" data-section="chat">
-                <span class="nav-icon">💬</span>
-                <span class="nav-text">AI Chat</span>
-                <span class="nav-badge">New</span>
             </a>
             <a href="#revenue" class="nav-item" data-section="revenue">
                 <span class="nav-icon">💰</span>
                 <span class="nav-text">Revenue</span>
-            </a>
-            <a href="#marketing" class="nav-item" data-section="marketing">
-                <span class="nav-icon">📢</span>
-                <span class="nav-text">Marketing</span>
-            </a>
-            <a href="#settings" class="nav-item" data-section="settings">
-                <span class="nav-icon">⚙️</span>
-                <span class="nav-text">Settings</span>
             </a>
         </nav>
         
@@ -64,21 +63,300 @@
         <!-- Top Bar -->
         <header class="top-bar">
             <div class="top-bar-left">
-                <h1 class="page-title" id="pageTitle">Dashboard</h1>
-                <p class="page-subtitle" id="pageSubtitle">Overview of your AI automation</p>
+                <h1 class="page-title" id="pageTitle">Marketing Generator</h1>
+                <p class="page-subtitle" id="pageSubtitle">Generate high-converting content in seconds</p>
             </div>
             <div class="top-bar-right">
                 <button class="btn-icon" onclick="toggleTheme()" title="Toggle theme">
                     <span>🌓</span>
                 </button>
-                <button class="btn-primary" onclick="openQuickAction()">
-                    <span>+</span> Quick Action
-                </button>
             </div>
         </header>
 
+        <!-- Trust Banner -->
+        <div class="trust-banner">
+            <strong>Used by founders to launch profitable AI brands</strong>
+            <span class="usage-counter" id="usageCounter"></span>
+        </div>
+
+        <!-- Marketing Generator Section -->
+        <section id="marketing-generator-section" class="content-section active">
+            <div class="chat-container">
+                <!-- Quick Start Panel -->
+                <div class="quick-start-panel">
+                    <div class="quick-start-header">
+                        <h3>Quick Start</h3>
+                        <label class="execution-mode-toggle">
+                            <input type="checkbox" id="executionModeToggle">
+                            <span>Execution Mode</span>
+                        </label>
+                    </div>
+                    <div class="quick-start-prompts">
+                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Generate marketing post about AI automation tools')">
+                            Generate marketing post
+                        </button>
+                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Create AI influencer for fitness niche')">
+                            Create AI influencer
+                        </button>
+                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Build $97 digital product for solopreneurs')">
+                            Build digital product
+                        </button>
+                    </div>
+                    <button class="daily-plan-btn" onclick="generateDailyPlan()">
+                        📅 Generate Today's Plan
+                    </button>
+                </div>
+                
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <span class="chat-icon">📢</span>
+                        <div>
+                            <h2>Marketing Generator</h2>
+                            <p>Generate high-converting content in seconds</p>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="btn-icon" onclick="clearChat()" title="Clear chat">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message system">
+                        <div class="message-avatar">⚡</div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-author">AI Studio</span>
+                                <span class="message-time">Just now</span>
+                            </div>
+                            <div class="message-text">
+                                <strong>AI Marketing Studio</strong>
+                                <br><br>
+                                Generate high-converting marketing content in seconds. Used by founders to create real posts, campaigns, and copy that drives sales.
+                                <br><br>
+                                <strong>Try it now:</strong>
+                                <br>• "Generate marketing post about [your product]"
+                                <br>• "Create a Telegram post for my SaaS launch"
+                                <br>• "Write a Reddit campaign for [topic]"
+                                <br><br>
+                                <em>Start with 3 free generations</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea 
+                            id="chatInput" 
+                            class="chat-input" 
+                            placeholder="Try: Generate marketing post about AI automation tools (Ctrl+Enter to send)"
+                            rows="1"
+                        ></textarea>
+                        <button class="btn-send" onclick="sendMessage()">
+                            <span>Send</span>
+                            <span class="send-icon">→</span>
+                        </button>
+                    </div>
+                    <div class="chat-shortcuts">
+                        <button class="shortcut-btn" onclick="insertShortcut('Generate marketing post about')">📝 Marketing Post</button>
+                        <button class="shortcut-btn" onclick="insertShortcut('Create Telegram post for')">📱 Telegram</button>
+                        <button class="shortcut-btn" onclick="insertShortcut('Generate Reddit campaign about')">🔴 Reddit</button>
+                        <button class="shortcut-btn" onclick="insertShortcut('Write Twitter post about')">🐦 Twitter</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Influencer Section -->
+        <section id="ai-influencer-section" class="content-section">
+            <div class="chat-container">
+                <div class="quick-start-panel">
+                    <div class="quick-start-header">
+                        <h3>Quick Start</h3>
+                        <label class="execution-mode-toggle">
+                            <input type="checkbox" id="executionModeToggleInfluencer">
+                            <span>Execution Mode</span>
+                        </label>
+                    </div>
+                    <div class="quick-start-prompts">
+                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Create luxury sigma AI influencer for Instagram')">
+                            Luxury sigma influencer
+                        </button>
+                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Create faceless AI influencer for AI wealth niche')">
+                            AI wealth influencer
+                        </button>
+                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Create fitness AI influencer for men 18-35')">
+                            Fitness influencer
+                        </button>
+                    </div>
+                    <button class="daily-plan-btn" onclick="generateDailyPlan()">
+                        📅 Generate Today's Plan
+                    </button>
+                </div>
+                
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <span class="chat-icon">🎭</span>
+                        <div>
+                            <h2>AI Influencer Generator</h2>
+                            <p>Complete execution-ready Instagram automation system</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="influencerMessages">
+                    <div class="message system">
+                        <div class="message-avatar">🎭</div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-author">AI Studio</span>
+                                <span class="message-time">Just now</span>
+                            </div>
+                            <div class="message-text">
+                                <strong>AI Influencer Generator</strong>
+                                <br><br>
+                                One prompt generates everything: identity, captions, hooks, CTAs, visual prompts, automation instructions, and monetization plan.
+                                <br><br>
+                                <strong>Try:</strong> "Create a luxury sigma AI influencer for Instagram"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea 
+                            id="influencerInput" 
+                            class="chat-input" 
+                            placeholder="Try: Create luxury sigma AI influencer for Instagram (Ctrl+Enter to send)"
+                            rows="1"
+                        ></textarea>
+                        <button class="btn-send" onclick="sendInfluencerMessage()">
+                            <span>Send</span>
+                            <span class="send-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Product Builder Section -->
+        <section id="product-builder-section" class="content-section">
+            <div class="chat-container">
+                <div class="quick-start-panel">
+                    <div class="quick-start-header">
+                        <h3>Quick Start</h3>
+                    </div>
+                    <div class="quick-start-prompts">
+                        <button class="quick-prompt-btn" onclick="insertProductPrompt('Build $29 PDF lead magnet for solopreneurs')">
+                            $29 PDF Lead Magnet
+                        </button>
+                        <button class="quick-prompt-btn" onclick="insertProductPrompt('Build $97 Notion product for creators')">
+                            $97 Notion Product
+                        </button>
+                        <button class="quick-prompt-btn" onclick="insertProductPrompt('Build $497 service offer for founders')">
+                            $497 Service Offer
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <span class="chat-icon">📦</span>
+                        <div>
+                            <h2>Digital Product Builder</h2>
+                            <p>Generate complete product + sales system</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="productMessages">
+                    <div class="message system">
+                        <div class="message-avatar">📦</div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-author">AI Studio</span>
+                                <span class="message-time">Just now</span>
+                            </div>
+                            <div class="message-text">
+                                <strong>Digital Product Builder</strong>
+                                <br><br>
+                                Generate complete digital products: PDF lead magnets, Notion templates, service offers. Includes product outline, sales page copy, bio/DM CTA, and $100/day funnel plan.
+                                <br><br>
+                                <strong>Try:</strong> "Build $97 digital product for solopreneurs"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea 
+                            id="productInput" 
+                            class="chat-input" 
+                            placeholder="Try: Build $97 digital product for solopreneurs (Ctrl+Enter to send)"
+                            rows="1"
+                        ></textarea>
+                        <button class="btn-send" onclick="sendProductMessage()">
+                            <span>Send</span>
+                            <span class="send-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automation Hub Section -->
+        <section id="automation-hub-section" class="content-section">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <span class="chat-icon">⚙️</span>
+                        <div>
+                            <h2>Automation Hub</h2>
+                            <p>Daily plans and execution checklists</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="automationMessages">
+                    <div class="message system">
+                        <div class="message-avatar">⚙️</div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-author">AI Studio</span>
+                                <span class="message-time">Just now</span>
+                            </div>
+                            <div class="message-text">
+                                <strong>Automation Hub</strong>
+                                <br><br>
+                                Generate daily execution plans: today's post, caption, CTA, and growth actions. One click = complete daily plan.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea 
+                            id="automationInput" 
+                            class="chat-input" 
+                            placeholder="Try: Generate today's execution plan (Ctrl+Enter to send)"
+                            rows="1"
+                        ></textarea>
+                        <button class="btn-send" onclick="sendAutomationMessage()">
+                            <span>Send</span>
+                            <span class="send-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Dashboard Section -->
-        <section id="dashboard-section" class="content-section active">
+        <section id="dashboard-section" class="content-section">
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-header">
@@ -111,169 +389,6 @@
                     </div>
                     <div class="stat-value" id="conversionRate">0%</div>
                     <div class="stat-footer">Last 7 days</div>
-                </div>
-            </div>
-
-            <div class="content-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Recent Activity</h2>
-                        <button class="btn-link">View all</button>
-                    </div>
-                    <div class="card-content">
-                        <div class="activity-list" id="activityList">
-                            <div class="activity-item">
-                                <div class="activity-icon">✅</div>
-                                <div class="activity-content">
-                                    <div class="activity-title">System initialized</div>
-                                    <div class="activity-time">Just now</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Quick Actions</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="actions-grid">
-                            <button class="action-card" onclick="openSection('chat')">
-                                <span class="action-icon">💬</span>
-                                <span class="action-title">AI Chat</span>
-                                <span class="action-desc">Talk to Claude/Cursor</span>
-                            </button>
-                            <button class="action-card" onclick="openSection('marketing')">
-                                <span class="action-icon">📢</span>
-                                <span class="action-title">Marketing</span>
-                                <span class="action-desc">Launch campaigns</span>
-                            </button>
-                            <button class="action-card" onclick="openSection('workflows')">
-                                <span class="action-icon">🔄</span>
-                                <span class="action-title">Workflows</span>
-                                <span class="action-desc">Automate tasks</span>
-                            </button>
-                            <button class="action-card" onclick="addSale()">
-                                <span class="action-icon">➕</span>
-                                <span class="action-title">Add Sale</span>
-                                <span class="action-desc">Record revenue</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Chat Section -->
-        <section id="chat-section" class="content-section">
-            <div class="chat-container">
-                <div class="chat-header">
-                    <div class="chat-title">
-                        <span class="chat-icon">💬</span>
-                        <div>
-                            <h2>AI Command Center</h2>
-                            <p>Communicate with Claude, Cursor, and OpenAI</p>
-                        </div>
-                    </div>
-                    <div class="chat-actions">
-                        <button class="btn-icon" onclick="clearChat()" title="Clear chat">
-                            🗑️
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message system">
-                        <div class="message-avatar">⚡</div>
-                        <div class="message-content">
-                            <div class="message-header">
-                                <span class="message-author">AI Studio</span>
-                                <span class="message-time">Just now</span>
-                            </div>
-                            <div class="message-text">
-                                Welcome to AI Command Center! You can communicate with Claude, Cursor, and OpenAI from here.
-                                <br><br>
-                                <strong>Available commands:</strong>
-                                <br>• Ask questions about your business
-                                <br>• Request marketing automation
-                                <br>• Get revenue insights
-                                <br>• Create workflows
-                                <br>• Generate content
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <textarea 
-                            id="chatInput" 
-                            class="chat-input" 
-                            placeholder="Type your message... (Ctrl+Enter to send)"
-                            rows="1"
-                        ></textarea>
-                        <button class="btn-send" onclick="sendMessage()">
-                            <span>Send</span>
-                            <span class="send-icon">→</span>
-                        </button>
-                    </div>
-                    <div class="chat-shortcuts">
-                        <button class="shortcut-btn" onclick="insertShortcut('Generate marketing post')">📝 Post</button>
-                        <button class="shortcut-btn" onclick="insertShortcut('Show revenue stats')">💰 Stats</button>
-                        <button class="shortcut-btn" onclick="insertShortcut('Create workflow')">🔄 Workflow</button>
-                        <button class="shortcut-btn" onclick="insertShortcut('Analyze performance')">📊 Analyze</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Workflows Section -->
-        <section id="workflows-section" class="content-section">
-            <div class="workflows-container">
-                <div class="workflows-header">
-                    <h2>Automation Workflows</h2>
-                    <button class="btn-primary" onclick="createWorkflow()">
-                        <span>+</span> Create Workflow
-                    </button>
-                </div>
-                
-                <div class="workflows-grid">
-                    <div class="workflow-card">
-                        <div class="workflow-header">
-                            <div class="workflow-status active"></div>
-                            <h3>Telegram Marketing</h3>
-                        </div>
-                        <p class="workflow-desc">Automated posting to Telegram groups</p>
-                        <div class="workflow-stats">
-                            <span>📊 15 posts today</span>
-                            <span>✅ Active</span>
-                        </div>
-                    </div>
-                    
-                    <div class="workflow-card">
-                        <div class="workflow-header">
-                            <div class="workflow-status active"></div>
-                            <h3>Reddit Automation</h3>
-                        </div>
-                        <p class="workflow-desc">Auto-post to Reddit subreddits</p>
-                        <div class="workflow-stats">
-                            <span>📊 8 posts today</span>
-                            <span>✅ Active</span>
-                        </div>
-                    </div>
-                    
-                    <div class="workflow-card">
-                        <div class="workflow-header">
-                            <div class="workflow-status active"></div>
-                            <h3>Whop Integration</h3>
-                        </div>
-                        <p class="workflow-desc">Process orders automatically</p>
-                        <div class="workflow-stats">
-                            <span>📊 3 orders processed</span>
-                            <span>✅ Active</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -328,132 +443,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Marketing Section -->
-        <section id="marketing-section" class="content-section">
-            <div class="marketing-container">
-                <div class="marketing-header">
-                    <h2>Marketing Campaigns</h2>
-                    <button class="btn-primary" onclick="launchCampaign()">
-                        <span>+</span> Launch Campaign
-                    </button>
-                </div>
-                
-                <div class="marketing-channels">
-                    <div class="channel-card">
-                        <div class="channel-header">
-                            <span class="channel-icon">📱</span>
-                            <h3>Telegram</h3>
-                            <span class="channel-status active">Active</span>
-                        </div>
-                        <div class="channel-stats">
-                            <div class="channel-stat">
-                                <span class="stat-label">Posts</span>
-                                <span class="stat-value" id="telegramPosts">0</span>
-                            </div>
-                            <div class="channel-stat">
-                                <span class="stat-label">Sales</span>
-                                <span class="stat-value" id="telegramSales">0</span>
-                            </div>
-                            <div class="channel-stat">
-                                <span class="stat-label">Revenue</span>
-                                <span class="stat-value" id="telegramRevenue">$0</span>
-                            </div>
-                        </div>
-                        <button class="btn-secondary" onclick="openTelegram()">Open Telegram</button>
-                    </div>
-                    
-                    <div class="channel-card">
-                        <div class="channel-header">
-                            <span class="channel-icon">🔴</span>
-                            <h3>Reddit</h3>
-                            <span class="channel-status active">Active</span>
-                        </div>
-                        <div class="channel-stats">
-                            <div class="channel-stat">
-                                <span class="stat-label">Posts</span>
-                                <span class="stat-value" id="redditPosts">0</span>
-                            </div>
-                            <div class="channel-stat">
-                                <span class="stat-label">Sales</span>
-                                <span class="stat-value" id="redditSales">0</span>
-                            </div>
-                            <div class="channel-stat">
-                                <span class="stat-label">Revenue</span>
-                                <span class="stat-value" id="redditRevenue">$0</span>
-                            </div>
-                        </div>
-                        <button class="btn-secondary" onclick="openReddit()">Open Reddit</button>
-                    </div>
-                    
-                    <div class="channel-card">
-                        <div class="channel-header">
-                            <span class="channel-icon">🐦</span>
-                            <h3>Twitter</h3>
-                            <span class="channel-status active">Active</span>
-                        </div>
-                        <div class="channel-stats">
-                            <div class="channel-stat">
-                                <span class="stat-label">Posts</span>
-                                <span class="stat-value" id="twitterPosts">0</span>
-                            </div>
-                            <div class="channel-stat">
-                                <span class="stat-label">Sales</span>
-                                <span class="stat-value" id="twitterSales">0</span>
-                            </div>
-                            <div class="channel-stat">
-                                <span class="stat-label">Revenue</span>
-                                <span class="stat-value" id="twitterRevenue">$0</span>
-                            </div>
-                        </div>
-                        <button class="btn-secondary" onclick="openTwitter()">Open Twitter</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Settings Section -->
-        <section id="settings-section" class="content-section">
-            <div class="settings-container">
-                <h2>Settings</h2>
-                <div class="settings-grid">
-                    <div class="setting-card">
-                        <h3>AI Integrations</h3>
-                        <div class="setting-item">
-                            <label>Claude API Key</label>
-                            <input type="password" placeholder="sk-..." class="setting-input">
-                        </div>
-                        <div class="setting-item">
-                            <label>OpenAI API Key</label>
-                            <input type="password" placeholder="sk-..." class="setting-input">
-                        </div>
-                        <div class="setting-item">
-                            <label>Cursor Integration</label>
-                            <div class="toggle-switch">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="setting-card">
-                        <h3>Platform Links</h3>
-                        <div class="setting-item">
-                            <label>Whop Store</label>
-                            <input type="text" value="https://whop.com/golo-capo/" class="setting-input">
-                        </div>
-                        <div class="setting-item">
-                            <label>n8n URL</label>
-                            <input type="text" value="https://app.n8n.cloud" class="setting-input">
-                        </div>
-                        <div class="setting-item">
-                            <label>Telegram Web</label>
-                            <input type="text" value="https://web.telegram.org" class="setting-input">
-                        </div>
                     </div>
                 </div>
             </div>
