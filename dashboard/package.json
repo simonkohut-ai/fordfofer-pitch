@@ -1,0 +1,21 @@
+{
+  "name": "ai-studio-dashboard",
+  "version": "1.0.0",
+  "description": "Unified AI Studio Dashboard - Everything in One App",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'No build needed - static site'"
+  },
+  "dependencies": {
+    "@langchain/openai": "^0.3.0",
+    "@langchain/core": "^0.3.0",
+    "langchain": "^0.3.0",
+    "axios": "^1.7.0",
+    "dotenv": "^16.4.0"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}

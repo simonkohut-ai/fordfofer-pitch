@@ -1,0 +1,24 @@
+node_modules/
+*.log
+.DS_Store
+.env
+.env.local
+.vercel
+dist/
+build/
+*.swp
+*.swo
+*~
+
+# Server files (not needed for Vercel)
+server.js
+server.py
+START_SERVER.bat
+START_SIMPLE.bat
+
+# Deployment scripts (optional)
+DEPLOY_NOW.bat
+
+# Local development
+.vscode/
+.idea/
