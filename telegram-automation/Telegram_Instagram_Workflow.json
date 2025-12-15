@@ -1,0 +1,315 @@
+{
+  "name": "Telegram → AI Influencer → Instagram → Email",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"]
+      },
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "telegram-influencer",
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.message.text}}",
+              "operation": "contains",
+              "value2": "/create"
+            }
+          ]
+        }
+      },
+      "name": "Check if /create command",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract prompt from Telegram message\nconst message = $input.item.json.message.text;\nconst prompt = message.replace('/create', '').trim();\n\nconst chatId = $input.item.json.message.chat.id;\nconst messageId = $input.item.json.message.message_id;\n\nreturn {\n  prompt,\n  chatId,\n  messageId,\n  userId: $input.item.json.message.from.id,\n  username: $input.item.json.message.from.username || 'user'\n};"
+      },
+      "name": "Parse Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 250]
+    },
+    {
+      "parameters": {
+        "chatId": "={{$json.chatId}}",
+        "text": "✅ Creating your AI influencer... This takes 2-3 minutes.\n\n💭 Prompt: {{$json.prompt}}",
+        "additionalFields": {}
+      },
+      "name": "Send Confirmation",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [850, 250],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an expert AI influencer creator. Return only valid JSON."
+            },
+            {
+              "role": "user",
+              "content": "=Generate a complete influencer identity based on: {{ $json.prompt }}\n\nReturn JSON:\n{\n  \"name\": \"First name only\",\n  \"age\": 25,\n  \"niche\": \"fitness/fashion/travel/etc\",\n  \"appearance\": {\n    \"ethnicity\": \"caucasian/asian/latina\",\n    \"hair_color\": \"blonde/brunette/black\",\n    \"eye_color\": \"blue/brown/green\",\n    \"body_type\": \"athletic/slim/curvy\"\n  },\n  \"personality\": {\n    \"traits\": [\"confident\", \"friendly\"],\n    \"tone\": \"motivational\"\n  },\n  \"instagram\": {\n    \"username\": \"@name_niche\",\n    \"bio\": \"Bio with emojis and passion\",\n    \"profile_description\": \"Full profile story\"\n  },\n  \"tiktok\": {\n    \"username\": \"@name.niche\",\n    \"bio\": \"TikTok bio with emojis\"\n  },\n  \"backstory\": \"2-3 sentence background story\"\n}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "name": "OpenAI - Generate Identity",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [1050, 250],
+      "credentials": {
+        "openAiApi": {
+          "id": "2",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract JSON from OpenAI response\nconst response = $input.item.json.message.content;\n\nlet jsonMatch = response.match(/```json\\n([\\s\\S]*?)\\n```/);\nif (!jsonMatch) {\n  jsonMatch = response.match(/```\\n([\\s\\S]*?)\\n```/);\n}\n\nconst jsonString = jsonMatch ? jsonMatch[1] : response;\nconst influencer = JSON.parse(jsonString);\n\n// Get previous data\nconst previousData = $('Parse Command').item.json;\n\nreturn { \n  influencer,\n  ...previousData\n};"
+      },
+      "name": "Parse Identity JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1250, 250]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an expert Instagram content creator. Return only valid JSON."
+            },
+            {
+              "role": "user",
+              "content": "=Create the FIRST Instagram post for {{ $json.influencer.name }}, a {{ $json.influencer.age }} year old {{ $json.influencer.niche }} influencer.\n\nThis is their introduction post. Make it engaging and authentic.\n\nReturn JSON:\n{\n  \"caption\": \"First post caption with emojis, story, and call to action\",\n  \"hashtags\": [\"#hashtag1\", \"#hashtag2\", \"#hashtag3\"],\n  \"image_description\": \"Detailed description of what the photo should show (for AI image generation)\"\n}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "name": "OpenAI - Generate First Post",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [1450, 250],
+      "credentials": {
+        "openAiApi": {
+          "id": "2",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse first post\nconst response = $input.item.json.message.content;\n\nlet jsonMatch = response.match(/```json\\n([\\s\\S]*?)\\n```/);\nif (!jsonMatch) {\n  jsonMatch = response.match(/```\\n([\\s\\S]*?)\\n```/);\n}\n\nconst jsonString = jsonMatch ? jsonMatch[1] : response;\nconst firstPost = JSON.parse(jsonString);\n\n// Combine all data\nconst influencer = $('Parse Identity JSON').item.json.influencer;\nconst userData = $('Parse Command').item.json;\n\nreturn {\n  influencer,\n  firstPost,\n  ...userData,\n  generated_at: new Date().toISOString()\n};"
+      },
+      "name": "Combine All Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1650, 250]
+    },
+    {
+      "parameters": {
+        "fromEmail": "simonkohut21@gmail.com",
+        "toEmail": "simonkohut21@gmail.com",
+        "subject": "=✅ AI Influencer Created: {{ $json.influencer.name }}",
+        "emailType": "html",
+        "message": "=<h2>🎉 Your AI Influencer is Ready!</h2>\n\n<div style=\"background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;\">\n  <h3>👤 {{ $json.influencer.name }}</h3>\n  <p><strong>Age:</strong> {{ $json.influencer.age }}</p>\n  <p><strong>Niche:</strong> {{ $json.influencer.niche }}</p>\n  <p><strong>Instagram:</strong> {{ $json.influencer.instagram.username }}</p>\n  <p><strong>TikTok:</strong> {{ $json.influencer.tiktok.username }}</p>\n</div>\n\n<h3>📝 Bio:</h3>\n<p>{{ $json.influencer.instagram.bio }}</p>\n\n<h3>📸 First Post Caption:</h3>\n<p>{{ $json.firstPost.caption }}</p>\n\n<p><strong>Hashtags:</strong> {{ $json.firstPost.hashtags.join(' ') }}</p>\n\n<h3>🎨 Image Description:</h3>\n<p>{{ $json.firstPost.image_description }}</p>\n\n<hr>\n\n<p><strong>Generated:</strong> {{ $json.generated_at }}</p>\n<p><strong>Requested by:</strong> @{{ $json.username }}</p>\n\n<p style=\"margin-top: 20px; color: #6b7280;\">\n  <small>To post to Instagram @golo.ai.studio, use the caption and image description above.</small>\n</p>",
+        "options": {}
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1850, 250],
+      "credentials": {
+        "smtp": {
+          "id": "3",
+          "name": "Gmail SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{$json.chatId}}",
+        "text": "=✅ Done! Your AI influencer is ready!\n\n👤 Name: {{ $json.influencer.name }}\n🎯 Niche: {{ $json.influencer.niche }}\n📸 Instagram: {{ $json.influencer.instagram.username }}\n\n📧 Full details sent to your email!\n\n💡 Next: Post to @golo.ai.studio on Instagram",
+        "additionalFields": {}
+      },
+      "name": "Send Success Message",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [2050, 250],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{$json.chatId}}",
+        "text": "❌ Error! Please use the format:\n\n/create [description]\n\nExample:\n/create Sophia, 25, fitness influencer, blonde, athletic",
+        "additionalFields": {}
+      },
+      "name": "Send Error Message",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [650, 450],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check if /create command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if /create command": {
+      "main": [
+        [
+          {
+            "node": "Parse Command",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Error Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Command": {
+      "main": [
+        [
+          {
+            "node": "Send Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Confirmation": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Generate Identity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Generate Identity": {
+      "main": [
+        [
+          {
+            "node": "Parse Identity JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Identity JSON": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Generate First Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Generate First Post": {
+      "main": [
+        [
+          {
+            "node": "Combine All Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine All Data": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Send Success Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "pinData": {},
+  "versionId": "1"
+}

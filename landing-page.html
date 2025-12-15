@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Influencer Generator - Get Complete Profiles in 3 Minutes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #FF6D5A;
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.3em;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .pricing-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        
+        .pricing-card.featured {
+            border-color: #FF6D5A;
+            background: linear-gradient(135deg, #FF6D5A 0%, #ff8c7a 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .price {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .price small {
+            font-size: 0.4em;
+            opacity: 0.8;
+        }
+        
+        .features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .features li:before {
+            content: "✅ ";
+            margin-right: 10px;
+        }
+        
+        .examples {
+            background: #f9fafb;
+            padding: 60px 40px;
+            margin: 40px 0;
+            border-radius: 20px;
+        }
+        
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .example-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonials {
+            background: white;
+            padding: 60px 40px;
+            margin: 40px 0;
+            border-radius: 20px;
+        }
+        
+        .testimonial {
+            background: #f9fafb;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .how-it-works {
+            background: white;
+            padding: 60px 40px;
+            margin: 40px 0;
+            border-radius: 20px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🦄 AI Influencer Generator</h1>
+            <p class="subtitle">Get a Complete AI Influencer Profile in 3 Minutes</p>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Professional Instagram & TikTok profiles, content calendars, and more - fully automated!</p>
+            <a href="#pricing" class="cta-button">Get Started Now →</a>
+            <a href="#examples" class="cta-button" style="background: white; color: #667eea;">See Examples</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="pricing-section" id="pricing">
+            <h2 style="text-align: center; font-size: 2.5em; margin-bottom: 20px;">💰 Choose Your Package</h2>
+            <p style="text-align: center; font-size: 1.2em; color: #666; margin-bottom: 40px;">All packages include instant delivery via email</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">$50<small>/one-time</small></div>
+                    <ul class="features">
+                        <li>Single influencer profile</li>
+                        <li>Instagram username & bio</li>
+                        <li>TikTok username & bio</li>
+                        <li>Basic content ideas</li>
+                        <li>Email delivery</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="font-size: 1em; padding: 15px 30px;">Buy Now</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <h3>Complete ⭐</h3>
+                    <div class="price">$150<small>/one-time</small></div>
+                    <ul class="features">
+                        <li>Complete influencer identity</li>
+                        <li>Instagram profile (username, bio, posts)</li>
+                        <li>TikTok profile setup</li>
+                        <li>7-day content calendar</li>
+                        <li>First 3 posts ready</li>
+                        <li>AI-generated profile image</li>
+                        <li>Hashtags & captions</li>
+                        <li>Target audience analysis</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="font-size: 1em; padding: 15px 30px; background: white; color: #FF6D5A;">Buy Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Agency Pack</h3>
+                    <div class="price">$400<small>/one-time</small></div>
+                    <ul class="features">
+                        <li>3 complete influencers</li>
+                        <li>All Complete features × 3</li>
+                        <li>Custom niches</li>
+                        <li>Extended content calendars</li>
+                        <li>Priority support</li>
+                        <li>Save $50 vs buying separately</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="font-size: 1em; padding: 15px 30px;">Buy Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <h2 style="text-align: center; font-size: 2.5em; margin-bottom: 20px;">⚡ How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Choose Package</h3>
+                    <p>Select the package that fits your needs</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Generates</h3>
+                    <p>Our AI creates a complete influencer profile in 3 minutes</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Delivered</h3>
+                    <p>Receive everything via email - ready to use!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="examples" id="examples">
+            <h2 style="text-align: center; font-size: 2.5em; margin-bottom: 20px;">🎨 What You Get</h2>
+            <div class="example-grid">
+                <div class="example-card">
+                    <h3>📱 Instagram Profile</h3>
+                    <p>Professional username, bio, profile description, and first posts ready to publish.</p>
+                </div>
+                <div class="example-card">
+                    <h3>🎵 TikTok Setup</h3>
+                    <p>Complete TikTok profile with username, bio, and content ideas tailored to your niche.</p>
+                </div>
+                <div class="example-card">
+                    <h3>📅 Content Calendar</h3>
+                    <p>7-day content calendar with captions, hashtags, and posting schedule.</p>
+                </div>
+                <div class="example-card">
+                    <h3>🖼️ AI-Generated Image</h3>
+                    <p>High-quality profile image (1024x1024) generated by AI, ready to use.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2 style="text-align: center; font-size: 2.5em; margin-bottom: 40px;">💬 What People Say</h2>
+            <div class="testimonial">
+                <p style="font-size: 1.1em; margin-bottom: 10px;">"Got my influencer profile in 3 minutes! Everything was ready to go. Worth every penny!"</p>
+                <p style="color: #666;">- Sarah M., Content Creator</p>
+            </div>
+            <div class="testimonial">
+                <p style="font-size: 1.1em; margin-bottom: 10px;">"Perfect for my agency. We ordered 3 profiles and they were all unique and professional. Highly recommend!"</p>
+                <p style="color: #666;">- Mike T., Marketing Agency</p>
+            </div>
+            <div class="testimonial">
+                <p style="font-size: 1.1em; margin-bottom: 10px;">"The content calendar alone is worth it. Saved me hours of work. The AI really understands my niche!"</p>
+                <p style="color: #666;">- Jessica L., Brand Manager</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <h2 style="margin-bottom: 20px;">Ready to Get Started?</h2>
+            <a href="#pricing" class="cta-button">Choose Your Package →</a>
+            <p style="margin-top: 30px; opacity: 0.8;">Questions? Contact us at simonkohut21@gmail.com</p>
+            <p style="margin-top: 10px; opacity: 0.7; font-size: 0.9em;">© 2025 AI Influencer Generator. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add PayPal/Whop integration here
+        document.querySelectorAll('.cta-button').forEach(button => {
+            if (button.textContent.includes('Buy Now')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Replace with actual payment link
+                    const package = this.closest('.pricing-card').querySelector('h3').textContent;
+                    alert(`Redirecting to payment for ${package}...\n\nReplace this with your PayPal/Whop link!`);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,251 @@
+{
+  "name": "AI Influencer Generator - Full Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-influencer",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook - Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "chiara-influencer"
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an expert AI influencer creator. Return only valid JSON."
+            },
+            {
+              "role": "user",
+              "content": "=Generate a complete influencer identity based on: {{ $json.body.prompt }}\n\nReturn JSON:\n{\n  \"name\": \"First name\",\n  \"age\": 25,\n  \"niche\": \"fitness/fashion/travel\",\n  \"appearance\": {\n    \"ethnicity\": \"caucasian/asian/latina\",\n    \"hair_color\": \"blonde/brunette/black\",\n    \"eye_color\": \"blue/brown/green\",\n    \"body_type\": \"athletic/slim/curvy\"\n  },\n  \"personality\": {\n    \"traits\": [\"confident\", \"friendly\"],\n    \"tone\": \"motivational\"\n  },\n  \"instagram\": {\n    \"username\": \"@name_niche\",\n    \"bio\": \"Bio with emojis\"\n  },\n  \"tiktok\": {\n    \"username\": \"@name.niche\",\n    \"bio\": \"Bio with emojis\"\n  },\n  \"backstory\": \"2-3 sentence background\"\n}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "name": "OpenAI - Generate Identity",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "1",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract JSON from OpenAI response\nconst response = $input.item.json.message.content;\n\n// Try to extract JSON from markdown code blocks\nlet jsonMatch = response.match(/```json\\n([\\s\\S]*?)\\n```/);\nif (!jsonMatch) {\n  jsonMatch = response.match(/```\\n([\\s\\S]*?)\\n```/);\n}\n\nconst jsonString = jsonMatch ? jsonMatch[1] : response;\nconst influencer = JSON.parse(jsonString);\n\nreturn { influencer };"
+      },
+      "name": "Parse Identity JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": "gpt-4o-mini",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an expert social media strategist. Return only valid JSON array."
+            },
+            {
+              "role": "user",
+              "content": "=Create a 7-day Instagram content calendar for {{ $json.influencer.name }}, a {{ $json.influencer.age }} year old {{ $json.influencer.niche }} influencer.\n\nReturn JSON array:\n[\n  {\n    \"day\": 1,\n    \"type\": \"educational\",\n    \"caption\": \"Full caption with emojis\",\n    \"hashtags\": [\"hashtag1\", \"hashtag2\"],\n    \"best_time\": \"09:00\"\n  }\n]\n\nGenerate 7 posts."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "name": "OpenAI - Generate Content",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "1",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract content calendar JSON\nconst response = $input.item.json.message.content;\n\nlet jsonMatch = response.match(/```json\\n([\\s\\S]*?)\\n```/);\nif (!jsonMatch) {\n  jsonMatch = response.match(/```\\n([\\s\\S]*?)\\n```/);\n}\n\nconst jsonString = jsonMatch ? jsonMatch[1] : response;\nconst contentCalendar = JSON.parse(jsonString);\n\n// Combine with influencer data\nconst influencer = $('Parse Identity JSON').item.json.influencer;\n\nreturn { \n  influencer,\n  contentCalendar,\n  generated_at: new Date().toISOString(),\n  prompt: $('Webhook - Trigger').item.json.body.prompt\n};"
+      },
+      "name": "Combine Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "fileName": "={{ $json.influencer.name.toLowerCase().replace(/\\s/g, '-') }}/influencer.json",
+        "fileContent": "={{ JSON.stringify($json, null, 2) }}",
+        "options": {}
+      },
+      "name": "Save to File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "your-email@gmail.com",
+        "toEmail": "={{ $json.body.clientEmail || 'client@example.com' }}",
+        "subject": "=✅ Your AI Influencer \"{{ $json.influencer.name }}\" is Ready!",
+        "emailType": "html",
+        "message": "=<h2>🎉 Your AI Influencer is Ready!</h2>\n\n<p>Hi there,</p>\n\n<p>We've successfully created your AI influencer based on your requirements:</p>\n\n<div style=\"background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;\">\n  <h3>👤 {{ $json.influencer.name }}</h3>\n  <p><strong>Age:</strong> {{ $json.influencer.age }}</p>\n  <p><strong>Niche:</strong> {{ $json.influencer.niche }}</p>\n  <p><strong>Instagram:</strong> {{ $json.influencer.instagram.username }}</p>\n  <p><strong>TikTok:</strong> {{ $json.influencer.tiktok.username }}</p>\n</div>\n\n<h3>📅 Content Calendar Included:</h3>\n<p>We've generated {{ $json.contentCalendar.length }} days of content to get you started.</p>\n\n<p><strong>Next Steps:</strong></p>\n<ul>\n  <li>Review the influencer profile</li>\n  <li>Download your files (attached)</li>\n  <li>Start posting content!</li>\n</ul>\n\n<p>Need any changes? Just reply to this email!</p>\n\n<p>Best regards,<br>\n<strong>Chiara Studio Team</strong></p>",
+        "options": {}
+      },
+      "name": "Send Email to Client",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1450, 300],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, influencer: $json.influencer, message: 'Influencer created successfully!' }) }}"
+      },
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1650, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#ai-studio",
+        "text": "=🎉 New AI Influencer Created!\n\n*Name:* {{ $json.influencer.name }}\n*Niche:* {{ $json.influencer.niche }}\n*Time:* {{ new Date().toLocaleString() }}",
+        "otherOptions": {}
+      },
+      "name": "Slack Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [1450, 500],
+      "credentials": {
+        "slackApi": {
+          "id": "3",
+          "name": "Slack API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook - Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Generate Identity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Generate Identity": {
+      "main": [
+        [
+          {
+            "node": "Parse Identity JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Identity JSON": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Generate Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Generate Content": {
+      "main": [
+        [
+          {
+            "node": "Combine Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine Data": {
+      "main": [
+        [
+          {
+            "node": "Save to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to File": {
+      "main": [
+        [
+          {
+            "node": "Send Email to Client",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Slack Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email to Client": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "pinData": {},
+  "versionId": "1"
+}
+

@@ -1,0 +1,19 @@
+# AI Agent Configuration
+# Copy this content to a new file named .env
+
+# OpenAI API Key (Required - Get from https://platform.openai.com/api-keys)
+OPENAI_API_KEY=REMOVED_OPENAI_KEY
+
+# Dashboard Configuration
+DASHBOARD_URL=http://localhost:3000
+DASHBOARD_API_KEY=
+
+# Telegram Bot (Already configured)
+TELEGRAM_BOT_TOKEN=REMOVED_TELEGRAM_TOKEN
+
+# Whop API (Already configured)
+WHOP_API_KEY=REMOVED_WHOP_KEY
+
+# Agent Settings
+AGENT_MODEL=gpt-4o-mini
+AGENT_TEMPERATURE=0.7

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦄 FordFofer Post Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        select {
+            flex: 1;
+            background: white;
+            color: #667eea;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .post-output {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 200px;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+
+        .post-content {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+            white-space: pre-wrap;
+        }
+
+        .placeholder {
+            color: #999;
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            width: 100%;
+            background: #28a745;
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .stat {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .success-msg.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .api-key-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .api-status {
+            font-size: 12px;
+            margin-bottom: 15px;
+            padding: 8px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .api-status.ready {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .api-status.missing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🦄</div>
+            <h1>FordFofer Post Generator</h1>
+            <p class="subtitle">AI generovaný Instagram obsah za 30 sekúnd</p>
+        </div>
+
+        <div id="apiStatus" class="api-status missing">
+            ❌ OpenAI API key nie je nastavený
+        </div>
+
+        <input 
+            type="password" 
+            id="apiKeyInput" 
+            class="api-key-input" 
+            placeholder="Vlož OpenAI API key (sk-proj-...)"
+            value="REMOVED_OPENAI_KEY"
+        >
+
+        <div class="controls">
+            <select id="postType">
+                <option value="hype">🚀 Hype Post</option>
+                <option value="education">📚 Edukačný Post</option>
+                <option value="testimonial">⭐ Testimonial</option>
+                <option value="urgency">⚡ Urgency/FOMO</option>
+                <option value="story">💡 Story Post</option>
+            </select>
+            <button onclick="generatePost()" id="generateBtn">
+                Generuj Post
+            </button>
+        </div>
+
+        <div class="post-output" id="postOutput">
+            <div class="placeholder">
+                👆 Vyber typ postu a klikni "Generuj Post"
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>AI generuje post...</p>
+        </div>
+
+        <button class="copy-btn" onclick="copyPost()" id="copyBtn" style="display:none;">
+            📋 Skopíruj Post
+        </button>
+
+        <div class="success-msg" id="successMsg">
+            ✅ Post skopírovaný! Teraz ho vlož na Instagram.
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value" id="totalPosts">0</div>
+                <div class="stat-label">Vygenerovaných</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="todayPosts">0</div>
+                <div class="stat-label">Dnes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="lastGenerated">-</div>
+                <div class="stat-label">Posledný post</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPost = '';
+        let stats = JSON.parse(localStorage.getItem('postStats') || '{"total":0,"today":0,"lastDate":""}');
+        
+        // Check API key on load
+        window.addEventListener('load', () => {
+            updateApiStatus();
+            updateStats();
+            document.getElementById('apiKeyInput').addEventListener('input', updateApiStatus);
+        });
+
+        function updateApiStatus() {
+            const apiKey = document.getElementById('apiKeyInput').value.trim();
+            const status = document.getElementById('apiStatus');
+            const generateBtn = document.getElementById('generateBtn');
+            
+            if (apiKey.startsWith('sk-')) {
+                status.className = 'api-status ready';
+                status.innerHTML = '✅ API key nastavený - pripravený generovať';
+                generateBtn.disabled = false;
+                localStorage.setItem('openai_key', apiKey);
+            } else {
+                status.className = 'api-status missing';
+                status.innerHTML = '❌ Vlož platný OpenAI API key';
+                generateBtn.disabled = true;
+            }
+        }
+
+        function updateStats() {
+            const today = new Date().toDateString();
+            if (stats.lastDate !== today) {
+                stats.today = 0;
+                stats.lastDate = today;
+            }
+            
+            document.getElementById('totalPosts').textContent = stats.total;
+            document.getElementById('todayPosts').textContent = stats.today;
+            document.getElementById('lastGenerated').textContent = 
+                stats.total > 0 ? 'Pred ' + Math.floor((Date.now() - stats.lastTime) / 60000) + 'min' : '-';
+        }
+
+        async function generatePost() {
+            const apiKey = document.getElementById('apiKeyInput').value.trim();
+            if (!apiKey.startsWith('sk-')) {
+                alert('❌ Vlož OpenAI API key!');
+                return;
+            }
+
+            const postType = document.getElementById('postType').value;
+            const loading = document.getElementById('loading');
+            const output = document.getElementById('postOutput');
+            const copyBtn = document.getElementById('copyBtn');
+            const generateBtn = document.getElementById('generateBtn');
+
+            // Show loading
+            output.style.display = 'none';
+            loading.classList.add('active');
+            generateBtn.disabled = true;
+
+            const prompts = {
+                hype: 'Vytvor brutálne sebavedomý hype post o FordFofer AI trading systéme. Začni emoji 🚀. Max 120 slov. Zdôrazni: €50 early access, $1.2B systém, AI agenti 24/7. Pridaj CTA "Link v bio" a payment info: gcapovic.biz@proton.me. 5 hashtagov.',
+                education: 'Vytvor edukatívny post ako funguje AI trading v FordFofer. Začni emoji 💡. Vysvetli 1 konkrétny benefit. Max 120 slov. Pridaj CTA a payment: gcapovic.biz@proton.me. 5 hashtagov.',
+                testimonial: 'Vytvor fake testimonial post o FordFofer (ako keby hovoril user). Začni emoji ⭐. Konkrétne čísla/výsledky. Max 120 slov. CTA + payment: gcapovic.biz@proton.me. 5 hashtagov.',
+                urgency: 'Vytvor urgency/FOMO post o FordFofer early access. Začni emoji ⚡. Limited spots, timer, exkluzivita. Max 120 slov. CTA + payment: gcapovic.biz@proton.me. 5 hashtagov.',
+                story: 'Vytvor story post o vzostupe FordFofer. Začni emoji 🦄. Ako sa dostal k $1.2B valuácii. Max 120 slov. CTA + payment: gcapovic.biz@proton.me. 5 hashtagov.'
+            };
+
+            try {
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-4o-mini',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: 'Si expertný Instagram copywriter pre AI fintech startupy. Píšeš v slovenčine/češtine, používaš emojis, vytváraš viral obsah.'
+                            },
+                            {
+                                role: 'user',
+                                content: prompts[postType]
+                            }
+                        ],
+                        max_tokens: 300,
+                        temperature: 0.9
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+
+                const data = await response.json();
+                currentPost = data.choices[0].message.content.trim();
+
+                // Update stats
+                stats.total++;
+                stats.today++;
+                stats.lastTime = Date.now();
+                localStorage.setItem('postStats', JSON.stringify(stats));
+                updateStats();
+
+                // Show post
+                loading.classList.remove('active');
+                output.style.display = 'block';
+                output.innerHTML = `<div class="post-content">${currentPost}</div>`;
+                copyBtn.style.display = 'block';
+                generateBtn.disabled = false;
+
+            } catch (error) {
+                loading.classList.remove('active');
+                output.style.display = 'block';
+                output.innerHTML = `<div class="placeholder" style="color: #dc3545;">❌ Chyba: ${error.message}<br><br>Skontroluj API key alebo skús znova.</div>`;
+                generateBtn.disabled = false;
+            }
+        }
+
+        function copyPost() {
+            navigator.clipboard.writeText(currentPost).then(() => {
+                const successMsg = document.getElementById('successMsg');
+                successMsg.classList.add('active');
+                setTimeout(() => {
+                    successMsg.classList.remove('active');
+                }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>
+

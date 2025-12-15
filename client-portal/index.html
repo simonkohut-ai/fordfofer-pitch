@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order AI Influencer - Chiara Studio</title>
+    <meta name="description" content="Get a complete AI influencer with content calendar in 3 minutes - $150">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #1f2937;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1f2937;
+            font-weight: 500;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .example-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .example-tag {
+            background: #f3f4f6;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .example-tag:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .success {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .success h2 {
+            color: #10b981;
+            margin-bottom: 16px;
+            font-size: 28px;
+        }
+        
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .features h3 {
+            margin-bottom: 12px;
+            color: #1f2937;
+        }
+        
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            color: #6b7280;
+        }
+        
+        .features li:before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .error {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            color: #991b1b;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦄 AI Influencer Generator</h1>
+        <p class="subtitle">Get a complete AI influencer with content calendar in 3 minutes</p>
+        
+        <div class="price-tag">$150</div>
+        
+        <div class="features">
+            <h3>What You Get:</h3>
+            <ul>
+                <li>Complete influencer identity & backstory</li>
+                <li>Instagram profile (bio, username, 12 posts)</li>
+                <li>TikTok profile (bio, 10 video ideas)</li>
+                <li>7-day content calendar with captions</li>
+                <li>Delivered to your email in 3-4 minutes</li>
+            </ul>
+        </div>
+        
+        <form id="orderForm">
+            <div class="form-group">
+                <label for="name">Your Name *</label>
+                <input type="text" id="name" name="name" required placeholder="John Doe">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Your Email *</label>
+                <input type="email" id="email" name="email" required placeholder="john@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="prompt">Describe Your Influencer *</label>
+                <textarea id="prompt" name="prompt" required placeholder="Example: Sophia, 25, fitness influencer, blonde, athletic, motivational"></textarea>
+                
+                <div class="example-tags">
+                    <span class="example-tag" onclick="fillExample('Sophia, 25, fitness influencer, blonde, athletic, motivational')">Fitness</span>
+                    <span class="example-tag" onclick="fillExample('Emma, 23, fashion blogger, brunette, elegant, Parisian style')">Fashion</span>
+                    <span class="example-tag" onclick="fillExample('Mia, 28, travel influencer, asian, adventurous, world explorer')">Travel</span>
+                    <span class="example-tag" onclick="fillExample('Luna, 26, beauty guru, latina, glamorous, makeup expert')">Beauty</span>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Generate AI Influencer - $150
+            </button>
+            
+            <p style="margin-top: 16px; color: #6b7280; font-size: 14px; text-align: center;">
+                Payment: PayPal/Skrill to gcapovic.biz@proton.me<br>
+                <small>Reference: Your email + "Influencer"</small>
+            </p>
+        </form>
+        
+        <div class="error" id="errorMessage"></div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <h2>Generating Your AI Influencer...</h2>
+            <p>This takes 3-4 minutes. Please don't close this page.</p>
+            <p style="margin-top: 16px; color: #6b7280; font-size: 14px;">
+                We're creating your influencer identity, social profiles, and content calendar...
+            </p>
+        </div>
+        
+        <div class="success" id="success">
+            <div class="success-icon">✅</div>
+            <h2>Success!</h2>
+            <p style="font-size: 18px; margin-bottom: 20px;">Your AI influencer has been generated and sent to your email!</p>
+            <p style="color: #6b7280;">Check your inbox (and spam folder) for the complete package.</p>
+            <button onclick="location.reload()" style="margin-top: 30px; padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">
+                Create Another Influencer
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // ⚠️ IMPORTANT: Replace this with your actual n8n webhook URL!
+        const N8N_WEBHOOK_URL = 'https://yourname.app.n8n.cloud/webhook/generate-influencer';
+        
+        function fillExample(text) {
+            document.getElementById('prompt').value = text;
+        }
+        
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            setTimeout(() => {
+                errorEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        document.getElementById('orderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Check if webhook URL is configured
+            if (N8N_WEBHOOK_URL.includes('yourname')) {
+                showError('⚠️ Please configure your n8n webhook URL in the code!');
+                return;
+            }
+            
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const formData = new FormData(form);
+            
+            const data = {
+                name: formData.get('name'),
+                clientEmail: formData.get('email'),
+                prompt: formData.get('prompt'),
+                timestamp: new Date().toISOString()
+            };
+            
+            // Validate
+            if (!data.name || !data.clientEmail || !data.prompt) {
+                showError('Please fill in all fields!');
+                return;
+            }
+            
+            // Hide form, show loading
+            form.style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('success').style.display = 'block';
+                } else {
+                    throw new Error(result.message || 'Generation failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Error: ' + error.message + '. Please try again or contact support at gcapovic.biz@proton.me');
+                document.getElementById('loading').style.display = 'none';
+                form.style.display = 'block';
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Check URL parameters for payment success
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('payment') === 'success') {
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            // Auto-submit form after payment
+            setTimeout(() => {
+                document.getElementById('orderForm').submit();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
+

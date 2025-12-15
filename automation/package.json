@@ -1,17 +1,21 @@
 {
   "name": "automation",
   "version": "1.0.0",
-  "description": "",
+  "description": "FordFofer Social Media Automation",
   "main": "auto-marketing.js",
   "scripts": {
     "start": "node auto-marketing.js",
+    "telegram": "node TELEGRAM_AUTO_BOT.js",
+    "meta": "node META_AUTO_POST.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["automation", "social-media", "ai", "instagram"],
+  "author": "Goliáš Čapovič",
   "license": "ISC",
   "dependencies": {
     "node-cron": "^4.2.1",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "axios": "^1.6.2",
+    "openai": "^4.20.1"
   }
 }

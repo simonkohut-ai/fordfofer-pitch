@@ -4,9 +4,12 @@
 
 const CONFIG = {
     
-    // ═══ ZÁKLADNÉ INFO ═══
-    name: "Goliáš Čapovič",              // Tvoje meno
-    brand: "themostwanted",               // Názov značky
+    // ═══ ZÁKLADNÉ INFO (ANONYMOUS) ═══
+    name: "Golo Čapo",                    // Pseudonym - Anonymous
+    brand: "Golo Čapo Studio",            // Brand name
+    chiara: "Chiara",                     // Chiara brand
+    project: "themostwanted",             // Project name
+    product: "p2ba",                      // Product name
     
     // ═══ SOCIÁLNE SIETE ═══
     instagram: "@fofrynaforde",          // Tvoj IG handle
@@ -15,11 +18,11 @@ const CONFIG = {
     twitter: "@fordfofer",            // Tvoj Twitter/X
     twitter_url: "https://twitter.com/fordfofer",
     
-    linkedin: "simon-kohut",          // LinkedIn username
-    linkedin_url: "https://linkedin.com/in/simon-kohut",
+    linkedin: "golo-capo",             // LinkedIn username (anonymous)
+    linkedin_url: "https://linkedin.com/in/golo-capo",
     
-    github: "simonkohut-ai",          // GitHub username
-    github_url: "https://github.com/simonkohut-ai",
+    github: "golocapo",                // GitHub username (anonymous)
+    github_url: "https://github.com/golocapo",
     
     tiktok: "@fordfofer",             // TikTok (ak máš)
     

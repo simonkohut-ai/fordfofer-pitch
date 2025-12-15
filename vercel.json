@@ -10,16 +10,14 @@
       "use": "@vercel/static"
     }
   ],
-    "routes": [
-        { "src": "/robots.txt", "dest": "/landing-page/robots.txt" },
-        { "src": "/sitemap.xml", "dest": "/landing-page/sitemap.xml" },
-        { "src": "/links", "dest": "/landing-page/links.html" },
-        { "src": "/linktree", "dest": "/landing-page/links.html" },
-        { "src": "/bio", "dest": "/landing-page/links.html" },
-        { "src": "/dashboard", "dest": "/landing-page/dashboard.html" },
-        { "src": "/ceo", "dest": "/landing-page/dashboard.html" },
-        { "src": "/admin", "dest": "/landing-page/dashboard.html" },
-        { "src": "/", "dest": "/landing-page/index.html" },
-        { "src": "/(.*)", "dest": "/landing-page/$1" }
-    ]
+  "routes": [
+    { "src": "/robots.txt", "dest": "/landing-page/robots.txt" },
+    { "src": "/sitemap.xml", "dest": "/landing-page/sitemap.xml" },
+    { "src": "/links", "dest": "/landing-page/links.html" },
+    { "src": "/linktree", "dest": "/landing-page/links.html" },
+    { "src": "/bio", "dest": "/landing-page/links.html" },
+    { "src": "/dashboard", "dest": "/automation/MARKETING_DASHBOARD.html" },
+    { "src": "/", "dest": "/landing-page/index.html" },
+    { "src": "/(.*)", "dest": "/landing-page/$1" }
+  ]
 }

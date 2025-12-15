@@ -1,0 +1,25 @@
+{
+  "name": "ai-studio-agent",
+  "version": "1.0.0",
+  "description": "Business Automation AI Agent - Marketing Campaign Execution",
+  "main": "agent.js",
+  "type": "module",
+  "scripts": {
+    "start": "node agent.js",
+    "dev": "node --watch agent.js"
+  },
+  "dependencies": {
+    "@langchain/openai": "^0.3.0",
+    "@langchain/core": "^0.3.0",
+    "langchain": "^0.3.0",
+    "axios": "^1.7.0",
+    "dotenv": "^16.4.0"
+  },
+  "keywords": [
+    "ai-agent",
+    "automation",
+    "marketing"
+  ],
+  "author": "",
+  "license": "MIT"
+}

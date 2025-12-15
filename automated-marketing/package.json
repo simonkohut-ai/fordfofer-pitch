@@ -1,0 +1,14 @@
+{
+  "name": "fully-automated-marketing",
+  "version": "1.0.0",
+  "description": "Fully automated Reddit and Twitter posting",
+  "main": "fully-automated-poster.js",
+  "scripts": {
+    "start": "node fully-automated-poster.js",
+    "install-deps": "npm install puppeteer"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
+
