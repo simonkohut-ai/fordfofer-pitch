@@ -29,7 +29,7 @@
 2. Click **Add New**
 3. Add:
    - **Name**: `OPENAI_API_KEY`
-   - **Value**: `REMOVED_OPENAI_KEY`
+   - **Value**: `YOUR_OPENAI_API_KEY_HERE` (use the key from your answers)
    - **Environments**: ✅ Check all (Production, Preview, Development)
 4. Click **Save**
 5. Go to **Deployments** → Click **"..."** on latest → **Redeploy**

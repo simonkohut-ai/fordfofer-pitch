@@ -35,7 +35,7 @@ After dashboard deployment:
 3. Click **"Add New"**
 4. Fill in:
    - **Name**: `OPENAI_API_KEY`
-   - **Value**: `REMOVED_OPENAI_KEY`
+   - **Value**: `YOUR_OPENAI_API_KEY_HERE` (add your OpenAI API key)
    - **Environments**: ✅ Check all (Production, Preview, Development)
 5. Click **"Save"**
 6. Go to **"Deployments"** tab
@@ -67,7 +67,7 @@ After p2ba-console deployment:
 3. Click **"Add New"**
 4. Fill in:
    - **Name**: `OPENAI_API_KEY`
-   - **Value**: `REMOVED_OPENAI_KEY`
+   - **Value**: `YOUR_OPENAI_API_KEY_HERE` (add your OpenAI API key)
    - **Environments**: ✅ Check all (Production, Preview, Development)
 5. Click **"Save"**
 6. Go to **"Deployments"** tab

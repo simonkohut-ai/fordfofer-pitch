@@ -13,7 +13,7 @@ pause
 cd /d "%~dp0"
 
 set VERCEL_TOKEN=REMOVED_VERCEL_TOKEN
-set OPENAI_KEY=REMOVED_OPENAI_KEY
+set OPENAI_KEY=YOUR_OPENAI_API_KEY_HERE
 
 echo.
 echo ═══════════════════════════════════════════════════════════════

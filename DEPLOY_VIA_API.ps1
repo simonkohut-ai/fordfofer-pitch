@@ -5,7 +5,7 @@ $ErrorActionPreference = "Stop"
 
 # Configuration
 $VERCEL_TOKEN = "REMOVED_VERCEL_TOKEN"
-$OPENAI_KEY = "REMOVED_OPENAI_KEY"
+$OPENAI_KEY = "YOUR_OPENAI_API_KEY_HERE"
 $TEAM_ID = "golos-projects-e144069f"
 
 Write-Host "🚀 Starting Auto Deployment..." -ForegroundColor Green

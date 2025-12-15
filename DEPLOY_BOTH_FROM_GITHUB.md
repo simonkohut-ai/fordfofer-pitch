@@ -37,7 +37,7 @@ You have deployments from the `p2ba` repository, but they're deploying from the 
 3. After deployment, go to **Settings** → **Environment Variables**
 4. Add:
    - **Name**: `OPENAI_API_KEY`
-   - **Value**: `REMOVED_OPENAI_KEY`
+   - **Value**: `YOUR_OPENAI_API_KEY_HERE` (add your OpenAI API key)
    - **Environments**: ✅ All (Production, Preview, Development)
 5. Click **"Save"**
 6. Go to **Deployments** → Click **"..."** → **"Redeploy"**
@@ -78,7 +78,7 @@ You have deployments from the `p2ba` repository, but they're deploying from the 
 3. After deployment, go to **Settings** → **Environment Variables**
 4. Add:
    - **Name**: `OPENAI_API_KEY`
-   - **Value**: `REMOVED_OPENAI_KEY`
+   - **Value**: `YOUR_OPENAI_API_KEY_HERE` (add your OpenAI API key)
    - **Environments**: ✅ All (Production, Preview, Development)
 5. Click **"Save"**
 6. Go to **Deployments** → Click **"..."** → **"Redeploy"**

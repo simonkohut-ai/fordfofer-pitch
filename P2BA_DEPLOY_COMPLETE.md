@@ -6,7 +6,7 @@
 
 ## 📋 YOUR ANSWERS SUMMARY
 
-- ✅ **OpenAI Key**: Provided (`REMOVED_OPENAI_KEY...`)
+- ✅ **OpenAI Key**: Provided (see your saved answers)
 - ✅ **Payment Methods**: Stripe, Skrill
 - ✅ **Identity Update**: Golo Čapo, Chiara, themostwanted, p2ba
 - ⚠️ **Environment Variables**: Need to determine
@@ -22,7 +22,7 @@
 
 Add:
 - **Name**: `OPENAI_API_KEY`
-- **Value**: `REMOVED_OPENAI_KEY`
+- **Value**: `YOUR_OPENAI_API_KEY_HERE` (use the key from your saved answers)
 - **Environments**: ✅ All (Production, Preview, Development)
 
 **Then**: Redeploy the project
