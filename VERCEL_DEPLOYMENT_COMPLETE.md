@@ -21,7 +21,7 @@ Add these:
 
 ### **Required:**
 ```
-OPENAI_API_KEY=REMOVED_OPENAI_KEY
+OPENAI_API_KEY=YOUR_OPENAI_API_KEY_HERE
 NODE_ENV=production
 ```
 
