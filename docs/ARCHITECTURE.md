@@ -1,86 +1,350 @@
-# Architecture Overview
+# Architecture - Golo Čapo Production System
 
-High‑level view of how the GoLoCapo / Fordfofer system is put together.
+**Goal:** Clean, scalable, revenue-focused architecture  
+**Principle:** If it doesn't drive revenue, SEO, or automation → remove it
 
-## Frontend
+---
 
-- **Static HTML/CSS/JS** served via Vercel.
-- Core entry pages live under `dashboard/`:
-  - `index.html` – GoLoCapo landing page.
-  - `prelaunch.html` – email‑first pre‑launch page.
-  - `pricing.html` – early‑access pricing.
-  - `portfolio/*.html` – portfolio index + case‑study pages.
-  - `clients/*/*.html` – client microsites.
-- Styling is handled by `dashboard/styles.css` and a small shared stylesheet under `dashboard/clients/_shared/styles.css`.
+## Production Routes
 
-## Backend / APIs
+### Public Routes (Active)
 
-Implemented as **Vercel serverless functions** in `dashboard/api/*.mjs`:
+**Marketing Pages:**
+- `/` → `dashboard/index.html` (Homepage)
+- `/prelaunch` → `prelaunch.html` (Waitlist funnel)
+- `/pricing` → `pricing.html` (Pricing + founding deal)
+- `/thank-you` → `thank-you.html` (Post-purchase)
 
-- `api/health.mjs` – overall health/status.  
-- `api/launch/status.mjs` – launch‑specific flags and integration status.  
-- `api/checkout-url.mjs` – returns Stripe payment link.  
-- `api/leads/*` – create and list leads.  
-- `api/customers/status.mjs` – customer summary.  
-- `api/payments/status.mjs` – payment summary.  
-- `api/stripe/webhook.mjs` – Stripe webhook (checkout session completed → upgrade lead → customer).  
-- `api/meta/*` – Meta Graph API integration (page selection, posting, status).  
-- `api/ai/*` – OpenAI/LangChain‑powered content generation.  
+**SEO:**
+- `/robots.txt` → `robots.txt` (Search engine rules)
+- `/sitemap.xml` → `sitemap.xml` (Site structure)
 
-Shared utilities under `dashboard/api/utils/*` handle:
+**API Routes:**
+- `/api/leads/submit` → Lead capture
+- `/api/leads/status` → Lead stats (admin)
+- `/api/revenue/track` → Revenue tracking
+- `/api/sales/qualify` → Lead qualification
+- `/api/stripe/webhook` → Payment processing
+- `/api/checkout-url` → Stripe checkout URL
+- `/api/ai/outreach` → AI outreach generation
+- `/api/n8n/webhook` → n8n integration
 
-- Storage abstraction (KV/Postgres/memory fallback).  
-- Email sending via Resend.  
-- Security headers and rate limiting.  
+**Admin/Dashboard:**
+- `/dashboard/revenue-dashboard.html` → Revenue dashboard (future)
 
-## Hosting & Routing
+---
 
-- **Hosting:** Vercel (Pro project `dashboard`).  
-- **Root routing:** `fordfofer-pitch/vercel.json` routes `golocapo.com` into `dashboard/`:
-  - `/` → `/dashboard/index.html`  
-  - `/pricing` → `/dashboard/pricing.html`  
-  - `/prelaunch` → `/dashboard/prelaunch.html`  
-  - `/portfolio*` → `/dashboard/portfolio/*`  
-  - `/api/(.*)` → `/dashboard/api/$1`  
-  - Legacy routes for `landing-page` and standalone `portfolio/`.  
-- **Dashboard‑local routing:** `dashboard/vercel.json` ensures API routes and portfolio/client pages are served correctly when `dashboard/` is used as the project root.
+## File Structure
 
-## Payments (Stripe)
+### Root Level (Production)
 
-- Uses **Stripe Payment Links** for checkout:
-  - Env var: `STRIPE_CHECKOUT_URL` – points to a Stripe Payment Link.
-  - Frontend pricing page calls `/api/checkout-url` and redirects to the returned URL.
-- Webhook:
-  - `/api/stripe/webhook` verifies signatures using `STRIPE_WEBHOOK_SECRET`.
-  - On `checkout.session.completed`, upgrades a lead → customer and records basic payment info.
+**Essential Files:**
+- `vercel.json` - Routing configuration
+- `prelaunch.html` - Waitlist page
+- `pricing.html` - Pricing page
+- `thank-you.html` - Thank you page
+- `robots.txt` - SEO
+- `sitemap.xml` - SEO
+- `README.md` - Project overview
+- `ENV_VARIABLES.md` - Environment setup
 
-## AI Integrations (OpenAI)
+**Documentation:**
+- `docs/` - Essential documentation only
 
-- Uses OpenAI via `langchain` and `@langchain/openai`:
-  - Env var: `OPENAI_API_KEY` (set in Vercel).  
-  - Used in `dashboard/api/ai/*.mjs` and promo‑kit / social‑kit tooling.  
-- Goals:
-  - Generate promo kits, posts, and product blueprints.  
-  - Support microsite/content generation for client sites.  
+**Scripts:**
+- `scripts/` - Production scripts only
 
-## Operations & Automation
+---
 
-- Dozens of PowerShell/BAT scripts at the repo root and under `dashboard/`.  
-- Central scripts (copies will live under `/scripts` as we consolidate):  
-  - `RUN_EVERYTHING.bat` – environment/setup helper.  
-  - `dashboard/REDEPLOY_LIVE.ps1` – redeploy + health checks.  
-  - `dashboard/TEST_STRIPE_SETUP.ps1` – validate Stripe configuration.  
-  - `dashboard/COMPLETE_TEST_SUITE.ps1` – smoke tests for key routes.  
+### Dashboard (Production)
 
-This architecture intentionally favors **simple static HTML + serverless APIs** and **scriptable operations** over heavy frameworks.
+**Pages:**
+- `index.html` - Homepage
+- `prelaunch.html` - Waitlist (duplicate for routing)
+- `pricing.html` - Pricing (duplicate for routing)
+- `thank-you.html` - Thank you (duplicate for routing)
+- `revenue-dashboard.html` - Revenue dashboard
 
-{
-  "cells": [],
-  "metadata": {
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "nbformat": 4,
-  "nbformat_minor": 2
-}
+**API Endpoints:**
+- `api/leads/submit.mjs` - Lead capture
+- `api/leads/status.mjs` - Lead stats
+- `api/revenue/track.mjs` - Revenue tracking
+- `api/sales/qualify.mjs` - Qualification
+- `api/stripe/webhook.mjs` - Stripe webhook
+- `api/checkout-url.mjs` - Checkout URL
+- `api/ai/outreach.mjs` - AI outreach
+- `api/n8n/webhook.mjs` - n8n webhook
+
+**Utilities:**
+- `api/utils/email.mjs` - Email sending
+- `api/utils/leads-storage.mjs` - Lead storage
+- `api/utils/storage.mjs` - Storage abstraction
+- `api/utils/security.mjs` - Security headers
+- `api/utils/rateLimit.mjs` - Rate limiting
+
+**Assets:**
+- `assets/brand/` - Brand assets (CSS, logos, icons)
+
+**Configuration:**
+- `package.json` - Dependencies
+
+---
+
+### Scripts (Production)
+
+**Essential Scripts:**
+- `scripts/ai_marketing_engine.mjs` - AI outreach generation
+- `scripts/DAILY_OUTREACH.ps1` - Daily outreach automation
+- `scripts/prompt_templates.md` - Prompt templates
+- `VERIFY_PRELAUNCH.ps1` - Route verification
+
+---
+
+### Documentation (Essential Only)
+
+**Core Docs:**
+- `docs/ARCHITECTURE.md` - This file
+- `docs/TECH_DEBT.md` - Technical debt tracking
+- `docs/BRAND_SYSTEM.md` - Brand guidelines
+- `docs/SEO_BASELINE.md` - SEO implementation
+- `docs/OFFER_STRATEGY.md` - Offer strategy
+- `docs/PRICING_TEST_MATRIX.md` - Pricing tests
+- `docs/REVENUE_VALIDATION.md` - Revenue validation
+- `docs/BUDGET_DEPLOYMENT.md` - Budget deployment
+- `docs/AI_MARKETING_ENGINE.md` - AI engine docs
+- `docs/CLOSING_SCRIPTS.md` - Sales scripts
+- `docs/SALES_AUTOMATION.md` - Sales automation
+- `docs/FIRST_SALES_PLAYBOOK.md` - Sales playbook
+
+---
+
+## Removed / Archive
+
+**Removed:**
+- All `.bat` deployment scripts (100+ files)
+- Old documentation files (200+ markdown files)
+- Archive folders: `landing-page/`, `chiara-desktop-app/`, `p2ba-console/`, `p2ba-core/`
+- Unused API endpoints
+- Redundant client sites (if not needed)
+- Old test files
+
+**Archive (If Needed):**
+- Move to `archive/` folder
+- Not deployed to production
+- Keep for reference only
+
+---
+
+## Build Optimization
+
+### Current Build
+
+**Static Files:**
+- HTML pages: ~50KB each
+- CSS: `assets/brand/brand.css` (~10KB)
+- JavaScript: Minimal (vanilla JS)
+- Images: Optimized PNGs
+
+**API Functions:**
+- Serverless functions: ~5-10KB each
+- Dependencies: Minimal (Resend, OpenAI SDK)
+
+**Total Build Size:** ~500KB (estimated)
+
+---
+
+### Optimization Targets
+
+**HTML:**
+- Minify HTML (remove comments, whitespace)
+- Target: < 30KB per page
+
+**CSS:**
+- Minify CSS
+- Remove unused styles
+- Target: < 8KB
+
+**JavaScript:**
+- Keep vanilla JS (no frameworks)
+- Minify if needed
+- Target: < 20KB total
+
+**Images:**
+- Optimize PNGs
+- Use WebP if possible
+- Target: < 100KB per image
+
+**Total Target:** < 300KB
+
+---
+
+## Load Time Optimization
+
+### Current Performance
+
+**First Contentful Paint:** TBD  
+**Time to Interactive:** TBD  
+**Largest Contentful Paint:** TBD
+
+### Optimization Strategies
+
+1. **Minimize HTTP Requests**
+   - Combine CSS files
+   - Inline critical CSS
+   - Defer non-critical JS
+
+2. **Optimize Assets**
+   - Compress images
+   - Use CDN for static assets
+   - Enable gzip/brotli
+
+3. **Caching**
+   - Set cache headers
+   - Use Vercel edge caching
+   - Cache static assets
+
+4. **Code Splitting**
+   - Load only what's needed
+   - Defer non-critical scripts
+   - Lazy load images
+
+---
+
+## Dependencies
+
+### Production Dependencies
+
+**Required:**
+- `resend` - Email sending
+- (OpenAI SDK if using AI features)
+
+**Optional:**
+- `@langchain/core` - AI features
+- `@langchain/openai` - AI features
+
+**Removed:**
+- `express` - Not needed (serverless)
+- `axios` - Use native fetch
+- `dotenv` - Vercel handles env vars
+
+---
+
+## Security
+
+### Headers
+
+**Security Headers (via `api/utils/security.mjs`):**
+- `X-Frame-Options: DENY`
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Content-Security-Policy` - Per page
+
+### Rate Limiting
+
+**Rate Limits:**
+- Lead submission: 5 requests/minute
+- API endpoints: 100 requests/minute
+- Revenue tracking: 100 requests/minute
+
+---
+
+## Monitoring
+
+### Health Checks
+
+**Endpoints:**
+- `/api/health` - System health
+- `/api/revenue/track` - Revenue tracking status
+
+### Metrics
+
+**Tracked:**
+- Page views (PostHog)
+- CTA clicks (PostHog)
+- Revenue (Stripe webhook)
+- Conversion rates (Revenue API)
+
+---
+
+## Deployment
+
+### Vercel Configuration
+
+**Framework Preset:** Other  
+**Build Command:** (none - static files)  
+**Output Directory:** (none - root)  
+**Install Command:** `npm install` (if package.json exists)
+
+**Root Directory:** (empty - root)
+
+---
+
+## Scaling Considerations
+
+### Current Limits
+
+**Vercel Free Tier:**
+- 100GB bandwidth/month
+- 100 serverless function invocations/day
+- Unlimited static files
+
+**Upgrade Triggers:**
+- > 100GB bandwidth/month
+- > 100 function invocations/day
+- Need more features
+
+### Optimization for Scale
+
+1. **Static First**
+   - Serve static HTML/CSS/JS
+   - Use serverless only for APIs
+
+2. **Caching**
+   - Cache static assets
+   - Cache API responses where possible
+
+3. **CDN**
+   - Use Vercel Edge Network
+   - Optimize asset delivery
+
+---
+
+## Future Improvements
+
+### Short-term
+
+1. **Minify Assets**
+   - HTML minification
+   - CSS minification
+   - JS minification
+
+2. **Image Optimization**
+   - Convert to WebP
+   - Compress images
+   - Lazy loading
+
+3. **Code Cleanup**
+   - Remove unused code
+   - Consolidate scripts
+   - Remove dead routes
+
+### Long-term
+
+1. **Performance Monitoring**
+   - Add performance tracking
+   - Monitor Core Web Vitals
+   - Optimize based on data
+
+2. **Advanced Caching**
+   - Implement service worker
+   - Cache API responses
+   - Offline support
+
+3. **Progressive Enhancement**
+   - Add offline support
+   - Improve mobile experience
+   - Enhance accessibility
+
+---
+
+**Remember:** Clean systems scale faster. Remove everything unnecessary.

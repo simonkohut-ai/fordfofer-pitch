@@ -4,17 +4,12 @@
   "description": "Unified AI Studio Dashboard - Everything in One App",
   "type": "module",
   "scripts": {
-    "dev": "node server.cjs",
-    "dev:node": "node server.cjs",
     "start": "vercel dev -p 3000",
     "vercel:dev": "vercel dev --listen 3000"
   },
   "dependencies": {
     "@langchain/core": "^0.3.0",
     "@langchain/openai": "^0.3.0",
-    "axios": "^1.7.0",
-    "dotenv": "^16.4.0",
-    "express": "^5.2.1",
     "langchain": "^0.3.0",
     "resend": "^3.2.0"
   },
