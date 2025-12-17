@@ -8,6 +8,7 @@ import { getStorage, setStorage } from '../utils/storage.mjs';
 
 /**
  * Track revenue event
+ * Exported for use in other modules
  */
 export async function trackRevenue({
   email,

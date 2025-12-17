@@ -189,6 +189,178 @@ const templates = {
     `,
     text: `New Prelaunch Lead: ${data.email}\nSource: ${data.source || 'prelaunch'}\nLead ID: ${data.leadId || 'N/A'}`,
   }),
+  
+  'demo-reminder': (data) => ({
+    subject: `Reminder: Demo Tomorrow at ${data.time || 'your scheduled time'}`,
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: rgba(255, 255, 255, 0.92); background: #0B0B12; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0B0B12; }
+          .header { text-align: center; margin-bottom: 40px; }
+          .logo { font-size: 48px; margin-bottom: 16px; }
+          h1 { font-size: 28px; font-weight: 700; color: rgba(255, 255, 255, 0.92); margin-bottom: 16px; }
+          p { font-size: 16px; color: rgba(255, 255, 255, 0.70); margin-bottom: 16px; }
+          .cta { text-align: center; margin: 32px 0; }
+          .btn { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #C080B0, #A070B0); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; }
+          .footer { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.12); text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.50); }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="logo">⚡</div>
+            <h1>Demo Reminder</h1>
+          </div>
+          <p>Hey ${data.name || 'there'}!</p>
+          <p>Quick reminder: We have a demo scheduled for tomorrow at ${data.time || 'your scheduled time'}.</p>
+          <p>Here's what we'll cover:</p>
+          <ul>
+            <li>How the tool works</li>
+            <li>How it solves your specific challenge</li>
+            <li>Q&A</li>
+          </ul>
+          <p>See you then!</p>
+          ${data.rescheduleLink ? `<div class="cta"><a href="${data.rescheduleLink}" class="btn">Reschedule if Needed</a></div>` : ''}
+          <div class="footer">
+            <p>Golo Čapo</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+    text: `Demo Reminder: We have a demo scheduled for tomorrow at ${data.time || 'your scheduled time'}. See you then!`,
+  }),
+  
+  'post-demo-followup': (data) => ({
+    subject: 'Thanks for the demo!',
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: rgba(255, 255, 255, 0.92); background: #0B0B12; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0B0B12; }
+          .header { text-align: center; margin-bottom: 40px; }
+          .logo { font-size: 48px; margin-bottom: 16px; }
+          h1 { font-size: 28px; font-weight: 700; color: rgba(255, 255, 255, 0.92); margin-bottom: 16px; }
+          p { font-size: 16px; color: rgba(255, 255, 255, 0.70); margin-bottom: 16px; }
+          .cta { text-align: center; margin: 32px 0; }
+          .btn { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #C080B0, #A070B0); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; }
+          .footer { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.12); text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.50); }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="logo">⚡</div>
+            <h1>Thanks for the Demo!</h1>
+          </div>
+          <p>Hey ${data.name || 'there'}!</p>
+          <p>Thanks for taking the time to chat!</p>
+          ${data.keyPoints ? `<p>As discussed:</p><ul>${data.keyPoints.map(point => `<li>${point}</li>`).join('')}</ul>` : ''}
+          <p>Ready to claim your founding spot?</p>
+          <div class="cta">
+            <a href="https://www.golocapo.com/prelaunch" class="btn">Claim Your Spot</a>
+          </div>
+          <p>Questions? Just reply!</p>
+          <div class="footer">
+            <p>Golo Čapo</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+    text: `Thanks for the demo! Ready to claim your founding spot? https://www.golocapo.com/prelaunch`,
+  }),
+  
+  'onboarding-day1': (data) => ({
+    subject: 'Getting Started with Golo Čapo',
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: rgba(255, 255, 255, 0.92); background: #0B0B12; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0B0B12; }
+          .header { text-align: center; margin-bottom: 40px; }
+          .logo { font-size: 48px; margin-bottom: 16px; }
+          h1 { font-size: 28px; font-weight: 700; color: rgba(255, 255, 255, 0.92); margin-bottom: 16px; }
+          p { font-size: 16px; color: rgba(255, 255, 255, 0.70); margin-bottom: 16px; }
+          .footer { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.12); text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.50); }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="logo">⚡</div>
+            <h1>Welcome!</h1>
+          </div>
+          <p>Hey ${data.name || 'there'}!</p>
+          <p>Here's how to get started:</p>
+          <ol>
+            <li>Access your dashboard (launching 21.12)</li>
+            <li>Set up your first campaign</li>
+            <li>Generate your first posts</li>
+          </ol>
+          <p>Need help? Just reply to this email.</p>
+          <p>Let's make your marketing effortless!</p>
+          <div class="footer">
+            <p>Golo Čapo</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+    text: `Welcome! Here's how to get started: 1. Access your dashboard 2. Set up your first campaign 3. Generate your first posts. Need help? Just reply!`,
+  }),
+  
+  'checkin-day7': (data) => ({
+    subject: 'How\'s it going?',
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: rgba(255, 255, 255, 0.92); background: #0B0B12; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0B0B12; }
+          .header { text-align: center; margin-bottom: 40px; }
+          .logo { font-size: 48px; margin-bottom: 16px; }
+          h1 { font-size: 28px; font-weight: 700; color: rgba(255, 255, 255, 0.92); margin-bottom: 16px; }
+          p { font-size: 16px; color: rgba(255, 255, 255, 0.70); margin-bottom: 16px; }
+          .footer { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.12); text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.50); }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="logo">⚡</div>
+            <h1>Quick Check-In</h1>
+          </div>
+          <p>Hey ${data.name || 'there'}!</p>
+          <p>Quick check-in — how's it going?</p>
+          <p>Are you:</p>
+          <ul>
+            <li>✅ Getting value from the tool?</li>
+            <li>❌ Running into any issues?</li>
+            <li>🤔 Not sure where to start?</li>
+          </ul>
+          <p>Reply and let me know! I'm here to help.</p>
+          <div class="footer">
+            <p>Golo Čapo</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+    text: `Quick check-in — how's it going? Are you getting value? Running into issues? Not sure where to start? Reply and let me know!`,
+  }),
 };
 
 // Send email via Resend
