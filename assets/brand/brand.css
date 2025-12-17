@@ -1,18 +1,28 @@
 /* Golo Čapo Brand Design System */
 
 :root {
-  /* Brand Colors */
-  --brand-primary: #C080B0;
-  --brand-secondary: #A070B0;
+  /* Design Tokens - Top-Class Startup UI */
+  
+  /* Colors */
+  --bg: #0B0B12;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel2: rgba(255, 255, 255, 0.03);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.70);
+  --border: rgba(255, 255, 255, 0.12);
+  --brand: #C080B0;
+  --brand2: #A070B0;
+  
+  /* Legacy aliases for compatibility */
+  --brand-primary: var(--brand);
+  --brand-secondary: var(--brand2);
   --brand-deep: #8060A0;
   --brand-accent: #D090C0;
-  
-  /* UI Colors */
-  --bg-primary: #0B0B12;
-  --bg-surface: rgba(255, 255, 255, 0.06);
-  --bg-border: rgba(255, 255, 255, 0.12);
-  --text-primary: rgba(255, 255, 255, 0.92);
-  --text-muted: rgba(255, 255, 255, 0.70);
+  --bg-primary: var(--bg);
+  --bg-surface: var(--panel);
+  --bg-border: var(--border);
+  --text-primary: var(--text);
+  --text-muted: var(--muted);
   --text-secondary: rgba(255, 255, 255, 0.50);
   
   /* Semantic Colors */
@@ -20,15 +30,17 @@
   --error: #ef4444;
   --warning: #f59e0b;
   
-  /* Spacing */
+  /* Spacing Scale */
   --spacing-xs: 8px;
-  --spacing-sm: 16px;
-  --spacing-md: 24px;
-  --spacing-lg: 32px;
-  --spacing-xl: 48px;
-  --spacing-2xl: 64px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
   
-  /* Typography */
+  /* Typography Scale */
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
   --font-size-base: 16px;
   --font-size-sm: 14px;
@@ -38,10 +50,23 @@
   --font-size-3xl: 42px;
   --font-size-4xl: 56px;
   
+  /* Responsive Typography */
+  --h1-size: clamp(40px, 5vw, 56px);
+  --h2-size: clamp(28px, 4vw, 36px);
+  --h3-size: clamp(20px, 3vw, 24px);
+  
   /* Layout */
-  --container-max-width: 1080px;
-  --border-radius: 12px;
-  --border-radius-lg: 16px;
+  --container: 1120px;
+  --container-max-width: var(--container);
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --border-radius: var(--radius-md);
+  --border-radius-lg: var(--radius-lg);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(192, 128, 176, 0.15);
+  --shadow-lg: 0 8px 24px rgba(192, 128, 176, 0.2);
   
   /* Transitions */
   --transition-fast: 0.15s ease;
@@ -97,11 +122,36 @@ body::before {
 
 /* Container */
 .container {
-  max-width: var(--container-max-width);
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--spacing-lg);
   position: relative;
   z-index: 1;
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Section Lead */
+.section-lead {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--font-size-lg);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-2xl);
 }
 
 /* Brand Bar */
@@ -155,15 +205,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(var(--font-size-2xl), 5vw, var(--font-size-4xl));
+  font-size: var(--h1-size);
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 h2 {
-  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-3xl));
+  font-size: var(--h2-size);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 h3 {
-  font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl));
+  font-size: var(--h3-size);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 p {
@@ -253,35 +309,52 @@ p {
 
 /* Cards */
 .card {
-  background: var(--bg-surface);
-  border: 1px solid var(--bg-border);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-lg);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
   backdrop-filter: blur(10px);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-/* Inputs */
-.input {
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Inputs & Selects */
+.input,
+.select {
   width: 100%;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--bg-border);
-  border-radius: var(--border-radius);
-  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
   font-size: var(--font-size-base);
   font-family: var(--font-family);
   transition: all var(--transition-base);
 }
 
-.input:focus {
+.input:focus,
+.select:focus {
   outline: none;
-  border-color: var(--brand-primary);
+  border-color: var(--brand);
   background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 0 0 3px rgba(192, 128, 176, 0.1);
 }
 
 .input::placeholder {
   color: var(--text-secondary);
+}
+
+.select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23C080B0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-md) center;
+  padding-right: calc(var(--spacing-xl) + var(--spacing-md));
 }
 
 /* Hero Section */
@@ -904,7 +977,84 @@ p {
 
 /* Focus visible */
 *:focus-visible {
-  outline: 2px solid var(--brand-primary);
+  outline: 2px solid var(--brand);
   outline-offset: 2px;
+}
+
+/* Link Underline Animation */
+a:not(.btn):not(.brand-bar a) {
+  position: relative;
+  text-decoration: none;
+  color: var(--brand);
+  transition: color var(--transition-base);
+}
+
+a:not(.btn):not(.brand-bar a)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--brand);
+  transition: width var(--transition-base);
+}
+
+a:not(.btn):not(.brand-bar a):hover::after {
+  width: 100%;
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal[data-reveal="fade"] {
+  transform: none;
+}
+
+.reveal[data-reveal="left"] {
+  transform: translateX(-16px);
+}
+
+.reveal[data-reveal="left"].is-visible {
+  transform: translateX(0);
+}
+
+.reveal[data-reveal="right"] {
+  transform: translateX(16px);
+}
+
+.reveal[data-reveal="right"].is-visible {
+  transform: translateX(0);
+}
+
+.reveal[data-reveal="scale"] {
+  transform: scale(0.95);
+}
+
+.reveal[data-reveal="scale"].is-visible {
+  transform: scale(1);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
