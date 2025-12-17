@@ -30,7 +30,7 @@ Verejná showcase stránka pre projekt MikoRK pohrebníctvo. Navrhnutá pre soci
 - ✅ OpenGraph tagy (og:title, og:description, og:url, og:image)
 - ✅ Twitter/X tagy (twitter:card, twitter:title, twitter:description, twitter:image)
 - ✅ JSON-LD štruktúrované údaje (Article schema)
-- ✅ OG obrázok na `/assets/og/mikork-og.svg` (1200x630)
+- ✅ OG obrázok na `/assets/og/mikork-og.png` (1200x630)
 - ✅ Hreflang alternatívy (sk, en)
 
 ### Navigácia & Zjistiteľnosť
@@ -57,36 +57,18 @@ Verejná showcase stránka pre projekt MikoRK pohrebníctvo. Navrhnutá pre soci
 
 ---
 
-## Dlhodobá Spolupráca
+## Návrh dlhodobej spolupráce (pre MikoRK)
 
-### Mesačný Plán Starostlivosti
+Ak chcete, vieme pokračovať ako dlhodobý partner a starať sa o web + výkon:
+- úpravy obsahu a sekcií podľa sezóny/služieb
+- lokálne SEO: titulky, popisy, interné prelinkovanie, nové podstránky
+- zlepšovanie konverzií (klik na telefón, kontakt, formulár)
+- kontrola rýchlosti, chýb (404), dostupnosti a technický audit
+- bezpečnostné a obsahové aktualizácie
 
-Pre MikoRK pohrebníctvo ponúkame **dlhodobú spoluprácu** v rámci mesačného plánu starostlivosti:
-
-#### Čo Zahŕňa:
-- ✅ **Aktualizácie obsahu** — Pravidelné aktualizácie stránok, služieb, informácií
-- ✅ **SEO monitoring** — Sledovanie pozícií v Google, optimalizácia lokálneho SEO
-- ✅ **Generovanie obsahu** — Vzdelávacie príspevky, sezónne oznámenia (s manuálnym schválením)
-- ✅ **Sledovanie konverzií** — Analýza kontaktných formulárov, telefónnych hovorov, dotazov
-- ✅ **Vylepšenia konverzií** — Optimalizácia na základe dát, A/B testovanie
-
-#### SLA Podpora:
-- **Reakčný čas:** Do 24 hodín na kritické problémy
-- **Aktualizácie:** Do 48 hodín na bežné požiadavky
-- **Mesačné reporty:** Prehľad výkonnosti, návrhy na zlepšenie
-- **Pravidelné check-iny:** Mesačné stretnutia na diskusiu o výsledkoch
-
-#### Etické Pravidlá (Dôležité):
-- ✅ **Žiadne automatizované kondolencie** — Vždy osobné
-- ✅ **Manuálne schválenie obsahu** — Všetok obsah pred zverejnením
-- ✅ **Rešpektujúci tón** — Vždy dôstojný, profesionálny
-- ✅ **Súkromie na prvom mieste** — GDPR-kompatibilné, minimálne sledovanie
-- ✅ **Ľudský kontakt** — Automatizácia podporuje, nikdy nenahradí ľudí
-
-#### Investícia:
-- **Mesačný plán:** €300-600/mesiac (podľa rozsahu)
-- **Jednorazové vylepšenia:** Podľa dohody
-- **Flexibilita:** Zrušiteľné kedykoľvek, bez záväzkov
+Etické pravidlá ostávajú:
+- žiadne automatizované kondolencie ani citlivé automatické správy
+- automatizácie iba na logistiku (routing dopytov, notifikácie)
 
 ---
 
@@ -95,7 +77,8 @@ Pre MikoRK pohrebníctvo ponúkame **dlhodobú spoluprácu** v rámci mesačnéh
 ### Vytvorené
 - `showcase/mikork.html` - Slovenská verzia (predvolená)
 - `showcase/mikork/en.html` - Anglická verzia
-- `assets/og/mikork-og.svg` - OG obrázok (1200x630)
+- `assets/og/mikork-og.png` - OG obrázok (1200x630)
+- `assets/og/mikork-og.svg` - SVG zdroj
 - `docs/showcases/MIKORK_SHOWCASE_README.md` - Tento súbor
 
 ### Upravené
