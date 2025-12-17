@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Deploy timestamp: 2025-12-17 09:07:16 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -12,12 +11,6 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0B0B12">
     <link rel="canonical" href="https://www.golocapo.com/">
-    
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.openai.com https://graph.facebook.com https://www.facebook.com;">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -57,140 +50,382 @@
     <link rel="stylesheet" href="/assets/brand/brand.css">
     
     <style>
-        /* Dashboard-specific overrides (minimal, conversion-focused) */
-        .header {
-            padding: var(--spacing-md) 0;
-            border-bottom: 1px solid var(--bg-border);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
+        /* Homepage-specific styles - minimal, conversion-focused */
+        .homepage-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
             align-items: center;
+            padding: var(--spacing-2xl) 0;
+            min-height: 80vh;
         }
         
-        .logo {
-            font-size: var(--font-size-xl);
+        .hero-content {
+            z-index: 2;
+        }
+        
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        
+        .logo-glow {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            filter: drop-shadow(0 0 40px rgba(192, 128, 176, 0.3));
+        }
+        
+        .logo-glow::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(192, 128, 176, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+        }
+        
+        .hero-title {
+            font-size: clamp(var(--font-size-3xl), 6vw, var(--font-size-4xl));
             font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--brand-accent), var(--brand-primary), var(--brand-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(var(--font-size-lg), 2.5vw, var(--font-size-xl));
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+        
+        .hero-outcomes {
+            list-style: none;
+            padding: 0;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .hero-outcomes li {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
-        }
-        
-        .logo-icon {
-            font-size: 32px;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: var(--spacing-lg);
-            align-items: center;
-        }
-        
-        .nav-links a {
+            margin-bottom: var(--spacing-sm);
             color: var(--text-muted);
-            text-decoration: none;
             font-size: var(--font-size-base);
-            transition: color var(--transition-base);
         }
         
-        .nav-links a:hover {
+        .hero-outcomes li::before {
+            content: '✓';
             color: var(--brand-primary);
+            font-weight: 700;
+            font-size: var(--font-size-lg);
         }
         
-        .nav-cta {
+        .hero-cta-group {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .cta-trust {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .section {
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: var(--font-size-lg);
+            line-height: 1.8;
+        }
+        
+        .how-it-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .step-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(192, 128, 176, 0.15);
+        }
+        
+        .step-number {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
             background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-            color: white;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--border-radius);
-            text-decoration: none;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .step-title {
+            font-size: var(--font-size-lg);
             font-weight: 600;
-            transition: all var(--transition-base);
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
         }
         
-        .nav-cta:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(192, 128, 176, 0.3);
+        .step-description {
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
         }
         
-        .hero {
-            padding: var(--spacing-2xl) 0 var(--spacing-xl);
+        .personas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .persona-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
             text-align: center;
         }
         
-        .hero .subheadline {
-            font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl));
+        .persona-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+        
+        .persona-description {
             color: var(--text-muted);
-            margin-bottom: var(--spacing-xl);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: var(--spacing-md);
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .launch-note {
             font-size: var(--font-size-sm);
-            color: var(--text-secondary);
-            margin-top: var(--spacing-md);
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+            background: linear-gradient(135deg, rgba(192, 128, 176, 0.05), rgba(160, 112, 176, 0.05));
+            border-radius: var(--border-radius-lg);
+            margin: var(--spacing-2xl) 0;
         }
         
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .homepage-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                min-height: auto;
+                padding: var(--spacing-xl) 0;
             }
             
-            .hero {
-                padding: var(--spacing-xl) 0 var(--spacing-lg);
+            .hero-visual {
+                order: -1;
             }
             
-            .cta-buttons {
+            .logo-glow {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .hero-cta-group {
                 flex-direction: column;
-                align-items: stretch;
+            }
+            
+        .hero-cta-group .btn {
+            width: 100%;
+        }
+        
+        /* CTA shimmer effect - lightweight, conversion-focused */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .btn-primary:hover::before {
+            animation-duration: 1.5s;
+        }
+            
+            .how-it-works,
+            .personas {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .logo-glow::before {
+                animation: none;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="brand-bar">
         <div class="container">
-            <div class="header-content">
-                <a href="/" class="logo" style="text-decoration: none; color: inherit;">
-                    <img src="/assets/brand/logo.svg" alt="Golo Čapo" style="width: 32px; height: 32px;">
-                    <span class="brand-wordmark">Golo Čapo</span>
-                </a>
-                <nav class="nav-links">
-                    <a href="/portfolio">Portfolio</a>
-                    <a href="/prelaunch">Prelaunch</a>
-                    <a href="/prelaunch" class="nav-cta">Join waitlist — 21.12</a>
-                </nav>
-            </div>
+            <a href="/" style="display: flex; align-items: center; gap: var(--spacing-sm); text-decoration: none; color: inherit;">
+                <img src="/assets/brand/logo.svg" alt="Golo Čapo" class="brand-logo">
+                <span class="brand-wordmark">Golo Čapo</span>
+            </a>
+            <nav style="margin-left: auto; display: flex; gap: var(--spacing-lg); align-items: center;">
+                <a href="/prelaunch" style="color: var(--text-muted); text-decoration: none; transition: color var(--transition-base);">Prelaunch</a>
+                <a href="/prelaunch" class="btn btn-primary" style="text-decoration: none;">Get Early Access</a>
+            </nav>
         </div>
     </header>
     
-    <!-- Hero -->
-    <section class="hero">
+    <!-- Hero Section -->
+    <section class="homepage-hero">
         <div class="container">
-            <h1>GoLoCapo</h1>
-            <p class="subheadline">AI Marketing Studio by Golo Čapo — Generate Meta-ready posts in seconds. Publish safely.</p>
-
-            <p class="launch-note" style="margin-bottom: 24px;">
-                We’re launching something new on <strong>21.12</strong> — an early Christmas gift for founders & small teams who want AI-powered marketing without chaos.
-                Join the waitlist — first access goes out on launch day.
-            </p>
-            
-            <div class="cta-buttons">
-                <a href="/prelaunch" class="btn-primary">Be first on 21.12</a>
+            <div class="hero-content">
+                <h1 class="hero-title">AI Marketing Studio</h1>
+                <p class="hero-subtitle">Generate Meta-ready posts in seconds. Not hours.</p>
+                
+                <ul class="hero-outcomes">
+                    <li>Meta-ready posts in seconds</li>
+                    <li>AI-powered automation</li>
+                    <li>Built for startups & small teams</li>
+                </ul>
+                
+                <div class="hero-cta-group">
+                    <a href="/prelaunch" class="btn btn-primary">Get Early Access</a>
+                    <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
+                </div>
+                
+                <p class="cta-trust">Founding spots limited • No spam • Cancel anytime</p>
             </div>
             
-            <p class="launch-note">Launching 21.12.2025</p>
+            <div class="hero-visual">
+                <div class="logo-glow">
+                    <img src="/assets/brand/logo.svg" alt="Golo Čapo" style="width: 100%; height: 100%;">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- What is GoLoCapo -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">What is Golo Čapo?</h2>
+            <p class="section-content">
+                An AI-powered marketing automation studio that generates Meta-ready posts in seconds. 
+                Built for startups and small teams who want professional marketing without the chaos. 
+                Launching 21.12 — Early Christmas gift for founders.
+            </p>
+        </div>
+    </section>
+    
+    <!-- How It Works -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="how-it-works">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Claim Your Spot</div>
+                    <div class="step-description">Secure founding customer access</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Launch 21.12</div>
+                    <div class="step-description">Get instant access on launch day</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Generate Posts</div>
+                    <div class="step-description">Meta-ready posts in seconds, not hours</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Who It's For -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Who It's For</h2>
+            <div class="personas">
+                <div class="persona-card">
+                    <div class="persona-title">Startups</div>
+                    <div class="persona-description">Small teams who need professional marketing without the overhead</div>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-title">Founders</div>
+                    <div class="persona-description">Solo founders who want AI-powered marketing automation</div>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-title">Small Teams</div>
+                    <div class="persona-description">Teams who want to scale marketing without scaling headcount</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Now -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Why Now?</h2>
+            <p class="section-content">
+                Marketing automation shouldn't require a team. AI makes it possible to generate professional, 
+                Meta-ready posts in seconds. Launching 21.12 — Early Christmas gift for founders.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title">Ready to Get Started?</h2>
+            <p class="section-content" style="max-width: 600px; margin: 0 auto var(--spacing-lg);">
+                Join the waitlist for early access. Launching 21.12 — Founding spots limited.
+            </p>
+            <a href="/prelaunch" class="btn btn-primary">Get Early Access</a>
         </div>
     </section>
     
@@ -198,12 +433,11 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
-                <a href="/portfolio">Portfolio</a>
+                <a href="/prelaunch">Prelaunch</a>
                 <a href="/pricing">Pricing</a>
-                <a href="/TERMS.md" target="_blank">Terms</a>
                 <a href="/PRIVACY.md" target="_blank">Privacy</a>
             </div>
-            <p class="footer-text">GoLoCapo © 2025 | Built by Golo Čapo</p>
+            <p class="footer-text">Golo Čapo © 2025 | Built for founders</p>
         </div>
     </footer>
 </body>
