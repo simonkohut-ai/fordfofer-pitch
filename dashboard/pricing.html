@@ -97,6 +97,12 @@
             letter-spacing: 0.5px;
         }
         
+        .pricing-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        
         .pricing-title {
             font-size: var(--font-size-xl);
             font-weight: 700;
@@ -220,11 +226,12 @@
             <p class="hero-subtitle">Pricing revealed on launch day – 21.12</p>
         </div>
         
-        <div class="pricing-card">
-            <div class="pricing-badge">Launch 21.12</div>
-            <h2 class="pricing-title">Early Access</h2>
-            <div class="pricing-price">TBA</div>
-            <div class="pricing-period">Pricing revealed on 21.12</div>
+        <!-- Founding Customer Deal -->
+        <div class="pricing-card" style="border: 2px solid var(--brand-primary); background: linear-gradient(135deg, rgba(192, 128, 176, 0.1), rgba(160, 112, 176, 0.1));">
+            <div class="pricing-badge" style="background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));">Founding Customer Deal</div>
+            <h2 class="pricing-title">Limited Offer</h2>
+            <div class="pricing-price">€149</div>
+            <div class="pricing-period">One-time setup + first month free</div>
             
             <ul class="pricing-features">
                 <li>Unlimited content generations</li>
@@ -237,17 +244,35 @@
                 <li>Email support</li>
             </ul>
             
-            <p style="margin-top: 20px; font-size: 13px; color: var(--text-secondary); text-align: center;">
-                Launching 21.12.2025
+            <p style="margin-top: 20px; font-size: 13px; color: var(--text-primary); text-align: center; font-weight: 600;">
+                ⚡ Limited to 10 spots
             </p>
             
-            <a href="/prelaunch" class="btn btn-primary" style="text-align:center; display:inline-block;">
-                Launching 21.12 — join the waitlist first
+            <p style="margin-top: 10px; font-size: 13px; color: var(--text-muted); text-align: center;">
+                ✅ Cancel anytime<br>
+                ✅ Satisfaction guarantee<br>
+                ✅ No questions asked refund
+            </p>
+            
+            <a href="#" id="pricingClaimBtn" class="btn btn-primary" style="text-align:center; display:inline-block; margin-top: var(--spacing-md); width: 100%; max-width: 300px;">
+                Claim Your Spot →
             </a>
+        </div>
+        
+        <!-- Waitlist Option -->
+        <div class="pricing-card" style="opacity: 0.8;">
+            <div class="pricing-badge" style="background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--bg-border);">Or Join Waitlist</div>
+            <h2 class="pricing-title">Early Access</h2>
+            <div class="pricing-price" style="font-size: var(--font-size-xl);">Free</div>
+            <div class="pricing-period">Get notified on launch day</div>
             
-            <p style="margin-top: 20px; font-size: 13px; color: var(--text-secondary);">
-                Pricing is revealed on launch day. Early access goes to the waitlist first.
+            <p style="margin-top: 20px; font-size: 14px; color: var(--text-muted); text-align: center;">
+                Join the waitlist to get early access when we launch on 21.12.
             </p>
+            
+            <a href="/prelaunch#early-access" class="btn btn-ghost" style="text-align:center; display:inline-block; margin-top: var(--spacing-md); width: 100%; max-width: 300px;">
+                Join Waitlist
+            </a>
         </div>
         
         <div class="trust-section">
@@ -298,6 +323,34 @@
     </footer>
     
     <script>
+        // Claim Spot button - Stripe checkout
+        (function() {
+            const pricingClaimBtn = document.getElementById('pricingClaimBtn');
+            if (pricingClaimBtn) {
+                pricingClaimBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get Stripe Payment Link from API or fallback
+                    const getCheckoutUrl = async () => {
+                        try {
+                            const response = await fetch('/api/checkout-url');
+                            if (response.ok) {
+                                const data = await response.json();
+                                if (data.url) return data.url;
+                            }
+                        } catch (err) {
+                            console.log('API fetch failed, using fallback');
+                        }
+                        return window.STRIPE_CHECKOUT_URL || 'https://buy.stripe.com/test_dRm14mcasaIZ6450rk1RC00';
+                    };
+                    
+                    getCheckoutUrl().then(stripeCheckoutUrl => {
+                        window.location.href = stripeCheckoutUrl;
+                    });
+                });
+            }
+        })();
+        
         async function goToCheckout() {
             try {
                 const response = await fetch('/api/checkout-url');
