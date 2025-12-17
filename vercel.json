@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/dashboard/index.html" },
     { "source": "/prelaunch", "destination": "/prelaunch.html" },
     { "source": "/pricing", "destination": "/pricing.html" },
     { "source": "/thank-you", "destination": "/thank-you.html" },
@@ -12,7 +11,6 @@
     { "source": "/products/local-business-care", "destination": "/products/local-business-care.html" },
     { "source": "/products/ai-marketing-starter", "destination": "/products/ai-marketing-starter.html" },
     { "source": "/demo/automated-marketing", "destination": "/demo/automated-marketing.html" },
-    { "source": "/assets/:path*", "destination": "/assets/:path*" },
     { "source": "/api/:path*", "destination": "/dashboard/api/:path*" }
   ],
   "headers": [
