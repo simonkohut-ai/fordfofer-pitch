@@ -1,0 +1,17 @@
+﻿const express = require("express");
+const path = require("path");
+
+const app = express();
+const PORT = process.env.PORT || 3001; // IMPORTANT: vercel dev will proxy to this
+
+app.use(express.static(__dirname, { extensions: ["html"] }));
+
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
+app.get("/:page", (req, res) => {
+  const file = path.join(__dirname, ${req.params.page}.html);
+  res.sendFile(file, (err) => {
+    if (err) res.status(404).sendFile(path.join(__dirname, "index.html"));
+  });
+});
+
+app.listen(PORT, () => console.log(Local app running on http://localhost:));

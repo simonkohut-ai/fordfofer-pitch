@@ -1,2 +1,4 @@
 ﻿server.js
-server/**/*.js
+server.cjs
+app.js
+node_modules
