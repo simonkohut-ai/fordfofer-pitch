@@ -1,15 +1,9 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/dashboard/index.html" },
-
     { "source": "/prelaunch", "destination": "/prelaunch.html" },
     { "source": "/pricing", "destination": "/pricing.html" },
     { "source": "/thank-you", "destination": "/thank-you.html" },
-
-    { "source": "/dashboard/prelaunch.html", "destination": "/prelaunch.html" },
-    { "source": "/dashboard/pricing.html", "destination": "/pricing.html" },
-    { "source": "/dashboard/thank-you.html", "destination": "/thank-you.html" },
-
     { "source": "/api/:path*", "destination": "/dashboard/api/:path*" }
   ]
 }
