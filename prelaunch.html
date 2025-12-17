@@ -64,6 +64,11 @@
     }
     </script>
     
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png">
@@ -84,13 +89,13 @@
     
     <div class="prelaunch-container">
         <!-- Hero Section -->
-        <section class="hero-section">
+        <section class="hero-section reveal" data-reveal="fade">
             <img src="/assets/brand/logo.svg" alt="Golo Čapo" class="hero-logo">
             <h1 class="hero-title">AI Marketing Studio</h1>
             <p class="hero-subtitle" style="font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl)); margin-bottom: var(--spacing-md);">
                 Generate Meta-ready posts in seconds. Not hours.
             </p>
-            <p style="color: var(--text-muted); margin-bottom: var(--spacing-lg);">
+            <p style="color: var(--muted); margin-bottom: var(--spacing-lg);">
                 21.12 — Early Christmas gift for founders.
             </p>
             <div id="countdown">
@@ -103,20 +108,20 @@
         </section>
         
         <!-- How It Works -->
-        <section class="section">
+        <section class="section reveal" data-reveal="up" data-delay="80">
             <h2 class="section-title">How It Works</h2>
             <div class="how-it-works">
-                <div class="step-card">
+                <div class="step-card reveal" data-reveal="up" data-delay="0">
                     <div class="step-number">1</div>
                     <div class="step-title">Claim Your Spot</div>
                     <div class="step-description">Secure founding customer access</div>
                 </div>
-                <div class="step-card">
+                <div class="step-card reveal" data-reveal="up" data-delay="80">
                     <div class="step-number">2</div>
                     <div class="step-title">Launch 21.12</div>
                     <div class="step-description">Get instant access on launch day</div>
                 </div>
-                <div class="step-card">
+                <div class="step-card reveal" data-reveal="up" data-delay="160">
                     <div class="step-number">3</div>
                     <div class="step-title">Generate Posts</div>
                     <div class="step-description">Meta-ready posts in seconds, not hours</div>
@@ -125,9 +130,9 @@
         </section>
         
         <!-- Social Proof -->
-        <section class="section">
+        <section class="section reveal" data-reveal="fade" data-delay="0">
             <div class="social-proof">
-                <p style="color: var(--text-muted); font-size: var(--font-size-sm);">Early Adopters</p>
+                <p style="color: var(--muted); font-size: var(--font-size-sm);">Early Adopters</p>
                 <div class="social-proof-logos">
                     <span style="font-size: var(--font-size-xl); opacity: 0.4;">🚀</span>
                     <span style="font-size: var(--font-size-xl); opacity: 0.4;">⚡</span>
@@ -137,7 +142,7 @@
         </section>
         
         <!-- Founding Customer Deal -->
-        <section id="founding-deal" class="section">
+        <section id="founding-deal" class="section reveal" data-reveal="scale" data-delay="0">
             <div class="founding-deal">
                 <div class="founding-badge">Founding Customer Deal</div>
                 
@@ -173,9 +178,9 @@
         </section>
         
         <!-- Early Access Form -->
-        <section id="early-access" class="section">
+        <section id="early-access" class="section reveal" data-reveal="up" data-delay="80">
             <h2 class="section-title">Get Early Access</h2>
-            <div id="formState" class="form-container">
+            <div id="formState" class="form-container reveal" data-reveal="fade" data-delay="160">
                 <form id="waitlistForm">
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -208,9 +213,9 @@
         </section>
         
         <!-- FAQ -->
-        <section class="faq-section">
+        <section class="faq-section reveal" data-reveal="up" data-delay="0">
             <h2 class="section-title">FAQ</h2>
-            <div class="faq-item">
+            <div class="faq-item reveal" data-reveal="fade" data-delay="0">
                 <div class="faq-question">What is Golo Čapo?</div>
                 <div class="faq-answer">21.12 — Early Christmas gift.</div>
             </div>
@@ -241,9 +246,9 @@
         </section>
         
         <!-- Final CTA -->
-        <section class="cta-section">
+        <section class="cta-section reveal" data-reveal="fade" data-delay="0">
             <h2 class="section-title">Ready to Get Started?</h2>
-            <div class="cta-buttons">
+            <div class="cta-buttons reveal" data-reveal="scale" data-delay="80">
                 <a href="#early-access" class="btn btn-primary" onclick="trackEvent('cta_click', {type: 'early_access'}); return true;">Get Early Access</a>
                 <a href="https://calendly.com/golocapo/15min" id="bookDemoBtn" class="btn btn-ghost" target="_blank" onclick="trackEvent('cta_click', {type: 'book_demo'}); return true;">Book a 15-min Demo</a>
             </div>
@@ -473,5 +478,8 @@
             }
         });
     </script>
+    
+    <!-- Motion System -->
+    <script defer src="/assets/brand/motion.js"></script>
 </body>
 </html>

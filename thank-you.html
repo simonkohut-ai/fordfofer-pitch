@@ -30,6 +30,11 @@
     <meta name="twitter:description" content="21.12 — Early Christmas gift.">
     <meta name="twitter:image" content="https://www.golocapo.com/assets/brand/og.png">
     
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png">
@@ -48,10 +53,10 @@
         </a>
     </div>
     
-    <div class="thank-you-container">
-        <div class="success-icon">✅</div>
-        <h1>You're In</h1>
-        <p class="message" id="thankYouMessage">
+    <div class="thank-you-container reveal" data-reveal="scale" data-delay="0">
+        <div class="success-icon reveal" data-reveal="fade" data-delay="0">✅</div>
+        <h1 class="reveal" data-reveal="up" data-delay="80">You're In</h1>
+        <p class="message reveal" data-reveal="fade" data-delay="160" id="thankYouMessage">
             Thank you for your purchase. Check your email for delivery instructions.
         </p>
         <p id="emailCheckMessage" style="display: none; font-size: 16px; color: var(--success); margin-top: 12px; font-weight: 600;">
@@ -61,7 +66,7 @@
             Launching 21.12.2025
         </p>
         
-               <div class="next-steps">
+               <div class="next-steps reveal" data-reveal="up" data-delay="240">
                    <h2>What Happens Next</h2>
                    <ol id="nextStepsList">
                        <li>Check your email for confirmation</li>
@@ -136,7 +141,7 @@
                    }
                </script>
         
-        <div class="footer">
+        <div class="footer reveal" data-reveal="fade" data-delay="0">
             <div class="footer-links">
                 <a href="/TERMS.md" target="_blank">Terms</a>
                 <a href="/PRIVACY.md" target="_blank">Privacy</a>
@@ -146,6 +151,9 @@
             <p>AI Marketing Studio by Golo Čapo © 2025</p>
         </div>
     </div>
+    
+    <!-- Motion System -->
+    <script defer src="/assets/brand/motion.js"></script>
 </body>
 </html>
 
