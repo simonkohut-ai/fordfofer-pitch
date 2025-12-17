@@ -11,6 +11,7 @@
     { "source": "/products/local-business-basic", "destination": "/products/local-business-basic.html" },
     { "source": "/products/local-business-care", "destination": "/products/local-business-care.html" },
     { "source": "/products/ai-marketing-starter", "destination": "/products/ai-marketing-starter.html" },
+    { "source": "/demo/automated-marketing", "destination": "/demo/automated-marketing.html" },
     { "source": "/assets/:path*", "destination": "/assets/:path*" },
     { "source": "/api/:path*", "destination": "/dashboard/api/:path*" }
   ],

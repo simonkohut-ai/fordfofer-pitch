@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Automatizovaný marketing — Demo | Golo Čapo</title>
+    <meta name="description" content="Generujte príspevky, kalendár a follow-up správy pre váš lokálny podnik. Etická automatizácia s manuálnym schválením.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="stylesheet" href="/assets/brand/brand.css">
+    
+    <style>
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        
+        .demo-form {
+            background: var(--bg-surface);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-primary);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            font-family: var(--font-family);
+        }
+        
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .platforms-group {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        
+        .platform-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .output-section {
+            background: var(--bg-surface);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            display: none;
+        }
+        
+        .output-section.active {
+            display: block;
+        }
+        
+        .output-section h3 {
+            color: var(--brand-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .post-item,
+        .calendar-item,
+        .followup-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .post-item pre,
+        .calendar-item pre,
+        .followup-item pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: var(--text-muted);
+            font-family: var(--font-family);
+            font-size: var(--font-size-sm);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-lg);
+        }
+        
+        .safety-note {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .safety-note h4 {
+            color: #10b981;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .safety-note ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .safety-note li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+        }
+        
+        .safety-note li::before {
+            content: '✓ ';
+            color: #10b981;
+            font-weight: 700;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .error-message {
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            color: #ef4444;
+        }
+        
+        .error-message.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="brand-bar">
+        <div class="container">
+            <a href="/" style="display: flex; align-items: center; gap: var(--spacing-sm); text-decoration: none; color: inherit;">
+                <img src="/assets/brand/logo.svg" alt="Golo Čapo" class="brand-logo">
+                <span class="brand-wordmark">Golo Čapo</span>
+            </a>
+            <nav style="margin-left: auto; display: flex; gap: var(--spacing-lg); align-items: center;">
+                <a href="/" style="color: var(--text-muted); text-decoration: none;">Domov</a>
+                <a href="/demo/automated-marketing" style="color: var(--text-muted); text-decoration: none;">Demo</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="demo-container">
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Automatizovaný marketing — Demo</h1>
+                <p class="hero-subtitle" style="max-width: 700px; margin: 0 auto;">
+                    Generujte príspevky, kalendár a follow-up správy pre váš lokálny podnik. Etická automatizácia s manuálnym schválením.
+                </p>
+            </div>
+        </section>
+        
+        <form class="demo-form" id="demoForm">
+            <h2 style="color: var(--brand-primary); margin-bottom: var(--spacing-lg);">Zadajte informácie</h2>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="businessName">Názov firmy *</label>
+                    <input type="text" id="businessName" name="businessName" required placeholder="Napríklad: MikoRK pohrebníctvo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="service">Služba (čo predávate) *</label>
+                    <input type="text" id="service" name="service" required placeholder="Napríklad: pohrebné služby">
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Mesto/oblasť *</label>
+                    <input type="text" id="location" name="location" required placeholder="Napríklad: Bratislava">
+                </div>
+                
+                <div class="form-group">
+                    <label for="goal">Cieľ *</label>
+                    <select id="goal" name="goal" required>
+                        <option value="">Vyberte cieľ</option>
+                        <option value="dopyty">Dopyty (kontaktné formuláre)</option>
+                        <option value="telefonaty">Telefonáty</option>
+                        <option value="rezervacie">Rezervácie</option>
+                        <option value="navstevy">Návštevy</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tone">Tón *</label>
+                    <select id="tone" name="tone" required>
+                        <option value="">Vyberte tón</option>
+                        <option value="pokojny">Pokojný</option>
+                        <option value="profesionalny">Profesionálny</option>
+                        <option value="energicky">Energický</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Platformy *</label>
+                <div class="platforms-group">
+                    <div class="platform-checkbox">
+                        <input type="checkbox" id="platform-fb" name="platforms" value="fb" checked>
+                        <label for="platform-fb" style="margin: 0; font-weight: 400;">Facebook/Instagram</label>
+                    </div>
+                    <div class="platform-checkbox">
+                        <input type="checkbox" id="platform-linkedin" name="platforms" value="linkedin">
+                        <label for="platform-linkedin" style="margin: 0; font-weight: 400;">LinkedIn</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--spacing-lg);">
+                Generovať obsah
+            </button>
+            
+            <div class="loading" id="loading">
+                <p>Generujem obsah...</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+        </form>
+        
+        <!-- Output Sections -->
+        <div class="output-section" id="postsSection">
+            <h3>Hotové príspevky (10)</h3>
+            <div id="postsContainer"></div>
+        </div>
+        
+        <div class="output-section" id="calendarSection">
+            <h3>7-dňový plán</h3>
+            <div id="calendarContainer"></div>
+        </div>
+        
+        <div class="output-section" id="followupsSection">
+            <h3>Follow-up správy (3)</h3>
+            <div id="followupsContainer"></div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons" id="actionButtons" style="display: none;">
+            <button class="btn btn-primary" id="copyAllBtn">Kopírovať všetko</button>
+            <button class="btn btn-secondary" id="exportJsonBtn">Stiahnuť JSON</button>
+        </div>
+        
+        <!-- Safety Note -->
+        <div class="safety-note">
+            <h4>Bezpečnosť / Etika</h4>
+            <ul>
+                <li>Žiadny spam — všetok obsah vyžaduje manuálne schválenie</li>
+                <li>Človek má vždy kontrolu — automatizácia podporuje, nikdy nenahradí</li>
+                <li>Žiadne citlivé automatické správy — osobné odpovede vždy</li>
+                <li>Etická automatizácia — rešpektujúci tón, lokálny kontext</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('demoForm');
+        const loading = document.getElementById('loading');
+        const errorMessage = document.getElementById('errorMessage');
+        const postsSection = document.getElementById('postsSection');
+        const calendarSection = document.getElementById('calendarSection');
+        const followupsSection = document.getElementById('followupsSection');
+        const postsContainer = document.getElementById('postsContainer');
+        const calendarContainer = document.getElementById('calendarContainer');
+        const followupsContainer = document.getElementById('followupsContainer');
+        const actionButtons = document.getElementById('actionButtons');
+        const copyAllBtn = document.getElementById('copyAllBtn');
+        const exportJsonBtn = document.getElementById('exportJsonBtn');
+        
+        let generatedData = null;
+        
+        // Template-based generation (fallback)
+        function generateWithTemplates(data) {
+            const { businessName, service, location, goal, tone, platforms } = data;
+            
+            const toneMap = {
+                pokojny: { adj: 'pokojný', style: 'dôstojný, rešpektujúci' },
+                profesionalny: { adj: 'profesionálny', style: 'dôveryhodný, spoľahlivý' },
+                energicky: { adj: 'energický', style: 'pozitívny, dynamický' }
+            };
+            
+            const goalMap = {
+                dopyty: 'kontaktné formuláre',
+                telefonaty: 'telefonáty',
+                rezervacie: 'rezervácie',
+                navstevy: 'návštevy'
+            };
+            
+            const toneInfo = toneMap[tone] || toneMap.pokojny;
+            const goalText = goalMap[goal] || 'kontakt';
+            
+            // Generate 10 posts
+            const posts = [];
+            const postTemplates = [
+                `Ponúkame ${service} v ${location}. ${toneInfo.adj.charAt(0).toUpperCase() + toneInfo.adj.slice(1)} prístup, spoľahlivá služba. Kontaktujte nás. #${location.replace(/\s+/g, '')} #${service.replace(/\s+/g, '')}`,
+                `Hľadáte ${service} v ${location}? ${businessName} vám pomôže. ${toneInfo.style}. Zavolajte alebo napíšte.`,
+                `V ${location} poskytujeme ${service}. ${businessName} — ${toneInfo.style} služba pre vás.`,
+                `Potrebujete ${service}? ${businessName} v ${location} je tu pre vás. ${toneInfo.adj.charAt(0).toUpperCase() + toneInfo.adj.slice(1)} prístup, profesionálna služba.`,
+                `V ${location} nájdete ${service} u ${businessName}. ${toneInfo.style}. Kontaktujte nás ešte dnes.`,
+                `${businessName} — ${service} v ${location}. ${toneInfo.adj.charAt(0).toUpperCase() + toneInfo.adj.slice(1)} prístup, spoľahlivá služba. Zavolajte alebo napíšte.`,
+                `Hľadáte ${service} v ${location}? ${businessName} vám ponúka ${toneInfo.style} službu. Kontaktujte nás.`,
+                `V ${location} poskytujeme ${service}. ${businessName} — ${toneInfo.style} prístup, profesionálna služba.`,
+                `${businessName} — ${service} v ${location}. ${toneInfo.adj.charAt(0).toUpperCase() + toneInfo.adj.slice(1)} prístup, spoľahlivá služba pre vás.`,
+                `Potrebujete ${service}? ${businessName} v ${location} je tu pre vás. ${toneInfo.style}. Kontaktujte nás.`
+            ];
+            
+            for (let i = 0; i < 10; i++) {
+                posts.push({
+                    id: i + 1,
+                    text: postTemplates[i] || postTemplates[0],
+                    platform: platforms.includes('fb') ? 'Facebook/Instagram' : 'LinkedIn'
+                });
+            }
+            
+            // Generate 7-day calendar
+            const days = ['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota', 'Nedeľa'];
+            const calendar = days.map((day, index) => ({
+                day: day,
+                date: new Date(Date.now() + index * 24 * 60 * 60 * 1000).toLocaleDateString('sk-SK'),
+                post: posts[index % posts.length].text,
+                platform: platforms.includes('fb') ? 'FB/IG' : 'LinkedIn'
+            }));
+            
+            // Generate 3 follow-ups
+            const followups = [
+                {
+                    type: 'Neutrálny follow-up',
+                    text: `Dobrý deň, kontaktovali ste ${businessName} ohľadom ${service} v ${location}. Máte ešte otázky? Radi vám pomôžeme.`
+                },
+                {
+                    type: 'Etický follow-up',
+                    text: `Dobrý deň, ďakujeme za váš záujem o ${service} v ${location}. ${businessName} je tu pre vás. Kontaktujte nás, ak potrebujete viac informácií.`
+                },
+                {
+                    type: 'Mierny follow-up',
+                    text: `Dobrý deň, ${businessName} poskytuje ${service} v ${location}. Ak máte otázky, radi vám odpovieme. Kontaktujte nás.`
+                }
+            ];
+            
+            return { posts, calendar, followups };
+        }
+        
+        // OpenAI generation (if API key exists)
+        async function generateWithAI(data) {
+            try {
+                const response = await fetch('/api/demo/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+                
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                
+                const result = await response.json();
+                return result.data;
+            } catch (error) {
+                console.warn('AI generation failed, using templates:', error);
+                return null;
+            }
+        }
+        
+        // Display results
+        function displayResults(data) {
+            generatedData = data;
+            
+            // Display posts
+            postsContainer.innerHTML = '';
+            data.posts.forEach(post => {
+                const item = document.createElement('div');
+                item.className = 'post-item';
+                item.innerHTML = `
+                    <div style="margin-bottom: var(--spacing-xs); color: var(--brand-primary); font-size: var(--font-size-sm); font-weight: 600;">
+                        Príspevok ${post.id} — ${post.platform}
+                    </div>
+                    <pre>${post.text}</pre>
+                `;
+                postsContainer.appendChild(item);
+            });
+            postsSection.classList.add('active');
+            
+            // Display calendar
+            calendarContainer.innerHTML = '';
+            data.calendar.forEach(item => {
+                const calItem = document.createElement('div');
+                calItem.className = 'calendar-item';
+                calItem.innerHTML = `
+                    <div style="margin-bottom: var(--spacing-xs); color: var(--brand-primary); font-size: var(--font-size-sm); font-weight: 600;">
+                        ${item.day}, ${item.date} — ${item.platform}
+                    </div>
+                    <pre>${item.post}</pre>
+                `;
+                calendarContainer.appendChild(calItem);
+            });
+            calendarSection.classList.add('active');
+            
+            // Display follow-ups
+            followupsContainer.innerHTML = '';
+            data.followups.forEach(followup => {
+                const item = document.createElement('div');
+                item.className = 'followup-item';
+                item.innerHTML = `
+                    <div style="margin-bottom: var(--spacing-xs); color: var(--brand-primary); font-size: var(--font-size-sm); font-weight: 600;">
+                        ${followup.type}
+                    </div>
+                    <pre>${followup.text}</pre>
+                `;
+                followupsContainer.appendChild(item);
+            });
+            followupsSection.classList.add('active');
+            
+            actionButtons.style.display = 'flex';
+        }
+        
+        // Copy all
+        copyAllBtn.addEventListener('click', () => {
+            if (!generatedData) return;
+            
+            let text = '=== HOTOVÉ PRÍSPEVKY ===\n\n';
+            generatedData.posts.forEach(post => {
+                text += `Príspevok ${post.id} (${post.platform}):\n${post.text}\n\n`;
+            });
+            
+            text += '\n=== 7-DŇOVÝ PLÁN ===\n\n';
+            generatedData.calendar.forEach(item => {
+                text += `${item.day}, ${item.date} (${item.platform}):\n${item.post}\n\n`;
+            });
+            
+            text += '\n=== FOLLOW-UP SPRÁVY ===\n\n';
+            generatedData.followups.forEach(followup => {
+                text += `${followup.type}:\n${followup.text}\n\n`;
+            });
+            
+            navigator.clipboard.writeText(text).then(() => {
+                copyAllBtn.textContent = 'Skopírované!';
+                setTimeout(() => {
+                    copyAllBtn.textContent = 'Kopírovať všetko';
+                }, 2000);
+            });
+        });
+        
+        // Export JSON
+        exportJsonBtn.addEventListener('click', () => {
+            if (!generatedData) return;
+            
+            const json = JSON.stringify(generatedData, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `marketing-content-${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+        
+        // Form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const platforms = Array.from(form.querySelectorAll('input[name="platforms"]:checked')).map(cb => cb.value);
+            
+            const data = {
+                businessName: formData.get('businessName'),
+                service: formData.get('service'),
+                location: formData.get('location'),
+                goal: formData.get('goal'),
+                tone: formData.get('tone'),
+                platforms: platforms
+            };
+            
+            loading.classList.add('active');
+            errorMessage.classList.remove('active');
+            postsSection.classList.remove('active');
+            calendarSection.classList.remove('active');
+            followupsSection.classList.remove('active');
+            actionButtons.style.display = 'none';
+            
+            try {
+                // Try AI first, fallback to templates
+                let result = await generateWithAI(data);
+                if (!result) {
+                    result = generateWithTemplates(data);
+                }
+                
+                displayResults(result);
+            } catch (error) {
+                errorMessage.textContent = 'Chyba pri generovaní obsahu. Skúste to znova.';
+                errorMessage.classList.add('active');
+            } finally {
+                loading.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
+
