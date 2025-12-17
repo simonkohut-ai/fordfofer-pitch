@@ -91,7 +91,41 @@ try {
     Write-Host "   ⚠️  Sitemap.xml failed: $($_.Exception.Message)" -ForegroundColor Yellow
 }
 
-# 6. Visual verification reminder
+# 6. Showcase Page
+Write-Host "6. Checking showcase page..." -ForegroundColor Cyan
+try {
+    $response = Invoke-WebRequest -Uri "$siteUrl/showcase/mikork" -Method Head -TimeoutSec 15 -UseBasicParsing
+    if ($response.StatusCode -eq 200) {
+        Write-Host "   ✅ Showcase page loads (200 OK)" -ForegroundColor Green
+    } else {
+        Write-Host "   ⚠️  Showcase page returned $($response.StatusCode)" -ForegroundColor Yellow
+    }
+} catch {
+    Write-Host "   ⚠️  Showcase page failed: $($_.Exception.Message)" -ForegroundColor Yellow
+}
+
+# 7. OG Image
+Write-Host "7. Checking OG image..." -ForegroundColor Cyan
+try {
+    $response = Invoke-WebRequest -Uri "$siteUrl/assets/og/mikork-og.png" -Method Head -TimeoutSec 15 -UseBasicParsing
+    if ($response.StatusCode -eq 200) {
+        Write-Host "   ✅ OG image loads (200 OK)" -ForegroundColor Green
+        
+        # Check Content-Type
+        $contentType = $response.Headers['Content-Type']
+        if ($contentType -like "*image*") {
+            Write-Host "   ✅ Content-Type correct: $contentType" -ForegroundColor Green
+        } else {
+            Write-Host "   ⚠️  Content-Type unexpected: $contentType" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "   ⚠️  OG image returned $($response.StatusCode)" -ForegroundColor Yellow
+    }
+} catch {
+    Write-Host "   ⚠️  OG image failed: $($_.Exception.Message)" -ForegroundColor Yellow
+}
+
+# 8. Visual verification reminder
 Write-Host "6. Visual verification..." -ForegroundColor Cyan
 Write-Host "   ⚠️  Manual check required:" -ForegroundColor Yellow
 Write-Host "      - Open $siteUrl in browser" -ForegroundColor Gray
