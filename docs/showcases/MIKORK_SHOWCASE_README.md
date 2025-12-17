@@ -1,224 +1,198 @@
-# MikoRK pohrebníctvo — Showcase Stránka
+# MikoRK pohrebníctvo — Investor Pitch Showcase
 
 **URL:** `/showcase/mikork` (SK) | `/showcase/mikork/en` (EN)  
-**Status:** ✅ Aktívna  
+**Status:** ✅ Investor Demo Ready  
 **Dátum:** 2025-12-17
 
 ---
 
-## Prehľad
+## Čo toto je
 
-Verejná showcase stránka pre projekt MikoRK pohrebníctvo. Navrhnutá pre sociálny traffic s optimalizovanými SEO a OpenGraph tagmi. Demonštruje dôstojnú, dôveryhodnú lokálnu webovú stránku pre podniky.
+Investor pitch stránka demonštrujúca reálnu dodávku pre reálneho klienta. Zameraná na:
+- **Reálny klient** — MikoRK pohrebníctvo (lokálny podnik, Slovensko)
+- **Reálna dodávka** — Kompletný web + značka + automatizácia
+- **Znovupoužiteľný produkt** — Extrahovaný ako `local-business-basic`
+- **Etické pozíciovanie** — Automatizácia podporuje ľudí, nikdy ich nenahradí
+
+---
+
+## Klient & Kontext
+
+**MikoRK pohrebníctvo:**
+- Lokálny podnik poskytujúci pohrebné služby na Slovensku
+- Potreba: Moderná online prítomnosť, ktorá buduje dôveru
+- Kontext: Citlivé odvetvie, väčšina dotazov cez telefóny, často v ťažkých situáciách
+- Požiadavka: Mobilná optimalizácia, lokálne SEO, etická automatizácia
+
+**Prečo toto záleží:**
+- Validuje produkt pre citlivé odvetvia
+- Dokazuje schopnosť dodávať v etickom kontexte
+- Demonštruje znovupoužiteľnosť šablóny
 
 ---
 
 ## Rozsah Dodávky
 
-### Obsah Stránky
-- ✅ Hero sekcia s názvom projektu
-- ✅ Prehľad (problém → výsledok)
-- ✅ Rozpis dodávok (5 kľúčových komponentov)
-- ✅ Porovnanie Pred/Po
-- ✅ Blok pripravený na metriky
-- ✅ Čo sme sa naučili / znovupoužiteľná šablóna
-- ✅ CTA odkazujúci na `/prelaunch`
+### 1. Obnovenie značky
+- Pokojná neutrálna paleta
+- Veľké čitateľné písmo
+- Vysoký kontrast pre prístupnosť (WCAG AA)
+- Žiadne agresívne výzvy na akciu
+- Žiadne rušivé animácie
 
-### SEO & Sociálne Siete
-- ✅ Title tag (150-160 znakov)
-- ✅ Meta description (150-160 znakov)
-- ✅ Canonical URL
-- ✅ OpenGraph tagy (og:title, og:description, og:url, og:image)
-- ✅ Twitter/X tagy (twitter:card, twitter:title, twitter:description, twitter:image)
-- ✅ JSON-LD štruktúrované údaje (Article schema)
-- ✅ OG obrázok na `/assets/og/mikork-og.png` (1200x630)
-- ✅ Hreflang alternatívy (sk, en)
+### 2. Webová šablóna
+- Mobilne-optimizovaný responzívny dizajn
+- Domovská stránka, kontaktná stránka, stránka služieb, stránka o nás
+- Vždy viditeľné telefónne číslo
+- Blok núdzového kontaktu
+- Jednoduchá navigácia
 
-### Navigácia & Zjistiteľnosť
-- ✅ Odkaz pridaný do footeru domovskej stránky ("Showcase: MikoRK")
-- ✅ Trasy pridané do `vercel.json`
-- ✅ URL pridané do `sitemap.xml`
-- ✅ Prepínač jazykov (SK/EN) na oboch stránkach
+### 3. Základy lokálneho SEO
+- Optimalizované pre vyhľadávania "pohrebníctvo + mesto"
+- Štruktúrované údaje (LocalBusiness, Organization)
+- Pripravené pre Google Maps
+- Priorita slovenského jazyka
 
----
+### 4. API kontaktného formulára
+- Jednoduchý formulár s emailovým upozornením pre majiteľa
+- Žiadna automatická odpoveď rodinám (osobná odpoveď vyžadovaná)
+- GDPR-kompatibilné, súkromie na prvom mieste
 
-## Jazykové Verzie
-
-### Slovenčina (SK) — Predvolená
-- **URL:** `/showcase/mikork`
-- **Canonical:** `https://www.golocapo.com/showcase/mikork`
-- **Jazyk:** `lang="sk"`
-- **Obsah:** Kompletne preložený do slovenčiny
-
-### Angličtina (EN)
-- **URL:** `/showcase/mikork/en`
-- **Canonical:** `https://www.golocapo.com/showcase/mikork/en`
-- **Jazyk:** `lang="en"`
-- **Obsah:** Anglický obsah
+### 5. Pravidlá etickej automatizácie
+- Generátor obsahu pre vzdelávacie príspevky (manuálne schválenie vyžadované)
+- Žiadne automatizované kondolencie
+- Žiadne automatizované odpovede
+- Automatizácia podporuje ľudí, nikdy ich nenahradí
 
 ---
 
-## Návrh dlhodobej spolupráce (pre MikoRK)
+## Produktizácia Výsledok
 
-Ak chcete, vieme pokračovať ako dlhodobý partner a starať sa o web + výkon:
-- úpravy obsahu a sekcií podľa sezóny/služieb
-- lokálne SEO: titulky, popisy, interné prelinkovanie, nové podstránky
-- zlepšovanie konverzií (klik na telefón, kontakt, formulár)
-- kontrola rýchlosti, chýb (404), dostupnosti a technický audit
-- bezpečnostné a obsahové aktualizácie
+**Produkt extrahovaný:** `local-business-basic`
 
-Etické pravidlá ostávajú:
-- žiadne automatizované kondolencie ani citlivé automatické správy
-- automatizácie iba na logistiku (routing dopytov, notifikácie)
+**Znovupoužiteľnosť:**
+- Šablóna funguje pre akýkoľvek lokálny podnik
+- Pohrebné služby, kozmetika, opraváreň, reštaurácia, služby pre domácnosť
+- Rovnaká základná štruktúra, rôzni klienti
 
----
+**Rýchlosť dodávky:**
+- 1-2 týždne od podpisu
+- Validované reálnym klientom
 
-## Súbory
-
-### Vytvorené
-- `showcase/mikork.html` - Slovenská verzia (predvolená)
-- `showcase/mikork/en.html` - Anglická verzia
-- `assets/og/mikork-og.png` - OG obrázok (1200x630)
-- `assets/og/mikork-og.svg` - SVG zdroj
-- `docs/showcases/MIKORK_SHOWCASE_README.md` - Tento súbor
-
-### Upravené
-- `vercel.json` - Pridané trasy pre SK a EN
-- `sitemap.xml` - Pridané URL pre obe verzie
-- `dashboard/index.html` - Aktualizovaný footer odkaz
+**Hodnota:**
+- €1,500-2,500 jednorazovo
+- Mesačná starostlivosť: €300-600/mesiac (voliteľné)
 
 ---
 
-## Ako Klonovať pre Ďalšieho Klienta
+## Etika (Prečo toto záleží)
 
-### 1. Skopírovať Šablónu
-```bash
-cp showcase/mikork.html showcase/[meno-klienta].html
-cp showcase/mikork/en.html showcase/[meno-klienta]/en.html
-```
+**Etické pravidlá:**
+- Žiadne automatizované kondolencie ani citlivé automatické správy
+- Automatizácie iba na logistiku (routing dopytov, notifikácie)
+- Manuálne schválenie všetkého obsahu pred zverejnením
+- Automatizácia podporuje ľudí, nikdy ich nenahradí
 
-### 2. Aktualizovať Obsah
-- Nahradiť "MikoRK pohrebníctvo" názvom klienta
-- Aktualizovať sekcie problému/výsledku
-- Aktualizovať zoznam dodávok
-- Aktualizovať pred/po body
-- Aktualizovať CTA text podľa potreby
-
-### 3. Aktualizovať SEO Meta Tagy
-- Aktualizovať `<title>` tag
-- Aktualizovať `meta name="description"`
-- Aktualizovať `og:title`, `og:description`, `og:url`
-- Aktualizovať `twitter:title`, `twitter:description`
-- Aktualizovať canonical URL
-- Aktualizovať JSON-LD štruktúrované údaje
-
-### 4. Vytvoriť OG Obrázok
-- Vytvoriť `assets/og/[meno-klienta]-og.svg` (1200x630)
-- Aktualizovať `og:image` a `twitter:image` URL
-
-### 5. Aktualizovať Smerovanie
-- Pridať pravidlo rewrite do `vercel.json`
-- Pridať URL do `sitemap.xml`
-- Pridať odkaz do footeru domovskej stránky (voliteľné)
-
-### 6. Overiť
-- Skontrolovať, či sa stránka načíta: `curl -I https://www.golocapo.com/showcase/[meno-klienta]`
-- Skontrolovať, či sa OG obrázok načíta: `curl -I https://www.golocapo.com/assets/og/[meno-klienta]-og.svg`
-- Testovať OG preview: https://www.opengraph.xyz/url/https://www.golocapo.com/showcase/[meno-klienta]
+**Prečo toto záleží pre investora:**
+- Pozíciovanie v citlivých odvetviach vyžaduje etické pravidlá
+- Dôvera klientov je kritická
+- Etická automatizácia je diferenciačný faktor
+- Umožňuje vstup do odvetví, kde konkurencia nie je etická
 
 ---
 
-## QA Checklist
+## Dlhodobá Spolupráca Model (MRR Potenciál)
 
-### Vizuálne
-- [ ] Tmavé pozadie (`#0B0B12`) viditeľné
-- [ ] Typografia správna (brand font, veľkosti, farby)
-- [ ] Rozostupy konzistentné (používa CSS premenné)
-- [ ] Tlačidlá správne štýlované (primary, ghost)
-- [ ] Karty sa zobrazujú správne
-- [ ] Footer sa zobrazuje správne
+**Mesačný plán starostlivosti:**
+- **Basic:** €300/mesiac — Základné úpravy obsahu, lokálne SEO monitoring, technická údržba
+- **Growth:** €450/mesiac — Aktívne SEO optimalizácie, konverzné zlepšenia, bi-týždenné check-iny
+- **Pro:** €600/mesiac — Prioritná podpora, týždenné check-iny, vlastné vylepšenia
 
-### Mobilné
-- [ ] Responzívny layout funguje
-- [ ] Text čitateľný na mobile
-- [ ] Tlačidlá prístupné na mobile
-- [ ] Navigácia funguje na mobile
-- [ ] Obrázky sa správne škálujú
+**MRR Potenciál:**
+- 1 klient na Basic = €300/mesiac
+- 10 klientov na Basic = €3,000/mesiac
+- 10 klientov na Growth = €4,500/mesiac
+- 10 klientov na Pro = €6,000/mesiac
 
-### OG Preview
-- [ ] OG obrázok sa načíta (1200x630)
-- [ ] Názov sa zobrazuje správne
-- [ ] Popis sa zobrazuje správne
-- [ ] URL sa zobrazuje správne
-- [ ] Brand farby viditeľné
-- [ ] Text čitateľný
-
-### SEO
-- [ ] Title tag prítomný (150-160 znakov)
-- [ ] Meta description prítomná (150-160 znakov)
-- [ ] Canonical URL správna
-- [ ] OpenGraph tagy prítomné
-- [ ] Twitter/X tagy prítomné
-- [ ] JSON-LD štruktúrované údaje platné
-- [ ] Sitemap obsahuje URL
-- [ ] Robots.txt odkazuje na sitemap
-- [ ] Hreflang alternatívy správne
-
-### Funkčnosť
-- [ ] CTA tlačidlo odkazuje na `/prelaunch`
-- [ ] Navigačné odkazy fungujú
-- [ ] Footer odkazy fungujú
-- [ ] Brand CSS sa načíta správne
-- [ ] Prepínač jazykov funguje
-- [ ] Žiadne chyby v konzole
+**Upsell stratégia:**
+- Po 30 dňoch od dodávky Basic ponúknuť Care
+- Zdôrazniť hodnotu: "Ušetrite čas, nechajte nás sa starať"
+- Zobraziť výsledky: "Váš web teraz funguje, poďme ho zlepšiť"
 
 ---
 
-## Overovacie Príkazy
+## Znovupoužiteľnosť Naprieč Trhmi
 
-### Lokálne Overenie
-```bash
-# Skontrolovať, či sa stránka načíta
-curl -I http://localhost:3000/showcase/mikork
-curl -I http://localhost:3000/showcase/mikork/en
+**Lokálne podniky (Slovensko, Česko, región):**
+- Pohrebné služby (validované MikoRK)
+- Kozmetika, kaderníctvo
+- Opraváreň, autoservis
+- Reštaurácia, kaviareň
+- Služby pre domácnosť (čistenie, údržba)
 
-# Skontrolovať, či sa OG obrázok načíta
-curl -I http://localhost:3000/assets/og/mikork-og.svg
+**Škálovateľnosť:**
+- Rovnaká šablóna, rôzni klienti
+- Znížené náklady na vývoj
+- Rýchlejšia dodávka
+- Predvídateľné príjmy
 
-# Overiť, či je brand.css referencovaný
-curl http://localhost:3000/showcase/mikork | grep "brand.css"
-```
-
-### Produkčné Overenie
-```bash
-# Skontrolovať, či sa stránka načíta (200 OK)
-curl -I https://www.golocapo.com/showcase/mikork
-curl -I https://www.golocapo.com/showcase/mikork/en
-
-# Skontrolovať, či sa OG obrázok načíta (200 OK, image/svg+xml)
-curl -I https://www.golocapo.com/assets/og/mikork-og.svg
-
-# Overiť, či je brand.css referencovaný
-curl https://www.golocapo.com/showcase/mikork | grep "brand.css"
-
-# Skontrolovať, či sitemap obsahuje URL
-curl https://www.golocapo.com/sitemap.xml | grep "showcase/mikork"
-```
-
-### OG Preview Nástroje
-- https://www.opengraph.xyz/url/https://www.golocapo.com/showcase/mikork
-- https://developers.facebook.com/tools/debug/?q=https://www.golocapo.com/showcase/mikork
-- https://cards-dev.twitter.com/validator
+**Systém, nie agentúra:**
+- Kompletná dokumentácia umožňuje nezávislosť klienta
+- Automatizácia znižuje manuálnu prácu
+- Šablóny umožňujú rýchlu dodávku
+- MRR model zabezpečuje predvídateľné príjmy
 
 ---
 
-## Poznámky
+## Technické Detaily
 
-- **Tón:** Pokojný, dôveryhodný, dôstojný (žiadna agresívna marketingová komunikácia)
-- **Dizajn:** Používa konsolidovaný `brand.css` (žiadne inline štýly okrem minimálnych opráv)
-- **Znovupoužiteľnosť:** Šablóna môže byť sklonovaná pre ďalšieho klienta
-- **SEO Fokus:** Optimalizované pre sociálny traffic (OG tagy kritické)
-- **Dlhodobá Spolupráca:** Mesačný plán starostlivosti dostupný pre MikoRK
+**Súbory:**
+- `showcase/mikork.html` — Slovenská verzia (predvolená)
+- `showcase/mikork/en.html` — Anglická verzia
+- `assets/og/mikork-og.png` — OG obrázok (1200x630)
+- `assets/og/mikork-og.svg` — SVG zdroj
+
+**SEO & Sociálne Siete:**
+- Title tag, meta description, canonical URL
+- OpenGraph tagy (og:title, og:description, og:url, og:image)
+- Twitter/X tagy
+- JSON-LD štruktúrované údaje (Article schema)
+- Hreflang alternatívy (sk, en)
+
+**Navigácia:**
+- Trasy pridané do `vercel.json`
+- URL pridané do `sitemap.xml`
+- Prepínač jazykov (SK/EN) na oboch stránkach
 
 ---
 
-**Status:** ✅ Produkčne Pripravené
+## Prečo Toto Záleží Pre Investora
+
+**Validácia produktu:**
+- Reálny klient, reálna dodávka
+- Validovaná cena (€1,500-2,500)
+- Validovaná rýchlosť dodávky (1-2 týždne)
+
+**Opakovateľnosť:**
+- Znovupoužiteľná šablóna
+- Znížené náklady na vývoj
+- Rýchlejšia dodávka
+
+**Príjmy:**
+- Jednorazové poplatky (€1,500-2,500)
+- Mesačná starostlivosť (€300-600/mesiac)
+- Predvídateľný rekurujúci príjem
+
+**Etické pozíciovanie:**
+- Automatizácia podporuje ľudí, nikdy ich nenahradí
+- Dôležité pre citlivé odvetvia
+- Diferenciačný faktor
+
+**Škálovateľnosť:**
+- Systém, nie agentúra
+- Dokumentácia umožňuje nezávislosť klienta
+- MRR model zabezpečuje predvídateľné príjmy
+
+---
+
+**Status:** ✅ Investor Demo Ready
