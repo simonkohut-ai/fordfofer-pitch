@@ -22,3 +22,4 @@ DEPLOY_NOW.bat
 # Local development
 .vscode/
 .idea/
+.env*.local

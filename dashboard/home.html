@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>AI Marketing Studio by Golo Čapo | Generate Meta-Ready Posts in Seconds</title>
+    <meta name="title" content="AI Marketing Studio by Golo Čapo">
+    <meta name="description" content="Generate Meta-ready posts in seconds. Publish safely. Human-approved workflow for founders and creators.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.openai.com https://graph.facebook.com https://www.facebook.com;">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://golocapo.com/">
+    <meta property="og:title" content="AI Marketing Studio by Golo Čapo">
+    <meta property="og:description" content="Generate Meta-ready posts in seconds. Publish safely.">
+    <meta property="og:image" content="https://golocapo.com/og-image.png">
+    <meta property="og:site_name" content="AI Marketing Studio">
+    
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Marketing Studio by Golo Čapo">
+    <meta name="twitter:description" content="Generate Meta-ready posts in seconds. Publish safely.">
+    <meta name="twitter:image" content="https://golocapo.com/og-image.png">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://golocapo.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --primary-hover: #5568d3;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+        
+        /* Header */
+        .header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .nav-cta:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero .subheadline {
+            font-size: clamp(20px, 3vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .launch-note {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+        }
+        
+        /* Features */
+        .features {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+        }
+        
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* Trust Section */
+        .trust-section {
+            padding: 60px 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .trust-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .trust-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        
+        .trust-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .trust-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .trust-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            padding: 48px 0 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 60px 0 40px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .features-grid,
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <span>AI Marketing Studio</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="/pricing">Pricing</a>
+                    <a href="/SECURITY.md">Security</a>
+                    <a href="/TERMS.md">Terms</a>
+                    <a href="/pricing" class="nav-cta">Get Early Access</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI Marketing Studio by Golo Čapo</h1>
+            <p class="subheadline">Generate Meta-ready posts in seconds. Publish safely.</p>
+            
+            <div class="cta-buttons">
+                <a href="/pricing" class="btn-primary">Get Early Access — €49</a>
+            </div>
+            
+            <p class="launch-note">Launching 21.12.2025</p>
+        </div>
+    </section>
+    
+    <!-- Featured Work -->
+    <section class="featured-work" style="padding: 80px 0; background: var(--background);">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 36px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary);">Featured Work</h2>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 18px; margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Portfolio-grade client microsites with premium design and lead capture.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto;">
+                <!-- MikoRK Project -->
+                <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 200ms ease; cursor: pointer;" 
+                     onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.3)';" 
+                     onmouseout="this.style.transform=''; this.style.boxShadow='';"
+                     onclick="window.location.href='/clients/mikork'">
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #8b5cf6 0%, #667eea 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+                            ⚱️
+                        </div>
+                        <div>
+                            <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary);">MikoRK</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px;">Pohrebníctvo Ružomberok</p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
+                        Premium funeral services website with respectful design, lead capture, and 24/7 availability messaging.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">UX</span>
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Lead Capture</span>
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Conversion</span>
+                    </div>
+                    <a href="/clients/mikork" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px;">
+                        View project →
+                    </a>
+                </div>
+                
+                <!-- Komfortreality Project -->
+                <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 200ms ease; cursor: pointer;" 
+                     onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.3)';" 
+                     onmouseout="this.style.transform=''; this.style.boxShadow='';"
+                     onclick="window.location.href='/clients/komfortreality'">
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #06b6d4 0%, #667eea 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+                            🏠
+                        </div>
+                        <div>
+                            <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary);">Komfortreality</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px;">Realitná kancelária</p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
+                        Professional real estate agency website with process-driven design, free valuation lead magnet, and conversion-optimized forms.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">UX</span>
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Lead Capture</span>
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Conversion</span>
+                    </div>
+                    <a href="/clients/komfortreality" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px;">
+                        View project →
+                    </a>
+                </div>
+                
+                <!-- Hamilton Merch Project -->
+                <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 200ms ease; cursor: pointer;" 
+                     onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.3)';" 
+                     onmouseout="this.style.transform=''; this.style.boxShadow='';"
+                     onclick="window.location.href='/clients/hamilton-merch'">
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+                            🏎️
+                        </div>
+                        <div>
+                            <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary);">Hamilton Merch</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px;">Track-Inspired Streetwear</p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
+                        Premium merch store with fan-inspired motorsport designs. Ecommerce UX, local cart, conversion-optimized product pages.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Ecommerce UX</span>
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Conversion</span>
+                        <span style="background: var(--background); color: var(--text-secondary); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Brand System</span>
+                    </div>
+                    <a href="/clients/hamilton-merch" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px;">
+                        View project →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 16px;">What You Get</h2>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 18px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Everything you need to create and publish Meta-ready content without hiring an agency.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Content Generation</h3>
+                    <p>Generate unlimited marketing posts, captions, and product descriptions. Execution-ready, no editing needed.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Influencer Systems</h3>
+                    <p>Build complete Instagram AI influencer blueprints: identity, content, visuals, automation, monetization.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Digital Product Builder</h3>
+                    <p>Generate complete digital product systems: outlines, sales pages, funnels, and monetization plans.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Meta Connect</h3>
+                    <p>Connect your Facebook Pages and Instagram accounts. Manual-first posting with human approval.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Copy & Share</h3>
+                    <p>One-click copy and prefilled share pages. Streamlined workflow for publishing content.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Image Generation</h3>
+                    <p>Generate matching images with DALL-E 3. Post-ready visuals for your content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="container">
+            <h2>Why Trust AI Marketing Studio</h2>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-icon">🔒</div>
+                    <div class="trust-content">
+                        <h3>No Autopost Without Consent</h3>
+                        <p>All posting requires explicit confirmation. We never post automatically without your approval.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🛡️</div>
+                    <div class="trust-content">
+                        <h3>Tokens Never Logged</h3>
+                        <p>Your Meta access tokens are stored securely and never appear in logs or error messages.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">↩️</div>
+                    <div class="trust-content">
+                        <h3>Cancel Anytime</h3>
+                        <p>No long-term commitments. Cancel your access at any time with no questions asked.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">👤</div>
+                    <div class="trust-content">
+                        <h3>Human-Approved Workflow</h3>
+                        <p>Unlike auto-spam tools, every post requires your explicit approval before publishing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="/TERMS.md" target="_blank">Terms</a>
+                <a href="/PRIVACY.md" target="_blank">Privacy</a>
+                <a href="/REFUND.md" target="_blank">Refund Policy</a>
+                <a href="/SECURITY.md" target="_blank">Security</a>
+            </div>
+            <p class="footer-text">AI Marketing Studio by Golo Čapo © 2025</p>
+        </div>
+    </footer>
+    
+    <script>
+        let checkoutUrl = null;
+        
+        // Fetch checkout URL from server
+        fetch('/api/checkout-url')
+            .then(res => res.json())
+            .then(data => {
+                if (data.url) {
+                    checkoutUrl = data.url;
+                }
+            })
+            .catch(() => {
+                // Silently fail
+            });
+        
+        function handlePrimaryCTA(event) {
+            // If clicking from hero CTA, go directly to pricing page
+            // Pricing page handles checkout redirect
+            // Allow default link behavior
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About – Hamilton-Inspired Merch Store</title>
+    <meta name="description" content="Learn about our track-inspired streetwear brand. Fan-inspired designs, premium quality.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="stylesheet" href="/clients/_shared/styles.css">
+    <style>
+        .header {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-default);
+            padding: var(--space-lg) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            letter-spacing: -0.5px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: var(--space-xl);
+        }
+        
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: var(--font-medium);
+            transition: color var(--transition-base);
+        }
+        
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+        
+        .footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-default);
+            padding: var(--space-3xl) 0;
+            margin-top: var(--space-4xl);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer h4 {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-md);
+        }
+        
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--space-sm);
+            transition: color var(--transition-base);
+        }
+        
+        .footer a:hover {
+            color: var(--text-primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border-default);
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+        
+        .footer-credit {
+            margin-top: var(--space-md);
+            font-size: var(--text-xs);
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                gap: var(--space-md);
+                font-size: var(--text-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">HAMILTON MERCH</div>
+                <nav class="nav">
+                    <a href="/clients/hamilton-merch">Home</a>
+                    <a href="/clients/hamilton-merch/shop">Shop</a>
+                    <a href="/clients/hamilton-merch/about">About</a>
+                    <a href="/clients/hamilton-merch/contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="section">
+        <div class="container">
+            <h1 class="section-title">Our Story</h1>
+            
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <h2 style="margin-bottom: var(--space-lg);">Track-Inspired Streetwear</h2>
+                <p style="margin-bottom: var(--space-md); color: var(--text-secondary); line-height: 1.8;">
+                    We create fan-inspired motorsport apparel that celebrates the culture and energy of racing. Our designs are inspired by the track, built for the street.
+                </p>
+                <p style="margin-bottom: var(--space-md); color: var(--text-secondary); line-height: 1.8;">
+                    Every piece is crafted with premium materials and attention to detail. We believe in quality over quantity, which is why we release limited drops throughout the year.
+                </p>
+                <p style="margin-bottom: var(--space-md); color: var(--text-secondary); line-height: 1.8;">
+                    Our mission is to bring motorsport-inspired style to everyday wear. Whether you're a racing fan or simply appreciate quality streetwear, our collection has something for you.
+                </p>
+                <div style="margin-top: var(--space-xl); padding-top: var(--space-xl); border-top: 1px solid var(--border-default);">
+                    <h3 style="margin-bottom: var(--space-md);">Our Values</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: var(--space-sm) 0; padding-left: var(--space-xl); position: relative; color: var(--text-secondary);">
+                            <span style="position: absolute; left: 0; color: var(--accent-primary);">✓</span>
+                            Premium quality materials and construction
+                        </li>
+                        <li style="padding: var(--space-sm) 0; padding-left: var(--space-xl); position: relative; color: var(--text-secondary);">
+                            <span style="position: absolute; left: 0; color: var(--accent-primary);">✓</span>
+                            Fan-inspired designs celebrating motorsport culture
+                        </li>
+                        <li style="padding: var(--space-sm) 0; padding-left: var(--space-xl); position: relative; color: var(--text-secondary);">
+                            <span style="position: absolute; left: 0; color: var(--accent-primary);">✓</span>
+                            Limited drops for exclusivity
+                        </li>
+                        <li style="padding: var(--space-sm) 0; padding-left: var(--space-xl); position: relative; color: var(--text-secondary);">
+                            <span style="position: absolute; left: 0; color: var(--accent-primary);">✓</span>
+                            Worldwide shipping and easy returns
+                        </li>
+                    </ul>
+                </div>
+                <div style="margin-top: var(--space-xl); text-align: center;">
+                    <a href="/clients/hamilton-merch/shop" class="btn btn-primary">Shop Collection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Hamilton Merch</h4>
+                    <p class="text-muted" style="margin-top: var(--space-sm);">Track-Inspired Streetwear</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <a href="/clients/hamilton-merch">Home</a>
+                    <a href="/clients/hamilton-merch/shop">Shop</a>
+                    <a href="/clients/hamilton-merch/about">About</a>
+                    <a href="/clients/hamilton-merch/contact">Contact</a>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <a href="/TERMS.md" target="_blank">Terms</a>
+                    <a href="/PRIVACY.md" target="_blank">Privacy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hamilton Merch. All rights reserved.</p>
+                <p class="footer-credit">Built by Golo Čapo</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

@@ -1,7 +1,9 @@
 // 🦄 AI Marketing Generation API Endpoint - Vercel Serverless Function
 // Generates AI-powered marketing content
 
-export default async function handler(req, res) {
+import { withRateLimit } from './utils/rateLimit.mjs';
+
+async function marketingHandler(req, res) {
   // 🦄 Hidden signature
   console.log('%c🦄', 'font-size: 1px; color: transparent;');
   
@@ -20,6 +22,20 @@ export default async function handler(req, res) {
 
   try {
     const { prompt, channel, type, tone } = req.body;
+    
+    // Validate input
+    const promptValidation = validateInput(prompt, {
+      minLength: 3,
+      maxLength: 1000,
+      allowEmpty: false,
+    });
+    
+    if (!promptValidation.valid) {
+      return res.status(400).json({
+        success: false,
+        error: promptValidation.error
+      });
+    }
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
@@ -64,7 +80,12 @@ Make it engaging, action-oriented, and optimized for conversions. Keep it concis
     }
 
     const data = await response.json();
-    const generatedContent = data.choices?.[0]?.message?.content || 'Failed to generate content';
+    let generatedContent = data.choices?.[0]?.message?.content || 'Failed to generate content';
+    
+    // Add subtle watermark
+    if (generatedContent && !generatedContent.endsWith('🦄')) {
+      generatedContent = generatedContent.trim() + ' 🦄';
+    }
 
     // Return formatted response
     return res.status(200).json({
@@ -78,11 +99,16 @@ Make it engaging, action-oriented, and optimized for conversions. Keep it concis
       }
     });
   } catch (error) {
-    console.error('Marketing API error:', error);
+    // Never log secrets
+    console.error('Marketing API error:', sanitizeForLogging({ message: error.message }));
+    // Return friendly error (never expose technical details)
     return res.status(500).json({
       success: false,
-      error: error.message || 'Marketing generation failed'
+      error: 'Unable to generate content right now. Please try again.'
     });
   }
 }
+
+// Export with rate limiting
+export default withRateLimit(marketingHandler);
 

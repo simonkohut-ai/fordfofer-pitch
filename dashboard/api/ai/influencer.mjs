@@ -1,14 +1,24 @@
 // 🦄 AI Influencer Generator API Endpoint - Vercel Serverless Function
 // Generates complete Instagram AI influencer blueprint
 
-export default async function handler(req, res) {
+import { withRateLimit } from '../utils/rateLimit.mjs';
+import { setSecurityHeaders, getAllowedOrigin, validateInput, sanitizeForLogging } from '../utils/security.mjs';
+
+async function influencerHandler(req, res) {
   // 🦄 Hidden signature
   console.log('%c🦄', 'font-size: 1px; color: transparent;');
   
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Security headers
+  setSecurityHeaders(res);
+  
+  // CORS (same-origin only in production)
+  const allowedOrigin = getAllowedOrigin(req);
+  if (allowedOrigin) {
+    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -21,8 +31,18 @@ export default async function handler(req, res) {
   try {
     const { prompt } = req.body;
 
-    if (!prompt) {
-      return res.status(400).json({ error: 'Prompt is required' });
+    // Validate input
+    const promptValidation = validateInput(prompt, {
+      minLength: 3,
+      maxLength: 2000,
+      allowEmpty: false,
+    });
+    
+    if (!promptValidation.valid) {
+      return res.status(400).json({
+        success: false,
+        error: promptValidation.error
+      });
     }
 
     const apiKey = process.env.OPENAI_API_KEY;
@@ -177,23 +197,67 @@ Return ONLY valid JSON, no markdown, no code blocks.`;
       }
     }
 
+    // Helper function to add watermark to text
+    const addWatermark = (text) => {
+      if (!text || typeof text !== 'string') return text;
+      return text.trim().endsWith('🦄') ? text : text.trim() + ' 🦄';
+    };
+    
+    // Helper function to watermark array of strings
+    const watermarkArray = (arr) => {
+      if (!Array.isArray(arr)) return arr;
+      return arr.map(item => {
+        if (typeof item === 'string') return addWatermark(item);
+        if (typeof item === 'object' && item.text) {
+          return { ...item, text: addWatermark(item.text) };
+        }
+        return item;
+      });
+    };
+
+    // Helper function to add watermark to text
+    const addWatermark = (text) => {
+      if (!text || typeof text !== 'string') return text;
+      return text.trim().endsWith('🦄') ? text : text.trim() + ' 🦄';
+    };
+    
+    // Helper function to watermark array of strings or objects with text property
+    const watermarkArray = (arr) => {
+      if (!Array.isArray(arr)) return arr;
+      return arr.map(item => {
+        if (typeof item === 'string') return addWatermark(item);
+        if (typeof item === 'object' && item.text) {
+          return { ...item, text: addWatermark(item.text) };
+        }
+        return item;
+      });
+    };
+
     // Ensure all required fields exist (backward compatible + new fields)
     const completeBlueprint = {
-      identity: blueprint.identity || {
+      identity: blueprint.identity ? {
+        ...blueprint.identity,
+        bio: blueprint.identity.bio ? addWatermark(blueprint.identity.bio) : blueprint.identity.bio,
+        coreBelief: blueprint.identity.coreBelief ? addWatermark(blueprint.identity.coreBelief) : blueprint.identity.coreBelief
+      } : {
         name: blueprint.persona?.name || 'AI Influencer',
-        handleSuggestions: ['@aiinfluencer', '@ai_creator', '@ai_content', '@ai_life', '@ai_vibes'],
-        bio: blueprint.persona?.bio || blueprint.persona?.bio || 'AI-powered content creator ✨',
-        coreBelief: blueprint.persona?.coreBelief || 'Empowering through AI-generated content',
+        handleSuggestions: blueprint.persona?.handleSuggestions || ['@aiinfluencer', '@ai_creator', '@ai_content', '@ai_life', '@ai_vibes'],
+        bio: addWatermark(blueprint.persona?.bio || 'AI-powered content creator ✨'),
+        coreBelief: addWatermark(blueprint.persona?.coreBelief || 'Empowering through AI-generated content'),
         personalityTraits: blueprint.persona?.personalityTraits || ['Creative', 'Authentic', 'Engaging', 'Motivational', 'Innovative']
       },
       visualPrompts: blueprint.visualPrompts || {
         imagePrompts: blueprint.assetPrompts?.influencerImagePrompt ? [blueprint.assetPrompts.influencerImagePrompt] : ['Modern, professional portrait'],
         reelVisualStyles: blueprint.assetPrompts?.reelVisualTemplates || ['Dynamic, engaging video style']
       },
-      postReadyContent: blueprint.postReadyContent || {
-        captions: blueprint.readyToPostCaptions ? blueprint.readyToPostCaptions.map(c => ({ text: c, type: 'post', length: 'medium' })) : [],
-        reelHooks: blueprint.reelScripts ? blueprint.reelScripts.map(s => s.hook || 'Hook') : [],
-        ctaEndings: blueprint.reelScripts ? blueprint.reelScripts.map(s => s.cta || 'CTA') : []
+      postReadyContent: blueprint.postReadyContent ? {
+        captions: watermarkArray(blueprint.postReadyContent.captions || []),
+        reelHooks: watermarkArray(blueprint.postReadyContent.reelHooks || []),
+        ctaEndings: watermarkArray(blueprint.postReadyContent.ctaEndings || [])
+      } : {
+        captions: watermarkArray(blueprint.readyToPostCaptions ? blueprint.readyToPostCaptions.map(c => ({ text: c, type: 'post', length: 'medium' })) : []),
+        reelHooks: watermarkArray(blueprint.reelScripts ? blueprint.reelScripts.map(s => s.hook || 'Hook') : []),
+        ctaEndings: watermarkArray(blueprint.reelScripts ? blueprint.reelScripts.map(s => s.cta || 'CTA') : [])
       },
       automationInstructions: blueprint.automationInstructions || {
         imageGeneration: blueprint.automationInstructions?.imageGeneration || 'Use AI image tools to generate influencer avatar',
@@ -202,11 +266,24 @@ Return ONLY valid JSON, no markdown, no code blocks.`;
         engagementRoutine: blueprint.automationInstructions?.engagementRoutine || '15-minute daily engagement loop',
         growthLoop: blueprint.automationInstructions?.growthLoop || 'Follow/comment strategy for growth'
       },
-      monetization: blueprint.monetization || {
-        digitalProducts: [{ name: 'Digital Product', description: 'Product description', price: '$29' }],
-        serviceOffer: { name: 'Service', description: 'Service description', price: '$99' },
-        funnel: 'Content → DM → Conversion funnel',
-        first100Plan: 'Plan to make first $100'
+      monetization: blueprint.monetization ? {
+        digitalProducts: blueprint.monetization.digitalProducts ? blueprint.monetization.digitalProducts.map(p => ({
+          ...p,
+          name: p.name ? addWatermark(p.name) : p.name,
+          description: p.description ? addWatermark(p.description) : p.description
+        })) : [],
+        serviceOffer: blueprint.monetization.serviceOffer ? {
+          ...blueprint.monetization.serviceOffer,
+          name: blueprint.monetization.serviceOffer.name ? addWatermark(blueprint.monetization.serviceOffer.name) : blueprint.monetization.serviceOffer.name,
+          description: blueprint.monetization.serviceOffer.description ? addWatermark(blueprint.monetization.serviceOffer.description) : blueprint.monetization.serviceOffer.description
+        } : { name: addWatermark('Service'), description: addWatermark('Service description'), price: '$99' },
+        funnel: blueprint.monetization.funnel ? addWatermark(blueprint.monetization.funnel) : addWatermark('Content → DM → Conversion funnel'),
+        first100Plan: blueprint.monetization.first100Plan ? addWatermark(blueprint.monetization.first100Plan) : addWatermark('Plan to make first $100')
+      } : {
+        digitalProducts: [{ name: addWatermark('Digital Product'), description: addWatermark('Product description'), price: '$29' }],
+        serviceOffer: { name: addWatermark('Service'), description: addWatermark('Service description'), price: '$99' },
+        funnel: addWatermark('Content → DM → Conversion funnel'),
+        first100Plan: addWatermark('Plan to make first $100')
       },
       hashtagSets: blueprint.hashtagSets || [],
       postingSchedule: blueprint.postingSchedule || {}
@@ -222,11 +299,14 @@ Return ONLY valid JSON, no markdown, no code blocks.`;
       }
     });
   } catch (error) {
-    console.error('Influencer API error:', error);
+    console.error('Influencer API error:', sanitizeForLogging({ message: error.message }));
     return res.status(500).json({
       success: false,
-      error: error.message || 'Influencer generation failed'
+      error: 'Unable to generate influencer system right now. Please try again.'
     });
   }
 }
+
+// Export with rate limiting
+export default withRateLimit(influencerHandler);
 

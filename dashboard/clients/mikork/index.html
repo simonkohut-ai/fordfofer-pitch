@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MikoRK – Pohrebníctvo Ružomberok | Dôstojné rozlúčenie</title>
+    <meta name="description" content="Profesionálne pohrebné služby v Ružomberku. Dôstojné rozlúčenie, kompletná starostlivosť, 24/7 dostupnosť.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="stylesheet" href="/clients/_shared/styles.css">
+    <style>
+        /* MikoRK Brand Accents */
+        :root {
+            --brand-accent: #8b5cf6;
+        }
+        
+        .header {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-default);
+            padding: var(--space-lg) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+        }
+        
+        .nav {
+            display: flex;
+            gap: var(--space-xl);
+        }
+        
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: var(--font-medium);
+            transition: color var(--transition-base);
+        }
+        
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+        
+        .trust-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-3xl) 0;
+        }
+        
+        .quick-steps {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin: var(--space-3xl) 0;
+        }
+        
+        .quick-steps h3 {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .steps-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        
+        .steps-list li {
+            counter-increment: step-counter;
+            padding: var(--space-md) 0;
+            padding-left: var(--space-3xl);
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .steps-list li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: var(--space-md);
+            width: 28px;
+            height: 28px;
+            background: var(--accent-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-bold);
+            font-size: var(--text-sm);
+        }
+        
+        .footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-default);
+            padding: var(--space-3xl) 0;
+            margin-top: var(--space-4xl);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer h4 {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-md);
+        }
+        
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--space-sm);
+            transition: color var(--transition-base);
+        }
+        
+        .footer a:hover {
+            color: var(--text-primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border-default);
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+        
+        .footer-credit {
+            margin-top: var(--space-md);
+            font-size: var(--text-xs);
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                gap: var(--space-md);
+                font-size: var(--text-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">MikoRK</div>
+                <nav class="nav">
+                    <a href="/clients/mikork">Domov</a>
+                    <a href="/clients/mikork/sluzby">Služby</a>
+                    <a href="/clients/mikork/kontakt">Kontakt</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Pohrebníctvo Ružomberok</h1>
+            <p class="hero-subtitle">Dôstojné rozlúčenie s vašimi blízkymi. Profesionálna starostlivosť v najťažších chvíľach.</p>
+            <div class="hero-cta">
+                <a href="/clients/mikork/kontakt" class="btn btn-primary">Kontaktovať nás</a>
+                <a href="/clients/mikork/sluzby" class="btn btn-secondary">Naše služby</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <div class="trust-row">
+                <div class="trust-card">
+                    <span class="trust-card-icon">⏰</span>
+                    <span class="trust-card-value">24/7</span>
+                    <span class="trust-card-label">Dostupnosť</span>
+                </div>
+                <div class="trust-card">
+                    <span class="trust-card-icon">🤝</span>
+                    <span class="trust-card-value">15+</span>
+                    <span class="trust-card-label">rokov skúseností</span>
+                </div>
+                <div class="trust-card">
+                    <span class="trust-card-icon">💙</span>
+                    <span class="trust-card-value">1000+</span>
+                    <span class="trust-card-label">spokojných rodín</span>
+                </div>
+                <div class="trust-card">
+                    <span class="trust-card-icon">🔒</span>
+                    <span class="trust-card-value">100%</span>
+                    <span class="trust-card-label">diskrétnosť</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Naše služby</h2>
+            <div class="grid grid-3">
+                <div class="card service-card">
+                    <div class="service-card-icon">⚱️</div>
+                    <h3 class="service-card-title">Kompletné pohrebné služby</h3>
+                    <p class="service-card-description">Organizácia pohrebu od A po Z. Zabezpečenie všetkých potrebných formalít a súhlasov.</p>
+                </div>
+                <div class="card service-card">
+                    <div class="service-card-icon">🚐</div>
+                    <h3 class="service-card-title">Pohrebný voz</h3>
+                    <p class="service-card-description">Dôstojná preprava v profesionálne vybavenom pohrebnom vozidle.</p>
+                </div>
+                <div class="card service-card">
+                    <div class="service-card-icon">🌹</div>
+                    <h3 class="service-card-title">Kvietky a venčeky</h3>
+                    <p class="service-card-description">Široký výber kvetov a venčekov pre dôstojné rozlúčenie.</p>
+                </div>
+                <div class="card service-card">
+                    <div class="service-card-icon">📋</div>
+                    <h3 class="service-card-title">Administratíva</h3>
+                    <p class="service-card-description">Pomoc s vybavením všetkých potrebných dokumentov a súhlasov.</p>
+                </div>
+                <div class="card service-card">
+                    <div class="service-card-icon">💬</div>
+                    <h3 class="service-card-title">Poradenstvo</h3>
+                    <p class="service-card-description">Odborné poradenstvo v najťažších chvíľach. Súcit a pochopenie.</p>
+                </div>
+                <div class="card service-card">
+                    <div class="service-card-icon">⏰</div>
+                    <h3 class="service-card-title">24/7 dostupnosť</h3>
+                    <p class="service-card-description">K dispozícii sme kedykoľvek, keď nás potrebujete.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <div class="quick-steps">
+                <h3>Čo robiť najprv?</h3>
+                <ol class="steps-list">
+                    <li>Kontaktujte nás telefonicky alebo cez kontaktný formulár</li>
+                    <li>Dohodneme sa na stretnutí a preberieme všetky detaily</li>
+                    <li>Zabezpečíme všetky potrebné dokumenty a súhlasy</li>
+                    <li>Organizujeme dôstojné rozlúčenie podľa vašich požiadaviek</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Často kladené otázky</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Aké služby poskytujete?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Poskytujeme kompletný rozsah pohrebných služieb vrátane organizácie pohrebu, prepravy, kvetov, administratívy a poradenstva.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Ste dostupní 24/7?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Áno, sme k dispozícii 24 hodín denne, 7 dní v týždni. V najťažších chvíľach sme tu pre vás.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Ako dlho trvá organizácia pohrebu?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Organizácia pohrebu zvyčajne trvá 3-7 dní v závislosti od vašich požiadaviek a dostupnosti termínov.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Môžete pomôcť s administratívou?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Áno, pomôžeme vám s vybavením všetkých potrebných dokumentov a súhlasov súvisiacich s pohrebom.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <div class="card card-elevated text-center" style="padding: var(--space-3xl);">
+                <h2 style="margin-bottom: var(--space-md);">Potrebujete pomoc?</h2>
+                <p style="margin-bottom: var(--space-xl); font-size: var(--text-lg);">Kontaktujte nás ešte dnes. Sme tu pre vás.</p>
+                <a href="/clients/mikork/kontakt" class="btn btn-primary">Kontaktovať nás</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>MikoRK</h4>
+                    <p class="text-muted" style="margin-top: var(--space-sm);">Pohrebníctvo Ružomberok</p>
+                </div>
+                <div>
+                    <h4>Navigácia</h4>
+                    <a href="/clients/mikork">Domov</a>
+                    <a href="/clients/mikork/sluzby">Služby</a>
+                    <a href="/clients/mikork/kontakt">Kontakt</a>
+                </div>
+                <div>
+                    <h4>Právne informácie</h4>
+                    <a href="/TERMS.md" target="_blank">Obchodné podmienky</a>
+                    <a href="/PRIVACY.md" target="_blank">Ochrana súkromia</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MikoRK. Všetky práva vyhradené.</p>
+                <p class="footer-credit">Built by Golo Čapo</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.closest('.faq-item');
+                const isActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // Open clicked if wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

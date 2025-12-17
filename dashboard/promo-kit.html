@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Kit Generator - AI Marketing Studio</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        .form-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--surface);
+        }
+        
+        .output-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            display: none;
+        }
+        
+        .output-section.active {
+            display: block;
+        }
+        
+        .caption-box {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+            font-family: monospace;
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+        
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .image-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .image-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .image-card h3 {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Promo Kit Generator</h1>
+            <p class="subtitle">Generate captions and images for your launch</p>
+        </div>
+        
+        <div class="form-section">
+            <form id="promoForm">
+                        <div class="form-group">
+                            <label>Teaser Copy (Locked)</label>
+                            <div style="background: var(--background); border: 1px solid var(--border); border-radius: 8px; padding: 16px; white-space: pre-wrap; font-family: monospace; color: var(--text-primary);">
+Golo Čapo
+PTK – Někdo půjde z kola ven
+21.12
+                            </div>
+                            <small style="color: var(--text-secondary); font-size: 12px;">This is the only teaser copy. No variations.</small>
+                        </div>
+                        
+                        <input type="hidden" id="brandName" value="Golo Čapo">
+                        <input type="hidden" id="song" value="PTK – Někdo půjde z kola ven">
+                        <input type="hidden" id="date" value="21.12">
+                
+                <div class="form-group">
+                    <label for="theme">Theme</label>
+                    <select id="theme">
+                        <option value="Dark Minimal" selected>Dark Minimal</option>
+                        <option value="Neon">Neon</option>
+                        <option value="Clean">Clean</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Generate Promo Kit
+                </button>
+            </form>
+        </div>
+        
+        <div id="outputSection" class="output-section">
+            <h2 style="margin-bottom: 24px;">Generated Content</h2>
+            
+            <div class="form-group">
+                <label>Caption</label>
+                <div id="captionBox" class="caption-box"></div>
+                <button onclick="copyCaption()" class="btn btn-secondary" style="width: 100%; margin-top: 12px;">
+                    📋 Copy Caption
+                </button>
+            </div>
+            
+            <div id="imagesContainer" class="images-grid"></div>
+        </div>
+        
+        <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+    </div>
+    
+    <script>
+        let currentCaption = '';
+        let currentImages = {};
+        
+        document.getElementById('promoForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const brandName = document.getElementById('brandName').value;
+            const song = document.getElementById('song').value;
+            const date = document.getElementById('date').value;
+            const theme = document.getElementById('theme').value;
+            
+            const outputSection = document.getElementById('outputSection');
+            outputSection.classList.add('active');
+            outputSection.innerHTML = '<div class="loading">🔄 Generating promo kit...</div>';
+            
+            try {
+                // Generate caption
+                const captionResponse = await fetch('/api/assets/caption', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ brandName, song, date }),
+                });
+                const captionData = await captionResponse.json();
+                
+                if (!captionData.success) {
+                    throw new Error(captionData.error || 'Failed to generate caption');
+                }
+                
+                currentCaption = captionData.caption;
+                
+                // Store for potential posting
+                localStorage.setItem('latestGeneratedContent', currentCaption);
+                
+                // Auto-copy caption to clipboard
+                try {
+                    await navigator.clipboard.writeText(currentCaption);
+                    // Show success message
+                    const captionBox = document.getElementById('captionBox');
+                    if (captionBox) {
+                        captionBox.style.border = '2px solid var(--success)';
+                        setTimeout(() => {
+                            captionBox.style.border = '1px solid var(--border)';
+                        }, 2000);
+                    }
+                } catch (err) {
+                    console.warn('Auto-copy failed, user can copy manually');
+                }
+                
+                // Generate images
+                const imagesContainer = document.createElement('div');
+                imagesContainer.className = 'images-grid';
+                imagesContainer.id = 'imagesContainer';
+                
+                const sizes = [
+                    { name: 'Feed', size: '1080x1080', key: 'feed' },
+                    { name: 'Story', size: '1080x1920', key: 'story' },
+                ];
+                
+                for (const { name, size, key } of sizes) {
+                    try {
+                        const imageResponse = await fetch('/api/assets/post-image', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ brandName, song, date, theme, size }),
+                        });
+                        
+                        if (!imageResponse.ok) {
+                            throw new Error(`Failed to generate ${name} image`);
+                        }
+                        
+                        const blob = await imageResponse.blob();
+                        const imageUrl = URL.createObjectURL(blob);
+                        currentImages[key] = imageUrl;
+                        
+                        const imageCard = document.createElement('div');
+                        imageCard.className = 'image-card';
+                        imageCard.innerHTML = `
+                            <h3>${name} (${size})</h3>
+                            <img src="${imageUrl}" alt="${name}">
+                            <button onclick="downloadImage('${imageUrl}', '${key}-${size}.png')" class="btn btn-secondary" style="width: 100%; margin-top: 8px;">
+                                ⬇️ Download
+                            </button>
+                        `;
+                        imagesContainer.appendChild(imageCard);
+                    } catch (error) {
+                        console.error(`Error generating ${name} image:`, error);
+                    }
+                }
+                
+                outputSection.innerHTML = `
+                    <h2 style="margin-bottom: 24px;">Generated Content</h2>
+                    <div class="form-group">
+                        <label>Caption</label>
+                        <div id="captionBox" class="caption-box">${currentCaption}</div>
+                        <button onclick="copyCaption()" class="btn btn-secondary" style="width: 100%; margin-top: 12px;">
+                            📋 Copy Caption
+                        </button>
+                    </div>
+                `;
+                outputSection.appendChild(imagesContainer);
+                
+            } catch (error) {
+                outputSection.innerHTML = `
+                    <div style="color: #ef4444; text-align: center; padding: 40px;">
+                        <p>Error: ${error.message}</p>
+                        <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 20px;">Try Again</button>
+                    </div>
+                `;
+            }
+        });
+        
+        function copyCaption() {
+            if (!currentCaption) return;
+            navigator.clipboard.writeText(currentCaption).then(() => {
+                alert('✅ Caption copied to clipboard!');
+            }).catch(() => {
+                alert('⚠️ Failed to copy. Please select and copy manually.');
+            });
+        }
+        
+        function downloadImage(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
+

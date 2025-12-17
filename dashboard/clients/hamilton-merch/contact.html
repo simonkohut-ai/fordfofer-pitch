@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact – Hamilton-Inspired Merch Store</title>
+    <meta name="description" content="Contact Hamilton Merch. Questions about orders, sizing, or returns? We're here to help.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="stylesheet" href="/clients/_shared/styles.css">
+    <style>
+        .header {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-default);
+            padding: var(--space-lg) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            letter-spacing: -0.5px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: var(--space-xl);
+        }
+        
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: var(--font-medium);
+            transition: color var(--transition-base);
+        }
+        
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+        }
+        
+        .contact-info {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .contact-item {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .contact-item strong {
+            display: block;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .contact-item span {
+            color: var(--text-secondary);
+        }
+        
+        .response-note {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid var(--accent-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-top: var(--space-lg);
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+        
+        .footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-default);
+            padding: var(--space-3xl) 0;
+            margin-top: var(--space-4xl);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer h4 {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-md);
+        }
+        
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--space-sm);
+            transition: color var(--transition-base);
+        }
+        
+        .footer a:hover {
+            color: var(--text-primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border-default);
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+        
+        .footer-credit {
+            margin-top: var(--space-md);
+            font-size: var(--text-xs);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav {
+                gap: var(--space-md);
+                font-size: var(--text-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">HAMILTON MERCH</div>
+                <nav class="nav">
+                    <a href="/clients/hamilton-merch">Home</a>
+                    <a href="/clients/hamilton-merch/shop">Shop</a>
+                    <a href="/clients/hamilton-merch/about">About</a>
+                    <a href="/clients/hamilton-merch/contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="section">
+        <div class="container">
+            <h1 class="section-title">Contact Us</h1>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        <span>support@hamiltonmerch.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Response Time</strong>
+                        <span>Within 24 hours</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Shipping Inquiries</strong>
+                        <span>Contact us for tracking updates</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Returns</strong>
+                        <span>30-day return policy</span>
+                    </div>
+                    <div class="response-note">
+                        <strong>Note:</strong> We're a fan-inspired brand. We are not affiliated with any official racing organizations or drivers.
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 style="margin-bottom: var(--space-lg);">Send Message</h3>
+                    <div id="formMessage" class="form-success"></div>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" required minlength="2" maxlength="100">
+                            <div class="form-error" id="nameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <div class="form-error" id="emailError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone <span class="optional">(optional)</span></label>
+                            <input type="tel" id="phone" name="phone" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="messageText" name="message" class="form-textarea" required minlength="10" maxlength="1000"></textarea>
+                            <div class="form-error" id="messageError"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <label for="consent">
+                                    I agree to the processing of personal data according to <a href="/PRIVACY.md" target="_blank">Privacy Policy</a> *
+                                </label>
+                            </div>
+                            <div class="form-error" id="consentError"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Hamilton Merch</h4>
+                    <p class="text-muted" style="margin-top: var(--space-sm);">Track-Inspired Streetwear</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <a href="/clients/hamilton-merch">Home</a>
+                    <a href="/clients/hamilton-merch/shop">Shop</a>
+                    <a href="/clients/hamilton-merch/about">About</a>
+                    <a href="/clients/hamilton-merch/contact">Contact</a>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <a href="/TERMS.md" target="_blank">Terms</a>
+                    <a href="/PRIVACY.md" target="_blank">Privacy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hamilton Merch. All rights reserved.</p>
+                <p class="footer-credit">Built by Golo Čapo</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const messageEl = document.getElementById('formMessage');
+        
+        function validateField(field, errorEl) {
+            const value = field.value.trim();
+            let isValid = true;
+            let error = '';
+            
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                error = 'This field is required.';
+            } else if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                isValid = false;
+                error = 'Invalid email format.';
+            } else if (field.id === 'name' && value && (value.length < 2 || value.length > 100)) {
+                isValid = false;
+                error = 'Name must be 2-100 characters.';
+            } else if (field.id === 'messageText' && value && (value.length < 10 || value.length > 1000)) {
+                isValid = false;
+                error = 'Message must be 10-1000 characters.';
+            }
+            
+            if (isValid) {
+                field.style.borderColor = '';
+                errorEl.classList.remove('show');
+            } else {
+                field.style.borderColor = 'var(--error)';
+                errorEl.textContent = error;
+                errorEl.classList.add('show');
+            }
+            
+            return isValid;
+        }
+        
+        ['name', 'email', 'messageText'].forEach(id => {
+            const field = document.getElementById(id);
+            const errorEl = document.getElementById(id + 'Error');
+            field.addEventListener('blur', () => validateField(field, errorEl));
+        });
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            messageEl.classList.remove('show');
+            messageEl.textContent = '';
+            
+            const nameValid = validateField(document.getElementById('name'), document.getElementById('nameError'));
+            const emailValid = validateField(document.getElementById('email'), document.getElementById('emailError'));
+            const messageValid = validateField(document.getElementById('messageText'), document.getElementById('messageError'));
+            const consent = document.getElementById('consent').checked;
+            
+            const consentError = document.getElementById('consentError');
+            if (!consent) {
+                consentError.textContent = 'You must agree to the privacy policy.';
+                consentError.classList.add('show');
+            } else {
+                consentError.classList.remove('show');
+            }
+            
+            if (!nameValid || !emailValid || !messageValid || !consent) {
+                return;
+            }
+            
+            const formData = {
+                brand: 'hamilton-merch',
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim() || null,
+                message: document.getElementById('messageText').value.trim(),
+                consent: true,
+            };
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            try {
+                const response = await fetch('/api/leads/submit-client', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageEl.textContent = 'Thank you for your message. We\'ll get back to you soon.';
+                    messageEl.classList.add('show');
+                    form.reset();
+                } else {
+                    messageEl.textContent = data.error || 'Error sending message. Please try again.';
+                    messageEl.classList.add('show');
+                    messageEl.style.background = 'rgba(239, 68, 68, 0.1)';
+                    messageEl.style.borderColor = 'var(--error)';
+                    messageEl.style.color = 'var(--error)';
+                }
+            } catch (error) {
+                messageEl.textContent = 'Connection error. Please try again.';
+                messageEl.classList.add('show');
+                messageEl.style.background = 'rgba(239, 68, 68, 0.1)';
+                messageEl.style.borderColor = 'var(--error)';
+                messageEl.style.color = 'var(--error)';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+    </script>
+</body>
+</html>
+

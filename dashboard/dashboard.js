@@ -45,11 +45,28 @@ function getRemainingFreeGenerations() {
     return Math.max(0, MARKETING_LIMIT - getMarketingUsage());
 }
 
+// Preview Mode State
+let previewMode = false;
+
+function isPreviewMode() {
+    return previewMode || (document.getElementById('previewModeToggle')?.checked || false);
+}
+
 // Initialize Dashboard
 function initDashboard() {
     // 🦄 Set theme
     if (settings.theme === 'dark') {
         document.body.setAttribute('data-theme', 'dark');
+    }
+    
+    // Initialize preview mode toggle
+    const previewToggle = document.getElementById('previewModeToggle');
+    if (previewToggle) {
+        previewToggle.addEventListener('change', (e) => {
+            previewMode = e.target.checked;
+            // Hide/show technical details
+            document.body.classList.toggle('preview-mode', previewMode);
+        });
     }
     
     // Check for payment success (Stripe redirect)
@@ -76,11 +93,56 @@ function initDashboard() {
     // Update usage counter
     updateUsageCounter();
     
+    // Initialize diagnostics
+    updateDiagnostics();
+    
     // Auto-refresh stats every 30 seconds
     setInterval(updateAllStats, 30000);
     
     // 🦄 Hidden brand signature
     console.log('%c🦄', 'font-size: 1px; color: transparent;');
+    
+    // Log app load
+    logEvent('app_loaded', { version: APP_VERSION });
+    
+    // Initialize Meta integration
+    initMetaIntegration();
+}
+
+// Demo Panel Functions
+function toggleDemoPanel() {
+    const panel = document.getElementById('demoPanel');
+    if (panel) {
+        panel.classList.toggle('active');
+    }
+}
+
+function runDemoInfluencer() {
+    toggleDemoPanel();
+    openSection('ai-influencer');
+    setTimeout(() => {
+        const prompt = 'Create a faceless AI influencer for Instagram focused on AI wealth and digital freedom. Audience: founders, creators, solopreneurs. Tone: calm, authoritative, minimal. No emojis, no hype, no clichés. Output execution-ready only.';
+        document.getElementById('chatInput').value = prompt;
+        sendMessage();
+    }, 300);
+}
+
+function runDemoProduct() {
+    toggleDemoPanel();
+    openSection('product-builder');
+    setTimeout(() => {
+        const prompt = 'Build a $97 Notion productivity system for solopreneurs. Focus: AI automation workflows, task management, client onboarding. Target: busy founders who want to scale without hiring.';
+        document.getElementById('chatInput').value = prompt;
+        sendMessage();
+    }, 300);
+}
+
+function runDemoDailyPlan() {
+    toggleDemoPanel();
+    openSection('marketing-generator');
+    setTimeout(() => {
+        generateDailyPlan();
+    }, 300);
 }
 
 // Navigation
@@ -480,6 +542,34 @@ function processAIMessage(userMessage) {
                 const usageNote = isMarketingUnlocked() 
                     ? '' 
                     : `\n\n📊 Free generations remaining: ${remainingAfter === 'unlimited' ? 'unlimited' : remainingAfter}/${MARKETING_LIMIT}`;
+                
+                // Store latest generated content
+                latestGeneratedContent = {
+                    caption: content,
+                    type: 'marketing',
+                    timestamp: Date.now()
+                };
+                
+                // Log generation event
+                logEvent('content_generated', {
+                    type: 'marketing',
+                    channel,
+                    length: content.length,
+                    hasWatermark: content.includes('🦄')
+                });
+                
+                // Show share buttons
+                const copyBtn = document.getElementById('copyPostBtn');
+                const shareBtn = document.getElementById('shareFacebookBtn');
+                const cursorPromptBtn = document.getElementById('copyCursorPromptBtn');
+                const nextStepArea = document.getElementById('nextStepArea');
+                if (copyBtn) copyBtn.style.display = 'flex';
+                if (shareBtn) shareBtn.style.display = 'flex';
+                if (cursorPromptBtn) cursorPromptBtn.style.display = 'flex';
+                if (nextStepArea) nextStepArea.style.display = 'block';
+                
+                updateDiagnostics();
+                
                 addChatMessage('assistant', `📢 **Generated Marketing Content** (${channel}):\n\n${content}${usageNote}\n\n💡 Copy and use this for your campaigns!`);
             })
             .catch(error => {
@@ -487,12 +577,14 @@ function processAIMessage(userMessage) {
                 removeChatMessage(loadingId);
                 // Friendly error messages (no technical details)
                 let friendlyError = 'Unable to generate content right now. Please try again in a moment.';
-                if (error.message.includes('limit') || error.message.includes('quota')) {
+                if (error.message.includes('limit') || error.message.includes('quota') || error.message.includes('429')) {
                     friendlyError = 'Service temporarily unavailable. Please try again in a few minutes.';
                 } else if (error.message.includes('network') || error.message.includes('fetch')) {
                     friendlyError = 'Connection issue. Please check your internet and try again.';
                 }
-                addChatMessage('assistant', `⚠️ ${friendlyError}\n\n💡 If this persists, try refreshing the page or contact support.`);
+                // Hide rate limit details in preview mode
+                const helpText = isPreviewMode() ? '' : '\n\n💡 If this persists, try refreshing the page or contact support.';
+                addChatMessage('assistant', `⚠️ ${friendlyError}${helpText}`);
             });
         return;
     }
@@ -685,6 +777,37 @@ function formatInfluencerBlueprint(blueprint) {
         ctaEndings: blueprint.reelScripts ? blueprint.reelScripts.map(s => s.cta || 'CTA') : []
     };
     
+    // Store first caption as latest if available
+    if (postReadyContent.captions && postReadyContent.captions.length > 0) {
+        const firstCaption = postReadyContent.captions[0];
+        const captionText = typeof firstCaption === 'string' ? firstCaption : firstCaption.text;
+        latestGeneratedContent = {
+            caption: captionText,
+            type: 'influencer',
+            timestamp: Date.now()
+        };
+        
+        // Log generation event
+        logEvent('content_generated', {
+            type: 'influencer',
+            captionCount: postReadyContent.captions.length,
+            length: captionText.length,
+            hasWatermark: captionText.includes('🦄')
+        });
+        
+        // Show share buttons
+        const copyBtn = document.getElementById('copyPostBtn');
+        const shareBtn = document.getElementById('shareFacebookBtn');
+        const cursorPromptBtn = document.getElementById('copyCursorPromptBtn');
+        const nextStepArea = document.getElementById('nextStepArea');
+        if (copyBtn) copyBtn.style.display = 'flex';
+        if (shareBtn) shareBtn.style.display = 'flex';
+        if (cursorPromptBtn) cursorPromptBtn.style.display = 'flex';
+        if (nextStepArea) nextStepArea.style.display = 'block';
+
+        updateDiagnostics();
+    }
+    
     const automationInstructions = blueprint.automationInstructions || {};
     const monetization = blueprint.monetization || {};
     const hashtagSets = blueprint.hashtagSets || [];
@@ -722,7 +845,10 @@ function formatInfluencerBlueprint(blueprint) {
                 <details style="margin-bottom: 15px; padding: 10px; background: #f5f5f5; border-radius: 6px;">
                     <summary style="cursor: pointer; font-weight: 600; font-size: 15px;">📝 Post-Ready Captions (${postReadyContent.captions.length})</summary>
                     <div style="margin-top: 10px; padding-left: 10px;">
-                        <button onclick="copyAllCaptions('${messageId}')" style="background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 10px;">📋 Copy All Captions</button>
+                        <div style="display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap;">
+                            <button onclick="copyAllCaptions('${messageId}')" style="background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px;">📋 Copy All Captions</button>
+                            <button onclick="downloadInfluencerJSON('${messageId}', ${JSON.stringify(blueprint).replace(/"/g, '&quot;').replace(/'/g, '&#39;')})" style="background: #764ba2; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px;">💾 Download JSON</button>
+                        </div>
                         <div style="max-height: 400px; overflow-y: auto;">
                             ${postReadyContent.captions.length > 0 
                                 ? postReadyContent.captions.slice(0, 10).map((caption, idx) => {
@@ -924,6 +1050,127 @@ function formatInfluencerBlueprint(blueprint) {
 }
 
 // Copy all captions function
+// Download JSON functions
+function downloadInfluencerJSON(messageId, blueprintJson) {
+    try {
+        // Parse the JSON string if needed
+        const blueprint = typeof blueprintJson === 'string' ? JSON.parse(blueprintJson) : blueprintJson;
+        const jsonStr = JSON.stringify(blueprint, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ai-influencer-${Date.now()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Error downloading JSON:', error);
+        alert('Error downloading JSON. Please try again.');
+    }
+}
+
+function downloadProductJSON(messageId, productJson) {
+    try {
+        const product = typeof productJson === 'string' ? JSON.parse(productJson) : productJson;
+        const jsonStr = JSON.stringify(product, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `digital-product-${Date.now()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Error downloading JSON:', error);
+        alert('Error downloading JSON. Please try again.');
+    }
+}
+
+// Store latest generated content for sharing
+let latestGeneratedContent = {
+    caption: null,
+    type: null,
+    timestamp: null
+};
+
+// App version for diagnostics
+const APP_VERSION = '1.0.0-prelaunch';
+
+// Simple event logging (client-side console + optional server endpoint)
+function logEvent(eventName, data = {}) {
+    const event = {
+        event: eventName,
+        timestamp: new Date().toISOString(),
+        ...data
+    };
+    
+    // Console log
+    console.log('[Event]', event);
+    
+    // Optional: send to server (non-blocking)
+    try {
+        fetch('/api/log', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(event)
+        }).catch(() => {
+            // Silently fail if endpoint doesn't exist
+        });
+    } catch (error) {
+        // Ignore logging errors
+    }
+}
+
+// Track last action result
+let lastActionResult = {
+    action: null,
+    success: null,
+    timestamp: null
+};
+
+function updateLastAction(action, success) {
+    lastActionResult = {
+        action,
+        success,
+        timestamp: new Date().toISOString()
+    };
+    updateDiagnostics();
+}
+
+// Update diagnostics display
+function updateDiagnostics() {
+    const versionEl = document.getElementById('diagnostics-version');
+    const lastGenEl = document.getElementById('diagnostics-last-gen');
+    const lastActionEl = document.getElementById('diagnostics-last-action');
+    
+    if (versionEl) {
+        versionEl.textContent = APP_VERSION;
+    }
+    
+    if (lastGenEl) {
+        if (latestGeneratedContent.timestamp) {
+            const date = new Date(latestGeneratedContent.timestamp);
+            lastGenEl.textContent = date.toLocaleString() + ' (' + latestGeneratedContent.type + ')';
+        } else {
+            lastGenEl.textContent = 'None';
+        }
+    }
+    
+    if (lastActionEl) {
+        if (lastActionResult.action) {
+            const status = lastActionResult.success ? '✅' : '❌';
+            const date = new Date(lastActionResult.timestamp);
+            lastActionEl.textContent = `${status} ${lastActionResult.action} at ${date.toLocaleTimeString()}`;
+        } else {
+            lastActionEl.textContent = 'None';
+        }
+    }
+}
+
 function copyAllCaptions(messageId) {
     const messageDiv = document.getElementById(messageId);
     if (!messageDiv) return;
@@ -955,6 +1202,915 @@ function copyAllCaptions(messageId) {
         console.error('Error copying captions:', error);
         alert('Error copying captions. Please try again.');
     }
+}
+
+// Copy latest generated post text with robust error handling
+function copyLatestPostText() {
+    if (!latestGeneratedContent.caption) {
+        showToast('Generate a post first.', 'warning');
+        logEvent('copy_clicked', { success: false, reason: 'no_content' });
+        updateLastAction('copy', false);
+        return;
+    }
+    
+    const textToCopy = latestGeneratedContent.caption;
+    let copySuccess = false;
+    
+    // Try modern clipboard API first
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            copySuccess = true;
+            showToast('✅ Copied to clipboard!', 'success');
+            logEvent('copy_clicked', { success: true, method: 'clipboard_api', length: textToCopy.length });
+            updateLastAction('copy', true);
+        }).catch(() => {
+            // Fallback to legacy method
+            copySuccess = tryLegacyCopy(textToCopy);
+            if (copySuccess) {
+                showToast('✅ Copied to clipboard!', 'success');
+                logEvent('copy_clicked', { success: true, method: 'legacy', length: textToCopy.length });
+                updateLastAction('copy', true);
+            } else {
+                showToast('⚠️ Copy failed. Use the share page to copy manually.', 'error');
+                logEvent('copy_clicked', { success: false, reason: 'clipboard_failed' });
+                updateLastAction('copy', false);
+            }
+        });
+    } else {
+        // Legacy fallback
+        copySuccess = tryLegacyCopy(textToCopy);
+        if (copySuccess) {
+            showToast('✅ Copied to clipboard!', 'success');
+            logEvent('copy_clicked', { success: true, method: 'legacy', length: textToCopy.length });
+            updateLastAction('copy', true);
+        } else {
+            showToast('⚠️ Copy failed. Use the share page to copy manually.', 'error');
+            logEvent('copy_clicked', { success: false, reason: 'clipboard_failed' });
+            updateLastAction('copy', false);
+        }
+    }
+}
+
+// Legacy copy fallback
+function tryLegacyCopy(text) {
+    try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        const success = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        return success;
+    } catch (error) {
+        console.error('Legacy copy failed:', error);
+        return false;
+    }
+}
+
+// Robust clipboard copy utility (reusable)
+async function copyTextToClipboard(text) {
+    if (!text) return false;
+    
+    // Try modern clipboard API first
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch (error) {
+            // Fallback to legacy method
+            return tryLegacyCopy(text);
+        }
+    } else {
+        // Legacy fallback
+        return tryLegacyCopy(text);
+    }
+}
+
+// Cursor Auto-Run Prompt (single source of truth)
+function getCursorAutoRunPrompt() {
+    // Keep as a single source of truth. Edit this prompt whenever you want.
+    return `## Cursor Auto-Run Prompt — "Meta Business Launch Stack (OpenAI Pro + Vercel Pro)"
+
+You are operating in \`fordfofer-pitch/dashboard\` deployed on Vercel Pro.
+
+### Mission
+Build the Meta Business integration the right way for launch:
+1) Phase B.1 Read-only Connect (OAuth → list Pages + IG accounts)
+2) Phase B.2 Human-approved Posting (manual "Post Now" from UI)
+3) Phase B.3 Scheduled Autopost (Vercel Cron)
+All behind hard flags + safety rails. Must be demoable and sellable.
+
+### Non-negotiables
+- Do NOT break Phase A (Copy/Share).
+- Identity: only Golo Čapo / 🦄, never "Šimon Kohút".
+- Add kill switches: META_INTEGRATION_ENABLED, META_POSTING_ENABLED, META_SCHEDULER_ENABLED.
+- Store tokens securely (never log tokens).
+- Clear UI states + error messages.
+- Include a "War Room" admin diagnostics view.
+
+# 0) Choose Vercel-native storage
+Use Vercel KV (preferred) OR Vercel Postgres if KV not configured.
+Implement a storage adapter so we can swap later.
+
+# 1) Implement Meta OAuth properly (Phase B.1)
+Replace placeholders with working OAuth flow:
+- /api/meta/oauth/start
+- /api/meta/oauth/callback
+Store token + expiry securely. Add /api/meta/status.
+
+# 2) Pages + IG discovery endpoint
+Implement /api/meta/pages returning normalized list.
+
+# 3) UI: Automation Hub
+Dynamic connect/disconnect, Pages dropdown, Save selection.
+
+# 4) Posting MVP (Phase B.2)
+Only if META_POSTING_ENABLED=true:
+- /api/meta/post posts latest generated content to selected Page
+- Explicit confirm required
+- Rate limit and validate input
+
+# 5) Scheduling (Phase B.3)
+Only if META_SCHEDULER_ENABLED=true:
+- Schedule UI + /api/cron/meta-post
+
+# 6) OpenAI content quality
+Brand presets + A/B variants + campaign pack generation.
+
+# 7) Observability
+/api/health and /api/meta/health + diagnostics panel + no token logs.
+
+# 8) Docs
+META_SETUP.md + LAUNCH_RUNBOOK.md + QA updates.
+
+### Output requirements
+Provide exact files, env vars, testing steps, gating behavior, known limitations.
+
+Proceed without questions. Optimize for demo + first paying customer.`;
+}
+
+// Copy Cursor prompt to clipboard
+async function copyCursorPrompt() {
+    const promptText = getCursorAutoRunPrompt();
+    const ok = await copyTextToClipboard(promptText);
+    
+    if (ok) {
+        showToast('✅ Cursor prompt copied!', 'success');
+        logEvent('cursor_prompt_copied', { length: promptText.length });
+    } else {
+        // Show modal fallback
+        showCursorPromptModal(promptText);
+    }
+}
+
+// Show Cursor prompt modal (fallback if clipboard fails)
+function showCursorPromptModal(promptText) {
+    // Remove existing modal if present
+    const existingModal = document.getElementById('cursor-prompt-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    const modal = document.createElement('div');
+    modal.id = 'cursor-prompt-modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    `;
+    
+    const content = document.createElement('div');
+    content.style.cssText = `
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        max-width: 800px;
+        max-height: 80vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    `;
+    
+    const header = document.createElement('div');
+    header.style.cssText = `
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    `;
+    
+    const title = document.createElement('h3');
+    title.textContent = '🧠 Cursor Auto-Run Prompt';
+    title.style.cssText = `
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+    `;
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '✕';
+    closeBtn.className = 'btn-icon-small';
+    closeBtn.onclick = () => modal.remove();
+    closeBtn.style.cssText = `
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--background);
+        color: var(--text-primary);
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+    
+    const textarea = document.createElement('textarea');
+    textarea.value = promptText;
+    textarea.readOnly = true;
+    textarea.style.cssText = `
+        width: 100%;
+        min-height: 400px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--background);
+        color: var(--text-primary);
+        font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        resize: vertical;
+        margin-bottom: 16px;
+    `;
+    
+    const actions = document.createElement('div');
+    actions.style.cssText = `
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+    `;
+    
+    const copyBtn = document.createElement('button');
+    copyBtn.textContent = '📋 Copy';
+    copyBtn.className = 'btn-primary';
+    copyBtn.onclick = () => {
+        textarea.select();
+        const ok = tryLegacyCopy(promptText);
+        if (ok) {
+            showToast('✅ Copied to clipboard!', 'success');
+            modal.remove();
+        } else {
+            showToast('⚠️ Copy failed. Please select and copy manually.', 'error');
+        }
+    };
+    copyBtn.style.cssText = `
+        padding: 10px 20px;
+        font-size: 14px;
+    `;
+    
+    const closeBtn2 = document.createElement('button');
+    closeBtn2.textContent = 'Close';
+    closeBtn2.className = 'btn-secondary';
+    closeBtn2.onclick = () => modal.remove();
+    closeBtn2.style.cssText = `
+        padding: 10px 20px;
+        font-size: 14px;
+    `;
+    
+    header.appendChild(title);
+    header.appendChild(closeBtn);
+    actions.appendChild(copyBtn);
+    actions.appendChild(closeBtn2);
+    
+    content.appendChild(header);
+    content.appendChild(textarea);
+    content.appendChild(actions);
+    modal.appendChild(content);
+    
+    document.body.appendChild(modal);
+    
+    // Focus textarea and select all
+    setTimeout(() => {
+        textarea.focus();
+        textarea.select();
+    }, 100);
+    
+    // Close on Escape key
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    document.addEventListener('keydown', handleEscape);
+}
+
+// Simple toast notification
+function showToast(message, type = 'info') {
+    // Remove existing toast
+    const existingToast = document.getElementById('toast-notification');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    const toast = document.createElement('div');
+    toast.id = 'toast-notification';
+    toast.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 32px;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 10000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        animation: slideInRight 0.3s ease-out;
+        max-width: 300px;
+    `;
+    
+    const colors = {
+        success: { bg: '#10b981', color: 'white' },
+        error: { bg: '#ef4444', color: 'white' },
+        warning: { bg: '#f59e0b', color: 'white' },
+        info: { bg: '#667eea', color: 'white' }
+    };
+    
+    const style = colors[type] || colors.info;
+    toast.style.background = style.bg;
+    toast.style.color = style.color;
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.animation = 'slideOutRight 0.3s ease-out';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Open Facebook share with prefilled text (with popup blocker detection)
+function openFacebookShare({ url, quote }) {
+    const shareUrl = url || window.location.origin + '/share/ai-studio';
+    const encodedUrl = encodeURIComponent(shareUrl);
+    
+    // Handle long content: use sessionStorage if quote > 1500 chars
+    let sharePageUrl;
+    if (quote && quote.length > 1500) {
+        const storageKey = 'share_' + Date.now();
+        sessionStorage.setItem(storageKey, quote);
+        sharePageUrl = `${shareUrl}?k=${storageKey}`;
+        logEvent('share_clicked', { method: 'sessionStorage', length: quote.length });
+    } else {
+        const encodedQuote = quote ? encodeURIComponent(quote) : '';
+        sharePageUrl = `${shareUrl}${encodedQuote ? '?quote=' + encodedQuote : ''}`;
+        logEvent('share_clicked', { method: 'url_param', length: quote ? quote.length : 0 });
+    }
+    
+    // Open share page
+    const shareWindow = window.open(sharePageUrl, '_blank');
+    
+    // Try Facebook sharer (may be blocked)
+    setTimeout(() => {
+        try {
+            const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}${quote && quote.length <= 1500 ? '&quote=' + encodeURIComponent(quote) : ''}`;
+            const fbWindow = window.open(facebookShareUrl, 'facebook-share', 'width=600,height=400,menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
+            
+            // Detect popup blocker
+            if (!fbWindow || fbWindow.closed || typeof fbWindow.closed === 'undefined') {
+                showToast('Popup blocked. Use the share page text and paste into Facebook.', 'warning');
+                logEvent('share_clicked', { popup_blocked: true });
+            } else {
+                logEvent('share_clicked', { popup_blocked: false, sharepage_opened: true });
+            }
+        } catch (error) {
+            console.error('Facebook share error:', error);
+            showToast('Popup blocked. Use the share page text and paste into Facebook.', 'warning');
+            logEvent('share_clicked', { popup_blocked: true, error: error.message });
+        }
+    }, 500);
+}
+
+// Share latest generated content to Facebook
+function shareLatestToFacebook() {
+    if (!latestGeneratedContent.caption) {
+        showToast('Generate a post first.', 'warning');
+        logEvent('share_clicked', { success: false, reason: 'no_content' });
+        updateLastAction('share', false);
+        return;
+    }
+    
+    const shareUrl = window.location.origin + '/share/ai-studio';
+    const quote = latestGeneratedContent.caption;
+    
+    openFacebookShare({ url: shareUrl, quote });
+    updateLastAction('share', true);
+}
+
+// Meta Integration Functions (Phase B)
+let metaStatus = {
+    enabled: false,
+    connected: false,
+    hasPageSelected: false,
+    hasIgSelected: false,
+    postingEnabled: false,
+    schedulerEnabled: false,
+};
+
+// Check Meta status
+async function checkMetaStatus() {
+    try {
+        const response = await fetch('/api/meta/status');
+        const data = await response.json();
+        metaStatus = data;
+        updateMetaUI();
+        updatePaymentsUI();
+        updatePromoKitUI();
+        return data;
+    } catch (error) {
+        console.error('Error checking Meta status:', error);
+        return null;
+    }
+}
+
+// Connect to Meta
+function connectMeta() {
+    window.location.href = '/api/meta/oauth/start?state=default';
+}
+
+// Disconnect from Meta
+async function disconnectMeta() {
+    if (!confirm('Disconnect from Meta? This will clear all stored tokens and selections.')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/meta/disconnect', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: 'default' }),
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            showToast('✅ Disconnected from Meta', 'success');
+            await checkMetaStatus();
+        } else {
+            showToast('Unable to disconnect. Please try again.', 'error');
+        }
+    } catch (error) {
+        console.error('Error disconnecting Meta:', error);
+        showToast('Unable to disconnect. Please try again.', 'error');
+    }
+}
+
+// Load Pages and update UI
+async function loadMetaPages() {
+    try {
+        const response = await fetch('/api/meta/pages');
+        const data = await response.json();
+        
+        if (data.success && data.pages) {
+            renderPagesDropdown(data.pages, data.selected_page_id);
+            return data.pages;
+        } else {
+            showToast('Unable to load Pages. Please try again.', 'error');
+            return [];
+        }
+    } catch (error) {
+        console.error('Error loading Pages:', error);
+        showToast('Unable to load Pages. Please try again.', 'error');
+        return [];
+    }
+}
+
+// Render Pages dropdown
+function renderPagesDropdown(pages, selectedPageId) {
+    const container = document.getElementById('meta-pages-container');
+    if (!container) return;
+    
+    if (pages.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No Pages found. Make sure you have a Facebook Page.</p>';
+        return;
+    }
+    
+    let html = '<label style="display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: var(--text-primary);">Select Page:</label>';
+    html += '<select id="meta-pages-select" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--background); color: var(--text-primary); font-size: 14px; margin-bottom: 12px;">';
+    
+    pages.forEach(page => {
+        const selected = page.page_id === selectedPageId ? 'selected' : '';
+        const igBadge = page.has_ig ? ' (IG)' : '';
+        html += `<option value="${page.page_id}" data-name="${page.page_name}" data-token="${page.page_access_token}" data-ig="${page.ig_business_account_id || ''}" ${selected}>${page.page_name}${igBadge}</option>`;
+    });
+    
+    html += '</select>';
+    html += '<button onclick="saveSelectedPage()" class="btn-primary" style="width: 100%; padding: 10px; font-size: 14px;">Save Selection</button>';
+    
+    container.innerHTML = html;
+}
+
+// Save selected page
+async function saveSelectedPage() {
+    const select = document.getElementById('meta-pages-select');
+    if (!select) return;
+    
+    const option = select.options[select.selectedIndex];
+    const pageId = option.value;
+    const pageName = option.dataset.name;
+    const pageAccessToken = option.dataset.token;
+    const igBusinessAccountId = option.dataset.ig || null;
+    
+    try {
+        const response = await fetch('/api/meta/select-page', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: 'default',
+                pageId,
+                pageName,
+                pageAccessToken,
+                igBusinessAccountId,
+            }),
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            showToast(`✅ Selected: ${pageName}`, 'success');
+            await checkMetaStatus();
+        } else {
+            showToast('Unable to save selection. Please try again.', 'error');
+        }
+    } catch (error) {
+        console.error('Error saving page selection:', error);
+        showToast('Unable to save selection. Please try again.', 'error');
+    }
+}
+
+// Post to Meta (Phase B.2)
+async function postToMeta() {
+    if (!latestGeneratedContent.caption) {
+        showToast('Generate content first.', 'warning');
+        return;
+    }
+    
+    if (!confirm(`Post this content to your selected Facebook Page?\n\n"${latestGeneratedContent.caption.substring(0, 100)}..."`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/meta/post', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: 'default',
+                message: latestGeneratedContent.caption,
+                confirm: true,
+            }),
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            showToast('✅ Posted to Facebook successfully!', 'success');
+            if (data.permalink) {
+                setTimeout(() => {
+                    if (confirm('Open post on Facebook?')) {
+                        window.open(data.permalink, '_blank');
+                    }
+                }, 1000);
+            }
+            await checkMetaStatus();
+        } else {
+            showToast(data.error || 'Unable to post. Please try again.', 'error');
+        }
+    } catch (error) {
+        console.error('Error posting to Meta:', error);
+        showToast('Unable to post. Please try again.', 'error');
+    }
+}
+
+// Update Meta UI
+function updateMetaUI() {
+    const panel = document.getElementById('meta-integration-panel');
+    if (!panel) return;
+    
+    if (!metaStatus.enabled) {
+        panel.innerHTML = `
+            <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">🔗 Meta Autopost</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px; line-height: 1.6;">
+                <strong style="color: var(--text-primary);">Status:</strong> Coming Soon
+                <br>
+                <span style="font-size: 13px;">Manual sharing available now · Autopost launching after 21.12.2025</span>
+            </p>
+            <div style="padding: 16px; background: var(--background); border-radius: 8px; border-left: 3px solid var(--primary);">
+                <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                    Currently, you can copy generated content and share manually. Automatic posting to Facebook Pages and Instagram will be available after launch.
+                </div>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = `
+        <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">🔗 Meta Autopost</h3>
+    `;
+    
+    if (!metaStatus.connected) {
+        html += `
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px; line-height: 1.6;">
+                Connect your Meta account to post directly to Facebook Pages.
+            </p>
+            <button onclick="connectMeta()" class="btn-primary" style="width: 100%; padding: 12px; font-size: 14px;">
+                Connect Meta Account
+            </button>
+        `;
+    } else {
+        html += `
+            <div style="margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="color: var(--text-secondary); font-size: 14px;">
+                        Connected as: <strong style="color: var(--text-primary);">${metaStatus.user_name || 'User'}</strong>
+                    </span>
+                    <button onclick="disconnectMeta()" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                        Disconnect
+                    </button>
+                </div>
+                <div id="meta-pages-container"></div>
+            </div>
+        `;
+        
+        if (metaStatus.hasPageSelected && metaStatus.postingEnabled) {
+            html += `
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+                    <button onclick="postToMeta()" class="btn-primary" style="width: 100%; padding: 12px; font-size: 14px;">
+                        📘 Post Latest Content to Facebook
+                    </button>
+                    <p style="color: var(--text-secondary); font-size: 12px; margin-top: 8px; text-align: center;">
+                        Requires explicit confirmation before posting
+                    </p>
+                </div>
+            `;
+        }
+    }
+    
+    panel.innerHTML = html;
+    
+    if (metaStatus.connected && !metaStatus.hasPageSelected) {
+        loadMetaPages();
+    } else if (metaStatus.connected && metaStatus.hasPageSelected) {
+        loadMetaPages();
+    }
+}
+
+// Update Payments Admin UI (now includes leads)
+async function updatePaymentsUI() {
+    const panel = document.getElementById('payments-admin-panel');
+    if (!panel) return;
+    
+    try {
+        // Fetch both leads and customers stats
+        const [leadsResponse, customersResponse] = await Promise.all([
+            fetch('/api/leads/status').then(r => r.json()).catch(() => ({ success: false })),
+            fetch('/api/customers/status').then(r => r.json()).catch(() => ({ success: false })),
+        ]);
+        
+        const leadsStats = leadsResponse.success ? leadsResponse.stats : null;
+        const customersStats = customersResponse.success ? customersResponse.stats : null;
+        
+        if (!leadsStats && !customersStats) {
+            panel.innerHTML = `
+                <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">📊 Growth</h3>
+                <p style="color: var(--text-secondary); font-size: 14px;">Unable to load data.</p>
+            `;
+            return;
+        }
+        
+        const totalLeads = leadsStats?.totalLeads || 0;
+        const totalCustomers = customersStats?.totalCustomers || 0;
+        const conversionRate = leadsStats?.conversionRate || 0;
+        const prelaunchLeads = leadsStats?.prelaunchLeads || 0;
+        const lastPayment = customersStats?.lastPaymentTimestamp 
+            ? new Date(customersStats.lastPaymentTimestamp).toLocaleString()
+            : 'No payments yet';
+        
+        let html = `
+            <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">📊 Growth</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                <div style="background: var(--background); padding: 16px; border-radius: 8px; border: 1px solid var(--border);">
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Total Leads</div>
+                    <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);">${totalLeads}</div>
+                </div>
+                <div style="background: var(--background); padding: 16px; border-radius: 8px; border: 1px solid var(--border);">
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Customers</div>
+                    <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);">${totalCustomers}</div>
+                </div>
+                <div style="background: var(--background); padding: 16px; border-radius: 8px; border: 1px solid var(--border);">
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Conversion</div>
+                    <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);">${conversionRate}%</div>
+                </div>
+                <div style="background: var(--background); padding: 16px; border-radius: 8px; border: 1px solid var(--border);">
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Prelaunch</div>
+                    <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);">${prelaunchLeads}</div>
+                </div>
+            </div>
+        `;
+        
+        // Client leads by brand
+        if (leadsStats?.byBrand && Object.keys(leadsStats.byBrand).length > 0) {
+            html += `
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">Client Leads by Brand</div>
+                    <div style="background: var(--background); border-radius: 8px; padding: 12px;">
+                        ${Object.entries(leadsStats.byBrand).map(([brand, count]) => `
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                                <span style="color: var(--text-primary); font-size: 14px; text-transform: capitalize;">${brand}</span>
+                                <span style="color: var(--text-secondary); font-size: 12px;">${count} leads</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        if (leadsStats?.recentLeads && leadsStats.recentLeads.length > 0) {
+            html += `
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">Recent Leads</div>
+                    <div style="background: var(--background); border-radius: 8px; padding: 12px;">
+                        ${leadsStats.recentLeads.map(lead => `
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                                <span style="color: var(--text-primary); font-size: 14px;">${lead.email}</span>
+                                <span style="color: var(--text-secondary); font-size: 12px;">${lead.source}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        if (customersStats?.recentCustomers && customersStats.recentCustomers.length > 0) {
+            html += `
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">Recent Customers</div>
+                    <div style="background: var(--background); border-radius: 8px; padding: 12px;">
+                        ${customersStats.recentCustomers.map(customer => `
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                                <span style="color: var(--text-primary); font-size: 14px;">${customer.email}</span>
+                                <span style="color: var(--text-secondary); font-size: 12px;">€${customer.amount}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        panel.innerHTML = html;
+    } catch (error) {
+        console.error('Payments UI error:', error);
+        panel.innerHTML = `
+            <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">📊 Growth</h3>
+            <p style="color: var(--text-secondary); font-size: 14px;">Error loading data.</p>
+        `;
+    }
+}
+
+// Check Meta status on load
+async function initMetaIntegration() {
+    // Check URL params for OAuth callback
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('meta') === 'connected') {
+        showToast('✅ Connected to Meta successfully!', 'success');
+        window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (urlParams.get('meta') === 'error') {
+        const reason = urlParams.get('reason') || 'Unknown error';
+        showToast(`Meta connection failed: ${reason}`, 'error');
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    
+    await checkMetaStatus();
+}
+
+// Update Promo Kit Posting UI
+async function updatePromoKitUI() {
+    const panel = document.getElementById('promo-kit-panel');
+    if (!panel) return;
+    
+    try {
+        const metaResponse = await fetch('/api/meta/status');
+        const metaData = await metaResponse.json();
+        
+        const isConnected = metaData.connected && metaData.hasPageSelected;
+        const postingEnabled = metaData.postingEnabled;
+        
+        let html = `
+            <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">📢 Post Promo Kit to Facebook Page</h3>
+        `;
+        
+        if (!isConnected) {
+            html += `
+                <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px; line-height: 1.6;">
+                    Connect your Meta account and select a Facebook Page to post promo kits automatically.
+                </p>
+                <div style="display: flex; gap: 12px;">
+                    <a href="/promo-kit" class="btn-primary" style="flex: 1; text-align: center; padding: 12px; font-size: 14px; text-decoration: none;">
+                        🎨 Generate Promo Kit
+                    </a>
+                    <button onclick="connectMeta()" class="btn-secondary" style="flex: 1; padding: 12px; font-size: 14px;">
+                        Connect Meta Account
+                    </button>
+                </div>
+            `;
+        } else if (!postingEnabled) {
+            html += `
+                <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px; line-height: 1.6;">
+                    <strong style="color: var(--text-primary);">Status:</strong> Connected to ${metaData.selected_page_name || 'Facebook Page'}
+                    <br>
+                    <span style="font-size: 13px;">Posting is currently disabled. Manual sharing available.</span>
+                </p>
+                <a href="/promo-kit" class="btn-primary" style="display: block; width: 100%; text-align: center; padding: 12px; font-size: 14px; text-decoration: none;">
+                    🎨 Generate Promo Kit
+                </a>
+            `;
+        } else {
+            html += `
+                <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px; line-height: 1.6;">
+                    <strong style="color: var(--text-primary);">Status:</strong> Ready to post to ${metaData.selected_page_name || 'Facebook Page'}
+                </p>
+                <div style="display: flex; gap: 12px;">
+                    <a href="/promo-kit" class="btn-secondary" style="flex: 1; text-align: center; padding: 12px; font-size: 14px; text-decoration: none;">
+                        🎨 Generate Promo Kit
+                    </a>
+                    <button onclick="postPromoKitToFacebook()" class="btn-primary" style="flex: 1; padding: 12px; font-size: 14px;">
+                        📘 Post to Facebook (Confirm)
+                    </button>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 12px; margin-top: 12px; text-align: center;">
+                    Requires explicit confirmation before posting
+                </p>
+            `;
+        }
+        
+        panel.innerHTML = html;
+    } catch (error) {
+        console.error('Promo Kit UI error:', error);
+        panel.innerHTML = `
+            <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px;">📢 Post Promo Kit</h3>
+            <p style="color: var(--text-secondary); font-size: 14px;">Error loading status.</p>
+        `;
+    }
+}
+
+// Post promo kit to Facebook
+async function postPromoKitToFacebook() {
+    if (!confirm('Are you sure you want to post the latest promo kit to your Facebook Page? This action cannot be undone.')) {
+        return;
+    }
+    
+    try {
+        const latestContent = localStorage.getItem('latestGeneratedContent') || 'Check out AI Marketing Studio!';
+        
+        // Generate confirmation token (timestamp in seconds)
+        const timestamp = Math.floor(Date.now() / 1000);
+        const confirmationToken = `confirm-post-${timestamp}`;
+        
+        const response = await fetch('/api/meta/post-latest', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                confirmationToken,
+                content: latestContent,
+            }),
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showToast(`✅ Posted successfully to ${data.pageName}!`, 'success');
+            updatePromoKitUI();
+        } else {
+            showToast(`❌ Post failed: ${data.error}`, 'error');
+        }
+    } catch (error) {
+        showToast(`❌ Error: ${error.message}`, 'error');
+    }
+}
+
+// Legacy function for compatibility
+async function checkMetaConfig() {
+    await checkMetaStatus();
 }
 
 // Generate influencer images
@@ -1068,11 +2224,34 @@ async function regenerateImage(messageId, type) {
     }
 }
 
-// Download image
+// Download image with watermark
 function downloadImage(imageUrl, filename) {
-    fetch(imageUrl)
-        .then(response => response.blob())
-        .then(blob => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    
+    img.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        
+        // Draw original image
+        ctx.drawImage(img, 0, 0);
+        
+        // Add subtle watermark in bottom-right corner
+        ctx.save();
+        ctx.globalAlpha = 0.3; // Low opacity
+        ctx.font = `${Math.max(20, img.width * 0.02)}px Arial`; // Responsive size
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'bottom';
+        
+        const padding = Math.max(10, img.width * 0.01);
+        ctx.fillText('🦄', img.width - padding, img.height - padding);
+        ctx.restore();
+        
+        // Convert to blob and download
+        canvas.toBlob(function(blob) {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -1081,11 +2260,30 @@ function downloadImage(imageUrl, filename) {
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
-        })
-        .catch(error => {
-            console.error('Error downloading image:', error);
-            alert('Error downloading image. Please try again.');
-        });
+        }, 'image/png');
+    };
+    
+    img.onerror = function() {
+        // Fallback: download without watermark if image fails to load
+        fetch(imageUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${filename}-${Date.now()}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error('Error downloading image:', error);
+                alert('Error downloading image. Please try again.');
+            });
+    };
+    
+    img.src = imageUrl;
 }
 
 function formatMarkdown(text) {
@@ -1114,10 +2312,17 @@ function loadChatHistory() {
 }
 
 function clearChat() {
+    const messagesContainer = document.getElementById('chatMessages');
+    const copyBtn = document.getElementById('copyPostBtn');
+    const shareBtn = document.getElementById('shareFacebookBtn');
+    const nextStepArea = document.getElementById('nextStepArea');
+    
+    if (!messagesContainer) return; // Element doesn't exist - safe to skip
+    
     if (confirm('Clear all chat history?')) {
         chatHistory = [];
         localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-        document.getElementById('chatMessages').innerHTML = `
+        messagesContainer.innerHTML = `
             <div class="message system">
                 <div class="message-avatar">⚡</div>
                 <div class="message-content">
@@ -1131,6 +2336,22 @@ function clearChat() {
                 </div>
             </div>
         `;
+        
+        // Hide action buttons
+        const cursorPromptBtn = document.getElementById('copyCursorPromptBtn');
+        if (copyBtn) copyBtn.style.display = 'none';
+        if (shareBtn) shareBtn.style.display = 'none';
+        if (cursorPromptBtn) cursorPromptBtn.style.display = 'none';
+        if (nextStepArea) nextStepArea.style.display = 'none';
+        
+        // Clear latest content
+        latestGeneratedContent = {
+            caption: null,
+            type: null,
+            timestamp: null
+        };
+        
+        updateDiagnostics();
     }
 }
 
@@ -1141,47 +2362,56 @@ function insertShortcut(text) {
 }
 
 // Stats Updates
+// Safe element setter helper
+const setText = (sel, val) => {
+    const el = typeof sel === 'string' ? document.getElementById(sel) : sel;
+    if (el) el.textContent = String(val ?? '');
+};
+
 function updateAllStats() {
     // 🦄 Hidden signature
     const today = new Date().toDateString();
     const todaySales = salesData.filter(sale => new Date(sale.date).toDateString() === today);
     const totalRevenue = salesData.reduce((sum, sale) => sum + parseFloat(sale.price), 0);
     
-    // Update dashboard stats
-    document.getElementById('totalRevenue').textContent = formatCurrency(totalRevenue);
-    document.getElementById('todaySales').textContent = todaySales.length;
+    // Update dashboard stats (with null guards)
+    setText('totalRevenue', formatCurrency(totalRevenue));
+    setText('todaySales', todaySales.length);
     
     const conversionRate = salesData.length > 0 ? ((salesData.length / 20) * 100).toFixed(1) : 0;
-    document.getElementById('conversionRate').textContent = conversionRate + '%';
+    setText('conversionRate', conversionRate + '%');
     
-    // Update revenue section
-    document.getElementById('revenueTotal').textContent = formatCurrency(totalRevenue);
-    document.getElementById('revenueCount').textContent = salesData.length;
+    // Update revenue section (with null guards)
+    setText('revenueTotal', formatCurrency(totalRevenue));
+    setText('revenueCount', salesData.length);
     const avgOrder = salesData.length > 0 ? (totalRevenue / salesData.length).toFixed(0) : 0;
-    document.getElementById('revenueAvg').textContent = formatCurrency(avgOrder);
+    setText('revenueAvg', formatCurrency(avgOrder));
     
-    // Update marketing stats
+    // Update marketing stats (safe - handles missing elements)
     updateMarketingStats();
     
-    // Update sales table
+    // Update sales table (safe - handles missing elements)
     renderSalesTable();
 }
 
 function updateMarketingStats() {
+    // Marketing stats elements may not exist - safe to skip if missing
     const channels = ['telegram', 'reddit', 'twitter'];
     
     channels.forEach(channel => {
         const channelSales = salesData.filter(sale => sale.channel === channel);
         const channelRevenue = channelSales.reduce((sum, sale) => sum + parseFloat(sale.price), 0);
         
-        document.getElementById(channel + 'Sales').textContent = channelSales.length;
-        document.getElementById(channel + 'Revenue').textContent = formatCurrency(channelRevenue);
-        document.getElementById(channel + 'Posts').textContent = channelSales.length * 2; // Estimate
+        // Safe updates - elements may not exist in current UI
+        setText(channel + 'Sales', channelSales.length);
+        setText(channel + 'Revenue', formatCurrency(channelRevenue));
+        setText(channel + 'Posts', channelSales.length * 2); // Estimate
     });
 }
 
 function renderSalesTable() {
     const tbody = document.getElementById('salesTable');
+    if (!tbody) return; // Element doesn't exist - safe to skip
     
     if (salesData.length === 0) {
         tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No sales yet. Start marketing!</td></tr>';
@@ -1262,6 +2492,8 @@ function getProductName(price) {
 
 function addActivity(title, description) {
     const activityList = document.getElementById('activityList');
+    if (!activityList) return; // Element doesn't exist - safe to skip
+    
     const activityItem = document.createElement('div');
     activityItem.className = 'activity-item';
     activityItem.innerHTML = `
@@ -1385,7 +2617,7 @@ function openStripeCheckout() {
     // Stripe Checkout (Test Mode)
     // ⚠️ SETUP REQUIRED: Replace with your actual Stripe test price ID
     // Get this from: Stripe Dashboard → Products → Create Product → Copy Price ID
-    const STRIPE_TEST_PRICE_ID = 'price_test_1234567890'; // ⚠️ Replace with your Stripe test price ID
+    const STRIPE_TEST_PRICE_ID = process.env.STRIPE_PRICE_ID || 'price_test_1234567890'; // Set STRIPE_PRICE_ID in Vercel env vars
     
     // Option 1: Use Stripe Payment Link (easiest for testing)
     // Create a payment link in Stripe Dashboard → Products → Payment Links
@@ -1396,7 +2628,7 @@ function openStripeCheckout() {
     
     if (STRIPE_TEST_PRICE_ID.includes('1234567890')) {
         // Show setup instructions
-        alert(`Stripe Checkout Setup Required:\n\n1. Go to: https://dashboard.stripe.com/test/products\n2. Create a product: "Unlimited Marketing Content"\n3. Set price: $9.99 (one-time)\n4. Copy the Price ID (starts with price_test_)\n5. Replace STRIPE_TEST_PRICE_ID in dashboard.js (line ~801)\n\nFor quick testing, create a Payment Link:\n- Stripe Dashboard → Products → Payment Links\n- Copy the link URL\n- Replace checkoutUrl in openStripeCheckout()`);
+        alert(`Stripe Checkout Setup Required:\n\n1. Go to: https://dashboard.stripe.com/test/products\n2. Create a product: "Unlimited Marketing Content"\n3. Set price: $99/month (recurring)\n4. Copy the Price ID (starts with price_)\n5. Add STRIPE_PRICE_ID to Vercel environment variables\n\nFor quick testing, create a Payment Link:\n- Stripe Dashboard → Products → Payment Links\n- Copy the link URL\n- Use that URL directly`);
         
         // Simulate payment success for testing (remove in production)
         if (confirm('Test Mode: Simulate successful payment?')) {
@@ -1581,7 +2813,10 @@ function formatProductOutput(product, container) {
                 <span class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
             </div>
             <div class="message-text" style="max-width: 100%;">
-                <h3>Digital Product System</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0;">📦 Digital Product System</h3>
+                    <button onclick="downloadProductJSON('${messageId}', ${JSON.stringify(product).replace(/"/g, '&quot;').replace(/'/g, '&#39;')})" style="background: #764ba2; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px;">💾 Download JSON</button>
+                </div>
                 <details open><summary><strong>Product:</strong> ${product.product?.name || 'N/A'} - ${product.product?.price || 'N/A'}</summary>
                     <p><strong>Type:</strong> ${product.product?.type || 'N/A'}</p>
                     <p><strong>Target:</strong> ${product.product?.targetAudience || 'N/A'}</p>

@@ -1,14 +1,24 @@
 // 🦄 AI Image Generation API Endpoint - Vercel Serverless Function
 // Generates images using OpenAI DALL-E
 
-export default async function handler(req, res) {
+import { withRateLimit } from '../utils/rateLimit.mjs';
+import { setSecurityHeaders, getAllowedOrigin, validateInput, sanitizeForLogging } from '../utils/security.mjs';
+
+async function imageHandler(req, res) {
   // 🦄 Hidden signature
   console.log('%c🦄', 'font-size: 1px; color: transparent;');
   
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Security headers
+  setSecurityHeaders(res);
+  
+  // CORS (same-origin only in production)
+  const allowedOrigin = getAllowedOrigin(req);
+  if (allowedOrigin) {
+    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -21,8 +31,18 @@ export default async function handler(req, res) {
   try {
     const { prompt, size = '1024x1024', style = 'natural' } = req.body;
 
-    if (!prompt) {
-      return res.status(400).json({ error: 'Prompt is required' });
+    // Validate input
+    const promptValidation = validateInput(prompt, {
+      minLength: 3,
+      maxLength: 1000,
+      allowEmpty: false,
+    });
+    
+    if (!promptValidation.valid) {
+      return res.status(400).json({
+        success: false,
+        error: promptValidation.error
+      });
     }
 
     const apiKey = process.env.OPENAI_API_KEY;
@@ -76,11 +96,14 @@ export default async function handler(req, res) {
       }
     });
   } catch (error) {
-    console.error('Image API error:', error);
+    console.error('Image API error:', sanitizeForLogging({ message: error.message }));
     return res.status(500).json({
       success: false,
-      error: error.message || 'Image generation failed'
+      error: 'Unable to generate image right now. Please try again.'
     });
   }
 }
+
+// Export with rate limiting
+export default withRateLimit(imageHandler);
 

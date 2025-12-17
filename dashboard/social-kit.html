@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Social Kit - Golo Čapo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+        
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+        
+        .copy-box {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        
+        .copy-content {
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .copy-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+        
+        .copy-btn.copied {
+            background: var(--success);
+        }
+        
+        .note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 32px;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">⚡</div>
+            <h1>Social Kit</h1>
+            <p class="subtitle">Manual posting templates</p>
+        </div>
+        
+        <!-- Teaser Caption -->
+        <div class="section">
+            <h2 class="section-title">Teaser Caption (Locked)</h2>
+            <div class="copy-box">
+                <div class="copy-content" id="teaserCaption">Golo Čapo
+PTK – Někdo půjde z kola ven
+21.12</div>
+                <button class="copy-btn" onclick="copyText('teaserCaption', this)">Copy</button>
+            </div>
+            <p class="note">Use this exact copy. No variations. Bio link: /prelaunch</p>
+        </div>
+        
+        <!-- DM Openers -->
+        <div class="section">
+            <h2 class="section-title">DM Openers</h2>
+            
+            <div class="copy-box">
+                <div class="copy-content" id="dm1">Hey [name], saw your post about [topic]. Launching something 21.12 that might help. Mind if I share?</div>
+                <button class="copy-btn" onclick="copyText('dm1', this)">Copy</button>
+            </div>
+            
+            <div class="copy-box">
+                <div class="copy-content" id="dm2">Quick question: What's your biggest marketing pain right now? (Launching a solution 21.12)</div>
+                <button class="copy-btn" onclick="copyText('dm2', this)">Copy</button>
+            </div>
+            
+            <div class="copy-box">
+                <div class="copy-content" id="dm3">Not selling. Just curious: What would you automate first if you could? (Building something for 21.12)</div>
+                <button class="copy-btn" onclick="copyText('dm3', this)">Copy</button>
+            </div>
+        </div>
+        
+        <!-- Comment Bait -->
+        <div class="section">
+            <h2 class="section-title">Comment Bait Examples</h2>
+            
+            <div class="copy-box">
+                <div class="copy-content" id="comment1">What's your #1 marketing challenge? (DM me if you want early access to something launching 21.12)</div>
+                <button class="copy-btn" onclick="copyText('comment1', this)">Copy</button>
+            </div>
+            
+            <div class="copy-box">
+                <div class="copy-content" id="comment2">Drop "YES" if you want to automate your content creation. (Launching 21.12)</div>
+                <button class="copy-btn" onclick="copyText('comment2', this)">Copy</button>
+            </div>
+        </div>
+        
+        <!-- Follow-up Templates -->
+        <div class="section">
+            <h2 class="section-title">Follow-up Messages</h2>
+            
+            <div class="copy-box">
+                <div class="copy-content" id="followup1">Thanks for the interest. Here's the link: golocapo.com/prelaunch (Launch 21.12)</div>
+                <button class="copy-btn" onclick="copyText('followup1', this)">Copy</button>
+            </div>
+            
+            <div class="copy-box">
+                <div class="copy-content" id="followup2">Early access is open. Join the waitlist: golocapo.com/prelaunch (21.12 launch)</div>
+                <button class="copy-btn" onclick="copyText('followup2', this)">Copy</button>
+            </div>
+        </div>
+        
+        <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+    </div>
+    
+    <script>
+        async function copyText(elementId, button) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            try {
+                await navigator.clipboard.writeText(text);
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -5,114 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>Early Access - AI Marketing Studio by Golo Čapo</title>
-    <meta name="title" content="Early Access - AI Marketing Studio by Golo Čapo">
-    <meta name="description" content="Join the waitlist. Launch 21.12.2025. Generate Meta-ready posts in seconds.">
+    <title>Golo Čapo - Early Access | 21.12</title>
+    <meta name="title" content="Golo Čapo - Early Access">
+    <meta name="description" content="Join the waitlist. Launch 21.12.2025.">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0B0B12">
     
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.resend.com;">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://golocapo.com/prelaunch">
+    <meta property="og:title" content="Golo Čapo">
+    <meta property="og:description" content="21.12">
+    <meta property="og:image" content="https://golocapo.com/assets/brand/og.png">
+    <meta property="og:site_name" content="Golo Čapo">
+    
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Golo Čapo">
+    <meta name="twitter:description" content="21.12">
+    <meta name="twitter:image" content="https://golocapo.com/assets/brand/og.png">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/brand/icon-512.png">
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="/assets/brand/brand.css">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary: #667eea;
-            --background: #0f172a;
-            --surface: #1e293b;
-            --border: #334155;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --success: #10b981;
-        }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
-            background: var(--background);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
+            min-height: 100vh;
         }
         
-        .container {
+        .prelaunch-container {
             max-width: 600px;
             width: 100%;
             text-align: center;
         }
         
-        .logo {
-            font-size: 64px;
-            margin-bottom: 24px;
-        }
-        
-        h1 {
-            font-size: clamp(32px, 5vw, 42px);
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-        }
-        
-        .subheadline {
-            font-size: clamp(18px, 3vw, 20px);
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 400;
+        .hero-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--spacing-md);
         }
         
         .form-container {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 32px;
+            background: var(--bg-surface);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
         }
         
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: var(--spacing-md);
             text-align: left;
         }
         
-        label {
+        .form-group label {
             display: block;
-            font-size: 14px;
+            font-size: var(--font-size-sm);
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: var(--spacing-xs);
             color: var(--text-primary);
         }
         
         input[type="email"] {
             width: 100%;
-            padding: 14px;
-            background: var(--background);
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            padding: var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius);
             color: var(--text-primary);
-            font-size: 16px;
+            font-size: var(--font-size-base);
+            font-family: var(--font-family);
         }
         
         input[type="email"]:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--brand-primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(192, 128, 176, 0.1);
         }
         
         .consent-group {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 24px;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
         }
         
         .consent-group input[type="checkbox"] {
@@ -121,48 +114,27 @@
         }
         
         .consent-group label {
-            font-size: 13px;
-            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
             font-weight: 400;
             margin: 0;
         }
         
         .consent-group a {
-            color: var(--primary);
+            color: var(--brand-primary);
             text-decoration: none;
         }
         
         .btn {
-            display: inline-block;
             width: 100%;
-            padding: 16px 32px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
         }
         
         .success-state {
             display: none;
-            background: var(--surface);
-            border: 1px solid var(--success);
-            border-radius: 16px;
-            padding: 40px;
+            background: var(--bg-surface);
+            border: 1px solid #10b981;
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
         }
         
         .success-state.active {
@@ -171,13 +143,13 @@
         
         .success-icon {
             font-size: 64px;
-            margin-bottom: 24px;
+            margin-bottom: var(--spacing-md);
         }
         
         .error-message {
             color: #ef4444;
-            font-size: 14px;
-            margin-top: 12px;
+            font-size: var(--font-size-sm);
+            margin-top: var(--spacing-sm);
             display: none;
         }
         
@@ -186,44 +158,31 @@
         }
         
         .launch-note {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-top: 24px;
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            margin-top: var(--spacing-md);
         }
         
-        .footer {
-            margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary);
+        #countdown {
+            margin: var(--spacing-sm) 0 var(--spacing-lg);
+            font-size: var(--font-size-lg);
+            color: var(--text-muted);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">⚡</div>
-        <h1>AI Marketing Studio</h1>
-        <p class="subheadline">
-            We’re launching something new on <strong>21.12</strong>.
+    <div class="brand-bar">
+        <a href="/">
+            <img src="/assets/brand/logo.svg" alt="Golo Čapo" class="brand-logo">
+            <span class="brand-wordmark">Golo Čapo</span>
+        </a>
+    </div>
+    
+    <div class="prelaunch-container">
+        <img src="/assets/brand/logo.svg" alt="Golo Čapo" class="hero-logo">
+        <h1 class="hero-title">AI Marketing Studio</h1>
+        <p class="hero-subtitle">
+            We're launching something new on <strong>21.12</strong>.
             An early Christmas gift for founders & small teams who want AI-powered marketing without chaos.
             Join the waitlist — first access goes out on launch day.
         </p>
@@ -249,7 +208,7 @@
                 
                 <div id="errorMessage" class="error-message"></div>
                 
-                <button type="submit" class="btn" id="submitBtn">
+                <button type="submit" class="btn btn-primary" id="submitBtn">
                     Be first on 21.12
                 </button>
             </form>
@@ -265,14 +224,14 @@
         
         <p class="launch-note">Launching 21.12.2025</p>
         
-        <div class="footer">
+        <footer class="footer">
             <div class="footer-links">
                 <a href="/TERMS.md" target="_blank">Terms</a>
                 <a href="/PRIVACY.md" target="_blank">Privacy</a>
                 <a href="/pricing">Pricing</a>
             </div>
             <p>&copy; 2025 Golo Čapo. All rights reserved.</p>
-        </div>
+        </footer>
     </div>
     
     <script>
@@ -348,7 +307,7 @@
                 } else {
                     showError(data.error || 'Something went wrong. Please try again.');
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Get Early Access';
+                    submitBtn.textContent = 'Be first on 21.12';
                 }
             } catch (error) {
                 showError('Network error. Please check your connection and try again.');

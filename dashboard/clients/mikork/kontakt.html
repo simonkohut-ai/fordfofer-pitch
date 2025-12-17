@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt – MikoRK Pohrebníctvo Ružomberok</title>
+    <meta name="description" content="Kontaktujte MikoRK pohrebníctvo v Ružomberku. Sme tu pre vás 24/7.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="stylesheet" href="/clients/_shared/styles.css">
+    <style>
+        .header {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-default);
+            padding: var(--space-lg) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+        }
+        
+        .nav {
+            display: flex;
+            gap: var(--space-xl);
+        }
+        
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: var(--font-medium);
+            transition: color var(--transition-base);
+        }
+        
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+        }
+        
+        .contact-info {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .contact-item {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .contact-item strong {
+            display: block;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .contact-item span {
+            color: var(--text-secondary);
+        }
+        
+        .response-note {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid var(--accent-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-top: var(--space-lg);
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+        
+        .footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-default);
+            padding: var(--space-3xl) 0;
+            margin-top: var(--space-4xl);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer h4 {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-md);
+        }
+        
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--space-sm);
+            transition: color var(--transition-base);
+        }
+        
+        .footer a:hover {
+            color: var(--text-primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border-default);
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+        
+        .footer-credit {
+            margin-top: var(--space-md);
+            font-size: var(--text-xs);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav {
+                gap: var(--space-md);
+                font-size: var(--text-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">MikoRK</div>
+                <nav class="nav">
+                    <a href="/clients/mikork">Domov</a>
+                    <a href="/clients/mikork/sluzby">Služby</a>
+                    <a href="/clients/mikork/kontakt">Kontakt</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="section">
+        <div class="container">
+            <h1 class="section-title">Kontaktujte nás</h1>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Kontaktné informácie</h3>
+                    <div class="contact-item">
+                        <strong>Telefón</strong>
+                        <span>24/7 dostupnosť</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        <span>info@mikork.sk</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Adresa</strong>
+                        <span>Ružomberok, Slovensko</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Dostupnosť</strong>
+                        <span>24 hodín denne, 7 dní v týždni</span>
+                    </div>
+                    <div class="response-note">
+                        <strong>Čas odozvy:</strong> Do 2 hodín počas pracovných hodín, do 4 hodín mimo pracovných hodín.
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 style="margin-bottom: var(--space-lg);">Poslať správu</h3>
+                    <div id="formMessage" class="form-success"></div>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Meno *</label>
+                            <input type="text" id="name" name="name" class="form-input" required minlength="2" maxlength="100">
+                            <div class="form-error" id="nameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <div class="form-error" id="emailError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Telefón <span class="optional">(voliteľné)</span></label>
+                            <input type="tel" id="phone" name="phone" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Správa *</label>
+                            <textarea id="messageText" name="message" class="form-textarea" required minlength="10" maxlength="1000"></textarea>
+                            <div class="form-error" id="messageError"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <label for="consent">
+                                    Súhlasím so spracovaním osobných údajov podľa <a href="/PRIVACY.md" target="_blank">ochrany súkromia</a> *
+                                </label>
+                            </div>
+                            <div class="form-error" id="consentError"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%;">Odoslať správu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>MikoRK</h4>
+                    <p class="text-muted" style="margin-top: var(--space-sm);">Pohrebníctvo Ružomberok</p>
+                </div>
+                <div>
+                    <h4>Navigácia</h4>
+                    <a href="/clients/mikork">Domov</a>
+                    <a href="/clients/mikork/sluzby">Služby</a>
+                    <a href="/clients/mikork/kontakt">Kontakt</a>
+                </div>
+                <div>
+                    <h4>Právne informácie</h4>
+                    <a href="/TERMS.md" target="_blank">Obchodné podmienky</a>
+                    <a href="/PRIVACY.md" target="_blank">Ochrana súkromia</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MikoRK. Všetky práva vyhradené.</p>
+                <p class="footer-credit">Built by Golo Čapo</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const messageEl = document.getElementById('formMessage');
+        
+        // Inline validation
+        function validateField(field, errorEl) {
+            const value = field.value.trim();
+            let isValid = true;
+            let error = '';
+            
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                error = 'Toto pole je povinné.';
+            } else if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                isValid = false;
+                error = 'Neplatný formát emailu.';
+            } else if (field.id === 'name' && value && (value.length < 2 || value.length > 100)) {
+                isValid = false;
+                error = 'Meno musí mať 2-100 znakov.';
+            } else if (field.id === 'messageText' && value && (value.length < 10 || value.length > 1000)) {
+                isValid = false;
+                error = 'Správa musí mať 10-1000 znakov.';
+            }
+            
+            if (isValid) {
+                field.style.borderColor = '';
+                errorEl.classList.remove('show');
+            } else {
+                field.style.borderColor = 'var(--error)';
+                errorEl.textContent = error;
+                errorEl.classList.add('show');
+            }
+            
+            return isValid;
+        }
+        
+        // Validate on blur
+        ['name', 'email', 'messageText'].forEach(id => {
+            const field = document.getElementById(id);
+            const errorEl = document.getElementById(id + 'Error');
+            field.addEventListener('blur', () => validateField(field, errorEl));
+        });
+        
+        // Form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Reset message
+            messageEl.classList.remove('show');
+            messageEl.textContent = '';
+            
+            // Validate all fields
+            const nameValid = validateField(document.getElementById('name'), document.getElementById('nameError'));
+            const emailValid = validateField(document.getElementById('email'), document.getElementById('emailError'));
+            const messageValid = validateField(document.getElementById('messageText'), document.getElementById('messageError'));
+            const consent = document.getElementById('consent').checked;
+            
+            const consentError = document.getElementById('consentError');
+            if (!consent) {
+                consentError.textContent = 'Musíte súhlasiť so spracovaním osobných údajov.';
+                consentError.classList.add('show');
+            } else {
+                consentError.classList.remove('show');
+            }
+            
+            if (!nameValid || !emailValid || !messageValid || !consent) {
+                return;
+            }
+            
+            const formData = {
+                brand: 'mikork',
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim() || null,
+                message: document.getElementById('messageText').value.trim(),
+                consent: true,
+            };
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Odosielanie...';
+            
+            try {
+                const response = await fetch('/api/leads/submit-client', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageEl.textContent = 'Ďakujeme za správu. Ozveme sa vám čoskoro.';
+                    messageEl.classList.add('show');
+                    form.reset();
+                } else {
+                    messageEl.textContent = data.error || 'Chyba pri odosielaní. Skúste to znova.';
+                    messageEl.classList.add('show');
+                    messageEl.style.background = 'rgba(239, 68, 68, 0.1)';
+                    messageEl.style.borderColor = 'var(--error)';
+                    messageEl.style.color = 'var(--error)';
+                }
+            } catch (error) {
+                messageEl.textContent = 'Chyba pripojenia. Skúste to znova.';
+                messageEl.classList.add('show');
+                messageEl.style.background = 'rgba(239, 68, 68, 0.1)';
+                messageEl.style.borderColor = 'var(--error)';
+                messageEl.style.color = 'var(--error)';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Odoslať správu';
+            }
+        });
+    </script>
+</body>
+</html>

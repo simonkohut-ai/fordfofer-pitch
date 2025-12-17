@@ -2,6 +2,8 @@
 
 **Professional AI automation command center - Zapier/Buffer/n8n style**
 
+**Status:** Production-ready and live. Revenue systems operational ahead of planned public release on 21.12.2025.
+
 ---
 
 ## 🚀 Features
@@ -18,6 +20,42 @@
 ## 🔒 Password Protected
 
 Password: `moneymachine25`
+
+---
+
+## 🚀 Deployment
+
+### Quick Deploy
+
+Run the production deployment script:
+
+```powershell
+.\REDEPLOY_LIVE.ps1
+```
+
+This script:
+- Deploys to Vercel production
+- Verifies project is "dashboard"
+- Checks domain `golocapo.com` is attached
+- Tests domain responds with HTTP 200
+- **Fails loudly if domain not working** (prevents false positives)
+
+### Why Deployment Says "Success" But Domain Is Not LIVE
+
+**Common confusion:** Deployment success ≠ Domain working
+
+**What happens:**
+1. ✅ Code deploys to `.vercel.app` URL (this succeeds)
+2. ⚠️ Domain attachment is separate (must be done in Vercel dashboard)
+3. ⚠️ DNS configuration is separate (must be done at domain registrar)
+4. ⚠️ DNS propagation takes time (can take up to 48 hours)
+
+**The script now prevents false positives:**
+- Aborts if domain not attached
+- Aborts if domain doesn't respond
+- Never says "LIVE" unless domain actually works
+
+**See:** `DEPLOYMENT_TROUBLESHOOTING.md` for full diagnosis guide.
 
 ---
 
@@ -59,17 +97,25 @@ Password: `moneymachine25`
 
 ## 🛠️ Local Development
 
-```bash
-# Install dependencies (if any)
+**See [RUN_LOCAL.md](./RUN_LOCAL.md) for detailed setup guide.**
+
+```powershell
+# Install dependencies
 npm install
 
-# Run local server
-node server.js
-# or
-python server.py
+# Install Vercel CLI (if not installed)
+npm install -g vercel
+
+# Set environment variables (PowerShell)
+$env:STRIPE_CHECKOUT_URL="https://buy.stripe.com/YOUR_LINK"
+
+# Run development server
+npm run dev
 
 # Open: http://localhost:3000
 ```
+
+**Note:** Uses `vercel dev` for full API route support. See `RUN_LOCAL.md` for troubleshooting.
 
 ---
 

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>War Room - AI Marketing Studio</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .card h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stat:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .stat-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-enabled {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status-disabled {
+            background: var(--border);
+            color: var(--text-secondary);
+        }
+        
+        .events-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .event-item {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+        
+        .event-item:last-child {
+            border-bottom: none;
+        }
+        
+        .event-type {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .event-time {
+            color: var(--text-secondary);
+            font-size: 11px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 War Room</h1>
+            <p class="subtitle">Launch monitoring and diagnostics</p>
+        </div>
+        
+        <div id="content" class="loading">
+            Loading...
+        </div>
+        
+        <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+    </div>
+    
+    <script>
+        async function loadWarRoom() {
+            const content = document.getElementById('content');
+            
+            try {
+                // Load all data in parallel
+                const [launchStatus, leadsStatus, customersStatus] = await Promise.all([
+                    fetch('/api/launch/status').then(r => r.json()),
+                    fetch('/api/leads/status').then(r => r.json()).catch(() => ({ success: false })),
+                    fetch('/api/customers/status').then(r => r.json()).catch(() => ({ success: false })),
+                ]);
+                
+                if (!launchStatus.success || !paymentsStatus.success) {
+                    throw new Error('Failed to load data');
+                }
+                
+                const launch = launchStatus;
+                const leads = leadsStatus.success ? leadsStatus.stats : null;
+                const customers = customersStatus.success ? customersStatus.stats : null;
+                
+                // Store leads for later use
+                window.leadsData = leads;
+                
+                // Format countdown
+                const countdown = launch.countdown;
+                const countdownText = countdown.days > 0
+                    ? `${countdown.days}d ${countdown.hours}h ${countdown.minutes}m`
+                    : countdown.hours > 0
+                    ? `${countdown.hours}h ${countdown.minutes}m`
+                    : `${countdown.minutes}m`;
+                
+                // Format stats
+                const totalLeads = leads?.totalLeads || 0;
+                const totalCustomers = customers?.totalCustomers || 0;
+                const conversionRate = leads?.conversionRate || 0;
+                const lastPayment = customers?.lastPaymentTimestamp
+                    ? new Date(customers.lastPaymentTimestamp).toLocaleString()
+                    : 'No payments yet';
+                
+                // Format events
+                const events = payments.recentEvents || [];
+                const eventsHtml = events.length > 0
+                    ? events.map(e => `
+                        <div class="event-item">
+                            <div class="event-type">${e.type}</div>
+                            <div class="event-time">${new Date(e.createdAt).toLocaleString()}</div>
+                        </div>
+                    `).join('')
+                    : '<div class="event-item">No events yet</div>';
+                
+                content.innerHTML = `
+                    <div class="grid">
+                        <div class="card">
+                            <h2>⏰ Launch Status</h2>
+                            <div class="stat">
+                                <span class="stat-label">Server Time</span>
+                                <span class="stat-value">${new Date(launch.serverTime).toLocaleString()}</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Time to Launch</span>
+                                <span class="stat-value">${countdownText}</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Launch Date</span>
+                                <span class="stat-value">21.12.2025 20:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h2>📊 Growth</h2>
+                            <div class="stat">
+                                <span class="stat-label">Total Leads</span>
+                                <span class="stat-value">${totalLeads}</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Customers</span>
+                                <span class="stat-value">${totalCustomers}</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Conversion Rate</span>
+                                <span class="stat-value">${conversionRate}%</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Last Payment</span>
+                                <span class="stat-value">${lastPayment}</span>
+                            </div>
+                            ${leads?.byBrand && Object.keys(leads.byBrand).length > 0 ? `
+                            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+                                <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Client Leads:</div>
+                                ${Object.entries(leads.byBrand).map(([brand, count]) => `
+                                    <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; color: var(--text-secondary);">
+                                        <span style="text-transform: capitalize;">${brand}:</span>
+                                        <span>${count}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="card">
+                            <h2>⚙️ Feature Flags</h2>
+                            <div class="stat">
+                                <span class="stat-label">Meta Integration</span>
+                                <span class="stat-value">
+                                    <span class="status-badge ${launch.flags.metaIntegrationEnabled ? 'status-enabled' : 'status-disabled'}">
+                                        ${launch.flags.metaIntegrationEnabled ? 'Enabled' : 'Disabled'}
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Meta Posting</span>
+                                <span class="stat-value">
+                                    <span class="status-badge ${launch.flags.metaPostingEnabled ? 'status-enabled' : 'status-disabled'}">
+                                        ${launch.flags.metaPostingEnabled ? 'Enabled' : 'Disabled'}
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Meta Scheduler</span>
+                                <span class="stat-value">
+                                    <span class="status-badge ${launch.flags.metaSchedulerEnabled ? 'status-enabled' : 'status-disabled'}">
+                                        ${launch.flags.metaSchedulerEnabled ? 'Enabled' : 'Disabled'}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h2>📊 Recent Events (Last 20)</h2>
+                        <div class="events-list">
+                            ${eventsHtml}
+                        </div>
+                    </div>
+                `;
+                
+            } catch (error) {
+                content.innerHTML = `
+                    <div style="color: var(--error); text-align: center; padding: 40px;">
+                        <p>Error loading war room data: ${error.message}</p>
+                        <button onclick="loadWarRoom()" style="margin-top: 20px; padding: 12px 24px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
+        // Load on page load
+        loadWarRoom();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(loadWarRoom, 30000);
+    </script>
+</body>
+</html>
+

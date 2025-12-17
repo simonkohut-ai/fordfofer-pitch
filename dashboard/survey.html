@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Quick Survey - Golo Čapo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+        
+        .form-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 32px;
+        }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 14px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px 32px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .success-state.active {
+            display: block;
+        }
+        
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .optional {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">⚡</div>
+            <h1>Quick Survey</h1>
+            <p class="subtitle">4 questions. 30 seconds.</p>
+        </div>
+        
+        <div id="formState" class="form-container">
+            <form id="surveyForm">
+                <div class="form-group">
+                    <label for="email">Email <span class="optional">(to link your responses)</span></label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="automation">What do you want to automate most?</label>
+                    <select id="automation" name="automation" required>
+                        <option value="">Select one...</option>
+                        <option value="content-generation">Content generation</option>
+                        <option value="social-posting">Social posting</option>
+                        <option value="lead-generation">Lead generation</option>
+                        <option value="analytics">Analytics & reporting</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pain">Biggest marketing pain?</label>
+                    <select id="pain" name="pain" required>
+                        <option value="">Select one...</option>
+                        <option value="time">Not enough time</option>
+                        <option value="consistency">Staying consistent</option>
+                        <option value="quality">Quality of content</option>
+                        <option value="results">Not seeing results</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="type">Solo founder or agency?</label>
+                    <select id="type" name="type" required>
+                        <option value="">Select one...</option>
+                        <option value="solo">Solo founder</option>
+                        <option value="agency">Agency</option>
+                        <option value="team">Small team</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedback">Anything else? <span class="optional">(optional)</span></label>
+                    <textarea id="feedback" name="feedback" placeholder="Share your thoughts..."></textarea>
+                </div>
+                
+                <div id="errorMessage" class="error-message"></div>
+                
+                <button type="submit" class="btn" id="submitBtn">
+                    Submit
+                </button>
+            </form>
+        </div>
+        
+        <div id="successState" class="success-state">
+            <div class="success-icon">✅</div>
+            <h2 style="font-size: 24px; margin-bottom: 16px;">Thanks</h2>
+            <p style="color: var(--text-secondary);">Your responses help us build better.</p>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const automation = document.getElementById('automation').value;
+            const pain = document.getElementById('pain').value;
+            const type = document.getElementById('type').value;
+            const feedback = document.getElementById('feedback').value.trim();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Reset error
+            errorMessage.classList.remove('show');
+            errorMessage.textContent = '';
+            
+            // Validate required fields
+            if (!automation || !pain || !type) {
+                showError('Please answer all required questions');
+                return;
+            }
+            
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                const response = await fetch('/api/survey/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email || null,
+                        automation,
+                        pain,
+                        type,
+                        feedback: feedback || null,
+                    }),
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show success state
+                    document.getElementById('formState').style.display = 'none';
+                    document.getElementById('successState').classList.add('active');
+                } else {
+                    showError(data.error || 'Something went wrong. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit';
+                }
+            } catch (error) {
+                showError('Network error. Please check your connection and try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+            }
+        });
+        
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+        }
+    </script>
+</body>
+</html>
+
