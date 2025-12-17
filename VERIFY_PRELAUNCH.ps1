@@ -23,49 +23,13 @@ foreach ($file in $files) {
 }
 
 Write-Host ""
-Write-Host "=== Direct File URL Checks ===" -ForegroundColor Cyan
-Write-Host ""
-
-$directUrls = @(
-    "https://www.golocapo.com/dashboard/index.html",
-    "https://www.golocapo.com/dashboard/prelaunch.html",
-    "https://www.golocapo.com/dashboard/pricing.html",
-    "https://www.golocapo.com/dashboard/thank-you.html"
-)
-
-$allDirectPass = $true
-
-foreach ($url in $directUrls) {
-    try {
-        $response = Invoke-WebRequest -Uri $url -Method Head -TimeoutSec 15 -UseBasicParsing
-        $status = $response.StatusCode
-        
-        if ($status -eq 200) {
-            Write-Host "✅ $status  $url" -ForegroundColor Green
-        } else {
-            Write-Host "⚠️  $status  $url" -ForegroundColor Yellow
-            $allDirectPass = $false
-        }
-    } catch {
-        $statusCode = $_.Exception.Response.StatusCode.value__
-        if ($statusCode -eq 404) {
-            Write-Host "❌ 404 NOT_FOUND  $url" -ForegroundColor Red
-            $allDirectPass = $false
-        } else {
-            Write-Host "❌ ERROR  $url" -ForegroundColor Red
-            Write-Host "   $($_.Exception.Message)" -ForegroundColor Gray
-            $allDirectPass = $false
-        }
-    }
-}
-
-Write-Host ""
 Write-Host "=== Rewrite URL Checks ===" -ForegroundColor Cyan
 Write-Host ""
 
 $rewriteUrls = @(
     "https://www.golocapo.com/prelaunch",
-    "https://www.golocapo.com/pricing"
+    "https://www.golocapo.com/pricing",
+    "https://www.golocapo.com/thank-you"
 )
 
 $allRewritePass = $true
@@ -103,18 +67,12 @@ if (-not $allFilesExist) {
     exit 1
 }
 
-# Check all URLs pass
-if ($allDirectPass -and $allRewritePass) {
-    Write-Host "✅ SUCCESS - All direct file URLs and rewrite URLs return HTTP 200" -ForegroundColor Green
+# Check all rewrite URLs pass
+if ($allRewritePass) {
+    Write-Host "✅ SUCCESS - All rewrite URLs return HTTP 200" -ForegroundColor Green
     exit 0
 } else {
     Write-Host "❌ FAIL - Some URLs did not return HTTP 200" -ForegroundColor Red
-    if (-not $allDirectPass) {
-        Write-Host "   Direct file URLs failed" -ForegroundColor Yellow
-    }
-    if (-not $allRewritePass) {
-        Write-Host "   Rewrite URLs failed" -ForegroundColor Yellow
-    }
     exit 1
 }
 

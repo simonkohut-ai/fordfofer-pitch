@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Pricing - AI Marketing Studio | Early Access</title>
+    <meta name="title" content="Pricing - AI Marketing Studio">
+    <meta name="description" content="Get early access to AI Marketing Studio. Generate and publish Meta-ready posts in minutes â€” without hiring an agency.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.openai.com https://graph.facebook.com https://www.facebook.com;">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://golocapo.com/pricing">
+    <meta property="og:title" content="Pricing - AI Marketing Studio">
+    <meta property="og:description" content="Get early access to AI Marketing Studio. Generate and publish Meta-ready posts in minutes.">
+    <meta property="og:image" content="https://golocapo.com/og-image.png">
+    <meta property="og:site_name" content="AI Marketing Studio">
+    
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pricing - AI Marketing Studio">
+    <meta name="twitter:description" content="Get early access to AI Marketing Studio. Generate and publish Meta-ready posts in minutes.">
+    <meta name="twitter:image" content="https://golocapo.com/og-image.png">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://golocapo.com/pricing">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>âš¡</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --primary-hover: #5568d3;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        h1 {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: clamp(18px, 3vw, 20px);
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .pricing-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .pricing-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .pricing-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .pricing-price {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        
+        .pricing-period {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 32px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pricing-features li {
+            padding: 12px 0;
+            font-size: 16px;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li::before {
+            content: "âœ“";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 16px 48px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+        
+        .trust-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .trust-section h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .trust-items {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .trust-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        
+        .trust-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .trust-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .trust-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .footer {
+            margin-top: auto;
+            padding: 32px 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .back-link:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px 16px;
+            }
+            
+            .pricing-card {
+                padding: 32px 24px;
+            }
+            
+            .pricing-price {
+                font-size: 48px;
+            }
+            
+            .trust-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">âš¡</div>
+            <h1>AI Marketing Studio</h1>
+            <p class="subtitle">Pricing revealed on launch day – 21.12</p>
+        </div>
+        
+        <div class="pricing-card">
+            <div class="pricing-badge">Launch 21.12</div>
+            <h2 class="pricing-title">Early Access</h2>
+            <div class="pricing-price">TBA</div>
+            <div class="pricing-period">Pricing revealed on 21.12</div>
+            
+            <ul class="pricing-features">
+                <li>Unlimited content generations</li>
+                <li>AI Influencer system builder</li>
+                <li>Digital Product blueprint generator</li>
+                <li>Copy & Share workflow</li>
+                <li>Manual-first posting (human-approved)</li>
+                <li>Priority access to Meta autopost (when available)</li>
+                <li>Image generation (DALL-E 3)</li>
+                <li>Email support</li>
+            </ul>
+            
+            <p style="margin-top: 20px; font-size: 13px; color: var(--text-secondary); text-align: center;">
+                Launching 21.12.2025
+            </p>
+            
+            <a href="/prelaunch" class="cta-button" style="text-align:center; display:inline-block;">
+                Launching 21.12 — join the waitlist first
+            </a>
+            
+            <p style="margin-top: 20px; font-size: 13px; color: var(--text-secondary);">
+                Pricing is revealed on launch day. Early access goes to the waitlist first.
+            </p>
+        </div>
+        
+        <div class="trust-section">
+            <h2>Why Trust AI Marketing Studio</h2>
+            <div class="trust-items">
+                <div class="trust-item">
+                    <div class="trust-icon">ðŸ”’</div>
+                    <div class="trust-content">
+                        <h3>No Autopost Without Consent</h3>
+                        <p>All posting requires explicit confirmation. We never post automatically without your approval.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">ðŸ›¡ï¸</div>
+                    <div class="trust-content">
+                        <h3>Tokens Never Logged</h3>
+                        <p>Your Meta access tokens are stored securely and never appear in logs or error messages.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">â†©ï¸</div>
+                    <div class="trust-content">
+                        <h3>Cancel Anytime</h3>
+                        <p>No long-term commitments. Cancel your access at any time with no questions asked.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">ðŸ‘¤</div>
+                    <div class="trust-content">
+                        <h3>Human-Approved Workflow</h3>
+                        <p>Unlike auto-spam tools, every post requires your explicit approval before publishing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="/" class="back-link">â† Back to Dashboard</a>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="/TERMS.md" target="_blank">Terms</a>
+            <a href="/PRIVACY.md" target="_blank">Privacy</a>
+            <a href="/REFUND.md" target="_blank">Refund Policy</a>
+            <a href="/SECURITY.md" target="_blank">Security</a>
+        </div>
+        <p>AI Marketing Studio by Golo ÄŒapo Â© 2025</p>
+    </footer>
+    
+    <script>
+        async function goToCheckout() {
+            try {
+                const response = await fetch('/api/checkout-url');
+                const data = await response.json();
+                
+                if (data.success && data.url) {
+                    // Redirect to Stripe checkout in same tab
+                    window.location.href = data.url;
+                } else {
+                    // Show friendly error message
+                    alert('Checkout not configured. Contact support at gcapovic.biz@gmail.com');
+                }
+            } catch (error) {
+                // Network or other error
+                alert('Checkout not configured. Contact support at gcapovic.biz@gmail.com');
+            }
+        }
+    </script>
+</body>
+</html>
+
+
