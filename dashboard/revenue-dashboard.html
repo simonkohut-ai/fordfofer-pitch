@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Dashboard | Golo Čapo</title>
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="/assets/brand/brand.css">
+    
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        
+        .dashboard-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .metric-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+        }
+        
+        .metric-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .metric-value {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--brand-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .metric-change {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+        }
+        
+        .metric-change.positive {
+            color: var(--color-success);
+        }
+        
+        .metric-change.negative {
+            color: var(--color-error);
+        }
+        
+        .section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-surface);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .table th,
+        .table td {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid var(--bg-border);
+        }
+        
+        .table th {
+            background: var(--bg-surface);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .table td {
+            color: var(--text-muted);
+        }
+        
+        .table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background: var(--color-success);
+            color: white;
+        }
+        
+        .badge-warning {
+            background: var(--color-warning);
+            color: white;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--text-muted);
+        }
+        
+        .error {
+            background: var(--color-error);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
+        }
+    </style>
+</head>
+<body>
+    <div class="brand-bar">
+        <a href="/">
+            <img src="/assets/brand/logo.svg" alt="Golo Čapo" class="brand-logo">
+            <span class="brand-wordmark">Golo Čapo</span>
+        </a>
+    </div>
+    
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="hero-title">Revenue Dashboard</h1>
+            <p class="hero-subtitle">Track revenue, conversions, and source attribution</p>
+        </div>
+        
+        <!-- Key Metrics -->
+        <div class="metrics-grid" id="metricsGrid">
+            <div class="metric-card">
+                <div class="metric-label">Today's Revenue</div>
+                <div class="metric-value" id="todayRevenue">€0</div>
+                <div class="metric-change" id="todayChange">Loading...</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">This Week</div>
+                <div class="metric-value" id="weekRevenue">€0</div>
+                <div class="metric-change" id="weekChange">Loading...</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">This Month</div>
+                <div class="metric-value" id="monthRevenue">€0</div>
+                <div class="metric-change" id="monthChange">Loading...</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Total Customers</div>
+                <div class="metric-value" id="totalCustomers">0</div>
+                <div class="metric-change" id="customersChange">Loading...</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Conversion Rate</div>
+                <div class="metric-value" id="conversionRate">0%</div>
+                <div class="metric-change" id="conversionChange">Loading...</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Avg Revenue/Customer</div>
+                <div class="metric-value" id="avgRevenue">€0</div>
+                <div class="metric-change" id="avgChange">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- Revenue by Source -->
+        <div class="section">
+            <h2 class="section-title">Revenue by Source</h2>
+            <div id="sourceTable" class="loading">Loading...</div>
+        </div>
+        
+        <!-- Recent Revenue -->
+        <div class="section">
+            <h2 class="section-title">Recent Revenue</h2>
+            <div id="recentRevenue" class="loading">Loading...</div>
+        </div>
+    </div>
+    
+    <script>
+        // Fetch revenue summary
+        async function loadRevenueDashboard() {
+            try {
+                // Get last 30 days
+                const endDate = new Date().toISOString();
+                const startDate = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+                
+                const response = await fetch(`/api/revenue/track?startDate=${startDate}&endDate=${endDate}`);
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to load revenue data');
+                }
+                
+                const summary = data.summary;
+                
+                // Update metrics
+                updateMetrics(summary);
+                
+                // Update source table
+                updateSourceTable(summary.sources);
+                
+                // Update recent revenue
+                updateRecentRevenue(summary.daily);
+                
+            } catch (error) {
+                console.error('Error loading revenue dashboard:', error);
+                document.getElementById('metricsGrid').innerHTML = `
+                    <div class="error">
+                        Error loading revenue data: ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        function updateMetrics(summary) {
+            // Today's revenue
+            const today = new Date().toISOString().split('T')[0];
+            const todayData = summary.daily[today] || { revenue: 0, customers: 0 };
+            document.getElementById('todayRevenue').textContent = `€${todayData.revenue.toFixed(2)}`;
+            document.getElementById('todayChange').textContent = `${todayData.customers} customers today`;
+            
+            // Week revenue
+            const weekStart = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+            let weekRevenue = 0;
+            let weekCustomers = 0;
+            for (const [date, data] of Object.entries(summary.daily)) {
+                if (new Date(date) >= weekStart) {
+                    weekRevenue += data.revenue;
+                    weekCustomers += data.customers;
+                }
+            }
+            document.getElementById('weekRevenue').textContent = `€${weekRevenue.toFixed(2)}`;
+            document.getElementById('weekChange').textContent = `${weekCustomers} customers this week`;
+            
+            // Month revenue
+            document.getElementById('monthRevenue').textContent = `€${summary.totalRevenue.toFixed(2)}`;
+            document.getElementById('monthChange').textContent = `${summary.totalCustomers} customers this month`;
+            
+            // Total customers
+            document.getElementById('totalCustomers').textContent = summary.totalCustomers;
+            
+            // Conversion rate (placeholder - would need lead data)
+            document.getElementById('conversionRate').textContent = 'N/A';
+            document.getElementById('conversionChange').textContent = 'Lead data needed';
+            
+            // Average revenue
+            document.getElementById('avgRevenue').textContent = `€${summary.averageRevenue.toFixed(2)}`;
+            document.getElementById('avgChange').textContent = 'Per customer';
+        }
+        
+        function updateSourceTable(sources) {
+            const sourceTable = document.getElementById('sourceTable');
+            
+            if (!sources || Object.keys(sources).length === 0) {
+                sourceTable.innerHTML = '<p>No revenue data by source yet.</p>';
+                return;
+            }
+            
+            const sortedSources = Object.entries(sources)
+                .sort((a, b) => b[1] - a[1]);
+            
+            let html = '<table class="table"><thead><tr><th>Source</th><th>Revenue</th><th>% of Total</th></tr></thead><tbody>';
+            
+            const total = Object.values(sources).reduce((sum, val) => sum + val, 0);
+            
+            sortedSources.forEach(([source, revenue]) => {
+                const percentage = total > 0 ? ((revenue / total) * 100).toFixed(1) : 0;
+                html += `
+                    <tr>
+                        <td>${source || 'Unknown'}</td>
+                        <td>€${revenue.toFixed(2)}</td>
+                        <td>${percentage}%</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            sourceTable.innerHTML = html;
+        }
+        
+        function updateRecentRevenue(daily) {
+            const recentRevenue = document.getElementById('recentRevenue');
+            
+            if (!daily || Object.keys(daily).length === 0) {
+                recentRevenue.innerHTML = '<p>No recent revenue data.</p>';
+                return;
+            }
+            
+            const sortedDays = Object.entries(daily)
+                .sort((a, b) => new Date(b[0]) - new Date(a[0]))
+                .slice(0, 7);
+            
+            let html = '<table class="table"><thead><tr><th>Date</th><th>Revenue</th><th>Customers</th></tr></thead><tbody>';
+            
+            sortedDays.forEach(([date, data]) => {
+                const dateObj = new Date(date);
+                const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                html += `
+                    <tr>
+                        <td>${dateStr}</td>
+                        <td>€${data.revenue.toFixed(2)}</td>
+                        <td>${data.customers}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            recentRevenue.innerHTML = html;
+        }
+        
+        // Load dashboard on page load
+        loadRevenueDashboard();
+        
+        // Refresh every 60 seconds
+        setInterval(loadRevenueDashboard, 60000);
+    </script>
+</body>
+</html>
+

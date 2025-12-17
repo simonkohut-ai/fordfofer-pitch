@@ -113,15 +113,31 @@ export default async function handler(req, res) {
     // Store customer if payment succeeded
     if (eventType === 'checkout.session.completed' && status === 'paid') {
       // Import leads storage to upgrade lead to customer
-      const { upgradeLeadToCustomer } = await import('../utils/leads-storage.mjs');
+      const { upgradeLeadToCustomer, getLeadByEmail } = await import('../utils/leads-storage.mjs');
       const { sendEmail } = await import('../utils/email.mjs');
       
       // Upgrade lead to customer (if lead exists)
+      const lead = await getLeadByEmail(email);
       await upgradeLeadToCustomer(email, {
         createdAt,
         amount,
         currency,
         stripeCustomerId,
+      });
+      
+      // Track revenue with source attribution
+      const { trackRevenue } = await import('../revenue/track.mjs');
+      await trackRevenue({
+        email,
+        amount,
+        currency,
+        source: lead?.source || session.metadata?.source || 'unknown',
+        sourceMedium: session.metadata?.utm_medium || 'direct',
+        sourceCampaign: session.metadata?.utm_campaign || 'founding-deal',
+        sourceContent: session.metadata?.utm_content || null,
+        customerId: stripeCustomerId,
+        paymentId: session.id,
+        timestamp: createdAt,
       });
       
       // Also store in legacy payment storage (for compatibility)
