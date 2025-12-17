@@ -406,7 +406,7 @@
                     One-time setup + first month free
                 </p>
                 <p class="founding-spots">Limited to 10 spots</p>
-                <a href="#early-access" class="btn btn-primary" style="margin-top: var(--spacing-md);">Claim Your Spot</a>
+                <a href="#" id="claimSpotBtn" class="btn btn-primary" style="margin-top: var(--spacing-md);">Claim Your Spot</a>
             </div>
         </section>
         
@@ -474,8 +474,8 @@
         <section class="cta-section">
             <h2 class="section-title">Ready to Get Started?</h2>
             <div class="cta-buttons">
-                <a href="#early-access" class="btn btn-primary">Get Early Access</a>
-                <a href="https://calendly.com/golocapo/15min" class="btn btn-ghost" target="_blank">Book a 15-min Demo</a>
+                <a href="#early-access" class="btn btn-primary" onclick="trackEvent('cta_click', {type: 'early_access'}); return true;">Get Early Access</a>
+                <a href="https://calendly.com/golocapo/15min" id="bookDemoBtn" class="btn btn-ghost" target="_blank" onclick="trackEvent('cta_click', {type: 'book_demo'}); return true;">Book a 15-min Demo</a>
             </div>
         </section>
         
@@ -498,7 +498,55 @@
         </footer>
     </div>
     
+    <!-- PostHog Analytics -->
     <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        // Initialize PostHog if key is provided (set via env var or replace placeholder)
+        var posthogKey = '{{POSTHOG_KEY}}' || '';
+        if (posthogKey && posthogKey !== '{{POSTHOG_KEY}}') {
+            posthog.init(posthogKey, {api_host:'https://us.i.posthog.com'});
+        }
+    </script>
+    <script>
+        // Analytics tracking function
+        function trackEvent(eventName, properties = {}) {
+            if (window.posthog && window.posthog.__loaded) {
+                try {
+                    posthog.capture(eventName, properties);
+                } catch(e) {
+                    console.log('PostHog error:', e);
+                }
+            }
+            // Fallback: console log for debugging
+            console.log('Event:', eventName, properties);
+        }
+        
+        // Track page view after PostHog loads
+        setTimeout(function() {
+            if (window.posthog && window.posthog.__loaded) {
+                trackEvent('page_view', {
+                    page: 'prelaunch',
+                    url: window.location.href,
+                    utm_source: new URLSearchParams(window.location.search).get('utm_source'),
+                    utm_medium: new URLSearchParams(window.location.search).get('utm_medium'),
+                    utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
+                });
+            }
+        }, 1000);
+        
+        // Store UTM params in sessionStorage for thank-you redirect
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const utmParams = {};
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+                const value = params.get(key);
+                if (value) utmParams[key] = value;
+            });
+            if (Object.keys(utmParams).length > 0) {
+                sessionStorage.setItem('utm_params', JSON.stringify(utmParams));
+            }
+        })();
+        
         // Countdown timer to 21.12 (Europe/Bratislava time)
         (function initCountdown() {
             const target = new Date('2025-12-21T00:00:00+01:00');
@@ -576,12 +624,19 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Show success state
-                    document.getElementById('formState').style.display = 'none';
-                    document.getElementById('successState').classList.add('active');
-                    // Scroll to success
-                    document.getElementById('successState').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Track conversion
+                    trackEvent('early_access_submit', { success: true });
+                    
+                    // Get UTM params from sessionStorage
+                    const utmParams = sessionStorage.getItem('utm_params');
+                    const utmQuery = utmParams ? '&' + new URLSearchParams(JSON.parse(utmParams)).toString() : '';
+                    
+                    // Redirect to thank-you page
+                    setTimeout(() => {
+                        window.location.href = `/thank-you?src=prelaunch${utmQuery}`;
+                    }, 1500);
                 } else {
+                    trackEvent('early_access_submit', { success: false, error: data.error });
                     showError(data.error || 'Something went wrong. Please try again.');
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Be first on 21.12';
@@ -599,8 +654,31 @@
             errorMessage.classList.add('show');
         }
         
+        // Claim Spot button - Stripe checkout
+        (function() {
+            const claimBtn = document.getElementById('claimSpotBtn');
+            if (claimBtn) {
+                claimBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    trackEvent('cta_click', {type: 'claim_spot'});
+                    
+                    // Get Stripe Payment Link from env var (set via server-side or placeholder)
+                    // In production, this should be injected server-side or fetched from API
+                    const stripeCheckoutUrl = window.STRIPE_CHECKOUT_URL || 'https://buy.stripe.com/test_dRm14mcasaIZ6450rk1RC00';
+                    
+                    // Get email from form if available
+                    const emailInput = document.getElementById('email');
+                    const email = emailInput && emailInput.value ? encodeURIComponent(emailInput.value) : '';
+                    const emailParam = email ? `?prefilled_email=${email}` : '';
+                    
+                    window.location.href = stripeCheckoutUrl + emailParam;
+                });
+            }
+        })();
+        
         // Share block
         document.getElementById('copyLinkBtn').addEventListener('click', async () => {
+            trackEvent('share_click', {method: 'copy_link'});
             const url = window.location.href;
             try {
                 await navigator.clipboard.writeText(url);

@@ -73,7 +73,7 @@ export default async function handler(req, res) {
     });
     console.log('Lead submitted:', sanitized);
     
-    // Send confirmation email (async, don't wait)
+    // Send confirmation email to lead (async, don't wait)
     sendEmail({
       to: email,
       subject: 'You\'re in. 21.12.',
@@ -86,6 +86,24 @@ export default async function handler(req, res) {
       console.error('Email send error:', err.message);
       // Don't fail the request if email fails
     });
+    
+    // Send notification email to operator (if configured)
+    const leadsToEmail = process.env.LEADS_TO_EMAIL;
+    if (leadsToEmail) {
+      sendEmail({
+        to: leadsToEmail,
+        subject: `New Prelaunch Lead: ${email.split('@')[0]}@***`,
+        template: 'lead-notification',
+        data: {
+          email: email.split('@')[0] + '@***',
+          source,
+          leadId: lead.id,
+        },
+      }).catch(err => {
+        console.error('Notification email error:', err.message);
+        // Don't fail the request if notification fails
+      });
+    }
     
     return res.status(200).json({
       success: true,

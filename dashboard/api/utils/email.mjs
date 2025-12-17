@@ -152,6 +152,38 @@ const templates = {
     `,
     text: `Ďakujeme za správu. Čoskoro vás budeme kontaktovať.`,
   }),
+  
+  'lead-notification': (data) => ({
+    subject: `New Prelaunch Lead: ${data.email}`,
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #0f172a; background: #f8fafc; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: white; }
+          h1 { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 16px; }
+          p { font-size: 16px; color: #475569; margin-bottom: 12px; }
+          .info { background: #f1f5f9; padding: 16px; border-radius: 8px; margin: 16px 0; }
+          .info strong { color: #0f172a; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>New Prelaunch Lead</h1>
+          <div class="info">
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Source:</strong> ${data.source || 'prelaunch'}</p>
+            <p><strong>Lead ID:</strong> ${data.leadId || 'N/A'}</p>
+          </div>
+          <p>Reply to their confirmation email to start a conversation.</p>
+        </div>
+      </body>
+      </html>
+    `,
+    text: `New Prelaunch Lead: ${data.email}\nSource: ${data.source || 'prelaunch'}\nLead ID: ${data.leadId || 'N/A'}`,
+  }),
 };
 
 // Send email via Resend

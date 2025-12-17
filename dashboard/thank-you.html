@@ -147,15 +147,16 @@
             Launching 21.12.2025
         </p>
         
-        <div class="next-steps">
-            <h2>What Happens Next</h2>
-            <ol id="nextStepsList">
-                <li>Check your email for delivery instructions</li>
-                <li>Download your Launch Pack</li>
-                <li>Follow the setup guide</li>
-                <li>Start using the templates and scripts</li>
-            </ol>
-        </div>
+               <div class="next-steps">
+                   <h2>What Happens Next</h2>
+                   <ol id="nextStepsList">
+                       <li>Check your email for confirmation</li>
+                       <li id="paidCustomerStep" style="display: none;">Reply to confirmation email with your use-case</li>
+                       <li id="paidCustomerStep2" style="display: none;">Book a demo if you want personalized setup</li>
+                       <li>Share the prelaunch link with others</li>
+                       <li>Launch day: 21.12</li>
+                   </ol>
+               </div>
         
         <div id="deliveryLink" style="display: none; margin: 24px 0;">
             <a href="#" id="deliveryUrl" class="btn btn-primary" target="_blank">Download Your Launch Pack</a>
@@ -169,28 +170,57 @@
         
         <a href="/" class="btn btn-primary">Go to Dashboard</a>
         
-        <script>
-            // Check for URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const email = urlParams.get('email');
-            const product = urlParams.get('product') || 'Launch Pack';
-            const deliveryUrl = urlParams.get('delivery_url');
-            
-            if (email) {
-                document.getElementById('emailCheckMessage').style.display = 'block';
-                document.getElementById('thankYouMessage').textContent = 
-                    `Thank you for your purchase, ${email.split('@')[0]}! Check your email for delivery instructions.`;
-            }
-            
-            if (product) {
-                document.getElementById('productMessage').textContent = `Product: ${product}`;
-            }
-            
-            if (deliveryUrl) {
-                document.getElementById('deliveryLink').style.display = 'block';
-                document.getElementById('deliveryUrl').href = deliveryUrl;
-            }
-        </script>
+               <script>
+                   // Check for URL parameters
+                   const urlParams = new URLSearchParams(window.location.search);
+                   const email = urlParams.get('email');
+                   const product = urlParams.get('product') || 'Launch Pack';
+                   const deliveryUrl = urlParams.get('delivery_url');
+                   const src = urlParams.get('src') || 'unknown';
+                   
+                   // Show different messages based on source
+                   if (src === 'checkout' || src === 'stripe') {
+                       // Paid customer
+                       document.getElementById('paidCustomerStep').style.display = 'list-item';
+                       document.getElementById('paidCustomerStep2').style.display = 'list-item';
+                       document.getElementById('thankYouMessage').textContent = 
+                           'Thank you for your purchase! Check your email for delivery instructions.';
+                   } else if (src === 'prelaunch') {
+                       // Waitlist signup
+                       document.getElementById('thankYouMessage').textContent = 
+                           'You\'re in! Check your email for confirmation.';
+                   }
+                   
+                   if (email) {
+                       document.getElementById('emailCheckMessage').style.display = 'block';
+                       const name = email.split('@')[0];
+                       if (src === 'checkout' || src === 'stripe') {
+                           document.getElementById('thankYouMessage').textContent = 
+                               `Thank you for your purchase, ${name}! Check your email for delivery instructions.`;
+                       } else {
+                           document.getElementById('thankYouMessage').textContent = 
+                               `Thank you, ${name}! Check your email for confirmation.`;
+                       }
+                   }
+                   
+                   if (product) {
+                       document.getElementById('productMessage').textContent = `Product: ${product}`;
+                   }
+                   
+                   if (deliveryUrl) {
+                       document.getElementById('deliveryLink').style.display = 'block';
+                       document.getElementById('deliveryUrl').href = deliveryUrl;
+                   }
+                   
+                   // Track thank-you page view
+                   if (window.posthog && window.posthog.__loaded) {
+                       posthog.capture('thank_you_view', {
+                           source: src,
+                           has_email: !!email,
+                           has_product: !!product,
+                       });
+                   }
+               </script>
         
         <div class="footer">
             <div class="footer-links">
