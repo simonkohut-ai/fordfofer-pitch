@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Kontakt - MikoRK pohrebníctvo</title>
+    <meta name="description" content="Kontaktujte MikoRK pohrebníctvo. Sme tu pre vás 24/7. Telefón, email alebo kontaktný formulár.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="/assets/mikork/brand.css">
+    
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .contact-info {
+            background: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+        }
+        
+        .contact-info h3 {
+            color: var(--brand-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-info p {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .contact-info a {
+            color: var(--brand-primary);
+            font-weight: 600;
+        }
+        
+        .contact-form {
+            background: var(--bg-surface);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .form-success {
+            display: none;
+            background: var(--success);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+        
+        .form-success.show {
+            display: block;
+        }
+        
+        .form-error {
+            display: none;
+            background: var(--error);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+        
+        .form-error.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo" style="text-decoration: none; color: inherit;">MikoRK pohrebníctvo</a>
+                <nav class="nav-links">
+                    <a href="/">Domov</a>
+                    <a href="/services">Služby</a>
+                    <a href="/about">O nás</a>
+                    <a href="/contact" class="btn btn-primary">Kontakt</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="section" style="padding-top: var(--spacing-xl);">
+        <div class="container">
+            <h1 class="section-title">Kontaktujte nás</h1>
+            <p class="section-content" style="max-width: 600px;">
+                Sme tu pre vás. Kontaktujte nás telefónom, emailom alebo vyplňte kontaktný formulár. Odpovieme vám čo najskôr.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Emergency Contact -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="emergency-contact">
+                <h2>Núdzový kontakt</h2>
+                <p>K dispozícii 24/7</p>
+                <a href="tel:+421XXXXXXXXX" class="phone">+421 XXX XXX XXX</a>
+                <p style="margin-top: var(--spacing-md); color: var(--text-secondary);">V prípade núdzovej situácie nás neváhajte kontaktovať</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Grid -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Kontaktný formulár</h2>
+                    
+                    <div id="formSuccess" class="form-success">
+                        Ďakujeme za vašu správu. Odpovieme vám čo najskôr.
+                    </div>
+                    
+                    <div id="formError" class="form-error">
+                        Nastala chyba. Skúste to prosím znova alebo nás kontaktujte telefónom.
+                    </div>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Vaše meno *</label>
+                            <input type="text" id="name" name="name" class="input" required placeholder="Vaše meno">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" class="input" required placeholder="vas@email.sk">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Telefón</label>
+                            <input type="tel" id="phone" name="phone" class="input" placeholder="+421 XXX XXX XXX">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Vaša správa *</label>
+                            <textarea id="message" name="message" class="input" required placeholder="Vaša správa..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: flex; align-items: flex-start; gap: var(--spacing-xs); font-weight: 400;">
+                                <input type="checkbox" name="consent" required style="margin-top: 4px;">
+                                <span>Súhlasím so spracovaním osobných údajov *</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Odoslať správu</button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <div class="contact-info" style="margin-bottom: var(--spacing-lg);">
+                        <h3>Kontaktné údaje</h3>
+                        <p><strong>MikoRK pohrebníctvo</strong></p>
+                        <p>Adresa</p>
+                        <p>Mesto, PSČ</p>
+                    </div>
+                    
+                    <div class="contact-info" style="margin-bottom: var(--spacing-lg);">
+                        <h3>Telefón</h3>
+                        <p><a href="tel:+421XXXXXXXXX">+421 XXX XXX XXX</a></p>
+                        <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">K dispozícii 24/7</p>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@mikork.sk">info@mikork.sk</a></p>
+                        <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">Odpovieme do 24 hodín</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kontakt</h3>
+                    <p>MikoRK pohrebníctvo</p>
+                    <p>Telefón: <a href="tel:+421XXXXXXXXX">+421 XXX XXX XXX</a></p>
+                    <p>Email: <a href="mailto:info@mikork.sk">info@mikork.sk</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Služby</h3>
+                    <p><a href="/services">Naše služby</a></p>
+                    <p><a href="/about">O nás</a></p>
+                    <p><a href="/contact">Kontakt</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Informácie</h3>
+                    <p>K dispozícii 24/7</p>
+                    <p>Lokálna spoločnosť</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MikoRK pohrebníctvo. Všetky práva vyhradené.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple form handling (to be connected to backend)
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const successMsg = document.getElementById('formSuccess');
+            const errorMsg = document.getElementById('formError');
+            
+            // Hide previous messages
+            successMsg.classList.remove('show');
+            errorMsg.classList.remove('show');
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Odosielanie...';
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                // Submit to API endpoint (to be created)
+                const response = await fetch('/api/mikork/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    successMsg.classList.add('show');
+                    form.reset();
+                    
+                    // Scroll to success message
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    errorMsg.classList.add('show');
+                    errorMsg.textContent = result.error || 'Nastala chyba. Skúste to prosím znova.';
+                }
+            } catch (error) {
+                errorMsg.classList.add('show');
+                errorMsg.textContent = 'Nastala chyba. Kontaktujte nás prosím telefónom.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Odoslať správu';
+            }
+        });
+    </script>
+</body>
+</html>
+
