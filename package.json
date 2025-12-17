@@ -1,0 +1,13 @@
+{
+  "name": "golocapo",
+  "version": "1.0.0",
+  "description": "Golo Čapo LaunchPack - AI Marketing Studio",
+  "type": "module",
+  "scripts": {
+    "vercel-build": "node scripts/vercel-static-export.mjs"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
+

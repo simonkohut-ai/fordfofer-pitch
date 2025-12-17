@@ -23,19 +23,19 @@ foreach ($file in $files) {
 }
 
 Write-Host ""
-Write-Host "=== Live Route Verification ===" -ForegroundColor Cyan
+Write-Host "=== Direct File URL Checks ===" -ForegroundColor Cyan
 Write-Host ""
 
-$urls = @(
-    "https://www.golocapo.com/",
-    "https://www.golocapo.com/prelaunch",
-    "https://www.golocapo.com/pricing",
-    "https://www.golocapo.com/api/health"
+$directUrls = @(
+    "https://www.golocapo.com/dashboard/index.html",
+    "https://www.golocapo.com/dashboard/prelaunch.html",
+    "https://www.golocapo.com/dashboard/pricing.html",
+    "https://www.golocapo.com/dashboard/thank-you.html"
 )
 
-$allPass = $true
+$allDirectPass = $true
 
-foreach ($url in $urls) {
+foreach ($url in $directUrls) {
     try {
         $response = Invoke-WebRequest -Uri $url -Method Head -TimeoutSec 15 -UseBasicParsing
         $status = $response.StatusCode
@@ -44,23 +44,58 @@ foreach ($url in $urls) {
             Write-Host "✅ $status  $url" -ForegroundColor Green
         } else {
             Write-Host "⚠️  $status  $url" -ForegroundColor Yellow
-            $allPass = $false
+            $allDirectPass = $false
         }
     } catch {
         $statusCode = $_.Exception.Response.StatusCode.value__
         if ($statusCode -eq 404) {
             Write-Host "❌ 404 NOT_FOUND  $url" -ForegroundColor Red
-            $allPass = $false
+            $allDirectPass = $false
         } else {
             Write-Host "❌ ERROR  $url" -ForegroundColor Red
             Write-Host "   $($_.Exception.Message)" -ForegroundColor Gray
-            $allPass = $false
+            $allDirectPass = $false
         }
     }
 }
 
 Write-Host ""
-Write-Host "=== Result ===" -ForegroundColor Cyan
+Write-Host "=== Rewrite URL Checks ===" -ForegroundColor Cyan
+Write-Host ""
+
+$rewriteUrls = @(
+    "https://www.golocapo.com/prelaunch",
+    "https://www.golocapo.com/pricing"
+)
+
+$allRewritePass = $true
+
+foreach ($url in $rewriteUrls) {
+    try {
+        $response = Invoke-WebRequest -Uri $url -Method Head -TimeoutSec 15 -UseBasicParsing
+        $status = $response.StatusCode
+        
+        if ($status -eq 200) {
+            Write-Host "✅ $status  $url" -ForegroundColor Green
+        } else {
+            Write-Host "⚠️  $status  $url" -ForegroundColor Yellow
+            $allRewritePass = $false
+        }
+    } catch {
+        $statusCode = $_.Exception.Response.StatusCode.value__
+        if ($statusCode -eq 404) {
+            Write-Host "❌ 404 NOT_FOUND  $url" -ForegroundColor Red
+            $allRewritePass = $false
+        } else {
+            Write-Host "❌ ERROR  $url" -ForegroundColor Red
+            Write-Host "   $($_.Exception.Message)" -ForegroundColor Gray
+            $allRewritePass = $false
+        }
+    }
+}
+
+Write-Host ""
+Write-Host "=== Final Result ===" -ForegroundColor Cyan
 
 # Fail if files are missing
 if (-not $allFilesExist) {
@@ -68,25 +103,18 @@ if (-not $allFilesExist) {
     exit 1
 }
 
-# Check /prelaunch specifically
-$prelaunchUrl = "https://www.golocapo.com/prelaunch"
-$prelaunchStatus = $null
-
-try {
-    $prelaunchResponse = Invoke-WebRequest -Uri $prelaunchUrl -Method Head -TimeoutSec 15 -UseBasicParsing
-    $prelaunchStatus = $prelaunchResponse.StatusCode
-} catch {
-    $prelaunchStatus = $_.Exception.Response.StatusCode.value__
-}
-
-Write-Host ""
-Write-Host "=== Final Result ===" -ForegroundColor Cyan
-
-if ($prelaunchStatus -eq 200) {
-    Write-Host "✅ SUCCESS - /prelaunch returns HTTP 200" -ForegroundColor Green
+# Check all URLs pass
+if ($allDirectPass -and $allRewritePass) {
+    Write-Host "✅ SUCCESS - All direct file URLs and rewrite URLs return HTTP 200" -ForegroundColor Green
     exit 0
 } else {
-    Write-Host "❌ FAIL - /prelaunch returned HTTP $prelaunchStatus (expected 200)" -ForegroundColor Red
+    Write-Host "❌ FAIL - Some URLs did not return HTTP 200" -ForegroundColor Red
+    if (-not $allDirectPass) {
+        Write-Host "   Direct file URLs failed" -ForegroundColor Yellow
+    }
+    if (-not $allRewritePass) {
+        Write-Host "   Rewrite URLs failed" -ForegroundColor Yellow
+    }
     exit 1
 }
 
