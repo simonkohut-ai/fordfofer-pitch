@@ -361,6 +361,79 @@ const templates = {
     `,
     text: `Quick check-in — how's it going? Are you getting value? Running into issues? Not sure where to start? Reply and let me know!`,
   }),
+  
+  'mikork-contact-notification': (data) => ({
+    subject: 'Nová správa z webu – MikoRK pohrebníctvo',
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #1B2631; background: #FFFFFF; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+          h1 { font-size: 24px; font-weight: 600; color: #2C3E50; margin-bottom: 24px; }
+          .info { background: #F8F9FA; border-left: 4px solid #2C3E50; padding: 16px; margin: 16px 0; }
+          .info-label { font-weight: 600; color: #2C3E50; margin-bottom: 4px; }
+          .info-value { color: #5D6D7E; }
+          .message-box { background: #F8F9FA; padding: 16px; border-radius: 8px; margin: 16px 0; }
+          .footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid #E5E7E9; font-size: 13px; color: #85929E; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>Nová správa z webu</h1>
+          <p>Máte novú správu z kontaktného formulára na webe MikoRK pohrebníctvo.</p>
+          
+          <div class="info">
+            <div class="info-label">Meno:</div>
+            <div class="info-value">${data.name || 'Neuvedené'}</div>
+          </div>
+          
+          <div class="info">
+            <div class="info-label">Email:</div>
+            <div class="info-value">${data.email || 'Neuvedené'}</div>
+          </div>
+          
+          <div class="info">
+            <div class="info-label">Telefón:</div>
+            <div class="info-value">${data.phone || 'Neuvedené'}</div>
+          </div>
+          
+          <div class="info">
+            <div class="info-label">Čas odoslania:</div>
+            <div class="info-value">${data.timestamp || 'Neuvedené'}</div>
+          </div>
+          
+          <div class="message-box">
+            <div class="info-label">Správa:</div>
+            <div class="info-value" style="white-space: pre-wrap; margin-top: 8px;">${data.message || 'Žiadna správa'}</div>
+          </div>
+          
+          <p style="margin-top: 24px; color: #5D6D7E;">
+            <strong>Prosím odpovedajte osobnou správou do 24 hodín.</strong>
+          </p>
+          
+          <div class="footer">
+            <p>MikoRK pohrebníctvo - Automatizovaný systém</p>
+            <p>Táto správa bola vygenerovaná automaticky. Odpoveď musí byť osobná.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+    text: `Nová správa z webu – MikoRK pohrebníctvo
+
+Meno: ${data.name || 'Neuvedené'}
+Email: ${data.email || 'Neuvedené'}
+Telefón: ${data.phone || 'Neuvedené'}
+Čas: ${data.timestamp || 'Neuvedené'}
+
+Správa:
+${data.message || 'Žiadna správa'}
+
+Prosím odpovedajte osobnou správou do 24 hodín.`,
+  }),
 };
 
 // Send email via Resend

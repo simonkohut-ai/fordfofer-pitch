@@ -6,6 +6,175 @@
 
 ---
 
+## What You Are Paying For
+
+### One-Time Setup
+
+**Included:**
+- Professional website (homepage, contact page, services, about)
+- Brand identity and design system
+- Local SEO optimization
+- Contact form with email notifications
+- Mobile-optimized and accessible design
+- Content generator tool (with your approval)
+- Complete documentation and handover guide
+
+**Value:**
+- Professional online presence
+- Lead capture system
+- Local search visibility
+- Time-saving automation tools
+- Complete documentation for self-service
+
+---
+
+## What Is Included
+
+### Website
+
+- ✅ Homepage with hero, services, values
+- ✅ Contact page with form
+- ✅ Services page template
+- ✅ About page template
+- ✅ Mobile-optimized design
+- ✅ Accessible to all users
+- ✅ Fast loading times
+
+### Brand & Design
+
+- ✅ Professional brand identity
+- ✅ Calm, respectful design
+- ✅ Consistent visual appearance
+- ✅ Design system documentation
+
+### SEO & Marketing
+
+- ✅ Local SEO optimization
+- ✅ Google Business Profile setup guide
+- ✅ Structured data (Schema.org)
+- ✅ Content generator tool
+
+### Automation
+
+- ✅ Contact form → Email notifications
+- ✅ Content generator (with approval)
+- ✅ Automation rules and guidelines
+
+### Documentation
+
+- ✅ Brand positioning guide
+- ✅ Design system guide
+- ✅ Local SEO guide
+- ✅ Automation rules
+- ✅ Testing checklist
+- ✅ This handover guide
+
+---
+
+## What Is NOT Included
+
+### Ongoing Services
+
+- ❌ Monthly content creation (optional add-on)
+- ❌ Social media management (optional add-on)
+- ❌ Website updates (request separately)
+- ❌ SEO monitoring (optional add-on)
+- ❌ Technical support beyond setup (request separately)
+
+### Future Development
+
+- ❌ New features (request separately)
+- ❌ Design changes (request separately)
+- ❌ Integration with other systems (request separately)
+- ❌ Custom development (request separately)
+
+### Content
+
+- ❌ Writing all website content (you provide, we implement)
+- ❌ Creating all social media posts (you approve generated content)
+- ❌ Managing Google Business Profile (you manage, we guide)
+
+---
+
+## How Changes Are Requested
+
+### Simple Changes
+
+**Examples:**
+- Update phone number
+- Update email address
+- Update address
+- Change text content
+- Add new page
+
+**Process:**
+1. Email developer with request
+2. Provide new information
+3. Developer implements change
+4. You review before going live
+5. Change goes live
+
+**Expected Time:** 1-3 business days
+
+**Cost:** Included in setup (first 3 simple changes free, then hourly rate)
+
+---
+
+### Complex Changes
+
+**Examples:**
+- New features
+- Design changes
+- Functionality changes
+- Integration with other systems
+
+**Process:**
+1. Email developer with request
+2. Developer provides estimate (time and cost)
+3. You approve estimate
+4. Developer implements change
+5. You review and test
+6. Change goes live
+
+**Expected Time:** Depends on complexity (1-2 weeks typical)
+
+**Cost:** Hourly rate or fixed quote
+
+---
+
+## Expected Response Times
+
+### Email Inquiries
+
+**Business Hours (Mo-Fr 9:00-17:00):**
+- Initial response: Within 24 hours
+- Simple changes: 1-3 business days
+- Complex changes: Quote within 48 hours
+
+**Outside Business Hours:**
+- Response within 48 hours
+
+**Urgent Issues:**
+- Contact by phone for urgent matters
+- Response within 4 hours (if available)
+
+---
+
+### Change Requests
+
+**Simple Changes:**
+- Acknowledgment: Within 24 hours
+- Implementation: 1-3 business days
+- Review: Same day
+
+**Complex Changes:**
+- Acknowledgment: Within 24 hours
+- Estimate: Within 48 hours
+- Implementation: As agreed in estimate
+- Review: Same day
+
+---
+
 ## What Was Done
 
 ### 1. Brand Identity
