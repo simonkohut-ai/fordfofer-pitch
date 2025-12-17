@@ -1,0 +1,15 @@
+﻿# Ignore everything except static files needed for deployment
+dashboard/
+docs/
+scripts/
+templates/
+case-studies/
+showcase/
+products/
+demo/
+*.md
+*.bat
+*.ps1
+*.mjs
+node_modules/
+.git/

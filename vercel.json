@@ -1,4 +1,7 @@
 {
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "framework": null,
   "rewrites": [
     { "source": "/prelaunch", "destination": "/prelaunch.html" },
     { "source": "/pricing", "destination": "/pricing.html" },
