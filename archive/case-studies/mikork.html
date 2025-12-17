@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Case Study: MikoRK pohrebníctvo | Golo Čapo - Local Business Website</title>
+    <meta name="description" content="How we built a respectful, mobile-first website for a local funeral services business in Slovakia. Trust-first design, ethical automation, local SEO optimization.">
+    <meta name="keywords" content="case study, local business website, funeral services website, Slovakia, local SEO, mobile-first design, ethical automation">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0B0B12">
+    <link rel="canonical" href="https://www.golocapo.com/case-studies/mikork">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.golocapo.com/case-studies/mikork">
+    <meta property="og:title" content="Case Study: MikoRK pohrebníctvo | Golo Čapo">
+    <meta property="og:description" content="How we built a respectful, mobile-first website for a local funeral services business. Trust-first design, ethical automation, local SEO.">
+    <meta property="og:image" content="https://www.golocapo.com/assets/brand/og.png">
+    <meta property="og:site_name" content="Golo Čapo">
+    
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Case Study: MikoRK pohrebníctvo">
+    <meta name="twitter:description" content="Respectful, mobile-first website for local funeral services. Trust-first design, ethical automation, local SEO.">
+    <meta name="twitter:image" content="https://www.golocapo.com/assets/brand/og.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Case Study: MikoRK pohrebníctvo",
+      "description": "How we built a respectful, mobile-first website for a local funeral services business",
+      "author": {
+        "@type": "Organization",
+        "name": "Golo Čapo"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Golo Čapo",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.golocapo.com/assets/brand/logo.svg"
+        }
+      },
+      "datePublished": "2025-12-17",
+      "dateModified": "2025-12-17"
+    }
+    </script>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/apple-touch-icon.png">
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="/assets/brand/brand.css">
+    
+    <style>
+        .case-study-hero {
+            text-align: center;
+            padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+            border-bottom: 1px solid var(--bg-border);
+        }
+        
+        .case-study-hero h1 {
+            font-size: clamp(var(--font-size-2xl), 5vw, var(--font-size-4xl));
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .case-study-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            margin-top: var(--spacing-lg);
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+        
+        .case-study-meta span {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .case-study-section {
+            padding: var(--spacing-2xl) 0;
+            border-bottom: 1px solid var(--bg-border);
+        }
+        
+        .case-study-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            color: var(--brand-primary);
+        }
+        
+        .problem-list, .solution-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .problem-list li, .solution-list li {
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            background: var(--bg-surface);
+            border-left: 3px solid var(--brand-primary);
+            border-radius: var(--border-radius);
+        }
+        
+        .problem-list li::before {
+            content: "❌ ";
+            margin-right: var(--spacing-xs);
+        }
+        
+        .solution-list li::before {
+            content: "✅ ";
+            margin-right: var(--spacing-xs);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .feature-card {
+            background: var(--bg-surface);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--bg-border);
+        }
+        
+        .feature-card h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-sm);
+            color: var(--brand-primary);
+        }
+        
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .feature-card li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+        }
+        
+        .feature-card li::before {
+            content: "• ";
+            color: var(--brand-primary);
+            margin-right: var(--spacing-xs);
+        }
+        
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .outcome-card {
+            background: var(--bg-surface);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--bg-border);
+            text-align: center;
+        }
+        
+        .outcome-card h3 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-sm);
+            color: var(--brand-primary);
+        }
+        
+        .outcome-card p {
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+        }
+        
+        .testimonial {
+            background: var(--bg-surface);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--brand-primary);
+            margin: var(--spacing-xl) 0;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        
+        .testimonial-author {
+            margin-top: var(--spacing-md);
+            font-style: normal;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: var(--spacing-3xl) 0;
+            background: var(--bg-surface);
+            border-radius: var(--border-radius-lg);
+            margin: var(--spacing-2xl) 0;
+        }
+        
+        .cta-section h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .cta-section p {
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .case-study-hero h1 {
+                font-size: var(--font-size-2xl);
+            }
+            
+            .features-grid, .outcome-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-study-section {
+                padding: var(--spacing-xl) 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Golo Čapo</a>
+                <nav class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/prelaunch">Prelaunch</a>
+                    <a href="/case-studies/mikork" class="active">Case Studies</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Case Study Hero -->
+    <section class="case-study-hero">
+        <div class="container">
+            <h1>Case Study: MikoRK pohrebníctvo</h1>
+            <p style="font-size: var(--font-size-lg); color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+                How we built a respectful, mobile-first website for a local funeral services business in Slovakia
+            </p>
+            <div class="case-study-meta">
+                <span>📍 Slovakia</span>
+                <span>🏢 Local Business</span>
+                <span>📱 Mobile-First</span>
+                <span>⏱️ 4 Weeks</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem -->
+    <section class="case-study-section">
+        <div class="container">
+            <h2 class="section-title">The Problem</h2>
+            <p style="font-size: var(--font-size-lg); margin-bottom: var(--spacing-lg); color: var(--text-muted);">
+                MikoRK pohrebníctvo needed a modern online presence that builds trust, works seamlessly on mobile devices, and respects the sensitive nature of their services.
+            </p>
+            
+            <h3 style="font-size: var(--font-size-lg); margin: var(--spacing-lg) 0 var(--spacing-md); color: var(--text-primary);">Must Have</h3>
+            <ul class="solution-list">
+                <li><strong>Builds trust immediately</strong> - First impression matters when families are grieving</li>
+                <li><strong>Works for stressed families on mobile</strong> - Most inquiries happen on phones, often in difficult circumstances</li>
+                <li><strong>Does not feel salesy or aggressive</strong> - Respectful, dignified tone is essential</li>
+                <li><strong>Reduces manual work while respecting empathy</strong> - Automation should help, not replace human connection</li>
+                <li><strong>Optimized for local discovery, not ads</strong> - Local SEO focus, not paid advertising</li>
+            </ul>
+            
+            <h3 style="font-size: var(--font-size-lg); margin: var(--spacing-lg) 0 var(--spacing-md); color: var(--text-primary);">Must Not Have</h3>
+            <ul class="problem-list">
+                <li><strong>Loud marketing</strong> - No aggressive sales language</li>
+                <li><strong>Automation that replaces human contact</strong> - No automated condolences or responses</li>
+                <li><strong>Complex systems they can't manage</strong> - Simple, explainable, maintainable</li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- Solution -->
+    <section class="case-study-section">
+        <div class="container">
+            <h2 class="section-title">The Solution</h2>
+            <p style="font-size: var(--font-size-lg); margin-bottom: var(--spacing-lg); color: var(--text-muted);">
+                We delivered a <strong>calm, dignified, local-first digital system</strong> focused on clarity, accessibility, and gentle automation.
+            </p>
+            
+            <div style="background: var(--bg-surface); padding: var(--spacing-lg); border-radius: var(--border-radius); margin-top: var(--spacing-lg);">
+                <h3 style="font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); color: var(--brand-primary);">Core Principles</h3>
+                <ul class="solution-list" style="margin-top: 0;">
+                    <li><strong>Respect First</strong> - Every design decision prioritizes dignity and respect</li>
+                    <li><strong>Accessibility First</strong> - Works for everyone, especially in stressful situations</li>
+                    <li><strong>Local First</strong> - Optimized for local discovery, not global reach</li>
+                    <li><strong>Human First</strong> - Automation supports humans, never replaces them</li>
+                    <li><strong>Simplicity First</strong> - Easy to use, easy to manage, easy to understand</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features -->
+    <section class="case-study-section">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🎨 Brand & Design</h3>
+                    <ul>
+                        <li>Calm neutral palette</li>
+                        <li>Large, readable typography</li>
+                        <li>High contrast for accessibility</li>
+                        <li>No aggressive CTAs</li>
+                        <li>WCAG AA compliant</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🌍 Local SEO</h3>
+                    <ul>
+                        <li>Optimized for "pohrebníctvo + mesto"</li>
+                        <li>Structured data (LocalBusiness)</li>
+                        <li>Google Maps-ready</li>
+                        <li>Slovak language priority</li>
+                        <li>Google Business Profile guide</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📞 Contact & Lead Handling</h3>
+                    <ul>
+                        <li>Always-visible phone number</li>
+                        <li>Simple contact form</li>
+                        <li>Email notification to owner</li>
+                        <li>No tracking of sensitive data</li>
+                        <li>GDPR-compliant</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🤖 Automation (Ethical)</h3>
+                    <ul>
+                        <li>Educational content generator</li>
+                        <li>Manual approval required</li>
+                        <li>No automated condolences</li>
+                        <li>No automated replies</li>
+                        <li>Respectful tone always</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testing & Verification -->
+    <section class="case-study-section">
+        <div class="container">
+            <h2 class="section-title">Testing & Verification</h2>
+            <p style="margin-bottom: var(--spacing-lg); color: var(--text-muted);">
+                Every aspect was tested to ensure it works for real users in real situations.
+            </p>
+            
+            <div class="outcome-grid">
+                <div class="outcome-card">
+                    <h3>Elderly Users</h3>
+                    <p>Tested with users who may not be tech-savvy. Large fonts, clear navigation, simple forms.</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <h3>Stressed Families</h3>
+                    <p>Tested in stressful situations. Fast loading, clear contact paths, one-handed use.</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <h3>Slow Connections</h3>
+                    <p>Optimized for slow internet. Minimal assets, fast loading, works offline.</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <h3>Mobile Devices</h3>
+                    <p>Tested on various devices. Responsive design, large touch targets, clear hierarchy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Outcome -->
+    <section class="case-study-section">
+        <div class="container">
+            <h2 class="section-title">Outcome</h2>
+            
+            <div class="outcome-grid">
+                <div class="outcome-card">
+                    <h3>For MikoRK</h3>
+                    <p>Professional online presence, mobile-optimized website, local SEO foundation, efficient lead capture, time-saving automation, complete documentation.</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <h3>For Families</h3>
+                    <p>Easy to find (local SEO), easy to contact (clear phone, simple form), works on mobile (stressful situations), respectful experience, fast loading.</p>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <p>"The website perfectly captures our values: respect, dignity, and professionalism. It works beautifully on mobile, which is crucial for families in difficult moments. The automation saves us time while maintaining our personal touch. We can manage everything ourselves, which gives us confidence and control."</p>
+                <p class="testimonial-author">— MikoRK pohrebníctvo Owner</p>
+            </div>
+            
+            <div style="background: var(--bg-surface); padding: var(--spacing-lg); border-radius: var(--border-radius); margin-top: var(--spacing-xl);">
+                <h3 style="font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); color: var(--brand-primary);">Project Metrics</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg);">
+                    <div>
+                        <strong style="color: var(--brand-primary);">Timeline:</strong>
+                        <p style="color: var(--text-muted); margin-top: var(--spacing-xs);">4 weeks</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brand-primary);">Investment:</strong>
+                        <p style="color: var(--text-muted); margin-top: var(--spacing-xs);">€1,500-2,500</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brand-primary);">Result:</strong>
+                        <p style="color: var(--text-muted); margin-top: var(--spacing-xs);">Production ready</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Get a Local Business Setup</h2>
+            <p>Ready to build a professional online presence for your local business? We deliver respectful, mobile-first websites that build trust and generate leads.</p>
+            <a href="/prelaunch" class="btn btn-primary">Get Started</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Golo Čapo</h3>
+                    <p>AI-powered marketing automation for startups</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links</h3>
+                    <p><a href="/">Home</a></p>
+                    <p><a href="/prelaunch">Prelaunch</a></p>
+                    <p><a href="/case-studies/mikork">Case Studies</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Golo Čapo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

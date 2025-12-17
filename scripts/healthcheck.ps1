@@ -24,10 +24,14 @@ foreach ($route in $routes) {
         $response = Invoke-WebRequest -Uri $url -Method Head -UseBasicParsing -TimeoutSec 10 -ErrorAction Stop
         $status = $response.StatusCode
         $contentType = $response.Headers["Content-Type"]
+        $vercelId = $response.Headers["x-vercel-id"]
         
         if ($status -eq 200) {
             Write-Host "✅ $route" -ForegroundColor Green
             Write-Host "   Status: $status | Content-Type: $contentType" -ForegroundColor Gray
+            if ($vercelId) {
+                Write-Host "   x-vercel-id: $vercelId" -ForegroundColor Gray
+            }
         } else {
             Write-Host "❌ $route" -ForegroundColor Red
             Write-Host "   Status: $status (expected 200)" -ForegroundColor Red

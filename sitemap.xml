@@ -11,44 +11,8 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.golocapo.com/pricing</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.golocapo.com/thank-you</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-  <url>
-    <loc>https://www.golocapo.com/showcase/mikork</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.golocapo.com/showcase/mikork/en</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.golocapo.com/case-studies/mikork</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.golocapo.com/products/local-business-basic</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.golocapo.com/products/local-business-care</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.golocapo.com/products/ai-marketing-starter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
 </urlset>
-

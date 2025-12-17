@@ -1,20 +1,37 @@
-# Docs
+# Golo Čapo Documentation
 
-This folder centralizes high‑level documentation for the `fordfofer-pitch` repo.
+## Production-Critical Files
 
-- `START_HERE.md` – overview of the project and where to look first.
-- `WHAT_IS_LIVE.md` – current production routes and their status.
-- `ARCHITECTURE.md` – high‑level architecture (frontend, APIs, payments, AI).
+**Core Pages:**
+- `/index.html` - Homepage
+- `/prelaunch.html` - Waitlist/early access page
+- `/thank-you.html` - Post-signup confirmation
 
-Most older strategy/ops notes still live at the repo root and in `dashboard/`. Over time, they can be migrated or referenced from here.
+**Assets:**
+- `/assets/brand/brand.css` - Brand design system
+- `/assets/brand/motion.js` - Scroll animations
+- `/assets/brand/logo.svg` - Logo wordmark
 
-{
-  "cells": [],
-  "metadata": {
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "nbformat": 4,
-  "nbformat_minor": 2
-}
+**Configuration:**
+- `/vercel.json` - Vercel deployment config
+- `/robots.txt` - SEO robots file
+- `/sitemap.xml` - SEO sitemap
+
+**API:**
+- `/dashboard/api/` - Serverless API routes
+
+## Internal Documentation
+
+See `/docs/internal/` for internal development notes and architecture docs.
+
+## Deployment
+
+- **Production:** Auto-deploys from `main` branch via Vercel
+- **Health Check:** Run `.\scripts\healthcheck.ps1` to verify all routes
+
+## Brand System
+
+Neo-Brutalism design system:
+- Hot pink primary, purple secondary
+- Bold borders, offset shadows
+- Family-friendly, premium startup feel
