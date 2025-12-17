@@ -18,8 +18,10 @@ STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxx
 # Analytics (PostHog)
 POSTHOG_KEY=phc_xxxxxxxxxxxxxxxxxxxxx
 
-# OpenAI (if using AI features)
+# OpenAI (for AI Marketing Engine)
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxx
+OPENAI_MODEL=gpt-4o-mini                    # Default: gpt-4o-mini
+OPENAI_TEMPERATURE=0.7                       # Default: 0.7 (sales-optimized)
 
 # Domain
 DOMAIN=https://www.golocapo.com
