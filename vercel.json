@@ -1,23 +1,9 @@
 {
-  "version": 2,
-  "routes": [
-    { "src": "/robots.txt", "dest": "/landing-page/robots.txt" },
-    { "src": "/sitemap.xml", "dest": "/landing-page/sitemap.xml" },
-    { "src": "/links", "dest": "/landing-page/links.html" },
-    { "src": "/linktree", "dest": "/landing-page/links.html" },
-    { "src": "/bio", "dest": "/landing-page/links.html" },
-    { "src": "/dashboard", "dest": "/automation/MARKETING_DASHBOARD.html" },
-    { "src": "/portfolio/(.*)", "dest": "/portfolio/$1" },
-    { "src": "/golo", "dest": "/portfolio/index.html" },
-    { "src": "/ako-to-funguje", "dest": "/portfolio/slovak.html" },
-    { "src": "/slovak", "dest": "/portfolio/slovak.html" },
-    { "src": "/share/ai-studio", "dest": "/dashboard/share/ai-studio.html" },
-    { "src": "/api/(.*)", "dest": "/dashboard/api/$1" },
-    { "src": "/portfolio", "dest": "/dashboard/portfolio/index.html" },
-    { "src": "/portfolio/(.*)", "dest": "/dashboard/portfolio/$1" },
-    { "src": "/pricing", "dest": "/dashboard/pricing.html" },
-    { "src": "/prelaunch", "dest": "/dashboard/prelaunch.html" },
-    { "src": "/", "dest": "/dashboard/index.html" },
-    { "src": "/(.*)", "dest": "/dashboard/$1" }
+  "rewrites": [
+    { "source": "/", "destination": "/dashboard/index.html" },
+    { "source": "/prelaunch", "destination": "/dashboard/prelaunch.html" },
+    { "source": "/pricing", "destination": "/dashboard/pricing.html" },
+    { "source": "/thank-you", "destination": "/dashboard/thank-you.html" },
+    { "source": "/api/:path*", "destination": "/dashboard/api/:path*" }
   ]
 }
