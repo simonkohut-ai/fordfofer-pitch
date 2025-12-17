@@ -1,21 +1,21 @@
 /* Golo Čapo Neo-Brutalism Brand System */
 
 :root {
-  /* Neo-Brutalism Colors */
-  --bg: #FFFBF5;
-  --bg2: #FFF0F5;
-  --text: #1A1A1A;
-  --muted: #666666;
-  --pink: #FF1493;
-  --purple: #8B00FF;
-  --lavender: #E6E6FA;
-  --border: #1A1A1A;
-  --border-light: #CCCCCC;
+  /* Neo-Brutalism Palette */
+  --bg: #FFF7FB;
+  --bg2: #FFFFFF;
+  --text: #141414;
+  --muted: #5A5A5A;
+  --pink: #FF2DAA;
+  --purple: #6D28FF;
+  --lav: #E9D5FF;
+  --border: #141414;
+  --focus: #FF2DAA;
   
   /* Brutal Shadows */
-  --shadow-brutal: 6px 6px 0 #1A1A1A;
-  --shadow-brutal-sm: 4px 4px 0 #1A1A1A;
-  --shadow-brutal-lg: 8px 8px 0 #1A1A1A;
+  --shadow: 8px 8px 0 var(--border);
+  --shadow-sm: 5px 5px 0 var(--border);
+  --shadow-lg: 12px 12px 0 var(--border);
   
   /* Spacing Scale */
   --spacing-xs: 8px;
@@ -25,9 +25,10 @@
   --spacing-xl: 32px;
   --spacing-2xl: 48px;
   --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
   
   /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   --font-size-base: 18px;
   --font-size-sm: 16px;
   --font-size-lg: 20px;
@@ -38,8 +39,8 @@
   
   /* Layout */
   --container: 1120px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius: 16px;
+  --radius-sm: 8px;
   --stroke: 3px;
   --stroke-sm: 2px;
   
@@ -79,13 +80,14 @@ body {
 .nav {
   position: sticky;
   top: 0;
-  background: var(--bg);
+  background: var(--bg2);
   border-bottom: var(--stroke) solid var(--border);
   padding: var(--spacing-md) var(--spacing-lg);
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  backdrop-filter: blur(10px);
 }
 
 .nav a {
@@ -105,12 +107,24 @@ body {
   gap: var(--spacing-sm);
   font-weight: 700;
   font-size: var(--font-size-lg);
-  color: var(--pink);
+  color: var(--text);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border: var(--stroke-sm) solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  background: var(--bg2);
+  transition: all var(--transition-base);
 }
 
-.nav-logo svg {
+.nav-logo:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow);
+}
+
+.nav-logo img {
   width: 32px;
   height: 32px;
+  display: block;
 }
 
 /* Typography */
@@ -138,6 +152,20 @@ p {
   color: var(--text);
 }
 
+/* Hero Sticker */
+.hero-sticker {
+  display: inline-block;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: var(--pink);
+  color: white;
+  border: var(--stroke) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-3xl));
+  font-weight: 700;
+  text-align: center;
+}
+
 /* Buttons */
 .btn {
   display: inline-block;
@@ -147,23 +175,23 @@ p {
   text-align: center;
   text-decoration: none;
   border: var(--stroke) solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius);
   cursor: pointer;
   transition: all var(--transition-base);
   font-family: var(--font-family);
-  background: var(--bg);
+  background: var(--bg2);
   color: var(--text);
-  box-shadow: var(--shadow-brutal-sm);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn:hover {
   transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-brutal);
+  box-shadow: var(--shadow);
 }
 
 .btn:active {
   transform: translate(0, 0);
-  box-shadow: var(--shadow-brutal-sm);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary {
@@ -177,7 +205,17 @@ p {
 }
 
 .btn-secondary {
-  background: var(--lavender);
+  background: var(--lav);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: var(--purple);
+  color: white;
+}
+
+.btn-ghost {
+  background: var(--bg2);
   color: var(--text);
 }
 
@@ -189,17 +227,17 @@ p {
 
 /* Cards */
 .card {
-  background: var(--bg);
+  background: var(--bg2);
   border: var(--stroke) solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius);
   padding: var(--spacing-xl);
-  box-shadow: var(--shadow-brutal);
+  box-shadow: var(--shadow);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .card:hover {
   transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-brutal-lg);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Badge / Pill */
@@ -212,11 +250,17 @@ p {
   background: var(--pink);
   color: white;
   border: var(--stroke-sm) solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .badge-secondary {
-  background: var(--lavender);
+  background: var(--lav);
   color: var(--text);
+}
+
+.badge-purple {
+  background: var(--purple);
+  color: white;
 }
 
 /* Sections */
@@ -251,14 +295,18 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
 /* Forms */
 .input,
 .select {
   width: 100%;
   padding: var(--spacing-md);
-  background: var(--bg);
+  background: var(--bg2);
   border: var(--stroke) solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius);
   color: var(--text);
   font-size: var(--font-size-base);
   font-family: var(--font-family);
@@ -269,7 +317,7 @@ p {
 .select:focus {
   outline: none;
   border-color: var(--pink);
-  box-shadow: 0 0 0 3px var(--lavender);
+  box-shadow: 0 0 0 3px var(--lav);
 }
 
 .input::placeholder {
@@ -279,7 +327,7 @@ p {
 .select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231A1A1A' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23141414' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right var(--spacing-md) center;
   padding-right: calc(var(--spacing-xl) + var(--spacing-md));
@@ -300,7 +348,7 @@ p {
 /* Hero */
 .hero {
   text-align: center;
-  padding: var(--spacing-3xl) 0;
+  padding: var(--spacing-4xl) 0 var(--spacing-3xl);
 }
 
 .hero-title {
@@ -325,12 +373,13 @@ p {
 
 /* Footer */
 .footer {
-  margin-top: var(--spacing-3xl);
+  margin-top: var(--spacing-4xl);
   padding: var(--spacing-xl) var(--spacing-lg);
   border-top: var(--stroke) solid var(--border);
   text-align: center;
   color: var(--muted);
   font-size: var(--font-size-sm);
+  background: var(--bg2);
 }
 
 .footer-links {
@@ -360,7 +409,7 @@ p {
   opacity: 0.7;
 }
 
-.footer-logo svg {
+.footer-logo img {
   width: 20px;
   height: 20px;
 }
@@ -379,6 +428,22 @@ p {
 
 .reveal[data-reveal="fade"] {
   transform: none;
+}
+
+.reveal[data-reveal="left"] {
+  transform: translateX(-16px);
+}
+
+.reveal[data-reveal="left"].is-visible {
+  transform: translateX(0);
+}
+
+.reveal[data-reveal="right"] {
+  transform: translateX(16px);
+}
+
+.reveal[data-reveal="right"].is-visible {
+  transform: translateX(0);
 }
 
 .reveal[data-reveal="scale"] {
@@ -401,10 +466,15 @@ p {
     opacity: 1;
     transform: none;
   }
+  
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 *:focus-visible {
-  outline: 3px solid var(--pink);
+  outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -416,6 +486,15 @@ p {
   
   .nav {
     padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .nav-logo {
+    font-size: var(--font-size-base);
+  }
+  
+  .nav-logo img {
+    width: 24px;
+    height: 24px;
   }
   
   .hero {
@@ -431,7 +510,12 @@ p {
   }
   
   .grid-2,
-  .grid-3 {
+  .grid-3,
+  .grid-4 {
     grid-template-columns: 1fr;
+  }
+  
+  .card {
+    padding: var(--spacing-lg);
   }
 }
