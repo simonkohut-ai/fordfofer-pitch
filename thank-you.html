@@ -8,152 +8,121 @@
     <title>Thank You | Golo Čapo</title>
     <meta name="description" content="Thank you for joining Golo Čapo. Check your email for next steps.">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#0B0B12">
+    <meta name="theme-color" content="#FFFBF5">
     <link rel="canonical" href="https://www.golocapo.com/thank-you">
-    
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.golocapo.com/thank-you">
-    <meta property="og:title" content="Golo Čapo">
-    <meta property="og:description" content="21.12 — Early Christmas gift.">
-    <meta property="og:image" content="https://www.golocapo.com/assets/brand/og.png">
-    <meta property="og:site_name" content="Golo Čapo">
-    
-    <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Golo Čapo">
-    <meta name="twitter:description" content="21.12 — Early Christmas gift.">
-    <meta name="twitter:image" content="https://www.golocapo.com/assets/brand/og.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/assets/brand/icon-512.png">
-    
     <!-- Brand CSS -->
     <link rel="stylesheet" href="/assets/brand/brand.css">
 </head>
 <body>
-    <div class="brand-bar">
-        <a href="/">
-            <img src="/assets/brand/logo.svg" alt="Golo Čapo" class="brand-logo">
-            <span class="brand-wordmark">Golo Čapo</span>
-        </a>
-    </div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+            <a href="/" class="nav-logo">
+                <img src="/assets/brand/logo.svg" alt="Golo Čapo" style="width: 32px; height: 32px;">
+                <span>Golo Čapo</span>
+            </a>
+            <a href="/">← Home</a>
+        </div>
+    </nav>
     
-    <div class="thank-you-container reveal" data-reveal="scale" data-delay="0">
-        <div class="success-icon reveal" data-reveal="fade" data-delay="0">✅</div>
-        <h1 class="reveal" data-reveal="up" data-delay="80">You're In</h1>
-        <p class="message reveal" data-reveal="fade" data-delay="160" id="thankYouMessage">
-            Thank you for your purchase. Check your email for delivery instructions.
-        </p>
-        <p id="emailCheckMessage" style="display: none; font-size: 16px; color: var(--success); margin-top: 12px; font-weight: 600;">
-            ✅ Check your inbox for access instructions
-        </p>
-        <p id="productMessage" style="font-size: 14px; color: var(--text-secondary); margin-top: 12px;">
-            Launching 21.12.2025
-        </p>
-        
-               <div class="next-steps reveal" data-reveal="up" data-delay="240">
-                   <h2>What Happens Next</h2>
-                   <ol id="nextStepsList">
-                       <li>Check your email for confirmation</li>
-                       <li id="paidCustomerStep" style="display: none;">Reply to confirmation email with your use-case</li>
-                       <li id="paidCustomerStep2" style="display: none;">Book a demo if you want personalized setup</li>
-                       <li>Share the prelaunch link with others</li>
-                       <li>Launch day: 21.12</li>
-                   </ol>
-               </div>
-        
-        <div id="deliveryLink" style="display: none; margin: 24px 0;">
-            <a href="#" id="deliveryUrl" class="btn btn-primary" target="_blank">Download Your Launch Pack</a>
+    <div class="container" style="max-width: 600px; padding-top: var(--spacing-3xl);">
+        <div class="card reveal" data-reveal="scale" data-delay="0" style="text-align: center;">
+            <div style="font-size: 64px; margin-bottom: var(--spacing-md);">✅</div>
+            <h1 style="color: #10b981; margin-bottom: var(--spacing-lg);">You're In</h1>
+            <p class="message" id="thankYouMessage" style="font-size: var(--font-size-lg); color: var(--muted); margin-bottom: var(--spacing-lg); line-height: 1.8;">
+                Thank you for your purchase. Check your email for delivery instructions.
+            </p>
+            <p id="emailCheckMessage" style="display: none; font-size: var(--font-size-base); color: #10b981; margin-top: var(--spacing-md); font-weight: 600;">
+                ✅ Check your inbox for access instructions
+            </p>
+            <p id="productMessage" style="font-size: var(--font-size-sm); color: var(--muted); margin-top: var(--spacing-md);">
+                Launching 21.12.2025
+            </p>
+            
+            <div class="card" style="background: var(--bg2); margin-top: var(--spacing-xl); text-align: left;">
+                <h2 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-md); text-align: center;">What Happens Next</h2>
+                <ol id="nextStepsList" style="margin-left: var(--spacing-lg); color: var(--text); line-height: 2;">
+                    <li>Check your email for confirmation</li>
+                    <li id="paidCustomerStep" style="display: none;">Reply to confirmation email with your use-case</li>
+                    <li id="paidCustomerStep2" style="display: none;">Book a demo if you want personalized setup</li>
+                    <li>Share the prelaunch link with others</li>
+                    <li>Launch day: 21.12</li>
+                </ol>
+            </div>
+            
+            <div id="deliveryLink" style="display: none; margin: var(--spacing-xl) 0;">
+                <a href="#" id="deliveryUrl" class="btn btn-primary" target="_blank">Download Your Launch Pack</a>
+            </div>
+            
+            <div class="card" style="background: var(--lavender); margin-top: var(--spacing-xl);">
+                <p style="margin-bottom: var(--spacing-sm);"><strong>Questions?</strong></p>
+                <p style="color: var(--muted); margin-bottom: var(--spacing-sm);">Email us at <a href="mailto:gcapovic.biz@gmail.com" style="color: var(--pink); font-weight: 600;">gcapovic.biz@gmail.com</a></p>
+                <p style="font-size: var(--font-size-sm); color: var(--muted);">We typically respond within 24 hours.</p>
+            </div>
+            
+            <a href="/" class="btn btn-secondary" style="margin-top: var(--spacing-xl);">Go to Homepage</a>
         </div>
         
-        <div class="contact-info">
-            <p><strong>Questions?</strong></p>
-            <p>Email us at <a href="mailto:gcapovic.biz@gmail.com">gcapovic.biz@gmail.com</a></p>
-            <p style="margin-top: 12px; font-size: 14px;">We typically respond within 24 hours.</p>
-        </div>
-        
-        <a href="/" class="btn btn-primary">Go to Dashboard</a>
-        
-               <script>
-                   // Check for URL parameters
-                   const urlParams = new URLSearchParams(window.location.search);
-                   const email = urlParams.get('email');
-                   const product = urlParams.get('product') || 'Launch Pack';
-                   const deliveryUrl = urlParams.get('delivery_url');
-                   const src = urlParams.get('src') || 'unknown';
-                   
-                   // Show different messages based on source
-                   if (src === 'checkout' || src === 'stripe') {
-                       // Paid customer
-                       document.getElementById('paidCustomerStep').style.display = 'list-item';
-                       document.getElementById('paidCustomerStep2').style.display = 'list-item';
-                       document.getElementById('thankYouMessage').textContent = 
-                           'Thank you for your purchase! Check your email for delivery instructions.';
-                   } else if (src === 'prelaunch') {
-                       // Waitlist signup
-                       document.getElementById('thankYouMessage').textContent = 
-                           'You\'re in! Check your email for confirmation.';
-                   }
-                   
-                   if (email) {
-                       document.getElementById('emailCheckMessage').style.display = 'block';
-                       const name = email.split('@')[0];
-                       if (src === 'checkout' || src === 'stripe') {
-                           document.getElementById('thankYouMessage').textContent = 
-                               `Thank you for your purchase, ${name}! Check your email for delivery instructions.`;
-                       } else {
-                           document.getElementById('thankYouMessage').textContent = 
-                               `Thank you, ${name}! Check your email for confirmation.`;
-                       }
-                   }
-                   
-                   if (product) {
-                       document.getElementById('productMessage').textContent = `Product: ${product}`;
-                   }
-                   
-                   if (deliveryUrl) {
-                       document.getElementById('deliveryLink').style.display = 'block';
-                       document.getElementById('deliveryUrl').href = deliveryUrl;
-                   }
-                   
-                   // Track thank-you page view
-                   if (window.posthog && window.posthog.__loaded) {
-                       posthog.capture('thank_you_view', {
-                           source: src,
-                           has_email: !!email,
-                           has_product: !!product,
-                       });
-                   }
-               </script>
-        
-        <div class="footer reveal" data-reveal="fade" data-delay="0">
+        <footer class="footer" style="margin-top: var(--spacing-2xl);">
             <div class="footer-links">
                 <a href="/TERMS.md" target="_blank">Terms</a>
                 <a href="/PRIVACY.md" target="_blank">Privacy</a>
-                <a href="/REFUND.md" target="_blank">Refund Policy</a>
-                <a href="/SECURITY.md" target="_blank">Security</a>
             </div>
-            <p>AI Marketing Studio by Golo Čapo © 2025</p>
-        </div>
+            <div class="footer-logo">
+                <img src="/assets/brand/logo.svg" alt="Golo Čapo">
+                <span>Golo Čapo © 2025</span>
+            </div>
+        </footer>
     </div>
+    
+    <script>
+        // Check for URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        const product = urlParams.get('product') || 'Launch Pack';
+        const deliveryUrl = urlParams.get('delivery_url');
+        const src = urlParams.get('src') || 'unknown';
+        
+        // Show different messages based on source
+        if (src === 'checkout' || src === 'stripe') {
+            document.getElementById('paidCustomerStep').style.display = 'list-item';
+            document.getElementById('paidCustomerStep2').style.display = 'list-item';
+            document.getElementById('thankYouMessage').textContent = 
+                'Thank you for your purchase! Check your email for delivery instructions.';
+        } else if (src === 'prelaunch') {
+            document.getElementById('thankYouMessage').textContent = 
+                'You\'re in! Check your email for confirmation.';
+        }
+        
+        if (email) {
+            document.getElementById('emailCheckMessage').style.display = 'block';
+            const name = email.split('@')[0];
+            if (src === 'checkout' || src === 'stripe') {
+                document.getElementById('thankYouMessage').textContent = 
+                    `Thank you for your purchase, ${name}! Check your email for delivery instructions.`;
+            } else {
+                document.getElementById('thankYouMessage').textContent = 
+                    `Thank you, ${name}! Check your email for confirmation.`;
+            }
+        }
+        
+        if (product) {
+            document.getElementById('productMessage').textContent = `Product: ${product}`;
+        }
+        
+        if (deliveryUrl) {
+            document.getElementById('deliveryLink').style.display = 'block';
+            document.getElementById('deliveryUrl').href = deliveryUrl;
+        }
+    </script>
     
     <!-- Motion System -->
     <script defer src="/assets/brand/motion.js"></script>
 </body>
 </html>
-

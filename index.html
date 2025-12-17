@@ -9,7 +9,7 @@
     <meta name="description" content="AI-powered marketing automation studio. Generate Meta-ready posts in seconds. Marketing automation that converts. Built for startups and small teams.">
     <meta name="keywords" content="AI marketing studio, marketing automation, AI growth system, startup marketing AI, AI marketing tools">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0B0B12">
+    <meta name="theme-color" content="#FFFBF5">
     <link rel="canonical" href="https://www.golocapo.com/">
     
     <!-- Open Graph / Facebook -->
@@ -44,155 +44,95 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/assets/brand/icon-512.png">
-    
     <!-- Brand CSS -->
     <link rel="stylesheet" href="/assets/brand/brand.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="brand-bar">
-        <div class="container">
-            <a href="/" style="display: flex; align-items: center; gap: var(--spacing-sm); text-decoration: none; color: inherit;">
-                <img src="/assets/brand/logo.svg" alt="Golo Čapo" class="brand-logo">
-                <span class="brand-wordmark">Golo Čapo</span>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+            <a href="/" class="nav-logo">
+                <img src="/assets/brand/logo.svg" alt="Golo Čapo" style="width: 32px; height: 32px;">
+                <span>Golo Čapo</span>
             </a>
-            <nav style="margin-left: auto; display: flex; gap: var(--spacing-lg); align-items: center;">
-                <a href="/prelaunch" style="color: var(--text-muted); text-decoration: none; transition: color var(--transition-base);">Prelaunch</a>
-                <a href="/prelaunch" class="btn btn-primary" style="text-decoration: none;">Get Early Access</a>
-            </nav>
+            <div style="display: flex; gap: var(--spacing-lg); align-items: center;">
+                <a href="/prelaunch">Prelaunch</a>
+                <a href="/prelaunch" class="btn btn-primary">Get Early Access</a>
+            </div>
         </div>
-    </header>
+    </nav>
     
     <!-- Hero Section -->
-    <section class="homepage-hero reveal" data-reveal="fade">
+    <section class="hero reveal" data-reveal="fade">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">AI Marketing Studio</h1>
-                <p class="hero-subtitle">Generate Meta-ready posts in seconds. Not hours.</p>
-                
-                <ul class="hero-outcomes">
-                    <li>Meta-ready posts in seconds</li>
-                    <li>AI-powered automation</li>
-                    <li>Built for startups & small teams</li>
-                </ul>
-                
-                <div class="hero-cta-group">
-                    <a href="/prelaunch" class="btn btn-primary">Get Early Access</a>
-                    <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
-                </div>
-                
-                <p class="cta-trust">Founding spots limited • No spam • Cancel anytime</p>
+            <h1 class="hero-title">AI Marketing Studio</h1>
+            <p class="hero-subtitle">Generate Meta-ready posts in seconds. Not hours.</p>
+            
+            <div class="hero-cta-group">
+                <a href="/prelaunch" class="btn btn-primary">Get Early Access</a>
+                <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
             </div>
             
-            <div class="hero-visual">
-                <div class="logo-glow">
-                    <img src="/assets/brand/logo.svg" alt="Golo Čapo" style="width: 100%; height: 100%;">
-                </div>
-            </div>
+            <p style="margin-top: var(--spacing-lg); color: var(--muted); font-size: var(--font-size-sm);">
+                Founding spots limited • No spam • Cancel anytime
+            </p>
         </div>
     </section>
     
-    <!-- What is GoLoCapo -->
+    <!-- Value Props -->
     <section class="section reveal" data-reveal="up" data-delay="80">
         <div class="container">
-            <h2 class="section-title">What is Golo Čapo?</h2>
-            <p class="section-lead">
-                An AI-powered marketing automation studio that generates Meta-ready posts in seconds. 
-                Built for startups and small teams who want professional marketing without the chaos. 
-                Launching 21.12 — Early Christmas gift for founders.
-            </p>
+            <div class="grid grid-3">
+                <div class="card reveal" data-reveal="up" data-delay="0">
+                    <h3 style="color: var(--pink); margin-bottom: var(--spacing-md);">⚡ Fast</h3>
+                    <p>Generate Meta-ready posts in seconds, not hours. No more writer's block.</p>
+                </div>
+                <div class="card reveal" data-reveal="up" data-delay="80">
+                    <h3 style="color: var(--purple); margin-bottom: var(--spacing-md);">🤖 AI-Powered</h3>
+                    <p>Smart automation that learns your brand voice and generates content that converts.</p>
+                </div>
+                <div class="card reveal" data-reveal="up" data-delay="160">
+                    <h3 style="color: var(--pink); margin-bottom: var(--spacing-md);">🚀 Built for Startups</h3>
+                    <p>No enterprise complexity. Just the tools you need to scale marketing without scaling headcount.</p>
+                </div>
+            </div>
         </div>
     </section>
     
     <!-- How It Works -->
-    <section id="how-it-works" class="section reveal" data-reveal="up" data-delay="160">
+    <section id="how-it-works" class="section reveal" data-reveal="up" data-delay="160" style="background: var(--bg2);">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
-            <div class="how-it-works">
-                <div class="step-card reveal" data-reveal="up" data-delay="0">
-                    <div class="step-number">1</div>
-                    <div class="step-title">Claim Your Spot</div>
-                    <div class="step-description">Secure founding customer access</div>
+            <div class="grid grid-3">
+                <div class="card reveal" data-reveal="scale" data-delay="0">
+                    <div class="badge" style="margin-bottom: var(--spacing-md);">1</div>
+                    <h3>Claim Your Spot</h3>
+                    <p>Secure founding customer access with early bird pricing.</p>
                 </div>
-                <div class="step-card reveal" data-reveal="up" data-delay="80">
-                    <div class="step-number">2</div>
-                    <div class="step-title">Launch 21.12</div>
-                    <div class="step-description">Get instant access on launch day</div>
+                <div class="card reveal" data-reveal="scale" data-delay="80">
+                    <div class="badge" style="margin-bottom: var(--spacing-md);">2</div>
+                    <h3>Launch 21.12</h3>
+                    <p>Get instant access on launch day. No waiting, no delays.</p>
                 </div>
-                <div class="step-card reveal" data-reveal="up" data-delay="160">
-                    <div class="step-number">3</div>
-                    <div class="step-title">Generate Posts</div>
-                    <div class="step-description">Meta-ready posts in seconds, not hours</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Who It's For -->
-    <section class="section reveal" data-reveal="up" data-delay="240">
-        <div class="container">
-            <h2 class="section-title">Who It's For</h2>
-            <div class="personas">
-                <div class="persona-card reveal" data-reveal="scale" data-delay="0">
-                    <div class="persona-title">Startups</div>
-                    <div class="persona-description">Small teams who need professional marketing without the overhead</div>
-                </div>
-                <div class="persona-card reveal" data-reveal="scale" data-delay="80">
-                    <div class="persona-title">Founders</div>
-                    <div class="persona-description">Solo founders who want AI-powered marketing automation</div>
-                </div>
-                <div class="persona-card reveal" data-reveal="scale" data-delay="160">
-                    <div class="persona-title">Small Teams</div>
-                    <div class="persona-description">Teams who want to scale marketing without scaling headcount</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Why Now -->
-    <section class="section reveal" data-reveal="fade" data-delay="0">
-        <div class="container">
-            <h2 class="section-title">Why Now?</h2>
-            <p class="section-lead">
-                Marketing automation shouldn't require a team. AI makes it possible to generate professional, 
-                Meta-ready posts in seconds. Launching 21.12 — Early Christmas gift for founders.
-            </p>
-        </div>
-    </section>
-    
-    <!-- Case Studies -->
-    <section class="section reveal" data-reveal="up" data-delay="80" style="background: var(--panel);">
-        <div class="container">
-            <h2 class="section-title">Case Studies</h2>
-            <p class="section-lead" style="margin-bottom: var(--spacing-xl);">
-                See how we deliver professional websites for local businesses.
-            </p>
-            <div class="grid grid-2">
-                <div class="card reveal" data-reveal="left" data-delay="0">
-                    <h3 style="font-size: var(--font-size-lg); margin-bottom: var(--spacing-sm); color: var(--brand);">MikoRK pohrebníctvo</h3>
-                    <p style="color: var(--muted); font-size: var(--font-size-sm); margin-bottom: var(--spacing-md);">
-                        Local funeral services business in Slovakia. Respectful, mobile-first website with ethical automation and local SEO optimization.
-                    </p>
-                    <a href="/case-studies/mikork" class="btn btn-secondary" style="display: inline-block;">Read Case Study</a>
+                <div class="card reveal" data-reveal="scale" data-delay="160">
+                    <div class="badge" style="margin-bottom: var(--spacing-md);">3</div>
+                    <h3>Generate Posts</h3>
+                    <p>Meta-ready posts in seconds. Copy, paste, publish. Done.</p>
                 </div>
             </div>
         </div>
     </section>
     
     <!-- Final CTA -->
-    <section class="cta-section reveal" data-reveal="fade" data-delay="0">
+    <section class="section reveal" data-reveal="fade" data-delay="0">
         <div class="container">
             <h2 class="section-title">Ready to Get Started?</h2>
-            <p class="section-lead" style="max-width: 600px; margin: 0 auto var(--spacing-xl);">
+            <p class="section-lead">
                 Join the waitlist for early access. Launching 21.12 — Founding spots limited.
             </p>
-            <a href="/prelaunch" class="btn btn-primary">Get Early Access</a>
+            <div style="text-align: center; margin-top: var(--spacing-xl);">
+                <a href="/prelaunch" class="btn btn-primary">Get Early Access</a>
+            </div>
         </div>
     </section>
     
@@ -201,12 +141,12 @@
         <div class="container">
             <div class="footer-links">
                 <a href="/prelaunch">Prelaunch</a>
-                <a href="/pricing">Pricing</a>
-                <a href="/showcase/mikork">Showcase: MikoRK</a>
-                <a href="/products/local-business-basic">Produkty</a>
                 <a href="/PRIVACY.md" target="_blank">Privacy</a>
             </div>
-            <p class="footer-text">Golo Čapo © 2025 | Built for founders</p>
+            <div class="footer-logo">
+                <img src="/assets/brand/logo.svg" alt="Golo Čapo">
+                <span>Golo Čapo © 2025</span>
+            </div>
         </div>
     </footer>
     
@@ -214,4 +154,3 @@
     <script defer src="/assets/brand/motion.js"></script>
 </body>
 </html>
-
