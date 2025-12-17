@@ -1,4 +1,4 @@
-/* Golo Čapo Neo-Brutalism Brand System */
+/* Golo Čapo Neo-Brutalism Brand System - Final Polish */
 
 :root {
   /* Neo-Brutalism Palette */
@@ -16,6 +16,7 @@
   --shadow: 8px 8px 0 var(--border);
   --shadow-sm: 5px 5px 0 var(--border);
   --shadow-lg: 12px 12px 0 var(--border);
+  --shadow-xl: 16px 16px 0 var(--border);
   
   /* Spacing Scale */
   --spacing-xs: 8px;
@@ -41,8 +42,8 @@
   --container: 1120px;
   --radius: 16px;
   --radius-sm: 8px;
-  --stroke: 3px;
-  --stroke-sm: 2px;
+  --stroke: 4px;
+  --stroke-sm: 3px;
   
   /* Transitions */
   --transition-fast: 0.15s ease;
@@ -59,6 +60,7 @@ html {
   font-size: var(--font-size-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -88,17 +90,19 @@ body {
   align-items: center;
   justify-content: space-between;
   backdrop-filter: blur(10px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
 }
 
-.nav a {
+.nav a:not(.nav-logo):not(.btn) {
   text-decoration: none;
   color: var(--text);
   font-weight: 600;
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
-.nav a:hover {
+.nav a:not(.nav-logo):not(.btn):hover {
   transform: translateY(-2px);
+  color: var(--pink);
 }
 
 .nav-logo {
@@ -114,6 +118,7 @@ body {
   box-shadow: var(--shadow-sm);
   background: var(--bg2);
   transition: all var(--transition-base);
+  text-decoration: none;
 }
 
 .nav-logo:hover {
@@ -125,6 +130,7 @@ body {
   width: 32px;
   height: 32px;
   display: block;
+  flex-shrink: 0;
 }
 
 /* Typography */
@@ -150,6 +156,7 @@ h3 {
 p {
   margin-bottom: var(--spacing-md);
   color: var(--text);
+  line-height: 1.7;
 }
 
 /* Hero Sticker */
@@ -164,6 +171,7 @@ p {
   font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-3xl));
   font-weight: 700;
   text-align: center;
+  margin-bottom: var(--spacing-lg);
 }
 
 /* Buttons */
@@ -182,6 +190,7 @@ p {
   background: var(--bg2);
   color: var(--text);
   box-shadow: var(--shadow-sm);
+  position: relative;
 }
 
 .btn:hover {
@@ -265,12 +274,13 @@ p {
 
 /* Sections */
 .section {
-  padding: var(--spacing-3xl) 0;
+  padding: var(--spacing-4xl) 0;
 }
 
 .section-title {
   text-align: center;
   margin-bottom: var(--spacing-xl);
+  color: var(--text);
 }
 
 .section-lead {
@@ -279,6 +289,7 @@ p {
   text-align: center;
   color: var(--muted);
   font-size: var(--font-size-lg);
+  line-height: 1.7;
 }
 
 /* Grid */
@@ -349,11 +360,13 @@ p {
 .hero {
   text-align: center;
   padding: var(--spacing-4xl) 0 var(--spacing-3xl);
+  position: relative;
 }
 
 .hero-title {
   margin-bottom: var(--spacing-lg);
   color: var(--pink);
+  font-weight: 700;
 }
 
 .hero-subtitle {
@@ -361,6 +374,20 @@ p {
   color: var(--muted);
   max-width: 600px;
   margin: 0 auto var(--spacing-xl);
+  line-height: 1.7;
+}
+
+.hero-visual {
+  margin: var(--spacing-2xl) 0;
+}
+
+.hero-visual img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border: var(--stroke) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
 }
 
 .hero-cta-group {
@@ -369,6 +396,18 @@ p {
   justify-content: center;
   flex-wrap: wrap;
   margin-top: var(--spacing-xl);
+}
+
+/* Trust Section */
+.trust-section {
+  background: var(--bg2);
+  border: var(--stroke) solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Footer */
@@ -417,7 +456,7 @@ p {
 /* Scroll Reveal (Light Motion) */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -431,7 +470,7 @@ p {
 }
 
 .reveal[data-reveal="left"] {
-  transform: translateX(-16px);
+  transform: translateX(-20px);
 }
 
 .reveal[data-reveal="left"].is-visible {
@@ -439,7 +478,7 @@ p {
 }
 
 .reveal[data-reveal="right"] {
-  transform: translateX(16px);
+  transform: translateX(20px);
 }
 
 .reveal[data-reveal="right"].is-visible {
@@ -471,6 +510,10 @@ p {
     opacity: 1;
     transform: none;
   }
+  
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 *:focus-visible {
@@ -490,6 +533,7 @@ p {
   
   .nav-logo {
     font-size: var(--font-size-base);
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
   
   .nav-logo img {
@@ -517,5 +561,9 @@ p {
   
   .card {
     padding: var(--spacing-lg);
+  }
+  
+  .section {
+    padding: var(--spacing-2xl) 0;
   }
 }
