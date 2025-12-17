@@ -139,6 +139,11 @@ export default async function handler(req, res) {
         paymentId: session.id,
         timestamp: createdAt,
       });
+        }
+      } catch (revenueError) {
+        console.error('Revenue tracking error:', sanitizeForLogging({ message: revenueError.message }));
+        // Don't fail webhook if revenue tracking fails
+      }
       
       // Also store in legacy payment storage (for compatibility)
       await setStorage('customers', email, {
