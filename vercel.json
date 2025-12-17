@@ -2,11 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "landing-page/**",
+      "src": "dashboard/**",
       "use": "@vercel/static"
     },
     {
-      "src": "automation/MARKETING_DASHBOARD.html",
+      "src": "portfolio/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "landing-page/**",
       "use": "@vercel/static"
     }
   ],
