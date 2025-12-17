@@ -1,8 +1,5 @@
 /* Golo Čapo Brand Design System */
 
-/* TEMPORARY DEBUG: Remove after visual verification */
-body { outline: 4px solid red !important; }
-
 :root {
   /* Brand Colors */
   --brand-primary: #C080B0;
