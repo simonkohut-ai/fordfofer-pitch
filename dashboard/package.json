@@ -7,7 +7,6 @@
     "dev": "node server.cjs",
     "dev:node": "node server.cjs",
     "start": "vercel dev -p 3000",
-    "build": "echo 'No build needed - static site'",
     "vercel:dev": "vercel dev --listen 3000"
   },
   "dependencies": {
