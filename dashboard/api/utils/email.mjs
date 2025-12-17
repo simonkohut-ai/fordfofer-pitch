@@ -14,13 +14,14 @@ const templates = {
       <head>
         <meta charset="UTF-8">
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #0f172a; background: #0f172a; }
-          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0f172a; }
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: rgba(255, 255, 255, 0.92); background: #0B0B12; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0B0B12; }
           .header { text-align: center; margin-bottom: 40px; }
           .logo { font-size: 48px; margin-bottom: 16px; }
-          h1 { font-size: 28px; font-weight: 700; color: #f1f5f9; margin-bottom: 16px; }
-          p { font-size: 18px; color: #94a3b8; margin-bottom: 16px; text-align: center; }
-          .footer { margin-top: 40px; padding-top: 32px; border-top: 1px solid #334155; text-align: center; font-size: 13px; color: #64748b; }
+          h1 { font-size: 28px; font-weight: 700; color: rgba(255, 255, 255, 0.92); margin-bottom: 16px; }
+          p { font-size: 18px; color: rgba(255, 255, 255, 0.70); margin-bottom: 16px; text-align: center; }
+          .footer { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.12); text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.50); }
+          a { color: #C080B0; text-decoration: none; }
         </style>
       </head>
       <body>
@@ -128,12 +129,13 @@ const templates = {
       <head>
         <meta charset="UTF-8">
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #0f172a; background: #0f172a; }
-          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0f172a; }
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: rgba(255, 255, 255, 0.92); background: #0B0B12; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0B0B12; }
           .header { text-align: center; margin-bottom: 40px; }
-          h1 { font-size: 28px; font-weight: 700; color: #f1f5f9; margin-bottom: 16px; }
-          p { font-size: 16px; color: #94a3b8; margin-bottom: 16px; }
-          .footer { margin-top: 40px; padding-top: 32px; border-top: 1px solid #334155; text-align: center; font-size: 13px; color: #64748b; }
+          h1 { font-size: 28px; font-weight: 700; color: rgba(255, 255, 255, 0.92); margin-bottom: 16px; }
+          p { font-size: 16px; color: rgba(255, 255, 255, 0.70); margin-bottom: 16px; }
+          .footer { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.12); text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.50); }
+          a { color: #C080B0; text-decoration: none; }
         </style>
       </head>
       <body>
@@ -161,12 +163,13 @@ const templates = {
       <head>
         <meta charset="UTF-8">
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #0f172a; background: #f8fafc; }
-          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: white; }
-          h1 { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 16px; }
-          p { font-size: 16px; color: #475569; margin-bottom: 12px; }
-          .info { background: #f1f5f9; padding: 16px; border-radius: 8px; margin: 16px 0; }
-          .info strong { color: #0f172a; }
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: rgba(255, 255, 255, 0.92); background: #0B0B12; }
+          .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #0B0B12; }
+          h1 { font-size: 24px; font-weight: 700; color: rgba(255, 255, 255, 0.92); margin-bottom: 16px; }
+          p { font-size: 16px; color: rgba(255, 255, 255, 0.70); margin-bottom: 12px; }
+          .info { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); padding: 16px; border-radius: 12px; margin: 16px 0; }
+          .info strong { color: rgba(255, 255, 255, 0.92); }
+          a { color: #C080B0; text-decoration: none; }
         </style>
       </head>
       <body>
