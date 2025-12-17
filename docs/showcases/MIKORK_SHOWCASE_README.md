@@ -1,189 +1,241 @@
-# MikoRK pohrebníctvo Showcase Page
+# MikoRK pohrebníctvo — Showcase Stránka
 
-**URL:** `/showcase/mikork`  
-**Status:** ✅ Live  
-**Date:** 2025-12-17
-
----
-
-## Summary
-
-Public showcase page for MikoRK pohrebníctvo project. Designed for social traffic with optimized SEO and OpenGraph tags. Demonstrates calm, trust-first local business website delivery.
+**URL:** `/showcase/mikork` (SK) | `/showcase/mikork/en` (EN)  
+**Status:** ✅ Aktívna  
+**Dátum:** 2025-12-17
 
 ---
 
-## Scope Delivered
+## Prehľad
 
-### Page Content
-- ✅ Hero section with project title
-- ✅ Overview (problem → outcome)
-- ✅ Deliverables breakdown (5 key components)
-- ✅ Before/After comparison
-- ✅ Metrics-ready block
-- ✅ What we learned / reusable template section
-- ✅ CTA linking to `/prelaunch`
+Verejná showcase stránka pre projekt MikoRK pohrebníctvo. Navrhnutá pre sociálny traffic s optimalizovanými SEO a OpenGraph tagmi. Demonštruje dôstojnú, dôveryhodnú lokálnu webovú stránku pre podniky.
 
-### SEO & Social
-- ✅ Title tag (150-160 chars)
-- ✅ Meta description (150-160 chars)
+---
+
+## Rozsah Dodávky
+
+### Obsah Stránky
+- ✅ Hero sekcia s názvom projektu
+- ✅ Prehľad (problém → výsledok)
+- ✅ Rozpis dodávok (5 kľúčových komponentov)
+- ✅ Porovnanie Pred/Po
+- ✅ Blok pripravený na metriky
+- ✅ Čo sme sa naučili / znovupoužiteľná šablóna
+- ✅ CTA odkazujúci na `/prelaunch`
+
+### SEO & Sociálne Siete
+- ✅ Title tag (150-160 znakov)
+- ✅ Meta description (150-160 znakov)
 - ✅ Canonical URL
-- ✅ OpenGraph tags (og:title, og:description, og:url, og:image)
-- ✅ Twitter/X tags (twitter:card, twitter:title, twitter:description, twitter:image)
-- ✅ JSON-LD structured data (Article schema)
-- ✅ OG image at `/assets/og/mikork-og.png` (1200x630)
+- ✅ OpenGraph tagy (og:title, og:description, og:url, og:image)
+- ✅ Twitter/X tagy (twitter:card, twitter:title, twitter:description, twitter:image)
+- ✅ JSON-LD štruktúrované údaje (Article schema)
+- ✅ OG obrázok na `/assets/og/mikork-og.svg` (1200x630)
+- ✅ Hreflang alternatívy (sk, en)
 
-### Navigation & Discoverability
-- ✅ Link added to homepage footer
-- ✅ Route added to `vercel.json`
-- ✅ URL added to `sitemap.xml`
-- ✅ `robots.txt` references sitemap (already configured)
-
----
-
-## Files Touched
-
-### Created
-- `showcase/mikork.html` - Main showcase page
-- `assets/og/mikork-og.svg` - SVG OG image source
-- `assets/og/mikork-og.png` - PNG OG image (fallback)
-- `docs/showcases/MIKORK_SHOWCASE_README.md` - This file
-
-### Modified
-- `vercel.json` - Added `/showcase/mikork` rewrite rule
-- `sitemap.xml` - Added showcase URL
-- `dashboard/index.html` - Added showcase link to footer
+### Navigácia & Zjistiteľnosť
+- ✅ Odkaz pridaný do footeru domovskej stránky ("Showcase: MikoRK")
+- ✅ Trasy pridané do `vercel.json`
+- ✅ URL pridané do `sitemap.xml`
+- ✅ Prepínač jazykov (SK/EN) na oboch stránkach
 
 ---
 
-## How to Clone for Next Client
+## Jazykové Verzie
 
-### 1. Copy Template
+### Slovenčina (SK) — Predvolená
+- **URL:** `/showcase/mikork`
+- **Canonical:** `https://www.golocapo.com/showcase/mikork`
+- **Jazyk:** `lang="sk"`
+- **Obsah:** Kompletne preložený do slovenčiny
+
+### Angličtina (EN)
+- **URL:** `/showcase/mikork/en`
+- **Canonical:** `https://www.golocapo.com/showcase/mikork/en`
+- **Jazyk:** `lang="en"`
+- **Obsah:** Anglický obsah
+
+---
+
+## Dlhodobá Spolupráca
+
+### Mesačný Plán Starostlivosti
+
+Pre MikoRK pohrebníctvo ponúkame **dlhodobú spoluprácu** v rámci mesačného plánu starostlivosti:
+
+#### Čo Zahŕňa:
+- ✅ **Aktualizácie obsahu** — Pravidelné aktualizácie stránok, služieb, informácií
+- ✅ **SEO monitoring** — Sledovanie pozícií v Google, optimalizácia lokálneho SEO
+- ✅ **Generovanie obsahu** — Vzdelávacie príspevky, sezónne oznámenia (s manuálnym schválením)
+- ✅ **Sledovanie konverzií** — Analýza kontaktných formulárov, telefónnych hovorov, dotazov
+- ✅ **Vylepšenia konverzií** — Optimalizácia na základe dát, A/B testovanie
+
+#### SLA Podpora:
+- **Reakčný čas:** Do 24 hodín na kritické problémy
+- **Aktualizácie:** Do 48 hodín na bežné požiadavky
+- **Mesačné reporty:** Prehľad výkonnosti, návrhy na zlepšenie
+- **Pravidelné check-iny:** Mesačné stretnutia na diskusiu o výsledkoch
+
+#### Etické Pravidlá (Dôležité):
+- ✅ **Žiadne automatizované kondolencie** — Vždy osobné
+- ✅ **Manuálne schválenie obsahu** — Všetok obsah pred zverejnením
+- ✅ **Rešpektujúci tón** — Vždy dôstojný, profesionálny
+- ✅ **Súkromie na prvom mieste** — GDPR-kompatibilné, minimálne sledovanie
+- ✅ **Ľudský kontakt** — Automatizácia podporuje, nikdy nenahradí ľudí
+
+#### Investícia:
+- **Mesačný plán:** €300-600/mesiac (podľa rozsahu)
+- **Jednorazové vylepšenia:** Podľa dohody
+- **Flexibilita:** Zrušiteľné kedykoľvek, bez záväzkov
+
+---
+
+## Súbory
+
+### Vytvorené
+- `showcase/mikork.html` - Slovenská verzia (predvolená)
+- `showcase/mikork/en.html` - Anglická verzia
+- `assets/og/mikork-og.svg` - OG obrázok (1200x630)
+- `docs/showcases/MIKORK_SHOWCASE_README.md` - Tento súbor
+
+### Upravené
+- `vercel.json` - Pridané trasy pre SK a EN
+- `sitemap.xml` - Pridané URL pre obe verzie
+- `dashboard/index.html` - Aktualizovaný footer odkaz
+
+---
+
+## Ako Klonovať pre Ďalšieho Klienta
+
+### 1. Skopírovať Šablónu
 ```bash
-cp showcase/mikork.html showcase/[client-name].html
+cp showcase/mikork.html showcase/[meno-klienta].html
+cp showcase/mikork/en.html showcase/[meno-klienta]/en.html
 ```
 
-### 2. Update Content
-- Replace "MikoRK pohrebníctvo" with client name
-- Update problem/outcome sections
-- Update deliverables list
-- Update before/after bullets
-- Update CTA text if needed
+### 2. Aktualizovať Obsah
+- Nahradiť "MikoRK pohrebníctvo" názvom klienta
+- Aktualizovať sekcie problému/výsledku
+- Aktualizovať zoznam dodávok
+- Aktualizovať pred/po body
+- Aktualizovať CTA text podľa potreby
 
-### 3. Update SEO Meta Tags
-- Update `<title>` tag
-- Update `meta name="description"`
-- Update `og:title`, `og:description`, `og:url`
-- Update `twitter:title`, `twitter:description`
-- Update canonical URL
-- Update JSON-LD structured data
+### 3. Aktualizovať SEO Meta Tagy
+- Aktualizovať `<title>` tag
+- Aktualizovať `meta name="description"`
+- Aktualizovať `og:title`, `og:description`, `og:url`
+- Aktualizovať `twitter:title`, `twitter:description`
+- Aktualizovať canonical URL
+- Aktualizovať JSON-LD štruktúrované údaje
 
-### 4. Create OG Image
-- Create `assets/og/[client-name]-og.png` (1200x630)
-- Update `og:image` and `twitter:image` URLs
+### 4. Vytvoriť OG Obrázok
+- Vytvoriť `assets/og/[meno-klienta]-og.svg` (1200x630)
+- Aktualizovať `og:image` a `twitter:image` URL
 
-### 5. Update Routing
-- Add rewrite rule to `vercel.json`:
-  ```json
-  { "source": "/showcase/[client-name]", "destination": "/showcase/[client-name].html" }
-  ```
-- Add URL to `sitemap.xml`
-- Add link to homepage footer (optional)
+### 5. Aktualizovať Smerovanie
+- Pridať pravidlo rewrite do `vercel.json`
+- Pridať URL do `sitemap.xml`
+- Pridať odkaz do footeru domovskej stránky (voliteľné)
 
-### 6. Verify
-- Check page loads: `curl -I https://www.golocapo.com/showcase/[client-name]`
-- Check OG image loads: `curl -I https://www.golocapo.com/assets/og/[client-name]-og.png`
-- Test OG preview: https://www.opengraph.xyz/url/https://www.golocapo.com/showcase/[client-name]
+### 6. Overiť
+- Skontrolovať, či sa stránka načíta: `curl -I https://www.golocapo.com/showcase/[meno-klienta]`
+- Skontrolovať, či sa OG obrázok načíta: `curl -I https://www.golocapo.com/assets/og/[meno-klienta]-og.svg`
+- Testovať OG preview: https://www.opengraph.xyz/url/https://www.golocapo.com/showcase/[meno-klienta]
 
 ---
 
 ## QA Checklist
 
-### Visual
-- [ ] Dark background (`#0B0B12`) visible
-- [ ] Typography correct (brand font, sizes, colors)
-- [ ] Spacing consistent (uses CSS variables)
-- [ ] Buttons styled correctly (primary, ghost)
-- [ ] Cards display correctly
-- [ ] Footer displays correctly
+### Vizuálne
+- [ ] Tmavé pozadie (`#0B0B12`) viditeľné
+- [ ] Typografia správna (brand font, veľkosti, farby)
+- [ ] Rozostupy konzistentné (používa CSS premenné)
+- [ ] Tlačidlá správne štýlované (primary, ghost)
+- [ ] Karty sa zobrazujú správne
+- [ ] Footer sa zobrazuje správne
 
-### Mobile
-- [ ] Responsive layout works
-- [ ] Text readable on mobile
-- [ ] Buttons accessible on mobile
-- [ ] Navigation works on mobile
-- [ ] Images scale correctly
+### Mobilné
+- [ ] Responzívny layout funguje
+- [ ] Text čitateľný na mobile
+- [ ] Tlačidlá prístupné na mobile
+- [ ] Navigácia funguje na mobile
+- [ ] Obrázky sa správne škálujú
 
 ### OG Preview
-- [ ] OG image loads (1200x630)
-- [ ] Title displays correctly
-- [ ] Description displays correctly
-- [ ] URL displays correctly
-- [ ] Brand colors visible
-- [ ] Text readable
+- [ ] OG obrázok sa načíta (1200x630)
+- [ ] Názov sa zobrazuje správne
+- [ ] Popis sa zobrazuje správne
+- [ ] URL sa zobrazuje správne
+- [ ] Brand farby viditeľné
+- [ ] Text čitateľný
 
 ### SEO
-- [ ] Title tag present (150-160 chars)
-- [ ] Meta description present (150-160 chars)
-- [ ] Canonical URL correct
-- [ ] OpenGraph tags present
-- [ ] Twitter/X tags present
-- [ ] JSON-LD structured data valid
-- [ ] Sitemap includes URL
-- [ ] Robots.txt references sitemap
+- [ ] Title tag prítomný (150-160 znakov)
+- [ ] Meta description prítomná (150-160 znakov)
+- [ ] Canonical URL správna
+- [ ] OpenGraph tagy prítomné
+- [ ] Twitter/X tagy prítomné
+- [ ] JSON-LD štruktúrované údaje platné
+- [ ] Sitemap obsahuje URL
+- [ ] Robots.txt odkazuje na sitemap
+- [ ] Hreflang alternatívy správne
 
-### Functionality
-- [ ] CTA button links to `/prelaunch`
-- [ ] Navigation links work
-- [ ] Footer links work
-- [ ] Brand CSS loads correctly
-- [ ] No console errors
+### Funkčnosť
+- [ ] CTA tlačidlo odkazuje na `/prelaunch`
+- [ ] Navigačné odkazy fungujú
+- [ ] Footer odkazy fungujú
+- [ ] Brand CSS sa načíta správne
+- [ ] Prepínač jazykov funguje
+- [ ] Žiadne chyby v konzole
 
 ---
 
-## Verification Commands
+## Overovacie Príkazy
 
-### Local Verification
+### Lokálne Overenie
 ```bash
-# Check page loads
+# Skontrolovať, či sa stránka načíta
 curl -I http://localhost:3000/showcase/mikork
+curl -I http://localhost:3000/showcase/mikork/en
 
-# Check OG image loads
-curl -I http://localhost:3000/assets/og/mikork-og.png
+# Skontrolovať, či sa OG obrázok načíta
+curl -I http://localhost:3000/assets/og/mikork-og.svg
 
-# Verify brand.css referenced
+# Overiť, či je brand.css referencovaný
 curl http://localhost:3000/showcase/mikork | grep "brand.css"
 ```
 
-### Production Verification
+### Produkčné Overenie
 ```bash
-# Check page loads (200 OK)
+# Skontrolovať, či sa stránka načíta (200 OK)
 curl -I https://www.golocapo.com/showcase/mikork
+curl -I https://www.golocapo.com/showcase/mikork/en
 
-# Check OG image loads (200 OK, image/png)
-curl -I https://www.golocapo.com/assets/og/mikork-og.png
+# Skontrolovať, či sa OG obrázok načíta (200 OK, image/svg+xml)
+curl -I https://www.golocapo.com/assets/og/mikork-og.svg
 
-# Verify brand.css referenced
+# Overiť, či je brand.css referencovaný
 curl https://www.golocapo.com/showcase/mikork | grep "brand.css"
 
-# Check sitemap includes URL
+# Skontrolovať, či sitemap obsahuje URL
 curl https://www.golocapo.com/sitemap.xml | grep "showcase/mikork"
 ```
 
-### OG Preview Tools
+### OG Preview Nástroje
 - https://www.opengraph.xyz/url/https://www.golocapo.com/showcase/mikork
 - https://developers.facebook.com/tools/debug/?q=https://www.golocapo.com/showcase/mikork
 - https://cards-dev.twitter.com/validator
 
 ---
 
-## Notes
+## Poznámky
 
-- **Tone:** Calm, trust-first, dignified (no aggressive marketing)
-- **Design:** Uses consolidated `brand.css` (no inline styles except minimal fixes)
-- **Reusability:** Template can be cloned for next client showcase
-- **SEO Focus:** Optimized for social traffic (OG tags critical)
+- **Tón:** Pokojný, dôveryhodný, dôstojný (žiadna agresívna marketingová komunikácia)
+- **Dizajn:** Používa konsolidovaný `brand.css` (žiadne inline štýly okrem minimálnych opráv)
+- **Znovupoužiteľnosť:** Šablóna môže byť sklonovaná pre ďalšieho klienta
+- **SEO Fokus:** Optimalizované pre sociálny traffic (OG tagy kritické)
+- **Dlhodobá Spolupráca:** Mesačný plán starostlivosti dostupný pre MikoRK
 
 ---
 
-**Status:** ✅ Production Ready
-
+**Status:** ✅ Produkčne Pripravené

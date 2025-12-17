@@ -26,6 +26,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.golocapo.com/showcase/mikork/en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.golocapo.com/case-studies/mikork</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

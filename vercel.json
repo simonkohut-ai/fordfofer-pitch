@@ -7,6 +7,7 @@
     { "source": "/case-studies/mikork", "destination": "/case-studies/mikork.html" },
     { "source": "/mikork", "destination": "/case-studies/mikork.html" },
     { "source": "/showcase/mikork", "destination": "/showcase/mikork.html" },
+    { "source": "/showcase/mikork/en", "destination": "/showcase/mikork/en.html" },
     { "source": "/api/:path*", "destination": "/dashboard/api/:path*" }
   ],
   "headers": [
