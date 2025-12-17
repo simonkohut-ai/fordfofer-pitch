@@ -65,6 +65,15 @@ NODE_ENV=production
 3. Go to Project Settings
 4. Copy API Key
 
+### OpenAI API Key
+
+1. Sign up at https://platform.openai.com
+2. Go to API Keys
+3. Create new API key
+4. Copy key (starts with `sk-`)
+5. (Optional) Set `OPENAI_MODEL` = `gpt-4o-mini` (default)
+6. (Optional) Set `OPENAI_TEMPERATURE` = `0.7` (sales-optimized)
+
 ---
 
 ## Testing
