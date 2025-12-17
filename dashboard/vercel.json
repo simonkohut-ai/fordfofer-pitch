@@ -1,49 +1,7 @@
-{
+﻿{
   "version": 2,
   "routes": [
-    {
-      "src": "/api/agent",
-      "dest": "/api/agent.js"
-    },
-    {
-      "src": "/api/marketing",
-      "dest": "/api/marketing.mjs"
-    },
-    {
-      "src": "/api/ai/influencer",
-      "dest": "/api/ai/influencer.mjs"
-    },
-    {
-      "src": "/api/ai/product",
-      "dest": "/api/ai/product.mjs"
-    },
-    {
-      "src": "/api/ai/image",
-      "dest": "/api/ai/image.mjs"
-    },
-    {
-      "src": "/portfolio/(.*)",
-      "dest": "/portfolio/$1"
-    },
-    {
-      "src": "/golo",
-      "dest": "/portfolio/index.html"
-    },
-    {
-      "src": "/ako-to-funguje",
-      "dest": "/portfolio/slovak.html"
-    },
-    {
-      "src": "/slovak",
-      "dest": "/portfolio/slovak.html"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }

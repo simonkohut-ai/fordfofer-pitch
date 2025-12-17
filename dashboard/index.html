@@ -3,7 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Studio - All-in-One AI Marketing Platform</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>AI Studio - All-in-One AI Marketing Platform | Automated Influencers, Digital Products & Marketing</title>
+    <meta name="title" content="AI Studio - All-in-One AI Marketing Platform">
+    <meta name="description" content="Generate AI influencers, digital products, and automated marketing systems. Execution-ready Instagram automation, product blueprints, and daily marketing plans.">
+    <meta name="keywords" content="AI marketing, AI influencer, digital products, Instagram automation, marketing automation, AI content generation">
+    <meta name="author" content="🦄">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.openai.com https://graph.facebook.com https://www.facebook.com;">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://golocapo.com/">
+    <meta property="og:title" content="AI Studio - All-in-One AI Marketing Platform">
+    <meta property="og:description" content="Generate AI influencers, digital products, and automated marketing systems. Execution-ready Instagram automation, product blueprints, and daily marketing plans.">
+    <meta property="og:image" content="https://golocapo.com/og-image.png">
+    <meta property="og:site_name" content="AI Studio">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://golocapo.com/">
+    <meta name="twitter:title" content="AI Studio - All-in-One AI Marketing Platform">
+    <meta name="twitter:description" content="Generate AI influencers, digital products, and automated marketing systems. Execution-ready Instagram automation, product blueprints, and daily marketing plans.">
+    <meta name="twitter:image" content="https://golocapo.com/og-image.png">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://golocapo.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AI Studio",
+      "description": "All-in-one AI marketing platform for generating AI influencers, digital products, and automated marketing systems.",
+      "url": "https://golocapo.com/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "🦄",
+        "url": "https://golocapo.com/"
+      },
+      "sameAs": []
+    }
+    </script>
+    
     <link rel="stylesheet" href="styles.css">
     <script src="auth.js"></script>
 </head>
@@ -67,6 +127,10 @@
                 <p class="page-subtitle" id="pageSubtitle">Generate high-converting content in seconds</p>
             </div>
             <div class="top-bar-right">
+                <label class="preview-mode-toggle" title="Preview Mode: Hide technical details">
+                    <input type="checkbox" id="previewModeToggle">
+                    <span>Preview Mode</span>
+                </label>
                 <button class="btn-icon" onclick="toggleTheme()" title="Toggle theme">
                     <span>🌓</span>
                 </button>
@@ -74,10 +138,45 @@
         </header>
 
         <!-- Trust Banner -->
-        <div class="trust-banner">
+        <div class="trust-banner" style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
             <strong>Used by founders to launch profitable AI brands</strong>
             <span class="usage-counter" id="usageCounter"></span>
+            <a href="/pricing" style="margin-left: auto; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap;">Get Early Access →</a>
         </div>
+
+        <!-- Demo Panel -->
+        <div class="demo-panel" id="demoPanel">
+            <div class="demo-header">
+                <h3>🚀 Quick Demo</h3>
+                <button class="btn-icon-small" onclick="toggleDemoPanel()" title="Close demo">✕</button>
+            </div>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="runDemoInfluencer()">
+                    <span class="demo-icon">🎭</span>
+                    <div>
+                        <strong>Generate Influencer</strong>
+                        <p>Complete Instagram AI influencer system</p>
+                    </div>
+                </button>
+                <button class="demo-btn" onclick="runDemoProduct()">
+                    <span class="demo-icon">📦</span>
+                    <div>
+                        <strong>Generate Product</strong>
+                        <p>Digital product + sales system</p>
+                    </div>
+                </button>
+                <button class="demo-btn" onclick="runDemoDailyPlan()">
+                    <span class="demo-icon">📅</span>
+                    <div>
+                        <strong>Generate Daily Plan</strong>
+                        <p>Today's post + caption + action plan</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <button class="demo-toggle-btn" id="demoToggleBtn" onclick="toggleDemoPanel()" title="Show demo panel">
+            🎬 Demo
+        </button>
 
         <!-- Marketing Generator Section -->
         <section id="marketing-generator-section" class="content-section active">
@@ -116,9 +215,30 @@
                         </div>
                     </div>
                     <div class="chat-actions">
+                        <button class="btn-icon" onclick="copyLatestPostText()" title="Copy latest post text" id="copyPostBtn" style="display: none;">
+                            📋
+                        </button>
+                        <button class="btn-icon" onclick="shareLatestToFacebook()" title="Share to Facebook (prefilled)" id="shareFacebookBtn" style="display: none;">
+                            📘
+                        </button>
+                        <button class="btn-icon" onclick="copyCursorPrompt()" title="Copy Cursor Prompt" id="copyCursorPromptBtn" style="display: none;">
+                            🧠
+                        </button>
                         <button class="btn-icon" onclick="clearChat()" title="Clear chat">
                             🗑️
                         </button>
+                    </div>
+                    <!-- Next Step Area (shown after generation) -->
+                    <div id="nextStepArea" style="display: none; margin-top: 16px; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;">
+                        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 500;">Next step:</div>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button onclick="copyLatestPostText()" class="btn-primary" style="flex: 1; min-width: 140px; padding: 10px 16px; font-size: 14px;">
+                                📋 Copy Post Text
+                            </button>
+                            <button onclick="shareLatestToFacebook()" class="btn-secondary" style="flex: 1; min-width: 140px; padding: 10px 16px; font-size: 14px;">
+                                📘 Share to Facebook
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -137,10 +257,14 @@
                                 <br><br>
                                 <strong>Try it now:</strong>
                                 <br>• "Generate marketing post about [your product]"
+                                <br><br>
+                                <span style="font-size: 12px; color: var(--text-secondary);">Launching 21.12.2025</span>
                                 <br>• "Create a Telegram post for my SaaS launch"
                                 <br>• "Write a Reddit campaign for [topic]"
                                 <br><br>
                                 <em>Start with 3 free generations</em>
+                                <br><br>
+                                <span style="color: var(--text-secondary); font-size: 13px;">💡 Generate a post to copy or share it.</span>
                             </div>
                         </div>
                     </div>
@@ -310,6 +434,31 @@
 
         <!-- Automation Hub Section -->
         <section id="automation-hub-section" class="content-section">
+            <!-- Growth Admin Panel (Leads + Customers) -->
+            <div id="payments-admin-panel" class="payments-admin-panel" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <!-- Dynamic content loaded by updatePaymentsUI() -->
+            </div>
+            
+            <!-- Promo Kit Posting Panel -->
+            <div id="promo-kit-panel" class="promo-kit-panel" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <!-- Dynamic content loaded by updatePromoKitUI() -->
+            </div>
+            
+            <!-- Meta Integration Panel (Phase B) -->
+            <div id="meta-integration-panel" class="meta-integration-panel" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <!-- Dynamic content loaded by updateMetaUI() -->
+            </div>
+            
+            <!-- Diagnostics Panel -->
+            <div class="diagnostics-panel" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">📊 Diagnostics</h3>
+                <div id="diagnostics-content" style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                    <div><strong>Version:</strong> <span id="diagnostics-version">-</span></div>
+                    <div><strong>Last Generated:</strong> <span id="diagnostics-last-gen">-</span></div>
+                    <div><strong>Last Action:</strong> <span id="diagnostics-last-action">-</span></div>
+                </div>
+            </div>
+            
             <div class="chat-container">
                 <div class="chat-header">
                     <div class="chat-title">
@@ -487,6 +636,23 @@
     </div>
 
     <script src="dashboard.js"></script>
+    
+    <!-- Footer -->
+    <footer style="margin-top: 60px; padding: 32px 24px; border-top: 1px solid var(--border); background: var(--background); text-align: center; color: var(--text-secondary); font-size: 13px;">
+        <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap;">
+            <a href="/TERMS.md" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Terms</a>
+            <a href="/PRIVACY.md" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Privacy</a>
+            <a href="/REFUND.md" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Refund Policy</a>
+            <a href="/SECURITY.md" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Security</a>
+            <a href="/pricing.html" style="color: var(--text-secondary); text-decoration: none;">Pricing</a>
+        </div>
+        <p style="margin-bottom: 12px;">
+            By using this tool you agree to the <a href="/TERMS.md" target="_blank" style="color: var(--primary); text-decoration: none;">Terms</a> & <a href="/PRIVACY.md" target="_blank" style="color: var(--primary); text-decoration: none;">Privacy Policy</a>.
+        </p>
+        <p style="font-size: 12px; opacity: 0.7;">
+            AI Marketing Studio by Golo Čapo © 2025
+        </p>
+    </footer>
 </body>
 </html>
 
