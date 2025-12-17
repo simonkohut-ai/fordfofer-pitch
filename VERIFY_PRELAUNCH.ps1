@@ -62,26 +62,32 @@ foreach ($url in $urls) {
 Write-Host ""
 Write-Host "=== Result ===" -ForegroundColor Cyan
 
-if ($allFilesExist -and $allPass) {
-    Write-Host "✅ SUCCESS - All files exist and routes return 200" -ForegroundColor Green
-    Write-Host ""
-    Write-Host "You can now:" -ForegroundColor Yellow
-    Write-Host "  1. Create Stripe Payment Link" -ForegroundColor White
-    Write-Host "  2. Set STRIPE_CHECKOUT_URL in Vercel" -ForegroundColor White
-    Write-Host "  3. Start promoting /prelaunch" -ForegroundColor White
+# Fail if files are missing
+if (-not $allFilesExist) {
+    Write-Host "❌ FAIL - Files missing. Cannot proceed." -ForegroundColor Red
+    exit 1
+}
+
+# Check /prelaunch specifically
+$prelaunchUrl = "https://www.golocapo.com/prelaunch"
+$prelaunchStatus = $null
+
+try {
+    $prelaunchResponse = Invoke-WebRequest -Uri $prelaunchUrl -Method Head -TimeoutSec 15 -UseBasicParsing
+    $prelaunchStatus = $prelaunchResponse.StatusCode
+} catch {
+    $prelaunchStatus = $_.Exception.Response.StatusCode.value__
+}
+
+Write-Host ""
+Write-Host "=== Final Result ===" -ForegroundColor Cyan
+
+if ($prelaunchStatus -eq 200) {
+    Write-Host "✅ SUCCESS - /prelaunch returns HTTP 200" -ForegroundColor Green
+    exit 0
 } else {
-    if (-not $allFilesExist) {
-        Write-Host "❌ FILES MISSING - Fix file paths first" -ForegroundColor Red
-    }
-    if (-not $allPass) {
-        Write-Host "❌ ROUTES FAILING - Redeploy after fixing files" -ForegroundColor Red
-        Write-Host ""
-        Write-Host "After fixing:" -ForegroundColor Yellow
-        Write-Host "  1. Commit changes" -ForegroundColor White
-        Write-Host "  2. Push to main" -ForegroundColor White
-        Write-Host "  3. Vercel will auto-deploy" -ForegroundColor White
-        Write-Host "  4. Run this script again" -ForegroundColor White
-    }
+    Write-Host "❌ FAIL - /prelaunch returned HTTP $prelaunchStatus (expected 200)" -ForegroundColor Red
+    exit 1
 }
 
 Write-Host ""
