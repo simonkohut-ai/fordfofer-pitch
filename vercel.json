@@ -4,6 +4,8 @@
     { "source": "/prelaunch", "destination": "/prelaunch.html" },
     { "source": "/pricing", "destination": "/pricing.html" },
     { "source": "/thank-you", "destination": "/thank-you.html" },
+    { "source": "/case-studies/mikork", "destination": "/case-studies/mikork.html" },
+    { "source": "/mikork", "destination": "/case-studies/mikork.html" },
     { "source": "/api/:path*", "destination": "/dashboard/api/:path*" }
   ],
   "headers": [
