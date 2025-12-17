@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README | GoLoCapo Portfolio</title>
+    <meta name="description" content="Project documentation: Features, deployment, local development">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #667eea;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { font-size: 48px; margin-bottom: 16px; }
+        h2 { font-size: 32px; margin-top: 48px; margin-bottom: 16px; }
+        p { margin-bottom: 16px; color: var(--text-secondary); }
+        ul { margin-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
+        li { margin-bottom: 8px; }
+        code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; }
+        .back-link {
+            display: inline-block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 32px;
+        }
+        .back-link:hover { color: var(--primary); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+        strong { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/portfolio" class="back-link">← Back to Portfolio</a>
+        <h1>⚡ AI Studio Dashboard</h1>
+        <p><strong>Professional AI automation command center - Zapier/Buffer/n8n style</strong></p>
+        <p><strong>Status:</strong> Production-ready and live. Revenue systems operational ahead of planned public release on 21.12.2025.</p>
+        <hr>
+        <h2>🚀 Features</h2>
+        <ul>
+            <li>📊 <strong>Dashboard</strong> - Revenue tracking and analytics</li>
+            <li>🔄 <strong>Workflows</strong> - Automation management</li>
+            <li>💬 <strong>AI Chat</strong> - Central communication hub</li>
+            <li>💰 <strong>Revenue</strong> - Sales tracking and breakdown</li>
+            <li>📢 <strong>Marketing</strong> - Campaign management</li>
+            <li>⚙️ <strong>Settings</strong> - Integrations and preferences</li>
+        </ul>
+        <h2>🚀 Deployment</h2>
+        <p>Run the production deployment script:</p>
+        <pre><code>.\REDEPLOY_LIVE.ps1</code></pre>
+        <p>This script:</p>
+        <ul>
+            <li>Deploys to Vercel production</li>
+            <li>Verifies project is "dashboard"</li>
+            <li>Checks domain `golocapo.com` is attached</li>
+            <li>Tests domain responds with HTTP 200</li>
+            <li><strong>Fails loudly if domain not working</strong> (prevents false positives)</li>
+        </ul>
+        <h2>📋 Deploy to Vercel</h2>
+        <h3>Option 1: From GitHub (Recommended)</h3>
+        <ol>
+            <li>Push to GitHub</li>
+            <li>Deploy on Vercel</li>
+            <li>Import from GitHub</li>
+            <li>Select repository</li>
+            <li>Click Deploy</li>
+        </ol>
+        <h2>🛠️ Local Development</h2>
+        <p>See <code>RUN_LOCAL.md</code> for detailed setup guide.</p>
+        <hr>
+        <p><a href="/portfolio">← Back to Portfolio</a></p>
+    </div>
+</body>
+</html>
+

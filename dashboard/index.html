@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>AI Studio - All-in-One AI Marketing Platform | Automated Influencers, Digital Products & Marketing</title>
-    <meta name="title" content="AI Studio - All-in-One AI Marketing Platform">
-    <meta name="description" content="Generate AI influencers, digital products, and automated marketing systems. Execution-ready Instagram automation, product blueprints, and daily marketing plans.">
-    <meta name="keywords" content="AI marketing, AI influencer, digital products, Instagram automation, marketing automation, AI content generation">
-    <meta name="author" content="🦄">
+    <title>GoLoCapo | AI Marketing Studio by Golo Čapo</title>
+    <meta name="title" content="GoLoCapo | AI Marketing Studio by Golo Čapo">
+    <meta name="description" content="Generate Meta-ready posts in seconds. Publish safely. Human-approved workflow for founders and creators.">
     <meta name="robots" content="index, follow">
     
     <!-- Security Headers -->
@@ -21,17 +19,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://golocapo.com/">
-    <meta property="og:title" content="AI Studio - All-in-One AI Marketing Platform">
-    <meta property="og:description" content="Generate AI influencers, digital products, and automated marketing systems. Execution-ready Instagram automation, product blueprints, and daily marketing plans.">
+    <meta property="og:title" content="GoLoCapo | AI Marketing Studio by Golo Čapo">
+    <meta property="og:description" content="Generate Meta-ready posts in seconds. Publish safely.">
     <meta property="og:image" content="https://golocapo.com/og-image.png">
-    <meta property="og:site_name" content="AI Studio">
-    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="GoLoCapo">
     
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://golocapo.com/">
-    <meta name="twitter:title" content="AI Studio - All-in-One AI Marketing Platform">
-    <meta name="twitter:description" content="Generate AI influencers, digital products, and automated marketing systems. Execution-ready Instagram automation, product blueprints, and daily marketing plans.">
+    <meta name="twitter:title" content="GoLoCapo | AI Marketing Studio by Golo Čapo">
+    <meta name="twitter:description" content="Generate Meta-ready posts in seconds. Publish safely.">
     <meta name="twitter:image" content="https://golocapo.com/og-image.png">
     
     <!-- Canonical -->
@@ -40,619 +36,249 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "AI Studio",
-      "description": "All-in-one AI marketing platform for generating AI influencers, digital products, and automated marketing systems.",
-      "url": "https://golocapo.com/",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "creator": {
-        "@type": "Organization",
-        "name": "🦄",
-        "url": "https://golocapo.com/"
-      },
-      "sameAs": []
-    }
-    </script>
-    
-    <link rel="stylesheet" href="styles.css">
-    <script src="auth.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --primary-hover: #5568d3;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+        
+        /* Header */
+        .header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .nav-cta:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero .subheadline {
+            font-size: clamp(20px, 3vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+        
+        .launch-note {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            padding: 48px 0 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 60px 0 40px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn-primary {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <span class="logo-icon">⚡</span>
-                <span class="logo-text">AI Studio</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <span>GoLoCapo</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="/portfolio">Portfolio</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/pricing" class="nav-cta">Get Early Access</a>
+                </nav>
             </div>
         </div>
-        
-        <nav class="sidebar-nav">
-            <div class="nav-section-label">Modes</div>
-            <a href="#marketing-generator" class="nav-item active" data-section="marketing-generator">
-                <span class="nav-icon">📢</span>
-                <span class="nav-text">Marketing Generator</span>
-            </a>
-            <a href="#ai-influencer" class="nav-item" data-section="ai-influencer">
-                <span class="nav-icon">🎭</span>
-                <span class="nav-text">AI Influencer</span>
-            </a>
-            <a href="#product-builder" class="nav-item" data-section="product-builder">
-                <span class="nav-icon">📦</span>
-                <span class="nav-text">Digital Product Builder</span>
-            </a>
-            <a href="#automation-hub" class="nav-item" data-section="automation-hub">
-                <span class="nav-icon">⚙️</span>
-                <span class="nav-text">Automation Hub</span>
-            </a>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>GoLoCapo</h1>
+            <p class="subheadline">AI Marketing Studio by Golo Čapo — Generate Meta-ready posts in seconds. Publish safely.</p>
             
-            <div class="nav-section-label" style="margin-top: 24px;">Tools</div>
-            <a href="#dashboard" class="nav-item" data-section="dashboard">
-                <span class="nav-icon">📊</span>
-                <span class="nav-text">Dashboard</span>
-            </a>
-            <a href="#revenue" class="nav-item" data-section="revenue">
-                <span class="nav-icon">💰</span>
-                <span class="nav-text">Revenue</span>
-            </a>
-        </nav>
-        
-        <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="user-avatar">A</div>
-                <div class="user-details">
-                    <div class="user-name">AI Studio</div>
-                    <div class="user-status">Active</div>
-                </div>
+            <div class="cta-buttons">
+                <a href="/pricing" class="btn-primary">Get Early Access — €49</a>
             </div>
+            
+            <p class="launch-note">Launching 21.12.2025</p>
         </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Top Bar -->
-        <header class="top-bar">
-            <div class="top-bar-left">
-                <h1 class="page-title" id="pageTitle">Marketing Generator</h1>
-                <p class="page-subtitle" id="pageSubtitle">Generate high-converting content in seconds</p>
-            </div>
-            <div class="top-bar-right">
-                <label class="preview-mode-toggle" title="Preview Mode: Hide technical details">
-                    <input type="checkbox" id="previewModeToggle">
-                    <span>Preview Mode</span>
-                </label>
-                <button class="btn-icon" onclick="toggleTheme()" title="Toggle theme">
-                    <span>🌓</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- Trust Banner -->
-        <div class="trust-banner" style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-            <strong>Used by founders to launch profitable AI brands</strong>
-            <span class="usage-counter" id="usageCounter"></span>
-            <a href="/pricing" style="margin-left: auto; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap;">Get Early Access →</a>
-        </div>
-
-        <!-- Demo Panel -->
-        <div class="demo-panel" id="demoPanel">
-            <div class="demo-header">
-                <h3>🚀 Quick Demo</h3>
-                <button class="btn-icon-small" onclick="toggleDemoPanel()" title="Close demo">✕</button>
-            </div>
-            <div class="demo-buttons">
-                <button class="demo-btn" onclick="runDemoInfluencer()">
-                    <span class="demo-icon">🎭</span>
-                    <div>
-                        <strong>Generate Influencer</strong>
-                        <p>Complete Instagram AI influencer system</p>
-                    </div>
-                </button>
-                <button class="demo-btn" onclick="runDemoProduct()">
-                    <span class="demo-icon">📦</span>
-                    <div>
-                        <strong>Generate Product</strong>
-                        <p>Digital product + sales system</p>
-                    </div>
-                </button>
-                <button class="demo-btn" onclick="runDemoDailyPlan()">
-                    <span class="demo-icon">📅</span>
-                    <div>
-                        <strong>Generate Daily Plan</strong>
-                        <p>Today's post + caption + action plan</p>
-                    </div>
-                </button>
-            </div>
-        </div>
-        <button class="demo-toggle-btn" id="demoToggleBtn" onclick="toggleDemoPanel()" title="Show demo panel">
-            🎬 Demo
-        </button>
-
-        <!-- Marketing Generator Section -->
-        <section id="marketing-generator-section" class="content-section active">
-            <div class="chat-container">
-                <!-- Quick Start Panel -->
-                <div class="quick-start-panel">
-                    <div class="quick-start-header">
-                        <h3>Quick Start</h3>
-                        <label class="execution-mode-toggle">
-                            <input type="checkbox" id="executionModeToggle">
-                            <span>Execution Mode</span>
-                        </label>
-                    </div>
-                    <div class="quick-start-prompts">
-                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Generate marketing post about AI automation tools')">
-                            Generate marketing post
-                        </button>
-                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Create AI influencer for fitness niche')">
-                            Create AI influencer
-                        </button>
-                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Build $97 digital product for solopreneurs')">
-                            Build digital product
-                        </button>
-                    </div>
-                    <button class="daily-plan-btn" onclick="generateDailyPlan()">
-                        📅 Generate Today's Plan
-                    </button>
-                </div>
-                
-                <div class="chat-header">
-                    <div class="chat-title">
-                        <span class="chat-icon">📢</span>
-                        <div>
-                            <h2>Marketing Generator</h2>
-                            <p>Generate high-converting content in seconds</p>
-                        </div>
-                    </div>
-                    <div class="chat-actions">
-                        <button class="btn-icon" onclick="copyLatestPostText()" title="Copy latest post text" id="copyPostBtn" style="display: none;">
-                            📋
-                        </button>
-                        <button class="btn-icon" onclick="shareLatestToFacebook()" title="Share to Facebook (prefilled)" id="shareFacebookBtn" style="display: none;">
-                            📘
-                        </button>
-                        <button class="btn-icon" onclick="copyCursorPrompt()" title="Copy Cursor Prompt" id="copyCursorPromptBtn" style="display: none;">
-                            🧠
-                        </button>
-                        <button class="btn-icon" onclick="clearChat()" title="Clear chat">
-                            🗑️
-                        </button>
-                    </div>
-                    <!-- Next Step Area (shown after generation) -->
-                    <div id="nextStepArea" style="display: none; margin-top: 16px; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;">
-                        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 500;">Next step:</div>
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <button onclick="copyLatestPostText()" class="btn-primary" style="flex: 1; min-width: 140px; padding: 10px 16px; font-size: 14px;">
-                                📋 Copy Post Text
-                            </button>
-                            <button onclick="shareLatestToFacebook()" class="btn-secondary" style="flex: 1; min-width: 140px; padding: 10px 16px; font-size: 14px;">
-                                📘 Share to Facebook
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message system">
-                        <div class="message-avatar">⚡</div>
-                        <div class="message-content">
-                            <div class="message-header">
-                                <span class="message-author">AI Studio</span>
-                                <span class="message-time">Just now</span>
-                            </div>
-                            <div class="message-text">
-                                <strong>AI Marketing Studio</strong>
-                                <br><br>
-                                Generate high-converting marketing content in seconds. Used by founders to create real posts, campaigns, and copy that drives sales.
-                                <br><br>
-                                <strong>Try it now:</strong>
-                                <br>• "Generate marketing post about [your product]"
-                                <br><br>
-                                <span style="font-size: 12px; color: var(--text-secondary);">Launching 21.12.2025</span>
-                                <br>• "Create a Telegram post for my SaaS launch"
-                                <br>• "Write a Reddit campaign for [topic]"
-                                <br><br>
-                                <em>Start with 3 free generations</em>
-                                <br><br>
-                                <span style="color: var(--text-secondary); font-size: 13px;">💡 Generate a post to copy or share it.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <textarea 
-                            id="chatInput" 
-                            class="chat-input" 
-                            placeholder="Try: Generate marketing post about AI automation tools (Ctrl+Enter to send)"
-                            rows="1"
-                        ></textarea>
-                        <button class="btn-send" onclick="sendMessage()">
-                            <span>Send</span>
-                            <span class="send-icon">→</span>
-                        </button>
-                    </div>
-                    <div class="chat-shortcuts">
-                        <button class="shortcut-btn" onclick="insertShortcut('Generate marketing post about')">📝 Marketing Post</button>
-                        <button class="shortcut-btn" onclick="insertShortcut('Create Telegram post for')">📱 Telegram</button>
-                        <button class="shortcut-btn" onclick="insertShortcut('Generate Reddit campaign about')">🔴 Reddit</button>
-                        <button class="shortcut-btn" onclick="insertShortcut('Write Twitter post about')">🐦 Twitter</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Influencer Section -->
-        <section id="ai-influencer-section" class="content-section">
-            <div class="chat-container">
-                <div class="quick-start-panel">
-                    <div class="quick-start-header">
-                        <h3>Quick Start</h3>
-                        <label class="execution-mode-toggle">
-                            <input type="checkbox" id="executionModeToggleInfluencer">
-                            <span>Execution Mode</span>
-                        </label>
-                    </div>
-                    <div class="quick-start-prompts">
-                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Create luxury sigma AI influencer for Instagram')">
-                            Luxury sigma influencer
-                        </button>
-                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Create faceless AI influencer for AI wealth niche')">
-                            AI wealth influencer
-                        </button>
-                        <button class="quick-prompt-btn" onclick="insertQuickPrompt('Create fitness AI influencer for men 18-35')">
-                            Fitness influencer
-                        </button>
-                    </div>
-                    <button class="daily-plan-btn" onclick="generateDailyPlan()">
-                        📅 Generate Today's Plan
-                    </button>
-                </div>
-                
-                <div class="chat-header">
-                    <div class="chat-title">
-                        <span class="chat-icon">🎭</span>
-                        <div>
-                            <h2>AI Influencer Generator</h2>
-                            <p>Complete execution-ready Instagram automation system</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-messages" id="influencerMessages">
-                    <div class="message system">
-                        <div class="message-avatar">🎭</div>
-                        <div class="message-content">
-                            <div class="message-header">
-                                <span class="message-author">AI Studio</span>
-                                <span class="message-time">Just now</span>
-                            </div>
-                            <div class="message-text">
-                                <strong>AI Influencer Generator</strong>
-                                <br><br>
-                                One prompt generates everything: identity, captions, hooks, CTAs, visual prompts, automation instructions, and monetization plan.
-                                <br><br>
-                                <strong>Try:</strong> "Create a luxury sigma AI influencer for Instagram"
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <textarea 
-                            id="influencerInput" 
-                            class="chat-input" 
-                            placeholder="Try: Create luxury sigma AI influencer for Instagram (Ctrl+Enter to send)"
-                            rows="1"
-                        ></textarea>
-                        <button class="btn-send" onclick="sendInfluencerMessage()">
-                            <span>Send</span>
-                            <span class="send-icon">→</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Digital Product Builder Section -->
-        <section id="product-builder-section" class="content-section">
-            <div class="chat-container">
-                <div class="quick-start-panel">
-                    <div class="quick-start-header">
-                        <h3>Quick Start</h3>
-                    </div>
-                    <div class="quick-start-prompts">
-                        <button class="quick-prompt-btn" onclick="insertProductPrompt('Build $29 PDF lead magnet for solopreneurs')">
-                            $29 PDF Lead Magnet
-                        </button>
-                        <button class="quick-prompt-btn" onclick="insertProductPrompt('Build $97 Notion product for creators')">
-                            $97 Notion Product
-                        </button>
-                        <button class="quick-prompt-btn" onclick="insertProductPrompt('Build $497 service offer for founders')">
-                            $497 Service Offer
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="chat-header">
-                    <div class="chat-title">
-                        <span class="chat-icon">📦</span>
-                        <div>
-                            <h2>Digital Product Builder</h2>
-                            <p>Generate complete product + sales system</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-messages" id="productMessages">
-                    <div class="message system">
-                        <div class="message-avatar">📦</div>
-                        <div class="message-content">
-                            <div class="message-header">
-                                <span class="message-author">AI Studio</span>
-                                <span class="message-time">Just now</span>
-                            </div>
-                            <div class="message-text">
-                                <strong>Digital Product Builder</strong>
-                                <br><br>
-                                Generate complete digital products: PDF lead magnets, Notion templates, service offers. Includes product outline, sales page copy, bio/DM CTA, and $100/day funnel plan.
-                                <br><br>
-                                <strong>Try:</strong> "Build $97 digital product for solopreneurs"
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <textarea 
-                            id="productInput" 
-                            class="chat-input" 
-                            placeholder="Try: Build $97 digital product for solopreneurs (Ctrl+Enter to send)"
-                            rows="1"
-                        ></textarea>
-                        <button class="btn-send" onclick="sendProductMessage()">
-                            <span>Send</span>
-                            <span class="send-icon">→</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Automation Hub Section -->
-        <section id="automation-hub-section" class="content-section">
-            <!-- Growth Admin Panel (Leads + Customers) -->
-            <div id="payments-admin-panel" class="payments-admin-panel" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
-                <!-- Dynamic content loaded by updatePaymentsUI() -->
-            </div>
-            
-            <!-- Promo Kit Posting Panel -->
-            <div id="promo-kit-panel" class="promo-kit-panel" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
-                <!-- Dynamic content loaded by updatePromoKitUI() -->
-            </div>
-            
-            <!-- Meta Integration Panel (Phase B) -->
-            <div id="meta-integration-panel" class="meta-integration-panel" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
-                <!-- Dynamic content loaded by updateMetaUI() -->
-            </div>
-            
-            <!-- Diagnostics Panel -->
-            <div class="diagnostics-panel" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
-                <h3 style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">📊 Diagnostics</h3>
-                <div id="diagnostics-content" style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
-                    <div><strong>Version:</strong> <span id="diagnostics-version">-</span></div>
-                    <div><strong>Last Generated:</strong> <span id="diagnostics-last-gen">-</span></div>
-                    <div><strong>Last Action:</strong> <span id="diagnostics-last-action">-</span></div>
-                </div>
-            </div>
-            
-            <div class="chat-container">
-                <div class="chat-header">
-                    <div class="chat-title">
-                        <span class="chat-icon">⚙️</span>
-                        <div>
-                            <h2>Automation Hub</h2>
-                            <p>Daily plans and execution checklists</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-messages" id="automationMessages">
-                    <div class="message system">
-                        <div class="message-avatar">⚙️</div>
-                        <div class="message-content">
-                            <div class="message-header">
-                                <span class="message-author">AI Studio</span>
-                                <span class="message-time">Just now</span>
-                            </div>
-                            <div class="message-text">
-                                <strong>Automation Hub</strong>
-                                <br><br>
-                                Generate daily execution plans: today's post, caption, CTA, and growth actions. One click = complete daily plan.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <textarea 
-                            id="automationInput" 
-                            class="chat-input" 
-                            placeholder="Try: Generate today's execution plan (Ctrl+Enter to send)"
-                            rows="1"
-                        ></textarea>
-                        <button class="btn-send" onclick="sendAutomationMessage()">
-                            <span>Send</span>
-                            <span class="send-icon">→</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dashboard Section -->
-        <section id="dashboard-section" class="content-section">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Total Revenue</span>
-                        <span class="stat-trend positive">+12%</span>
-                    </div>
-                    <div class="stat-value" id="totalRevenue">$0</div>
-                    <div class="stat-footer">All time</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Today's Sales</span>
-                        <span class="stat-trend">Goal: 10</span>
-                    </div>
-                    <div class="stat-value" id="todaySales">0</div>
-                    <div class="stat-footer">Last 24 hours</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Active Workflows</span>
-                        <span class="stat-trend positive">Running</span>
-                    </div>
-                    <div class="stat-value">3</div>
-                    <div class="stat-footer">Automated</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Conversion Rate</span>
-                        <span class="stat-trend">Target: 10%</span>
-                    </div>
-                    <div class="stat-value" id="conversionRate">0%</div>
-                    <div class="stat-footer">Last 7 days</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Revenue Section -->
-        <section id="revenue-section" class="content-section">
-            <div class="revenue-container">
-                <div class="revenue-header">
-                    <h2>Revenue Analytics</h2>
-                    <div class="revenue-filters">
-                        <button class="filter-btn active">Today</button>
-                        <button class="filter-btn">Week</button>
-                        <button class="filter-btn">Month</button>
-                        <button class="filter-btn">All Time</button>
-                    </div>
-                </div>
-                
-                <div class="revenue-stats">
-                    <div class="revenue-card">
-                        <span class="revenue-label">Total Revenue</span>
-                        <span class="revenue-value" id="revenueTotal">$0</span>
-                    </div>
-                    <div class="revenue-card">
-                        <span class="revenue-label">Sales Count</span>
-                        <span class="revenue-value" id="revenueCount">0</span>
-                    </div>
-                    <div class="revenue-card">
-                        <span class="revenue-label">Avg Order</span>
-                        <span class="revenue-value" id="revenueAvg">$0</span>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Recent Sales</h2>
-                        <button class="btn-link" onclick="addSale()">Add Sale</button>
-                    </div>
-                    <div class="card-content">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Time</th>
-                                    <th>Customer</th>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Channel</th>
-                                </tr>
-                            </thead>
-                            <tbody id="salesTable">
-                                <tr>
-                                    <td colspan="5" class="empty-state">No sales yet</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Add Sale Modal -->
-    <div id="saleModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Add Sale</h2>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
-            </div>
-            <form id="saleForm" onsubmit="saveSale(event)">
-                <div class="form-group">
-                    <label>Customer Name</label>
-                    <input type="text" id="customerName" required>
-                </div>
-                <div class="form-group">
-                    <label>Product</label>
-                    <select id="productType" required>
-                        <option value="75">Launch Special ($75)</option>
-                        <option value="150">Regular Price ($150)</option>
-                        <option value="400">Agency Pack ($400)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Channel</label>
-                    <select id="channel" required>
-                        <option value="telegram">Telegram</option>
-                        <option value="reddit">Reddit</option>
-                        <option value="twitter">Twitter</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn-primary">Save Sale</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script src="dashboard.js"></script>
+    </section>
     
     <!-- Footer -->
-    <footer style="margin-top: 60px; padding: 32px 24px; border-top: 1px solid var(--border); background: var(--background); text-align: center; color: var(--text-secondary); font-size: 13px;">
-        <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap;">
-            <a href="/TERMS.md" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Terms</a>
-            <a href="/PRIVACY.md" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Privacy</a>
-            <a href="/REFUND.md" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Refund Policy</a>
-            <a href="/SECURITY.md" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Security</a>
-            <a href="/pricing.html" style="color: var(--text-secondary); text-decoration: none;">Pricing</a>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="/portfolio">Portfolio</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/TERMS.md" target="_blank">Terms</a>
+                <a href="/PRIVACY.md" target="_blank">Privacy</a>
+            </div>
+            <p class="footer-text">GoLoCapo © 2025 | Built by Golo Čapo</p>
         </div>
-        <p style="margin-bottom: 12px;">
-            By using this tool you agree to the <a href="/TERMS.md" target="_blank" style="color: var(--primary); text-decoration: none;">Terms</a> & <a href="/PRIVACY.md" target="_blank" style="color: var(--primary); text-decoration: none;">Privacy Policy</a>.
-        </p>
-        <p style="font-size: 12px; opacity: 0.7;">
-            AI Marketing Studio by Golo Čapo © 2025
-        </p>
     </footer>
 </body>
 </html>
-

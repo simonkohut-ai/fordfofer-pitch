@@ -3,6 +3,13 @@
   "routes": [
     { "handle": "filesystem" },
     { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/portfolio", "dest": "/portfolio/index.html" },
+    { "src": "/portfolio/case-study", "dest": "/portfolio/case-study.html" },
+    { "src": "/portfolio/project-recap", "dest": "/portfolio/project-recap.html" },
+    { "src": "/portfolio/audit-complete", "dest": "/portfolio/audit-complete.html" },
+    { "src": "/portfolio/flagship-summary", "dest": "/portfolio/flagship-summary.html" },
+    { "src": "/portfolio/readme", "dest": "/portfolio/readme.html" },
+    { "src": "/pricing", "dest": "/pricing.html" },
     { "src": "/.*", "dest": "/index.html" }
   ]
 }
